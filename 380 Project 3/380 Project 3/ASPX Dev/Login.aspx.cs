@@ -21,15 +21,17 @@ namespace _380_Project_3
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            Label1.Visible = true;
+
             if (Authenticate(TextBox1.Text, TextBox2.Text))
             {
-                Label1.Text = "Login Failure";
                 Response.Redirect("ProjectSelection.aspx");
             }
 
             else
             {
-                Label1.Text = "Login Failure";
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Font.Bold = true;
             }
         }
 
@@ -49,19 +51,20 @@ namespace _380_Project_3
                     {
                         if (sPassword == ds.Tables[0].Rows[0]["Password"].ToString())
                         {
-                            Label1.Text = "Login Success";
                             bAuthenticate = true;
                             Session["_CurrentUserID"] = ds.Tables[0].Rows[0]["UserID"].ToString();
                         }
 
                         else
                         {
+                            Label1.Text = "Incorrect password";
                             bAuthenticate = false;
                         }
                     }
 
                     else
                     {
+                        Label1.Text = "User does not exist";
                         bAuthenticate = false;
                     }
                 }
