@@ -135,5 +135,11 @@ namespace _380_Project_3
             DropDownList1.DataSource = dt;
             DropDownList1.DataBind();
         }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            Session["_CurrentProjID"] = DropDownList1.SelectedValue;
+            Response.Redirect("LandingPage.aspx");
+        }
     }
 }

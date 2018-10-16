@@ -67,19 +67,82 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ASPX Dev\ActionItems.aspx" />
+    <Content Include="ASPX Dev\Changes.aspx" />
+    <Content Include="ASPX Dev\Components.aspx" />
+    <Content Include="ASPX Dev\Decisions.aspx" />
+    <Content Include="ASPX Dev\Defects.aspx" />
     <Content Include="ASPX Dev\Deliverables.aspx" />
+    <Content Include="ASPX Dev\Issues.aspx" />
+    <Content Include="ASPX Dev\LandingPage.aspx" />
     <Content Include="ASPX Dev\Login.aspx" />
+    <Content Include="ASPX Dev\Milestones.aspx" />
     <Content Include="ASPX Dev\ProjectSelection.aspx" />
+    <Content Include="ASPX Dev\ReferenceDocuments.aspx" />
+    <Content Include="ASPX Dev\Requirements.aspx" />
+    <Content Include="ASPX Dev\Resources.aspx" />
+    <Content Include="ASPX Dev\Risks.aspx" />
+    <Content Include="ASPX Dev\SummaryTasks.aspx" />
+    <Content Include="ASPX Dev\Tasks.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ASPX Dev\ActionItems.aspx.cs">
+      <DependentUpon>ActionItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\ActionItems.aspx.designer.cs">
+      <DependentUpon>ActionItems.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\Changes.aspx.cs">
+      <DependentUpon>Changes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\Changes.aspx.designer.cs">
+      <DependentUpon>Changes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\Components.aspx.cs">
+      <DependentUpon>Components.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\Components.aspx.designer.cs">
+      <DependentUpon>Components.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\Decisions.aspx.cs">
+      <DependentUpon>Decisions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\Decisions.aspx.designer.cs">
+      <DependentUpon>Decisions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\Defects.aspx.cs">
+      <DependentUpon>Defects.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\Defects.aspx.designer.cs">
+      <DependentUpon>Defects.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ASPX Dev\Deliverables.aspx.cs">
       <DependentUpon>Deliverables.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ASPX Dev\Deliverables.aspx.designer.cs">
       <DependentUpon>Deliverables.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\Issues.aspx.cs">
+      <DependentUpon>Issues.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\Issues.aspx.designer.cs">
+      <DependentUpon>Issues.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\LandingPage.aspx.cs">
+      <DependentUpon>LandingPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\LandingPage.aspx.designer.cs">
+      <DependentUpon>LandingPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ASPX Dev\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -88,12 +151,61 @@
     <Compile Include="ASPX Dev\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ASPX Dev\Milestones.aspx.cs">
+      <DependentUpon>Milestones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\Milestones.aspx.designer.cs">
+      <DependentUpon>Milestones.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ASPX Dev\ProjectSelection.aspx.cs">
       <DependentUpon>ProjectSelection.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ASPX Dev\ProjectSelection.aspx.designer.cs">
       <DependentUpon>ProjectSelection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\ReferenceDocuments.aspx.cs">
+      <DependentUpon>ReferenceDocuments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\ReferenceDocuments.aspx.designer.cs">
+      <DependentUpon>ReferenceDocuments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\Requirements.aspx.cs">
+      <DependentUpon>Requirements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\Requirements.aspx.designer.cs">
+      <DependentUpon>Requirements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\Resources.aspx.cs">
+      <DependentUpon>Resources.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\Resources.aspx.designer.cs">
+      <DependentUpon>Resources.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\Risks.aspx.cs">
+      <DependentUpon>Risks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\Risks.aspx.designer.cs">
+      <DependentUpon>Risks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\SummaryTasks.aspx.cs">
+      <DependentUpon>SummaryTasks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\SummaryTasks.aspx.designer.cs">
+      <DependentUpon>SummaryTasks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\Tasks.aspx.cs">
+      <DependentUpon>Tasks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\Tasks.aspx.designer.cs">
+      <DependentUpon>Tasks.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

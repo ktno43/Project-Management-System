@@ -37,7 +37,9 @@
                 <asp:DropDownList ID="DropDownList1" runat="server" Height="18px" Width="615px" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
                 </asp:DropDownList>
             </td>
-            <td>&nbsp;</td>
+            <td>
+                <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Select Project" Width="137px" />
+            </td>
         </tr>
         <tr>
             <td class="auto-style2">&nbsp;</td>
@@ -45,7 +47,7 @@
                 <asp:Button ID="Button1" runat="server" Text="Delete Project" Width="151px" OnClick="Button1_Click" />
             </td>
             <td>
-                <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="New Project" Width="136px" />
+                <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="New Project" Width="139px" />
             </td>
         </tr>
         <tr>
@@ -54,7 +56,7 @@
                 <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
             </td>
             <td>
-                <asp:Button ID="Button3" runat="server" Text="Export Reports" />
+                <asp:Button ID="Button3" runat="server" Text="Export Reports" Width="138px" />
             </td>
         </tr>
     </table>
