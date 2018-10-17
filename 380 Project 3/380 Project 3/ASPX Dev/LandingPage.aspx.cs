@@ -14,7 +14,7 @@ namespace _380_Project_3.ASPX_Dev
 
         }
 
-        protected void Menu1_MenuItemClick(object sender, MenuEventArgs e)
+        protected void Menu_TabNav_MenuItemClick(object sender, MenuEventArgs e)
         {
             bool hasParent = e.Item.Parent != null;
 

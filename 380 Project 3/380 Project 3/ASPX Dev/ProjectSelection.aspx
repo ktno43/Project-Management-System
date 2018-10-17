@@ -23,6 +23,16 @@
         .auto-style5 {
             text-align: center;
         }
+        .auto-style6 {
+            width: 100%;
+        }
+        .auto-style7 {
+            text-align: right;
+            height: 30px;
+        }
+        .auto-style8 {
+            height: 30px;
+        }
     </style>
 </head>
 <body style="height: 170px; width: 1214px;">
@@ -34,32 +44,64 @@
         <tr>
             <td class="auto-style3">Select Project:</td>
             <td class="auto-style4">
-                <asp:DropDownList ID="DropDownList1" runat="server" Height="18px" Width="615px" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+                <asp:DropDownList ID="DropDownList1" runat="server" Height="18px" Width="615px" AutoPostBack="True" DataSourceID="ProjectDropDownList" DataTextField="ProjectName" DataValueField="ProjectID">
                 </asp:DropDownList>
+                <asp:SqlDataSource ID="ProjectDropDownList" runat="server" ConnectionString="<%$ ConnectionStrings:Project DBConnectionString %>" SelectCommand="SELECT [ProjectName], [ProjectID] FROM [tblProjSelect] WHERE ([UserID] = @UserID) ORDER BY [ProjectName]">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
             </td>
             <td>
-                <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Select Project" Width="137px" />
+                <asp:Button ID="ButtonOpen" runat="server" OnClick="Button_Open_Click" Text="Open Project" Width="137px" />
             </td>
         </tr>
         <tr>
             <td class="auto-style2">&nbsp;</td>
             <td class="auto-style4">
-                <asp:Button ID="Button1" runat="server" Text="Delete Project" Width="151px" OnClick="Button1_Click" />
+                <asp:Button ID="ButtonDel" runat="server" Text="Delete Project" Width="151px" OnClick="Button_Del_Click" />
             </td>
             <td>
-                <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="New Project" Width="139px" />
+                <asp:Button ID="ButtonNew" runat="server" OnClick="Button_New_Click" Text="New Project" Width="139px" />
             </td>
         </tr>
         <tr>
-            <td class="auto-style3">Project Name:</td>
+            <td class="auto-style3">&nbsp;</td>
             <td class="auto-style4">
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                &nbsp;</td>
+            <td>
+                <asp:Button ID="ButtonExport" runat="server" Text="Export Reports" Width="138px" />
+            </td>
+        </tr>
+        <tr>
+            <td class="auto-style3">&nbsp;</td>
+            <td class="auto-style4">
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style3">
+                <asp:Label ID="LabelProjectName" runat="server" Text="Project Name" Visible="False"></asp:Label>
+            </td>
+            <td class="auto-style4">
+                <table class="auto-style6">
+                    <tr>
+                        <td class="auto-style8">
+                            <asp:TextBox ID="TextBoxProjectName" runat="server" Visible="False" Width="447px"></asp:TextBox>
+                        </td>
+                        <td class="auto-style7">
+                            <asp:Button ID="ButtonCreate" runat="server" OnClick="ButtonCreate_Click" Text="Create Project" Visible="False" Width="142px" />
+                        </td>
+                    </tr>
+                </table>
             </td>
             <td>
-                <asp:Button ID="Button3" runat="server" Text="Export Reports" Width="138px" />
-            </td>
+                &nbsp;</td>
         </tr>
     </table>
     </form>
+    <p>
+        &nbsp;</p>
     </body>
 </html>

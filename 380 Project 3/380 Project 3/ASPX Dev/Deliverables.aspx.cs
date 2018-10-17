@@ -4,99 +4,98 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
 
 namespace _380_Project_3
 {
     public partial class Deliverables : System.Web.UI.Page
     {
+        private string g_sqlConn = ConfigurationManager.ConnectionStrings["devDB"].ConnectionString;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        protected void Menu1_MenuItemClick(object sender, MenuEventArgs e)
+        public void Connect(SqlConnection sqlConn)
         {
-            bool hasParent = e.Item.Parent != null;
+            if (sqlConn.State == ConnectionState.Closed)
+                sqlConn.Open();
+        }
 
-            switch (hasParent)
+        public void Disconnect(SqlConnection sqlConn)
+        {
+            if (sqlConn.State == ConnectionState.Open)
+                sqlConn.Close();
+        }
+
+        protected void Button_New_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
-                case false:
-                    switch (e.Item.Value)
+                Connect(conn);
+                using (SqlCommand cmd = new SqlCommand("insert into tblDeliverables(UserID,ProjectID,Name,Description) values(@UserID, @ProjectID, @Name, @Description)", conn))
+                {
+                    try
                     {
-                        case "Deliverables":
-                            Response.Redirect("Deliverables.aspx");
-                            break;
+                        cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                        cmd.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
+                        cmd.Parameters.AddWithValue("@Name", TextBox1.Text);
+                        cmd.Parameters.AddWithValue("@Description", Request.Form["TextArea1"]);
 
-                        case "Tasks":
-                            Response.Redirect("Tasks.aspx");
-                            break;
-
-                        case "Issues":
-                            Response.Redirect("Issues.aspx");
-                            break;
-
-                        case "Action Items":
-                            Response.Redirect("ActionItems.aspx");
-                            break;
-
-                        case "Decisions":
-                            Response.Redirect("Decisions.aspx");
-                            break;
-
-                        case "Resources":
-                            Response.Redirect("Resources.aspx");
-                            break;
-
-                        case "Risks":
-                            Response.Redirect("Risks.aspx");
-                            break;
-
-                        case "Requirements":
-                            Response.Redirect("Requirements.aspx");
-                            break;
-
-                        case "Changes":
-                            Response.Redirect("Changes.aspx");
-                            break;
-
-                        case "Reference Documents":
-                            Response.Redirect("ReferenceDocuments.aspx");
-                            break;
-
-                        case "Components":
-                            Response.Redirect("Components.aspx");
-                            break;
-
-                        case "Defects":
-                            Response.Redirect("Defects.aspx");
-                            break;
+                        cmd.ExecuteNonQuery();
                     }
-                    break;
 
-                case true:
-                    switch (e.Item.Parent.Value)
+                    catch (Exception ex)
                     {
-                        case "Tasks":
-                            switch (e.Item.Value)
-                            {
-                                case "Tasks":
-                                    Response.Redirect("Tasks.aspx");
-                                    break;
-
-                                case "Summary Tasks":
-                                    Response.Redirect("SummaryTasks.aspx");
-                                    break;
-
-                                case "Milestones":
-                                    Response.Redirect("Milestones.aspx");
-                                    break;
-                            }
-                            break;
+                        Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
                     }
-                    break;
+
+                    finally
+                    {
+                        Disconnect(conn);
+                    }
+                }
             }
         }
 
+        protected void Button_Del_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                Connect(conn);
 
+                using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblDeliverables where UserID={0} and ProjectID={1} AND Name='{2}'",
+                    Session["_CurrentUserID"], Session["_CurrentProjID"], TextBox1.Text), conn))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    catch (Exception ex)
+                    {
+                        Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                    }
+
+                    finally
+                    {
+                        Disconnect(conn);
+                    }
+                }
+            }
+        }
+
+        protected void Button_Save_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button_Search_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

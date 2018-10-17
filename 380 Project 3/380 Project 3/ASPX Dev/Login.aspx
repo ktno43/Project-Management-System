@@ -38,24 +38,24 @@
         <tr>
             <td class="auto-style3">Username:</td>
             <td class="auto-style4">
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBoxUsername" runat="server"></asp:TextBox>
             </td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style3">Password:</td>
             <td class="auto-style5">
-                <asp:TextBox ID="TextBox2" runat="server" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="TextBoxPassword" runat="server" TextMode="Password"></asp:TextBox>
             </td>
             <td>
-                <asp:Label ID="Label1" runat="server" Text="[Label 1]" Visible="False"></asp:Label>
+                <asp:Label ID="Label" runat="server" Text="[Label 1]" Visible="False"></asp:Label>
             </td>
         </tr>
         <tr>
             <td class="auto-style1">
                 &nbsp;</td>
             <td class="auto-style5">
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Login" Width="69px" />
+        <asp:Button ID="ButtonLogin" runat="server" OnClick="Button_Login_Click" Text="Login" Width="69px" />
             </td>
             <td>&nbsp;</td>
         </tr>

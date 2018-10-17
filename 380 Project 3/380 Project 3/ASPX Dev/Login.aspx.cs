@@ -12,26 +12,26 @@ namespace _380_Project_3
 {
     public partial class Login : System.Web.UI.Page
     {
-        string g_sqlConn = ConfigurationManager.ConnectionStrings["devDB"].ConnectionString;
+        private string g_sqlConn = ConfigurationManager.ConnectionStrings["devDB"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void Button_Login_Click(object sender, EventArgs e)
         {
-            Label1.Visible = true;
+            Label.Visible = true;
 
-            if (Authenticate(TextBox1.Text, TextBox2.Text))
+            if (Authenticate(TextBoxUsername.Text, TextBoxPassword.Text))
             {
                 Response.Redirect("ProjectSelection.aspx");
             }
 
             else
             {
-                Label1.ForeColor = System.Drawing.Color.Red;
-                Label1.Font.Bold = true;
+                Label.ForeColor = System.Drawing.Color.Red;
+                Label.Font.Bold = true;
             }
         }
 
@@ -57,14 +57,14 @@ namespace _380_Project_3
 
                         else
                         {
-                            Label1.Text = "Incorrect password";
+                            Label.Text = "Incorrect password";
                             bAuthenticate = false;
                         }
                     }
 
                     else
                     {
-                        Label1.Text = "User does not exist";
+                        Label.Text = "User does not exist";
                         bAuthenticate = false;
                     }
                 }
