@@ -1,6 +1,6 @@
 Install Microsoft Visual Studio 2017 Community Edition
-  *Make sure you have the ASP.NET and Web Development Tools added*
-  *Project form is an ASP.NET Web Forms Page*
+  1.*Make sure you have the ASP.NET and Web Development Tools added*
+  2.*Project form is an ASP.NET Web Forms Page*
 
 Install Microsoft SQL Server 2017
   1. Once installation is finished, create a server instance named "COMP380"
