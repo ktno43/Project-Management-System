@@ -102,6 +102,5 @@ namespace _380_Project_3.ASPX_Dev
             if (sqlConn.State == ConnectionState.Open)
                 sqlConn.Close();
         }
-
     }
 }
