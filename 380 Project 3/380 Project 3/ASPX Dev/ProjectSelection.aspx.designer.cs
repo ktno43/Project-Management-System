@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace _380_Project_3 {
+namespace _380_Project_3.ASPX_Dev {
     
     
     public partial class ProjectSelection {
@@ -22,22 +22,22 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// DropDownListProjSelect control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListProjSelect;
         
         /// <summary>
-        /// ProjectDropDownList control.
+        /// ProjectSelectDB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource ProjectDropDownList;
+        protected global::System.Web.UI.WebControls.SqlDataSource ProjectSelectDB;
         
         /// <summary>
         /// ButtonOpen control.
@@ -49,15 +49,6 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.WebControls.Button ButtonOpen;
         
         /// <summary>
-        /// ButtonDel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonDel;
-        
-        /// <summary>
         /// ButtonNew control.
         /// </summary>
         /// <remarks>
@@ -67,39 +58,30 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.WebControls.Button ButtonNew;
         
         /// <summary>
-        /// ButtonExport control.
+        /// ButtonDelete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonExport;
+        protected global::System.Web.UI.WebControls.Button ButtonDelete;
         
         /// <summary>
-        /// LabelProjectName control.
+        /// ButtonGenReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelProjectName;
+        protected global::System.Web.UI.WebControls.Button ButtonGenReport;
         
         /// <summary>
-        /// TextBoxProjectName control.
+        /// ButtonModalCreate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxProjectName;
-        
-        /// <summary>
-        /// ButtonCreate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonCreate;
+        protected global::System.Web.UI.WebControls.Button ButtonModalCreate;
     }
 }

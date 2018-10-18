@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <table class="auto-style2">
             <tr>
-                <td class="auto-style3">Name<span class="auto-style5">*</span><span class="auto-style6">:</span></td>
+                <td class="auto-style3">Name<span class="auto-style1">*</span><span class="auto-style6">:</span></td>
                 <td class="auto-style8">
                     <asp:TextBox ID="TextBox1" runat="server" Width="315px"></asp:TextBox>
                     <asp:Button ID="ButtonSearch" runat="server" Text="Search" OnClick="Button_Search_Click" />
@@ -16,7 +16,7 @@
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
-                            <td>Associated Requirement(s):</td>
+                            <td class="auto-style2">Associated Requirement(s):</td>
                             <td>&nbsp;</td>
                             <td class="auto-style15">
                                 <asp:Button ID="ButtonReqs" runat="server" Text="Associate Requirements" />
@@ -31,7 +31,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="auto-style7">Description<span class="auto-style5">*</span><span class="auto-style6">:</span></td>
+                <td class="auto-style7">Description<span class="auto-style1">*</span><span class="auto-style6">:</span></td>
                 <td class="auto-style9">
                     <textarea id="TextArea1" class="auto-style2" name="TextArea1" maxlength="1000"></textarea></td>
                 <td>&nbsp;</td>
@@ -169,3 +169,14 @@
         </table>
 
     </asp:Content>
+<asp:Content ID="Content1" runat="server" contentplaceholderid="head">
+    <style type="text/css">
+        .auto-style1 {
+            color: #FF0000;
+        }
+        .auto-style2 {
+            color: #000000;
+        }
+    </style>
+</asp:Content>
+

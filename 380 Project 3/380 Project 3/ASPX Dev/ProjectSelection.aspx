@@ -1,107 +1,116 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProjectSelection.aspx.cs" Inherits="_380_Project_3.ProjectSelection" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProjectSelection.aspx.cs" Inherits="_380_Project_3.ASPX_Dev.ProjectSelection" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <style type="text/css">
         .auto-style1 {
-            width: 95%;
-            height: 94%;
-        }
-        .auto-style2 {
-            width: 431px;
-        }
-        .auto-style3 {
-            width: 431px;
-            text-align: right;
-        }
-        .auto-style4 {
-            width: 531px;
-        }
-        .auto-style5 {
             text-align: center;
         }
-        .auto-style6 {
-            width: 100%;
-        }
-        .auto-style7 {
+
+        .auto-style2 {
             text-align: right;
-            height: 30px;
+            width: 327px;
         }
+
+        .auto-style4 {
+            width: 578px;
+            text-align: left;
+        }
+
+        .auto-style5 {
+            width: 327px;
+            height: 59px;
+        }
+
+        .auto-style6 {
+            width: 578px;
+            height: 59px;
+        }
+
         .auto-style8 {
-            height: 30px;
+            text-align: left;
+            height: 59px;
         }
     </style>
 </head>
-<body style="height: 170px; width: 1214px;">
+<body>
     <form id="form1" runat="server">
         <div>
-            <h1 class="auto-style5">Welcome to the Project Management System</h1>
+            <h1 class="auto-style1">Welcome to the Project Management System</h1>
         </div>
-    <table class="auto-style1">
-        <tr>
-            <td class="auto-style3">Select Project:</td>
-            <td class="auto-style4">
-                <asp:DropDownList ID="DropDownList1" runat="server" Height="18px" Width="615px" AutoPostBack="True" DataSourceID="ProjectDropDownList" DataTextField="ProjectName" DataValueField="ProjectID">
-                </asp:DropDownList>
-                <asp:SqlDataSource ID="ProjectDropDownList" runat="server" ConnectionString="<%$ ConnectionStrings:Project DBConnectionString %>" SelectCommand="SELECT [ProjectName], [ProjectID] FROM [tblProjSelect] WHERE ([UserID] = @UserID) ORDER BY [ProjectName]">
-                    <SelectParameters>
-                        <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
-                    </SelectParameters>
-                </asp:SqlDataSource>
-            </td>
-            <td>
-                <asp:Button ID="ButtonOpen" runat="server" OnClick="Button_Open_Click" Text="Open Project" Width="137px" />
-            </td>
-        </tr>
-        <tr>
-            <td class="auto-style2">&nbsp;</td>
-            <td class="auto-style4">
-                <asp:Button ID="ButtonDel" runat="server" Text="Delete Project" Width="151px" OnClick="Button_Del_Click" />
-            </td>
-            <td>
-                <asp:Button ID="ButtonNew" runat="server" OnClick="Button_New_Click" Text="New Project" Width="139px" />
-            </td>
-        </tr>
-        <tr>
-            <td class="auto-style3">&nbsp;</td>
-            <td class="auto-style4">
-                &nbsp;</td>
-            <td>
-                <asp:Button ID="ButtonExport" runat="server" Text="Export Reports" Width="138px" />
-            </td>
-        </tr>
-        <tr>
-            <td class="auto-style3">&nbsp;</td>
-            <td class="auto-style4">
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style3">
-                <asp:Label ID="LabelProjectName" runat="server" Text="Project Name" Visible="False"></asp:Label>
-            </td>
-            <td class="auto-style4">
-                <table class="auto-style6">
-                    <tr>
-                        <td class="auto-style8">
-                            <asp:TextBox ID="TextBoxProjectName" runat="server" Visible="False" Width="447px"></asp:TextBox>
-                        </td>
-                        <td class="auto-style7">
-                            <asp:Button ID="ButtonCreate" runat="server" OnClick="ButtonCreate_Click" Text="Create Project" Visible="False" Width="142px" />
-                        </td>
-                    </tr>
-                </table>
-            </td>
-            <td>
-                &nbsp;</td>
-        </tr>
-    </table>
+        <table style="width: 100%;">
+            <tr>
+                <td class="auto-style2">Select Project</td>
+                <td class="auto-style4">
+                    <asp:DropDownList ID="DropDownListProjSelect" runat="server" DataSourceID="ProjectSelectDB" DataTextField="ProjectName" DataValueField="ProjectID" Height="16px" Width="571px">
+                    </asp:DropDownList>
+                    <asp:SqlDataSource ID="ProjectSelectDB" runat="server" ConnectionString="<%$ ConnectionStrings:Project DBConnectionString %>" SelectCommand="SELECT [ProjectName], [ProjectID] FROM [tblProjSelect] WHERE ([UserID] = @UserID)">
+                        <SelectParameters>
+                            <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                        </SelectParameters>
+                    </asp:SqlDataSource>
+                </td>
+                <td class="text-left">
+                    <asp:Button ID="ButtonOpen" runat="server" OnClick="ButtonOpen_Click" Text="Open Project" Width="160px" />
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style5"></td>
+                <td class="auto-style6"></td>
+                <td class="auto-style8">
+                    <asp:Button ID="ButtonNew" runat="server" data-toggle="modal" data-target="#myModal" Text="New Project" Width="160px" OnClientClick="return false;" />
+
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style5"></td>
+                <td class="auto-style6">
+                    <asp:Button ID="ButtonDelete" runat="server" OnClick="ButtonDelete_Click" Text="Delete Project" Width="160px" />
+                </td>
+                <td class="auto-style8">
+                    <asp:Button ID="ButtonGenReport" runat="server" OnClick="ButtonGenReport_Click" Text="Generate Reports" Width="160px" />
+                </td>
+            </tr>
+        </table>
+
+
+        <div class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Create New Project</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            Project Name:<br />
+                            <input id="projectName" type="text" name="ProjectName" />
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <asp:Button ID="ButtonModalCreate" runat="server" Text="Create Project" CssClass="btn btn-default" OnClick="ButtonModalCreate_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
     </form>
-    <p>
-        &nbsp;</p>
-    </body>
+
+</body>
 </html>

@@ -6,10 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
-using System.Web.UI.HtmlControls;
 using System.Configuration;
 
-namespace _380_Project_3
+namespace _380_Project_3.ASPX_Dev
 {
     public partial class ProjectSelection : System.Web.UI.Page
     {
@@ -20,63 +19,16 @@ namespace _380_Project_3
 
         }
 
-        public void Connect(SqlConnection sqlConn)
+        protected void ButtonOpen_Click(object sender, EventArgs e)
         {
-            if (sqlConn.State == ConnectionState.Closed)
-                sqlConn.Open();
-        }
-
-        public void Disconnect(SqlConnection sqlConn)
-        {
-            if (sqlConn.State == ConnectionState.Open)
-                sqlConn.Close();
-        }
-
-        protected void Button_Open_Click(object sender, EventArgs e)
-        {
-            Session["_CurrentProjID"] = DropDownList1.SelectedValue;
+            Session["_CurrentProjID"] = DropDownListProjSelect.SelectedValue;
             Response.Redirect("LandingPage.aspx");
         }
 
-        protected void Button_New_Click(object sender, EventArgs e)
+        protected void ButtonModalCreate_Click(object sender, EventArgs e)
         {
-            LabelProjectName.Visible = true;
-            TextBoxProjectName.Visible = true;
-            ButtonCreate.Visible = true;
-            TextBoxProjectName.Focus();
-        }
+            string sProjectName = String.Format("{0}", Request.Form["projectName"]);
 
-        protected void Button_Del_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(g_sqlConn))
-            {
-                Connect(conn);
-
-                using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblProjSelect where UserID={0} AND ProjectName='{1}'",
-                    Session["_CurrentUserID"], DropDownList1.SelectedItem.Text), conn))
-                {
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    catch (Exception ex)
-                    {
-                        Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
-                    }
-
-                    finally
-                    {
-                        Disconnect(conn);
-                    }
-                }
-            }
-
-            DropDownList1.DataBind();
-        }
-
-        protected void ButtonCreate_Click(object sender, EventArgs e)
-        {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
                 Connect(conn);
@@ -85,7 +37,7 @@ namespace _380_Project_3
                     try
                     {
                         cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                        cmd.Parameters.AddWithValue("@ProjectName", TextBoxProjectName.Text);
+                        cmd.Parameters.AddWithValue("@ProjectName", sProjectName);
 
                         cmd.ExecuteNonQuery();
                     }
@@ -102,11 +54,54 @@ namespace _380_Project_3
                 }
             }
 
-            LabelProjectName.Visible = false;
-            TextBoxProjectName.Visible = false;
-            ButtonCreate.Visible = false;
-
-            DropDownList1.DataBind();
+            DropDownListProjSelect.DataBind();
         }
+
+        protected void ButtonDelete_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                Connect(conn);
+
+                using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblProjSelect where UserID={0} AND ProjectName='{1}'",
+                    Session["_CurrentUserID"], DropDownListProjSelect.SelectedItem.Text), conn))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    catch (Exception ex)
+                    {
+                        Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                    }
+
+                    finally
+                    {
+                        Disconnect(conn);
+                    }
+                }
+            }
+
+            DropDownListProjSelect.DataBind();
+        }
+
+        protected void ButtonGenReport_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Connect(SqlConnection sqlConn)
+        {
+            if (sqlConn.State == ConnectionState.Closed)
+                sqlConn.Open();
+        }
+
+        private void Disconnect(SqlConnection sqlConn)
+        {
+            if (sqlConn.State == ConnectionState.Open)
+                sqlConn.Close();
+        }
+
     }
 }
