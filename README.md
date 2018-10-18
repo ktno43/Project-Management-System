@@ -12,4 +12,5 @@ Install Microsoft SQL Server Management Studio 18.0
 
 Open up Visual studio
   1. Open "380 Project 3.sln"
+  2. .aspx pages are in the project folder "ASPX Dev"
   
