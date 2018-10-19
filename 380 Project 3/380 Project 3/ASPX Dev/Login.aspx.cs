@@ -41,8 +41,7 @@ namespace _380_Project_3
 
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
-                using (SqlDataAdapter sda = new SqlDataAdapter("select UserID, Username, Password from tblUser where Username='"
-                    + sUserName + "'", conn))
+                using (SqlDataAdapter sda = new SqlDataAdapter(String.Format("SELECT UserID, Username, Password from tblUser WHERE Username='{0}'", sUserName), conn))
                 {
                     DataSet ds = new DataSet();
                     sda.Fill(ds, "tblUser");

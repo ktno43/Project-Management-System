@@ -13,13 +13,40 @@ namespace _380_Project_3 {
     public partial class Deliverables {
         
         /// <summary>
-        /// TextBox1 control.
+        /// DropDownListDelivSelect control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListDelivSelect;
+        
+        /// <summary>
+        /// ProjectSelectDB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource ProjectSelectDB;
+        
+        /// <summary>
+        /// ButtonModalSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonModalSearch;
+        
+        /// <summary>
+        /// TextBoxName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxName;
         
         /// <summary>
         /// ButtonSearch control.
@@ -38,6 +65,15 @@ namespace _380_Project_3 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonReqs;
+        
+        /// <summary>
+        /// TextBoxDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
         
         /// <summary>
         /// CalendarStart control.
@@ -67,13 +103,13 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.WebControls.Calendar CalendarDue;
         
         /// <summary>
-        /// GridView1 control.
+        /// GridViewListDeliverables control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.GridView GridViewListDeliverables;
         
         /// <summary>
         /// GridDeliverables control.

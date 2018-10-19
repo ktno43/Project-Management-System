@@ -12,7 +12,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Menu ID="MenuTabNav" runat="server" BackColor="#B5C7DE" DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="1.5em" ForeColor="#284E98" Height="108px" Orientation="Horizontal" StaticSubMenuIndent="10px" Width="100%">
+            <asp:Menu ID="MenuTabNav" runat="server" BackColor="#B5C7DE" DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size=".8em" ForeColor="#284E98" Height="108px" Orientation="Horizontal" StaticSubMenuIndent="10px" Width="100%">
                 <DynamicHoverStyle BackColor="#284E98" ForeColor="White" />
                 <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="5px"/>
                 <DynamicMenuStyle BackColor="#B5C7DE" />

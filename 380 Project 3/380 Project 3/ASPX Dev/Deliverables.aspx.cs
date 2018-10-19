@@ -31,6 +31,32 @@ namespace _380_Project_3
                 sqlConn.Close();
         }
 
+        protected void ButtonModalSearch_Click(object sender, EventArgs e)
+        {
+            Session["_CurrentDelivID"] = DropDownListDelivSelect.SelectedValue;
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                Connect(conn);
+                using (SqlCommand cmd = new SqlCommand(String.Format("SELECT Name, Description FROM tblDeliverables WHERE DeliverableID={0} AND UserID={1} AND ProjectID={2}",
+                    DropDownListDelivSelect.SelectedValue, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                {
+                    SqlDataReader sdr = cmd.ExecuteReader();
+
+                    while (sdr.Read())
+                    {
+                        TextBoxName.Text = sdr[0].ToString();
+                        TextBoxDescription.Text = sdr[1].ToString();
+                    }
+                    sdr.Close();
+                }
+
+                Disconnect(conn);
+            }
+
+            ButtonSave.Visible = true;
+            ButtonDel.Visible = true;
+        }
+
         protected void Button_New_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
@@ -42,8 +68,8 @@ namespace _380_Project_3
                     {
                         cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                         cmd.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
-                        cmd.Parameters.AddWithValue("@Name", TextBox1.Text);
-                        cmd.Parameters.AddWithValue("@Description", Request.Form["TextArea1"]);
+                        cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
+                        cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
 
                         cmd.ExecuteNonQuery();
                     }
@@ -55,10 +81,27 @@ namespace _380_Project_3
 
                     finally
                     {
+                        using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT DeliverableID FROM tblDeliverables WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                     TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                        {
+                            SqlDataReader sdr = cmd2.ExecuteReader();
+
+                            while (sdr.Read())
+                            {
+                                Session["_CurrentDelivID"] = sdr[0].ToString();
+
+                            }
+                            sdr.Close();
+                        }
+
                         Disconnect(conn);
                     }
                 }
             }
+
+            GridViewListDeliverables.DataBind();
+            ButtonSave.Visible = true;
+            ButtonDel.Visible = true;
         }
 
         protected void Button_Del_Click(object sender, EventArgs e)
@@ -68,7 +111,7 @@ namespace _380_Project_3
                 Connect(conn);
 
                 using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblDeliverables where UserID={0} and ProjectID={1} AND Name='{2}'",
-                    Session["_CurrentUserID"], Session["_CurrentProjID"], TextBox1.Text), conn))
+                    Session["_CurrentUserID"], Session["_CurrentProjID"], TextBoxName.Text), conn))
                 {
                     try
                     {
@@ -86,14 +129,39 @@ namespace _380_Project_3
                     }
                 }
             }
+
+            GridViewListDeliverables.DataBind();
         }
 
         protected void Button_Save_Click(object sender, EventArgs e)
         {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                Connect(conn);
 
+                using (SqlCommand cmd = new SqlCommand(String.Format("UPDATE tblDeliverables SET Name='{0}', Description='{1}' WHERE UserID={2} AND ProjectID={3} AND DeliverableID={4}", TextBoxName.Text, TextBoxDescription.Text, Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDelivID"]), conn))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    //  catch (Exception ex)
+                    // {
+                    //  Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                    //  }
+
+                    finally
+                    {
+                        Disconnect(conn);
+                    }
+                }
+            }
+
+            GridViewListDeliverables.DataBind();
         }
 
-        protected void Button_Search_Click(object sender, EventArgs e)
+        protected void ButtonModalCreate_Click(object sender, EventArgs e)
         {
 
         }
