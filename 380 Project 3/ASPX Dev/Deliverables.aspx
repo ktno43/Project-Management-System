@@ -42,7 +42,7 @@
     </div>
     <table class="auto-style2">
         <tr>
-            <td class="auto-style3">Name<span class="auto-style1">*</span><span class="auto-style6">:</span></td>
+            <td class="auto-style5">Name<span class="auto-style1">*</span><span class="auto-style6">:</span></td>
             <td class="auto-style8">
                 <asp:TextBox ID="TextBoxName" runat="server" Width="315px"></asp:TextBox>
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
@@ -70,14 +70,14 @@
             </td>
         </tr>
         <tr>
-            <td class="auto-style7">Description<span class="auto-style1">*</span><span class="auto-style6">:</span></td>
+            <td class="text-right">Description<span class="auto-style1">*</span><span class="auto-style6">:</span></td>
             <td class="auto-style9">
                 <asp:TextBox ID="TextBoxDescription" runat="server" Height="168px" MaxLength="1000" TextMode="MultiLine" Width="351px"></asp:TextBox>
             </td>
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td class="auto-style12">Start Date:<br />
+            <td class="text-right">Start Date:<br />
                 <br />
                 <br />
                 <br />
@@ -110,7 +110,7 @@
             </td>
         </tr>
         <tr>
-            <td class="auto-style7">Due Date:</td>
+            <td class="text-right">Due Date:</td>
             <td class="auto-style9">
                 <asp:Calendar ID="CalendarDue" runat="server"></asp:Calendar>
             </td>
@@ -226,6 +226,10 @@
             color: #000000;
             width: 439px;
             height: 266px;
+        }
+        .auto-style5 {
+            height: 30px;
+            text-align: right;
         }
     </style>
 </asp:Content>

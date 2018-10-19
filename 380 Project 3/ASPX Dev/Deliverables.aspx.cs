@@ -33,7 +33,6 @@ namespace _380_Project_3
 
         protected void ButtonModalSearch_Click(object sender, EventArgs e)
         {
-            Session["_CurrentDelivID"] = DropDownListDelivSelect.SelectedValue;
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
                 Connect(conn);
@@ -81,24 +80,12 @@ namespace _380_Project_3
 
                     finally
                     {
-                        using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT DeliverableID FROM tblDeliverables WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
-                     TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
-                        {
-                            SqlDataReader sdr = cmd2.ExecuteReader();
-
-                            while (sdr.Read())
-                            {
-                                Session["_CurrentDelivID"] = sdr[0].ToString();
-
-                            }
-                            sdr.Close();
-                        }
-
                         Disconnect(conn);
                     }
                 }
             }
 
+            DropDownListDelivSelect.DataBind();
             GridViewListDeliverables.DataBind();
             ButtonSave.Visible = true;
             ButtonDel.Visible = true;
@@ -130,6 +117,7 @@ namespace _380_Project_3
                 }
             }
 
+            DropDownListDelivSelect.DataBind();
             GridViewListDeliverables.DataBind();
         }
 
@@ -138,18 +126,31 @@ namespace _380_Project_3
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
                 Connect(conn);
+                using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT DeliverableID FROM tblDeliverables WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                    TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                {
+                    SqlDataReader sdr = cmd2.ExecuteReader();
 
-                using (SqlCommand cmd = new SqlCommand(String.Format("UPDATE tblDeliverables SET Name='{0}', Description='{1}' WHERE UserID={2} AND ProjectID={3} AND DeliverableID={4}", TextBoxName.Text, TextBoxDescription.Text, Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDelivID"]), conn))
+                    while (sdr.Read())
+                    {
+                        Session["_CurrentDelivID"] = sdr[0].ToString();
+
+                    }
+                    sdr.Close();
+                }
+
+                using (SqlCommand cmd = new SqlCommand(String.Format("UPDATE tblDeliverables SET Name='{0}', Description='{1}' WHERE UserID={2} AND ProjectID={3} AND DeliverableID={4}", 
+                    TextBoxName.Text, TextBoxDescription.Text, Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDelivID"]), conn))
                 {
                     try
                     {
                         cmd.ExecuteNonQuery();
                     }
 
-                    //  catch (Exception ex)
-                    // {
-                    //  Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
-                    //  }
+                    catch (Exception ex)
+                    {
+                        Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                    }
 
                     finally
                     {
@@ -157,7 +158,7 @@ namespace _380_Project_3
                     }
                 }
             }
-
+            DropDownListDelivSelect.DataBind();
             GridViewListDeliverables.DataBind();
         }
 
