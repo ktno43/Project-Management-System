@@ -139,7 +139,7 @@ namespace _380_Project_3
                     sdr.Close();
                 }
 
-                using (SqlCommand cmd = new SqlCommand(String.Format("UPDATE tblDeliverables SET Name='{0}', Description='{1}' WHERE UserID={2} AND ProjectID={3} AND DeliverableID={4}", 
+                using (SqlCommand cmd = new SqlCommand(String.Format("UPDATE tblDeliverables SET Name='{0}', Description='{1}' WHERE UserID={2} AND ProjectID={3} AND DeliverableID={4}",
                     TextBoxName.Text, TextBoxDescription.Text, Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDelivID"]), conn))
                 {
                     try
@@ -158,6 +158,7 @@ namespace _380_Project_3
                     }
                 }
             }
+
             DropDownListDelivSelect.DataBind();
             GridViewListDeliverables.DataBind();
         }
@@ -166,5 +167,36 @@ namespace _380_Project_3
         {
 
         }
+
+        protected void ImageButtonStartDate_Click(object sender, ImageClickEventArgs e)
+        {
+            if (CalendarStart.Visible == false)
+                CalendarStart.Visible = true;
+
+            else
+                CalendarStart.Visible = false;
+        }
+
+        protected void ImageButtonDueDate_Click(object sender, ImageClickEventArgs e)
+        {
+            if (CalendarDue.Visible == false)
+                CalendarDue.Visible = true;
+
+            else
+                CalendarDue.Visible = false;
+        }
+
+        protected void CalendarStart_SelectionChanged(object sender, EventArgs e)
+        {
+            TextBoxStartDate.Text = CalendarStart.SelectedDate.ToString("dddd, dd MMMM yyyy");
+            CalendarStart.Visible = false;
+        }
+
+        protected void CalendarDue_SelectionChanged(object sender, EventArgs e)
+        {
+            TextBoxDueDate.Text = CalendarDue.SelectedDate.ToString("dddd, dd MMMM yyyy");
+            CalendarDue.Visible = false;
+        }
+
     }
 }

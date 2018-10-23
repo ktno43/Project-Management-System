@@ -76,6 +76,24 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
         
         /// <summary>
+        /// TextBoxStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxStartDate;
+        
+        /// <summary>
+        /// ImageButtonStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonStartDate;
+        
+        /// <summary>
         /// CalendarStart control.
         /// </summary>
         /// <remarks>
@@ -92,6 +110,24 @@ namespace _380_Project_3 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonTask;
+        
+        /// <summary>
+        /// TextBoxDueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxDueDate;
+        
+        /// <summary>
+        /// ImageButtonDueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonDueDate;
         
         /// <summary>
         /// CalendarDue control.

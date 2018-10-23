@@ -85,9 +85,11 @@
     <Content Include="ASPX Dev\SummaryTasks.aspx" />
     <Content Include="ASPX Dev\Tasks.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\calendar.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\DBHelper.cs" />
     <Compile Include="ASPX Dev\ActionItems.aspx.cs">
       <DependentUpon>ActionItems.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

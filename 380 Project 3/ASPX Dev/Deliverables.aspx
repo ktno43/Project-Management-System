@@ -22,7 +22,7 @@
                         Deliverables List:
                         <asp:DropDownList ID="DropDownListDelivSelect" runat="server" DataSourceID="ProjectSelectDB" DataTextField="Name" DataValueField="DeliverableID" Height="30px" Width="571px">
                         </asp:DropDownList>
-                        <asp:SqlDataSource ID="ProjectSelectDB" runat="server" ConnectionString="<%$ ConnectionStrings:Project DBConnectionString %>" SelectCommand="SELECT [Name], [DeliverableID] FROM [tblDeliverables] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
+                        <asp:SqlDataSource ID="ProjectSelectDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [DeliverableID] FROM [tblDeliverables] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
                             <SelectParameters>
                                 <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                                 <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -40,14 +40,32 @@
         </div>
 
     </div>
-    <table class="auto-style2">
+    <table class="auto-style34">
         <tr>
-            <td class="auto-style5">Name<span class="auto-style1">*</span><span class="auto-style6">:</span></td>
-            <td class="auto-style8">
+            <td class="auto-style12">
+                <table class="auto-style10">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>Name<span class="auto-style1">*</span><span class="auto-style6">:</span></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+            <td class="auto-style20">
                 <asp:TextBox ID="TextBoxName" runat="server" Width="315px"></asp:TextBox>
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
             </td>
-            <td class="auto-style1">
+            <td class="auto-style11">
                 <table style="width: 100%;">
                     <tr>
                         <td>&nbsp;</td>
@@ -70,23 +88,89 @@
             </td>
         </tr>
         <tr>
-            <td class="text-right">Description<span class="auto-style1">*</span><span class="auto-style6">:</span></td>
-            <td class="auto-style9">
-                <asp:TextBox ID="TextBoxDescription" runat="server" Height="168px" MaxLength="1000" TextMode="MultiLine" Width="351px"></asp:TextBox>
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="text-right">Start Date:<br />
-                <br />
-                <br />
-                <br />
-                <br />
-            </td>
-            <td class="auto-style13">
-                <asp:Calendar ID="CalendarStart" runat="server"></asp:Calendar>
+            <td class="auto-style16">
+                <table class="auto-style19">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>Description<span class="auto-style1">*</span><span class="auto-style6">:</span></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
             </td>
             <td class="auto-style14">
+                <asp:TextBox ID="TextBoxDescription" runat="server" Height="168px" MaxLength="1000" TextMode="MultiLine" Width="351px"></asp:TextBox>
+            </td>
+            <td class="auto-style17"></td>
+        </tr>
+        <tr>
+            <td class="auto-style18">
+                <table class="auto-style21">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>Start Date:<br />
+                <br />
+                <br />
+                <br />
+                <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+            <td class="auto-style7">
+                <br />
+                <table style="width:100%;">
+                    <tr>
+                        <td class="auto-style36">
+                <asp:TextBox ID="TextBoxStartDate" runat="server" Width="203px"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:ImageButton ID="ImageButtonStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonStartDate_Click" Width="30px" />
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style40">
+                <asp:Calendar ID="CalendarStart" runat="server" OnSelectionChanged="CalendarStart_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" Width="125px">
+                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
+                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
+                    <OtherMonthDayStyle ForeColor="#999999" />
+                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
+                    <TodayDayStyle BackColor="#CCCCCC" />
+                            </asp:Calendar>
+                        </td>
+                        <td class="auto-style41"></td>
+                        <td class="auto-style41"></td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style38"></td>
+                        <td class="auto-style28"></td>
+                        <td class="auto-style28"></td>
+                    </tr>
+                </table>
+            </td>
+            <td class="auto-style8">
                 <br />
                 <table style="width: 100%;">
                     <tr>
@@ -110,11 +194,59 @@
             </td>
         </tr>
         <tr>
-            <td class="text-right">Due Date:</td>
-            <td class="auto-style9">
-                <asp:Calendar ID="CalendarDue" runat="server"></asp:Calendar>
+            <td class="auto-style31">
+                <table class="auto-style21">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>Due Date:</td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style39"></td>
+                        <td class="auto-style39"></td>
+                        <td class="auto-style39"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
             </td>
-            <td>
+            <td class="auto-style9">
+                <br />
+                <table style="width:100%;">
+                    <tr>
+                        <td class="auto-style36">
+                <asp:TextBox ID="TextBoxDueDate" runat="server" Width="203px"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:ImageButton ID="ImageButtonDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonDueDate_Click" Width="30px" />
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style36">
+                <asp:Calendar ID="CalendarDue" runat="server" OnSelectionChanged="CalendarDue_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" Width="121px">
+                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
+                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
+                    <OtherMonthDayStyle ForeColor="#999999" />
+                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
+                    <TodayDayStyle BackColor="#CCCCCC" />
+                            </asp:Calendar>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style36">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+            <td class="auto-style32">
                 <table style="width: 100%;">
                     <tr>
                         <td>List of Deliverable(s):</td>
@@ -128,8 +260,8 @@
                                 <Columns>
                                     <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                                     <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-                                    <asp:BoundField DataField="StartDate" HeaderText="StartDate" SortExpression="StartDate" />
-                                    <asp:BoundField DataField="DueDate" HeaderText="DueDate" SortExpression="DueDate" />
+                                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" />
+                                    <asp:BoundField DataField="DueDate" HeaderText="Due Date" SortExpression="DueDate" />
                                     <asp:BoundField DataField="Requirements" HeaderText="Requirements" SortExpression="Requirements" />
                                     <asp:BoundField DataField="Tasks" HeaderText="Tasks" SortExpression="Tasks" />
                                 </Columns>
@@ -144,7 +276,7 @@
                                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                             </asp:GridView>
-                            <asp:SqlDataSource ID="GridDeliverables" runat="server" ConnectionString="<%$ ConnectionStrings:Project DBConnectionString %>" SelectCommand="SELECT [Name], [Description], [StartDate], [DueDate], [Requirements], [Tasks] FROM [tblDeliverables] WHERE (([ProjectID] = @ProjectID) AND ([UserID] = @UserID))">
+                            <asp:SqlDataSource ID="GridDeliverables" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [StartDate], [DueDate], [Requirements], [Tasks] FROM [tblDeliverables] WHERE (([ProjectID] = @ProjectID) AND ([UserID] = @UserID))">
                                 <SelectParameters>
                                     <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
                                     <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
@@ -163,28 +295,18 @@
             </td>
         </tr>
         <tr>
-            <td class="auto-style4">&nbsp;</td>
-            <td class="auto-style9">&nbsp;</td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style4">&nbsp;</td>
-            <td class="auto-style9">&nbsp;</td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style4">&nbsp;</td>
-            <td class="auto-style9">&nbsp;</td>
-            <td>
-                <table style="width: 100%;">
+            <td class="auto-style24"></td>
+            <td class="auto-style22"></td>
+            <td class="auto-style23">
+                <table style="width:100%;">
                     <tr>
                         <td>
                             <asp:Button ID="ButtonNew" runat="server" Text="New" Width="101px" OnClick="Button_New_Click" />
                         </td>
-                        <td class="auto-style15">
+                        <td>
                             <asp:Button ID="ButtonDel" runat="server" Text="Delete" Width="96px" OnClick="Button_Del_Click" Visible="False" />
                         </td>
-                        <td class="auto-style15">
+                        <td>
                             <asp:Button ID="ButtonSave" runat="server" Text="Save" Width="131px" OnClick="Button_Save_Click" Visible="False" />
                         </td>
                     </tr>
@@ -202,9 +324,20 @@
             </td>
         </tr>
         <tr>
-            <td class="auto-style4">&nbsp;</td>
-            <td class="auto-style9">&nbsp;</td>
-            <td>&nbsp;</td>
+            <td class="auto-style29"></td>
+            <td class="auto-style27"></td>
+            <td class="auto-style28"></td>
+        </tr>
+        <tr>
+            <td class="auto-style29"></td>
+            <td class="auto-style27"></td>
+            <td class="auto-style28">
+            </td>
+        </tr>
+        <tr>
+            <td class="auto-style29"></td>
+            <td class="auto-style27"></td>
+            <td class="auto-style28"></td>
         </tr>
     </table>
 
@@ -222,14 +355,112 @@
         .auto-style3 {
             height: 30px;
         }
-        .auto-style4 {
+        .auto-style6 {
+            text-align: right;
+            height: 185px;
+        }
+        .auto-style7 {
+            text-align: left;
+            height: 230px;
+            width: 102%;
+        }
+        .auto-style8 {
+            height: 230px;
+        }
+        .auto-style9 {
+            width: 102%;
+            height: 166px;
+        }
+        .auto-style10 {
+            width: 100%;
+            height: 140px;
+        }
+        .auto-style11 {
+            color: #FF0000;
+            height: 140px;
+        }
+        .auto-style12 {
+            text-align: right;
+            height: 140px;
+        }
+        .auto-style14 {
+            width: 102%;
+            height: 174px;
+        }
+        .auto-style16 {
+            text-align: right;
+            height: 174px;
+        }
+        .auto-style17 {
+            height: 174px;
+        }
+        .auto-style18 {
+            text-align: right;
+            height: 230px;
+        }
+        .auto-style19 {
+            width: 100%;
+            height: 165px;
+        }
+        .auto-style20 {
+            width: 102%;
+            height: 140px;
+        }
+        .auto-style21 {
+            width: 100%;
+            height: 201px;
+        }
+        .auto-style22 {
+            width: 102%;
+            height: 60px;
+        }
+        .auto-style23 {
+            height: 60px;
+        }
+        .auto-style24 {
             color: #000000;
             width: 439px;
-            height: 266px;
+            height: 60px;
         }
-        .auto-style5 {
-            height: 30px;
+        .auto-style27 {
+            width: 102%;
+            height: 20px;
+        }
+        .auto-style28 {
+            height: 20px;
+        }
+        .auto-style29 {
+            color: #000000;
+            width: 439px;
+            height: 20px;
+        }
+        .auto-style31 {
             text-align: right;
+            height: 166px;
+        }
+        .auto-style32 {
+            height: 166px;
+        }
+        .auto-style34 {
+            color: #000000;
+            height: 871px;
+        }
+        .auto-style36 {
+            width: 184px;
+        }
+        .auto-style38 {
+            height: 20px;
+            width: 184px;
+        }
+        .auto-style39 {
+            height: 67px;
+        }
+        .auto-style40 {
+            width: 184px;
+            height: 162px;
+        }
+        .auto-style41 {
+            height: 162px;
         }
     </style>
 </asp:Content>
