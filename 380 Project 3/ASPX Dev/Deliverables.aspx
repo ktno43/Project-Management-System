@@ -38,8 +38,8 @@
 
             </div>
         </div>
-
     </div>
+
     <table class="auto-style34">
         <tr>
             <td class="auto-style12">
@@ -62,8 +62,27 @@
                 </table>
             </td>
             <td class="auto-style20">
+                <table style="width:100%;">
+                    <tr>
+                        <td class="auto-style42">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style42">
                 <asp:TextBox ID="TextBoxName" runat="server" Width="315px"></asp:TextBox>
+                        </td>
+                        <td>
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style42">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
             </td>
             <td class="auto-style11">
                 <table style="width: 100%;">
@@ -75,7 +94,7 @@
                     <tr>
                         <td class="auto-style2">Associated Requirement(s):</td>
                         <td>&nbsp;</td>
-                        <td class="auto-style2">
+                        <td class="auto-style44">
                             <asp:Button ID="ButtonReqs" runat="server" Text="Associate Requirements" />
                         </td>
                     </tr>
@@ -176,7 +195,7 @@
                     <tr>
                         <td class="auto-style3">Associated Task(s):</td>
                         <td class="auto-style3"></td>
-                        <td class="auto-style3">
+                        <td class="auto-style43">
                             <asp:Button ID="ButtonTask" runat="server" Text="Associate Tasks" />
                         </td>
                     </tr>
@@ -300,13 +319,13 @@
             <td class="auto-style23">
                 <table style="width:100%;">
                     <tr>
-                        <td>
+                        <td class="text-left">
                             <asp:Button ID="ButtonNew" runat="server" Text="New" Width="101px" OnClick="Button_New_Click" />
                         </td>
-                        <td>
+                        <td class="text-right">
                             <asp:Button ID="ButtonDel" runat="server" Text="Delete" Width="96px" OnClick="Button_Del_Click" Visible="False" />
                         </td>
-                        <td>
+                        <td class="text-right">
                             <asp:Button ID="ButtonSave" runat="server" Text="Save" Width="131px" OnClick="Button_Save_Click" Visible="False" />
                         </td>
                     </tr>
@@ -461,6 +480,17 @@
         }
         .auto-style41 {
             height: 162px;
+        }
+        .auto-style42 {
+            width: 348px;
+        }
+        .auto-style43 {
+            height: 30px;
+            text-align: right;
+        }
+        .auto-style44 {
+            color: #000000;
+            text-align: right;
         }
     </style>
 </asp:Content>

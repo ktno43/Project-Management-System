@@ -70,6 +70,7 @@ namespace _380_Project_3
                         cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
                         cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
 
+
                         cmd.ExecuteNonQuery();
                     }
 
