@@ -13,5 +13,15 @@ namespace _380_Project_3.ASPX_Dev
         {
 
         }
+
+        protected void ButtonModalSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+            protected void ButtonNew_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

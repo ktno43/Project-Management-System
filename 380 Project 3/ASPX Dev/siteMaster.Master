@@ -26,6 +26,7 @@
                         <asp:MenuItem Text="Milestones" Value="Milestones" NavigateUrl="~/ASPX Dev/Milestones.aspx"></asp:MenuItem>
                     </asp:MenuItem>
                     <asp:MenuItem Text="Action Items" Value="Action Items" NavigateUrl="~/ASPX Dev/ActionItems.aspx"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="~/ASPX Dev/Issues.aspx" Text="Issues" Value="Issues"></asp:MenuItem>
                     <asp:MenuItem Text="Decisions" Value="Decisions" NavigateUrl="~/ASPX Dev/Decisions.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="Resources" Value="Resources" NavigateUrl="~/ASPX Dev/Resources.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="Risks" Value="Risks" NavigateUrl="~/ASPX Dev/Risks.aspx"></asp:MenuItem>

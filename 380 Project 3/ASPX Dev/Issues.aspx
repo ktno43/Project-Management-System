@@ -15,14 +15,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Search for Deliverables</h4>
+                        <h4 class="modal-title">Search for Issues</h4>
                     </div>
 
                     <div class="modal-body">
-                        Tasks List:
-                        <asp:DropDownList ID="DropDownListTaskSelect" runat="server" DataSourceID="DropDownListTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
+                        Issues List:
+                        <asp:DropDownList ID="DropDownListIssuesSelect" runat="server" DataSourceID="DropDownListIssuesDB" DataTextField="Name" DataValueField="IssueID" Height="30px" Width="571px">
                         </asp:DropDownList>
-                        <asp:SqlDataSource ID="DropDownListTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] FROM [tblTasks] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
+                        <asp:SqlDataSource ID="DropDownListIssuesDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [IssueID] FROM [tblIssues] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
                             <SelectParameters>
                                 <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                                 <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -32,7 +32,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <asp:Button ID="ButtonModalSearch" runat="server" Text="Open Task" CssClass="btn btn-default" OnClick="ButtonModalSearch_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                        <asp:Button ID="ButtonModalSearch" runat="server" Text="Open Issue" CssClass="btn btn-default" OnClick="ButtonModalSearch_Click" UseSubmitBehavior="false" data-dismiss="modal" />
                     </div>
                 </div>
 
@@ -42,7 +42,7 @@
         <table style="width:100%;">
             <tr>
                 <td class="auto-style4">Name<span class="auto-style1">*</span><span class="auto-style3">:<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                    <asp:Button ID="ButtonSearch" runat="server" Text="Search" />
+ <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
                     </span></td>
                 <td class="auto-style2">
                     <table style="width:100%;">
@@ -183,7 +183,7 @@
             </tr>
             <tr>
                 <td class="auto-style7">
-                    <asp:Button ID="ButtonNew" runat="server" Text="New" />
+                    <asp:Button ID="ButtonNew" runat="server" Text="New" OnClick="ButtonNew_Click" />
                 </td>
                 <td class="text-right">
                     <asp:Button ID="ButtonDelete" runat="server" Text="Delete" />

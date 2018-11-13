@@ -13,22 +13,22 @@ namespace _380_Project_3.ASPX_Dev {
     public partial class Issues {
         
         /// <summary>
-        /// DropDownListTaskSelect control.
+        /// DropDownListIssuesSelect control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListTaskSelect;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListIssuesSelect;
         
         /// <summary>
-        /// DropDownListTaskDB control.
+        /// DropDownListIssuesDB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource DropDownListTaskDB;
+        protected global::System.Web.UI.WebControls.SqlDataSource DropDownListIssuesDB;
         
         /// <summary>
         /// ButtonModalSearch control.
