@@ -20,9 +20,9 @@
 
                     <div class="modal-body">
                         Deliverables List:
-                        <asp:DropDownList ID="DropDownListDelivSelect" runat="server" DataSourceID="ProjectSelectDB" DataTextField="Name" DataValueField="DeliverableID" Height="30px" Width="571px">
+                        <asp:DropDownList ID="DropDownListDelivSelect" runat="server" DataSourceID="DropDownListDelivDB" DataTextField="Name" DataValueField="DeliverableID" Height="30px" Width="571px">
                         </asp:DropDownList>
-                        <asp:SqlDataSource ID="ProjectSelectDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [DeliverableID] FROM [tblDeliverables] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
+                        <asp:SqlDataSource ID="DropDownListDelivDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [DeliverableID] FROM [tblDeliverables] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
                             <SelectParameters>
                                 <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                                 <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -32,7 +32,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <asp:Button ID="ButtonModalSearch" runat="server" Text="Open Project" CssClass="btn btn-default" OnClick="ButtonModalSearch_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                        <asp:Button ID="ButtonModalSearch" runat="server" Text="Open Deliverable" CssClass="btn btn-default" OnClick="ButtonModalSearch_Click" UseSubmitBehavior="false" data-dismiss="modal" />
                     </div>
                 </div>
 
@@ -268,9 +268,9 @@
             <td class="auto-style32">
                 <table style="width: 100%;">
                     <tr>
-                        <td>List of Deliverable(s):</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td class="auto-style28">List of Deliverable(s):</td>
+                        <td class="auto-style28"></td>
+                        <td class="auto-style28"></td>
                     </tr>
                     <tr>
                         <td class="auto-style1">
@@ -295,10 +295,10 @@
                                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                             </asp:GridView>
-                            <asp:SqlDataSource ID="GridDeliverables" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [StartDate], [DueDate], [Requirements], [Tasks] FROM [tblDeliverables] WHERE (([ProjectID] = @ProjectID) AND ([UserID] = @UserID))">
+                            <asp:SqlDataSource ID="GridDeliverables" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [StartDate], [DueDate], [Requirements], [Tasks] FROM [tblDeliverables] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
                                 <SelectParameters>
-                                    <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
                                     <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                                    <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
                                 </SelectParameters>
                             </asp:SqlDataSource>
                         </td>

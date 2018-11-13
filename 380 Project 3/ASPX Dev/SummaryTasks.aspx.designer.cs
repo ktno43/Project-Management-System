@@ -13,22 +13,22 @@ namespace _380_Project_3.ASPX_Dev {
     public partial class SummaryTasks {
         
         /// <summary>
-        /// DropDownListDelivSelect control.
+        /// DropDownListSummTaskSelect control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListDelivSelect;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListSummTaskSelect;
         
         /// <summary>
-        /// ProjectSelectDB control.
+        /// DropDownListSummTaskDB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource ProjectSelectDB;
+        protected global::System.Web.UI.WebControls.SqlDataSource DropDownListSummTaskDB;
         
         /// <summary>
         /// ButtonModalSearch control.

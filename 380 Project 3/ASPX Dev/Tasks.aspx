@@ -19,10 +19,10 @@
                     </div>
 
                     <div class="modal-body">
-                        Deliverables List:
-                        <asp:DropDownList ID="DropDownListDelivSelect" runat="server" DataSourceID="ProjectSelectDB" DataTextField="Name" DataValueField="DeliverableID" Height="30px" Width="571px">
+                        Tasks List:
+                        <asp:DropDownList ID="DropDownListTaskSelect" runat="server" DataSourceID="DropDownListTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
                         </asp:DropDownList>
-                        <asp:SqlDataSource ID="ProjectSelectDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [DeliverableID] FROM [tblDeliverables] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
+                        <asp:SqlDataSource ID="DropDownListTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] FROM [tblTasks] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
                             <SelectParameters>
                                 <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                                 <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -32,7 +32,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <asp:Button ID="ButtonModalSearch" runat="server" Text="Open Project" CssClass="btn btn-default" OnClick="ButtonModalSearch_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                        <asp:Button ID="ButtonModalSearch" runat="server" Text="Open Task" CssClass="btn btn-default" OnClick="ButtonModalSearch_Click" UseSubmitBehavior="false" data-dismiss="modal" />
                     </div>
                 </div>
 
@@ -328,18 +328,74 @@
                 <td>
                     <table style="width: 100%;">
                         <tr>
+                            <td class="auto-style83"></td>
+                            <td class="auto-style84"></td>
+                            <td class="auto-style3"></td>
+                        </tr>
+                        <tr>
                             <td class="auto-style53">&nbsp;</td>
                             <td class="auto-style64">&nbsp;</td>
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
                             <td class="auto-style53">List of Task(s) and Summary Task(s):</td>
-                            <td class="auto-style64">&nbsp;</td>
+                            <td class="auto-style63">
+                                &nbsp;</td>
+                            <td class="text-right">
+                                &nbsp;</td>
+                        </tr>
+                    </table>
+                    <asp:GridView ID="GridViewTaskList" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataSourceID="GridTasks">
+                        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                        <Columns>
+                            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
+                            <asp:BoundField DataField="TaskType" HeaderText="TaskType" SortExpression="TaskType" />
+                            <asp:BoundField DataField="ExpectedStartDate" HeaderText="Expected Start Date" SortExpression="ExpectedStartDate" />
+                            <asp:BoundField DataField="ExpectedEndDate" HeaderText="Expected End Date" SortExpression="ExpectedEndDate" />
+                            <asp:BoundField DataField="ExpectedDuration" HeaderText="Expected Duration" SortExpression="ExpectedDuration" />
+                            <asp:BoundField DataField="ExpectedEffort" HeaderText="Expected Effort" SortExpression="ExpectedEffort" />
+                            <asp:BoundField DataField="ActualStartDate" HeaderText="ActualStartDate" SortExpression="ActualStartDate" />
+                            <asp:BoundField DataField="ActualEndDate" HeaderText="Actual End Date" SortExpression="ActualEndDate" />
+                            <asp:BoundField DataField="ActualDuration" HeaderText="Actual Duration" SortExpression="ActualDuration" />
+                            <asp:BoundField DataField="ActualEffort" HeaderText="Actual Effort" SortExpression="ActualEffort" />
+                            <asp:BoundField DataField="PredecessorTask" HeaderText="Predecessor Task" SortExpression="PredecessorTask" />
+                            <asp:BoundField DataField="SuccessorTask" HeaderText="Successor Task" SortExpression="SuccessorTask" />
+                            <asp:BoundField DataField="Resource" HeaderText="Resource" SortExpression="Resource" />
+                            <asp:BoundField DataField="Issues" HeaderText="Issues" SortExpression="Issues" />
+                        </Columns>
+                        <EditRowStyle BackColor="#999999" />
+                        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                    </asp:GridView>
+                    <asp:SqlDataSource ID="GridTasks" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [TaskType], [Resource], [ExpectedStartDate], [SuccessorTask], [PredecessorTask], [ActualEffort], [ActualDuration], [ActualEndDate], [ActualStartDate], [ExpectedDuration], [ExpectedEndDate], [ExpectedEffort], [Issues] FROM [tblTasks] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
+                        <SelectParameters>
+                            <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                            <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                        </SelectParameters>
+                    </asp:SqlDataSource>
+                    <br />
+                    <table style="width: 100%;">
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="auto-style53">&nbsp;</td>
-                            <td class="auto-style63">
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td class="text-right">
                                 <asp:Button ID="ButtonChangeTaskType" runat="server" Text="Change Task Type" />
                             </td>
                             <td class="text-right">
@@ -384,7 +440,9 @@
                         <tr>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td class="text-right">Actual Start Date:</td>
+                            <td class="text-right">
+                                <asp:Label ID="LabelActualStartDate" runat="server" Text="Actual Start Date:" Visible="False"></asp:Label>
+                            </td>
                         </tr>
                         <tr>
                             <td class="auto-style9"></td>
@@ -442,13 +500,15 @@
                         </tr>
                         <tr>
                             <td class="auto-style81">
-                    <asp:TextBox ID="TextBoxActualStartDate" runat="server" Width="107px"></asp:TextBox>
-                                <asp:ImageButton ID="ImageButtonActualStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonActualStartDate_Click" Width="30px" />
+                    <asp:TextBox ID="TextBoxActualStartDate" runat="server" Width="107px" Visible="False"></asp:TextBox>
+                                <asp:ImageButton ID="ImageButtonActualStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonActualStartDate_Click" Width="30px" Visible="False" />
                             </td>
-                            <td class="auto-style18">Actual End Date:</td>
+                            <td class="auto-style18">
+                                <asp:Label ID="LabelActualEndDate" runat="server" Text="Actual End Date:" Visible="False"></asp:Label>
+                            </td>
                             <td class="auto-style82">
-                    <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="105px"></asp:TextBox>
-                                <asp:ImageButton ID="ImageButtonActualEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonActualEndDate_Click" Width="30px" />
+                    <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="105px" Visible="False"></asp:TextBox>
+                                <asp:ImageButton ID="ImageButtonActualEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonActualEndDate_Click" Width="30px" Visible="False" />
                             </td>
                         </tr>
                         <tr>
@@ -499,16 +559,20 @@
                 </td>
             </tr>
             <tr>
-                <td class="auto-style55">Actual Duration:</td>
+                <td class="auto-style55">
+                    <asp:Label ID="LabelActualDuration" runat="server" Text="Actual Duration:" Visible="False"></asp:Label>
+                </td>
                 <td class="auto-style56">
-                    <asp:TextBox ID="TextBoxActualDuration" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="TextBoxActualDuration" runat="server" Visible="False"></asp:TextBox>
                 </td>
                 <td class="auto-style57"></td>
             </tr>
             <tr>
-                <td class="auto-style42">Actual Effort:</td>
+                <td class="auto-style42">
+                    <asp:Label ID="LabelActualEffort" runat="server" Text="Actual Effort:" Visible="False"></asp:Label>
+                </td>
                 <td class="auto-style28">
-                    <asp:TextBox ID="TextBoxActualEffort" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="TextBoxActualEffort" runat="server" Visible="False"></asp:TextBox>
                 </td>
                 <td>
                     <table style="width: 100%;">
@@ -531,7 +595,7 @@
                                         </td>
                                         <td class="auto-style9"></td>
                                         <td class="auto-style58">
-                                            <asp:Button ID="ButtonGantt" runat="server" Text="Gantt Chart" />
+                                            <asp:Button ID="ButtonGantt" runat="server" Text="Gantt Chart" Visible="False" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -542,10 +606,10 @@
                                 </table>
                             </td>
                             <td class="text-right">
-                                <asp:Button ID="ButtonDelete" runat="server" Text="Delete" Width="96px" OnClick="ButtonDelete_Click" />
+                                <asp:Button ID="ButtonDelete" runat="server" Text="Delete" Width="96px" OnClick="ButtonDelete_Click" Visible="False" />
                             </td>
                             <td class="text-right">
-                                <asp:Button ID="ButtonSave" runat="server" Text="Save" Width="131px" OnClick="ButtonSave_Click" />
+                                <asp:Button ID="ButtonSave" runat="server" Text="Save" Width="131px" OnClick="ButtonSave_Click" Visible="False" />
                             </td>
                         </tr>
                         <tr>
@@ -561,239 +625,18 @@
 </asp:Content>
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
     <style type="text/css">
-        .auto-style1 {
-            color: #FF0000;
-        }
-
-        .auto-style2 {
-            color: #000000;
-        }
-
+        
         .auto-style3 {
             height: 23px;
         }
 
-        .auto-style4 {
-            text-align: right;
-        }
-
-        .auto-style5 {
-            text-align: left;
-            height: 77px;
-            width: 447px;
-        }
-
-        .auto-style6 {
-            height: 77px;
-        }
-
-        .auto-style8 {
-            width: 323px;
-        }
-
-        .auto-style9 {
-            height: 20px;
-        }
-
-        .auto-style10 {
-            height: 20px;
-            text-align: right;
-            width: 161px;
-        }
-
-        .auto-style11 {
-            height: 19px;
-        }
-
-        .auto-style12 {
-            height: 19px;
-            text-align: right;
-            width: 161px;
-        }
-
-        .auto-style15 {
-            height: 20px;
-            text-align: right;
-            width: 130px;
-        }
-
-        .auto-style18 {
-            text-align: right;
-            width: 267px;
-            height: 60px;
-        }
-
-        .auto-style22 {
-            width: 130px;
-            height: 20px;
-        }
-
-        .auto-style24 {
-            width: 323px;
-            height: 20px;
-        }
-
-        .auto-style25 {
-            width: 67px;
-            height: 20px;
-        }
-
-        .auto-style26 {
-            width: 67px;
-        }
-
-        .auto-style27 {
-            height: 23px;
-            width: 447px;
-        }
-
-        .auto-style28 {
-            width: 447px;
-        }
-
-        .auto-style29 {
-            height: 20px;
-            width: 447px;
-        }
-
-        .auto-style30 {
-            height: 19px;
-            width: 447px;
-        }
-
-        .auto-style32 {
-            width: 357px;
-        }
-
-        .auto-style34 {
-            width: 4px;
-        }
-
-        .auto-style36 {
-            width: 365px;
-        }
-
-        .auto-style39 {
-            height: 77px;
-            width: 161px;
-        }
-
-        .auto-style40 {
-            height: 23px;
-            width: 161px;
-        }
-
-        .auto-style41 {
-            width: 161px;
-        }
-
-        .auto-style42 {
-            text-align: right;
-            width: 161px;
-        }
-
-        .auto-style44 {
-            width: 136px;
-        }
-
-        .auto-style45 {
-            width: 136px;
-            height: 26px;
-        }
-
-        .auto-style46 {
-            height: 26px;
-            text-align: right;
-        }
-
-        .auto-style47 {
-            height: 26px;
-        }
-
-        .auto-style50 {
-            margin-left: 304px;
-        }
-
-        .auto-style51 {
-            width: 184px;
-        }
-
-        .auto-style53 {
+        .auto-style83 {
             width: 237px;
+            height: 23px;
         }
-
-        .auto-style54 {
-            width: 184px;
-            height: 20px;
-        }
-
-        .auto-style55 {
-            text-align: right;
-            width: 161px;
-            height: 22px;
-        }
-
-        .auto-style56 {
-            width: 447px;
-            height: 22px;
-        }
-
-        .auto-style57 {
-            height: 22px;
-        }
-
-        .auto-style58 {
-            height: 20px;
-            text-align: right;
-        }
-
-        .auto-style60 {
-            width: 119px;
-        }
-
-        .auto-style61 {
-            width: 119px;
-            height: 20px;
-        }
-
-        .auto-style63 {
-            text-align: left;
+        .auto-style84 {
             width: 183px;
-        }
-
-        .auto-style64 {
-            width: 183px;
-        }
-        .auto-style71 {
-            width: 158px;
-            height: 20px;
-        }
-        .auto-style75 {
-            height: 20px;
-            width: 159px;
-        }
-        .auto-style76 {
-            width: 159px;
-        }
-        .auto-style77 {
-            width: 158px;
-        }
-        .auto-style78 {
-            width: 130px;
-        }
-        .auto-style79 {
-            width: 267px;
-            height: 20px;
-        }
-        .auto-style80 {
-            width: 267px;
-        }
-        .auto-style81 {
-            width: 158px;
-            height: 60px;
-        }
-        .auto-style82 {
-            height: 60px;
+            height: 23px;
         }
     </style>
 </asp:Content>

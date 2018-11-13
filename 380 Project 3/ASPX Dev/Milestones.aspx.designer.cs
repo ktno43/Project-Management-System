@@ -13,22 +13,22 @@ namespace _380_Project_3.ASPX_Dev {
     public partial class Milestones {
         
         /// <summary>
-        /// DropDownListDelivSelect control.
+        /// DropDownListMilestoneSelect control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListDelivSelect;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListMilestoneSelect;
         
         /// <summary>
-        /// ProjectSelectDB control.
+        /// DropDownListMilestoneDB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource ProjectSelectDB;
+        protected global::System.Web.UI.WebControls.SqlDataSource DropDownListMilestoneDB;
         
         /// <summary>
         /// ButtonModalSearch control.

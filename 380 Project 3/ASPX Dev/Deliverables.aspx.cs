@@ -140,9 +140,14 @@ namespace _380_Project_3
                     sdr.Close();
                 }
 
-                using (SqlCommand cmd = new SqlCommand(String.Format("UPDATE tblDeliverables SET Name='{0}', Description='{1}' WHERE UserID={2} AND ProjectID={3} AND DeliverableID={4}",
-                    TextBoxName.Text, TextBoxDescription.Text, Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDelivID"]), conn))
+                using (SqlCommand cmd = new SqlCommand("UPDATE tblDeliverables SET Name=@Name, Description=@Description WHERE UserID=@UserID AND ProjectID=@ProjID AND DeliverableID=@DelivID", conn))
                 {
+                    cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
+                    cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
+                    cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                    cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                    cmd.Parameters.AddWithValue("@DelivID", Session["_CurrentDelivID"]);
+
                     try
                     {
                         cmd.ExecuteNonQuery();
