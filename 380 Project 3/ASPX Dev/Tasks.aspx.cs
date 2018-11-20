@@ -81,6 +81,11 @@ namespace _380_Project_3.ASPX_Dev
             ButtonGantt.Visible = true;
         }
 
+        protected void ButtonModalResource_Click(object sender, EventArgs e)
+        {
+
+        }
+
         protected void ButtonNew_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))

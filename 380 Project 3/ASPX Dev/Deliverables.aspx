@@ -40,6 +40,64 @@
         </div>
     </div>
 
+    <div class="container2">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Search for Tasks</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        Tasks List:
+                    <div style="overflow-y: scroll; height: 250px">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridViewAssociateTask" ForeColor="#333333" GridLines="None" Width="472px">
+                            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                            <Columns>
+                                <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                                <asp:BoundField DataField="TaskType" HeaderText="TaskType" SortExpression="TaskType" />
+                                <asp:TemplateField HeaderText="Associated">
+                                    <ItemTemplate>
+                                        <asp:CheckBox ID="CheckBox1" runat="server" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                            <EditRowStyle BackColor="#999999" />
+                            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                            <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                            <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                            <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                        </asp:GridView>
+                    </div>
+                        <asp:SqlDataSource ID="GridViewAssociateTask" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskType] FROM [tblTasks] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
+                            <SelectParameters>
+                                <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                                <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <asp:Button ID="Button1" runat="server" Text="Associate Tasks" CssClass="btn btn-default" OnClick="ButtonModalAssociateTask_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
     <table class="auto-style34">
         <tr>
             <td class="auto-style12">
@@ -62,7 +120,7 @@
                 </table>
             </td>
             <td class="auto-style20">
-                <table style="width:100%;">
+                <table style="width: 100%;">
                     <tr>
                         <td class="auto-style42">&nbsp;</td>
                         <td>&nbsp;</td>
@@ -70,10 +128,10 @@
                     </tr>
                     <tr>
                         <td class="auto-style42">
-                <asp:TextBox ID="TextBoxName" runat="server" Width="315px"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxName" runat="server" Width="315px"></asp:TextBox>
                         </td>
                         <td>
-                <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
+                            <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
                         </td>
                         <td>&nbsp;</td>
                     </tr>
@@ -138,10 +196,10 @@
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>Start Date:<br />
-                <br />
-                <br />
-                <br />
-                <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
                         </td>
                     </tr>
                     <tr>
@@ -158,10 +216,10 @@
             </td>
             <td class="auto-style7">
                 <br />
-                <table style="width:100%;">
+                <table style="width: 100%;">
                     <tr>
                         <td class="auto-style36">
-                <asp:TextBox ID="TextBoxStartDate" runat="server" Width="203px"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxStartDate" runat="server" Width="203px"></asp:TextBox>
                         </td>
                         <td>
                             <asp:ImageButton ID="ImageButtonStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonStartDate_Click" Width="30px" />
@@ -170,13 +228,13 @@
                     </tr>
                     <tr>
                         <td class="auto-style40">
-                <asp:Calendar ID="CalendarStart" runat="server" OnSelectionChanged="CalendarStart_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" Width="125px">
-                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
-                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
-                    <OtherMonthDayStyle ForeColor="#999999" />
-                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
-                    <TodayDayStyle BackColor="#CCCCCC" />
+                            <asp:Calendar ID="CalendarStart" runat="server" OnSelectionChanged="CalendarStart_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" Width="125px">
+                                <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
+                                <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
+                                <OtherMonthDayStyle ForeColor="#999999" />
+                                <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+                                <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
+                                <TodayDayStyle BackColor="#CCCCCC" />
                             </asp:Calendar>
                         </td>
                         <td class="auto-style41"></td>
@@ -196,11 +254,50 @@
                         <td class="auto-style3">Associated Task(s):</td>
                         <td class="auto-style3"></td>
                         <td class="auto-style43">
-                            <asp:Button ID="ButtonTask" runat="server" Text="Associate Tasks" />
+                            <asp:Button ID="ButtonTask" runat="server" data-toggle="modal" data-target="#myModal2" Text="Associate Tasks" OnClientClick="return false;" />
                         </td>
                     </tr>
                     <tr>
-                        <td>&nbsp;</td>
+                        <td>
+                            <asp:GridView ID="GridViewAssociatedTasks" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridAssociatedTasks" ForeColor="#333333" GridLines="None" AllowSorting="True">
+                                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                                <Columns>
+                                    <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                                    <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
+                                    <asp:BoundField DataField="TaskType" HeaderText="TaskType" SortExpression="TaskType" />
+                                    <asp:BoundField DataField="ExpectedStartDate" HeaderText="ExpectedStartDate" SortExpression="ExpectedStartDate" />
+                                    <asp:BoundField DataField="ExpectedEndDate" HeaderText="ExpectedEndDate" SortExpression="ExpectedEndDate" />
+                                    <asp:BoundField DataField="ExpectedDuration" HeaderText="ExpectedDuration" SortExpression="ExpectedDuration" />
+                                    <asp:BoundField DataField="ExpectedEffort" HeaderText="ExpectedEffort" SortExpression="ExpectedEffort" />
+                                    <asp:BoundField DataField="ActualStartDate" HeaderText="ActualStartDate" SortExpression="ActualStartDate" />
+                                    <asp:BoundField DataField="ActualEndDate" HeaderText="ActualEndDate" SortExpression="ActualEndDate" />
+                                    <asp:BoundField DataField="ActualDuration" HeaderText="ActualDuration" SortExpression="ActualDuration" />
+                                    <asp:BoundField DataField="EffortCompleted" HeaderText="EffortCompleted" SortExpression="EffortCompleted" />
+                                    <asp:BoundField DataField="ActualEffort" HeaderText="ActualEffort" SortExpression="ActualEffort" />
+                                    <asp:BoundField DataField="PredecessorTask" HeaderText="PredecessorTask" SortExpression="PredecessorTask" />
+                                    <asp:BoundField DataField="PredecessorDependency" HeaderText="PredecessorDependency" SortExpression="PredecessorDependency" />
+                                    <asp:BoundField DataField="SuccessorTask" HeaderText="SuccessorTask" SortExpression="SuccessorTask" />
+                                    <asp:BoundField DataField="SuccessorDependency" HeaderText="SuccessorDependency" SortExpression="SuccessorDependency" />
+                                </Columns>
+                                <EditRowStyle BackColor="#999999" />
+                                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                            </asp:GridView>
+                            <asp:SqlDataSource ID="GridAssociatedTasks" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [TaskType], [ExpectedStartDate], [ExpectedEndDate], [ExpectedDuration], [ExpectedEffort], [ActualStartDate], [ActualEndDate], [ActualDuration], [EffortCompleted], [ActualEffort], [PredecessorTask], [PredecessorDependency], [SuccessorTask], [SuccessorDependency] FROM [tblTasks] WHERE (([AssociatedDeliverable] = @AssociatedDeliverable) AND ([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
+                                <SelectParameters>
+                                    <asp:SessionParameter Name="AssociatedDeliverable" SessionField="_CurrentDelivID" Type="Int32" />
+                                    <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                                    <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+                        </td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
@@ -234,10 +331,10 @@
             </td>
             <td class="auto-style9">
                 <br />
-                <table style="width:100%;">
+                <table style="width: 100%;">
                     <tr>
                         <td class="auto-style36">
-                <asp:TextBox ID="TextBoxDueDate" runat="server" Width="203px"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxDueDate" runat="server" Width="203px"></asp:TextBox>
                         </td>
                         <td>
                             <asp:ImageButton ID="ImageButtonDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonDueDate_Click" Width="30px" />
@@ -246,13 +343,13 @@
                     </tr>
                     <tr>
                         <td class="auto-style36">
-                <asp:Calendar ID="CalendarDue" runat="server" OnSelectionChanged="CalendarDue_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" Width="121px">
-                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
-                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
-                    <OtherMonthDayStyle ForeColor="#999999" />
-                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
-                    <TodayDayStyle BackColor="#CCCCCC" />
+                            <asp:Calendar ID="CalendarDue" runat="server" OnSelectionChanged="CalendarDue_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" Width="121px">
+                                <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
+                                <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
+                                <OtherMonthDayStyle ForeColor="#999999" />
+                                <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+                                <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
+                                <TodayDayStyle BackColor="#CCCCCC" />
                             </asp:Calendar>
                         </td>
                         <td>&nbsp;</td>
@@ -279,10 +376,8 @@
                                 <Columns>
                                     <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                                     <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-                                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" />
-                                    <asp:BoundField DataField="DueDate" HeaderText="Due Date" SortExpression="DueDate" />
-                                    <asp:BoundField DataField="Requirements" HeaderText="Requirements" SortExpression="Requirements" />
-                                    <asp:BoundField DataField="Tasks" HeaderText="Tasks" SortExpression="Tasks" />
+                                    <asp:BoundField DataField="StartDate" HeaderText="StartDate" SortExpression="StartDate" />
+                                    <asp:BoundField DataField="DueDate" HeaderText="DueDate" SortExpression="DueDate" />
                                 </Columns>
                                 <EditRowStyle BackColor="#999999" />
                                 <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -295,7 +390,7 @@
                                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                             </asp:GridView>
-                            <asp:SqlDataSource ID="GridDeliverables" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [StartDate], [DueDate], [Requirements], [Tasks] FROM [tblDeliverables] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
+                            <asp:SqlDataSource ID="GridDeliverables" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [StartDate], [DueDate] FROM [tblDeliverables] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
                                 <SelectParameters>
                                     <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                                     <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -317,7 +412,7 @@
             <td class="auto-style24"></td>
             <td class="auto-style22"></td>
             <td class="auto-style23">
-                <table style="width:100%;">
+                <table style="width: 100%;">
                     <tr>
                         <td class="text-left">
                             <asp:Button ID="ButtonNew" runat="server" Text="New" Width="101px" OnClick="Button_New_Click" />
@@ -350,8 +445,7 @@
         <tr>
             <td class="auto-style29"></td>
             <td class="auto-style27"></td>
-            <td class="auto-style28">
-            </td>
+            <td class="auto-style28"></td>
         </tr>
         <tr>
             <td class="auto-style29"></td>
@@ -361,137 +455,5 @@
     </table>
 
 </asp:Content>
-<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
-    <style type="text/css">
-        .auto-style1 {
-            color: #FF0000;
-        }
 
-        .auto-style2 {
-            color: #000000;
-        }
-
-        .auto-style3 {
-            height: 30px;
-        }
-        .auto-style6 {
-            text-align: right;
-            height: 185px;
-        }
-        .auto-style7 {
-            text-align: left;
-            height: 230px;
-            width: 102%;
-        }
-        .auto-style8 {
-            height: 230px;
-        }
-        .auto-style9 {
-            width: 102%;
-            height: 166px;
-        }
-        .auto-style10 {
-            width: 100%;
-            height: 140px;
-        }
-        .auto-style11 {
-            color: #FF0000;
-            height: 140px;
-        }
-        .auto-style12 {
-            text-align: right;
-            height: 140px;
-        }
-        .auto-style14 {
-            width: 102%;
-            height: 174px;
-        }
-        .auto-style16 {
-            text-align: right;
-            height: 174px;
-        }
-        .auto-style17 {
-            height: 174px;
-        }
-        .auto-style18 {
-            text-align: right;
-            height: 230px;
-        }
-        .auto-style19 {
-            width: 100%;
-            height: 165px;
-        }
-        .auto-style20 {
-            width: 102%;
-            height: 140px;
-        }
-        .auto-style21 {
-            width: 100%;
-            height: 201px;
-        }
-        .auto-style22 {
-            width: 102%;
-            height: 60px;
-        }
-        .auto-style23 {
-            height: 60px;
-        }
-        .auto-style24 {
-            color: #000000;
-            width: 439px;
-            height: 60px;
-        }
-        .auto-style27 {
-            width: 102%;
-            height: 20px;
-        }
-        .auto-style28 {
-            height: 20px;
-        }
-        .auto-style29 {
-            color: #000000;
-            width: 439px;
-            height: 20px;
-        }
-        .auto-style31 {
-            text-align: right;
-            height: 166px;
-        }
-        .auto-style32 {
-            height: 166px;
-        }
-        .auto-style34 {
-            color: #000000;
-            height: 871px;
-        }
-        .auto-style36 {
-            width: 184px;
-        }
-        .auto-style38 {
-            height: 20px;
-            width: 184px;
-        }
-        .auto-style39 {
-            height: 67px;
-        }
-        .auto-style40 {
-            width: 184px;
-            height: 162px;
-        }
-        .auto-style41 {
-            height: 162px;
-        }
-        .auto-style42 {
-            width: 348px;
-        }
-        .auto-style43 {
-            height: 30px;
-            text-align: right;
-        }
-        .auto-style44 {
-            color: #000000;
-            text-align: right;
-        }
-    </style>
-</asp:Content>
 
