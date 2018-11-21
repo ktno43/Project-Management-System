@@ -12,7 +12,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Menu ID="MenuTabNav" runat="server" BackColor="#B5C7DE" DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size=".8em" ForeColor="#284E98" Height="108px" Orientation="Horizontal" StaticSubMenuIndent="10px" Width="100%">
+            <asp:Menu ID="MenuTabNav" runat="server" BackColor="#B5C7DE" DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="X-Small" ForeColor="#284E98" Orientation="Horizontal" StaticSubMenuIndent="10px" Width="100%" Font-Bold="True">
                 <DynamicHoverStyle BackColor="#284E98" ForeColor="White" />
                 <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="5px"/>
                 <DynamicMenuStyle BackColor="#B5C7DE" />
@@ -38,12 +38,14 @@
                     <asp:MenuItem Text="Logout" Value="Logout"></asp:MenuItem>
                 </Items>
                 <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
-                <StaticMenuItemStyle HorizontalPadding="10px" VerticalPadding="35px" />
+                <StaticMenuItemStyle HorizontalPadding="10px" VerticalPadding="10px" />
                 <StaticSelectedStyle BackColor="#507CD1" />
             </asp:Menu>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
     </form>
+    <p>
+        &nbsp;</p>
 </body>
 </html>

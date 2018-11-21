@@ -32,6 +32,16 @@ namespace _380_Project_3.ASPX_Dev
                 sqlConn.Close();
         }
 
+        protected void ButtonModalSetPredTask_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ButtonModalSetSuccTask_Click(object sender, EventArgs e)
+        {
+
+        }
+
         protected void ButtonModalSearch_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
@@ -62,6 +72,7 @@ namespace _380_Project_3.ASPX_Dev
                 Disconnect(conn);
             }
 
+            id_GridviewScroll.Visible = true;
             LabelActualStartDate.Visible = true;
             ImageButtonActualStartDate.Visible = true;
             TextBoxActualStartDate.Visible = true;

@@ -32,6 +32,17 @@ namespace _380_Project_3.ASPX_Dev
                 sqlConn.Close();
         }
 
+
+        protected void ButtonModalSetPredTask_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ButtonModalSetSuccTask_Click(object sender, EventArgs e)
+        {
+
+        }
+
         protected void ButtonModalSearch_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
@@ -62,6 +73,7 @@ namespace _380_Project_3.ASPX_Dev
                 Disconnect(conn);
             }
 
+            id_GridviewScroll.Visible = true;
             LabelActualStartDate.Visible = true;
             ImageButtonActualStartDate.Visible = true;
             TextBoxActualStartDate.Visible = true;
@@ -81,6 +93,10 @@ namespace _380_Project_3.ASPX_Dev
             ButtonGantt.Visible = true;
         }
 
+        protected void ButtonModalResource_Click(object sender, EventArgs e)
+        {
+
+        }
         protected void ButtonNew_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
@@ -166,7 +182,7 @@ namespace _380_Project_3.ASPX_Dev
                     }
                     sdr.Close();
                 }
-                // Doesn't like " ' " when you update (thinks its a string)
+
                 using (SqlCommand cmd = new SqlCommand("UPDATE tblTasks SET Name=@Name, Description=@Description, " +
                     "ExpectedStartDate=@ExpStartDate, ExpectedEndDate=@ExpEndDate, ExpectedEffort=@ExpEff," +
                     "ActualStartDate=@ActStartDate, ActualEndDate=@ActEndDate, ActualEffort=@ActEff " +

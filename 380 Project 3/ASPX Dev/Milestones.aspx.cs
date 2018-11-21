@@ -32,6 +32,17 @@ namespace _380_Project_3.ASPX_Dev
                 sqlConn.Close();
         }
 
+        protected void ButtonModalSetPredTask_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ButtonModalSetSuccTask_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
         protected void ButtonModalSearch_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
@@ -48,10 +59,10 @@ namespace _380_Project_3.ASPX_Dev
                         TextBoxName.Text = sdr[0].ToString();
                         TextBoxDescription.Text = sdr[1].ToString();
 
-                        TextBoxExpectedCompletionDate.Text = sdr[2].ToString();
+                        TextBoxExpectedDueDate.Text = sdr[2].ToString();
                         TextBoxExpectedEffort.Text = sdr[3].ToString();
 
-                        TextBoxActualCompletionDate.Text = sdr[4].ToString();
+                        TextBoxActualEndDate.Text = sdr[4].ToString();
                         TextBoxActualEffort.Text = sdr[5].ToString();
                     }
                     sdr.Close();
@@ -60,10 +71,10 @@ namespace _380_Project_3.ASPX_Dev
                 Disconnect(conn);
             }
 
-            ImageButtonActualCompletionDate.Visible = true;
-            LabelActualCompletionDate.Visible = true;
-            TextBoxActualCompletionDate.Visible = true;
-  
+            ImageButtonActualEndDate.Visible = true;
+            LabelActualEndDate.Visible = true;
+            TextBoxActualEndDate.Visible = true;
+
             LabelActualEffort.Visible = true;
             TextBoxActualEffort.Visible = true;
 
@@ -85,7 +96,7 @@ namespace _380_Project_3.ASPX_Dev
                     cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
                     cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
                     cmd.Parameters.AddWithValue("@TaskType", g_TaskType);
-                    cmd.Parameters.AddWithValue("@ExpEnd", Convert.ToDateTime(TextBoxExpectedCompletionDate.Text));
+                    cmd.Parameters.AddWithValue("@ExpEnd", Convert.ToDateTime(TextBoxExpectedDueDate.Text));
                     cmd.Parameters.AddWithValue("@ExpEffort", TextBoxExpectedEffort.Text);
 
                     try
@@ -164,9 +175,9 @@ namespace _380_Project_3.ASPX_Dev
                 {
                     cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
                     cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
-                    cmd.Parameters.AddWithValue("@ExpEndDate", Convert.ToDateTime(TextBoxExpectedCompletionDate.Text));
+                    cmd.Parameters.AddWithValue("@ExpEndDate", Convert.ToDateTime(TextBoxExpectedDueDate.Text));
                     cmd.Parameters.AddWithValue("@ExpEff", TextBoxExpectedEffort.Text);
-                    cmd.Parameters.AddWithValue("@ActEndDate", Convert.ToDateTime(TextBoxActualCompletionDate.Text));
+                    cmd.Parameters.AddWithValue("@ActEndDate", Convert.ToDateTime(TextBoxActualEndDate.Text));
                     cmd.Parameters.AddWithValue("@ActEff", TextBoxActualEffort.Text);
                     cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                     cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
@@ -193,34 +204,34 @@ namespace _380_Project_3.ASPX_Dev
             GridViewTaskList.DataBind();
         }
 
-        protected void ImageButtonExpectedStartDate_Click(object sender, ImageClickEventArgs e)
+        protected void ImageButtonExpectedDueDate_Click(object sender, ImageClickEventArgs e)
         {
-            if (CalendarExpectedCompletionDate.Visible == false)
-                CalendarExpectedCompletionDate.Visible = true;
+            if (CalendarExpectedDue.Visible == false)
+                CalendarExpectedDue.Visible = true;
 
             else
-                CalendarExpectedCompletionDate.Visible = false;
+                CalendarExpectedDue.Visible = false;
         }
 
-        protected void ImageButtonActualStartDate_Click(object sender, ImageClickEventArgs e)
+        protected void ImageButtonActualEndDate_Click(object sender, ImageClickEventArgs e)
         {
-            if (CalendarActualCompletionDate.Visible == false)
-                CalendarActualCompletionDate.Visible = true;
+            if (CalendarActualEnd.Visible == false)
+                CalendarActualEnd.Visible = true;
 
             else
-                CalendarActualCompletionDate.Visible = false;
+                CalendarActualEnd.Visible = false;
         }
 
-        protected void CalendarExpectedStart_SelectionChanged(object sender, EventArgs e)
+        protected void CalendarExpectedDue_SelectionChanged(object sender, EventArgs e)
         {
-            TextBoxExpectedCompletionDate.Text = CalendarExpectedCompletionDate.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarExpectedCompletionDate.Visible = false;
+            TextBoxExpectedDueDate.Text = CalendarExpectedDue.SelectedDate.ToString("dddd, dd MMMM yyyy");
+            CalendarExpectedDue.Visible = false;
         }
 
-        protected void CalendarActualStart_SelectionChanged(object sender, EventArgs e)
+        protected void CalendarActualEnd_SelectionChanged(object sender, EventArgs e)
         {
-            TextBoxActualCompletionDate.Text = CalendarActualCompletionDate.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarActualCompletionDate.Visible = false;
+            TextBoxActualEndDate.Text = CalendarActualEnd.SelectedDate.ToString("dddd, dd MMMM yyyy");
+            CalendarActualEnd.Visible = false;
         }
 
     }

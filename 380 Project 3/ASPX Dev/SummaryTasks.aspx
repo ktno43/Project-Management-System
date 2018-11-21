@@ -41,268 +41,179 @@
 
     </div>
 
-    <div>
-        <table style="width: 100%;">
-            <tr>
-                <td class="auto-style39">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td class="auto-style3"></td>
-                            <td class="auto-style3"></td>
-                            <td class="auto-style3"></td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td class="auto-style4">Name<span class="auto-style1">*</span><span class="auto-style2">:</span></td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="auto-style5">
-                    <table>
-                        <tr>
-                            <td class="auto-style24"></td>
-                            <td class="auto-style25"></td>
-                            <td class="auto-style9">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style8">
-                                <asp:TextBox ID="TextBoxName" runat="server" Width="315px"></asp:TextBox>
-                            </td>
-                            <td class="auto-style26">
-                                <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
-                            </td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style8">&nbsp;</td>
-                            <td class="auto-style26">&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="auto-style6">
-                    <table class="nav-justified">
-                        <tr>
-                            <td class="auto-style45">Resource Assigned:</td>
-                            <td class="auto-style47"></td>
-                            <td class="auto-style46">
-                                <asp:Button ID="ButtonAddResource" runat="server" CssClass="auto-style50" Text="Add New Resource" OnClick="ButtonAddResource_Click" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style44">&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style44">&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td class="auto-style40">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td class="auto-style4">Description<span class="auto-style1">*</span><span class="auto-style2">:</span></td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="auto-style27">
-                    <table class="auto-style36">
-                        <tr>
-                            <td class="auto-style32">&nbsp;</td>
-                            <td class="auto-style34">&nbsp;</td>
-                            <td class="auto-style34">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style32">
-                                <asp:TextBox ID="TextBoxDescription" runat="server" Height="168px" MaxLength="1000" TextMode="MultiLine" Width="351px"></asp:TextBox>
-                            </td>
-                            <td class="auto-style34">&nbsp;</td>
-                            <td class="auto-style34">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style32">&nbsp;</td>
-                            <td class="auto-style34">&nbsp;</td>
-                            <td class="auto-style34">&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="auto-style3">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td class="auto-style51">Associate Predecessor Task:</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style51">
-                                <asp:DropDownList ID="DropDownListPre" runat="server" Height="16px" Width="140px">
-                                    <asp:ListItem>Finish to Start</asp:ListItem>
-                                    <asp:ListItem>Start to Start</asp:ListItem>
-                                    <asp:ListItem>Finish to Finish</asp:ListItem>
-                                    <asp:ListItem>Start to Finish</asp:ListItem>
-                                </asp:DropDownList>
-                            </td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style51">&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style54"></td>
-                            <td class="auto-style9"></td>
-                            <td class="auto-style9"></td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style51">&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style51">Associate Sucessor Task:</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style51">
-                                <asp:DropDownList ID="DropDownListSuc" runat="server" Width="140px">
-                                    <asp:ListItem>Finish to Start</asp:ListItem>
-                                    <asp:ListItem>Start to Start</asp:ListItem>
-                                    <asp:ListItem>Finish to Finish</asp:ListItem>
-                                    <asp:ListItem>Start to Finish</asp:ListItem>
-                                </asp:DropDownList>
-                            </td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style51">&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style54"></td>
-                            <td class="auto-style9"></td>
-                            <td class="auto-style9"></td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style51">&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style51">&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td class="auto-style41">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td class="text-right">Expected Start Date<span class="auto-style1">*</span>:</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="auto-style28">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td class="auto-style77">&nbsp;</td>
-                            <td class="auto-style78">&nbsp;</td>
-                            <td class="auto-style76">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style71">
-                    <asp:TextBox ID="TextBoxExpectedStartDate" runat="server"></asp:TextBox>
-                                <asp:ImageButton ID="ImageButtonExpectedStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonExpectedStartDate_Click" Width="30px" />
-                            </td>
-                            <td class="auto-style15">Expected Due Date<span class="auto-style1">*</span>:</td>
-                            <td class="auto-style75">
-                    <asp:TextBox ID="TextBoxExpectedDueDate" runat="server"></asp:TextBox>
-                                <asp:ImageButton ID="ImageButtonExpectedDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonExpectedDueDate_Click" Width="30px" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style71">
+    <div class="container2">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Search for Resource</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        Resource List:
+                        <asp:DropDownList ID="DropDownListResourceSelect" runat="server" DataSourceID="DropDownListSummTaskDB" DataTextField="Name" DataValueField="ResourceID" Height="30px" Width="571px">
+                        </asp:DropDownList>
+                        <asp:SqlDataSource ID="DropDownListResourceDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [ResourceID] FROM [tblResources] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
+                            <SelectParameters>
+                                <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                                <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <asp:Button ID="ButtonModalAssignResrc" runat="server" Text="Assign Resource" CssClass="btn btn-default" OnClick="ButtonModalResource_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container3">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal3" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Associate Predecessor Task</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        Tasks List:
+                        <asp:DropDownList ID="DropDownListSetPredTask" runat="server" DataSourceID="DropDownListSummTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
+                        </asp:DropDownList>
+                        <asp:SqlDataSource ID="DropDownListSetPredTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] FROM [tblTasks] 
+                            WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([PredecessorTask] IS NOT NULL) AND ([SuccessorTask] IS NOT NULL))">
+                            <SelectParameters>
+                                <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                                <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <asp:Button ID="ButtonModalSetPredTask" runat="server" Text="Set Predecessor Task" CssClass="btn btn-default" OnClick="ButtonModalSetPredTask_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="container4">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal4" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Associate Successor Task</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        Tasks List:
+                        <asp:DropDownList ID="DropDownListSetSuccTask" runat="server" DataSourceID="DropDownListSummTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
+                        </asp:DropDownList>
+                        <asp:SqlDataSource ID="DropDownListSetSuccTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] 
+                            FROM [tblTasks]   
+                            WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([PredecessorTask] IS NOT NULL) AND ([SuccessorTask] IS NOT NULL))">
+                            <SelectParameters>
+                                <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                                <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <asp:Button ID="ButtonModalSetSuccTask" runat="server" Text="Set Successor Task" CssClass="btn btn-default" OnClick="ButtonModalSetSuccTask_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <table style="width: 100%;">
+        <tr>
+            <td colspan="1" class="text-right">Name*:</td>
+            <td colspan="3">
+                <asp:TextBox ID="TextBoxName" runat="server" Width="315px"></asp:TextBox>
+            </td>
+            <td colspan="1">
+                <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
+            </td>
+            <td colspan="6"></td>
+            <td colspan="1">Resource Assigned:</td>
+            <td colspan="1"></td>
+            <td colspan="6" class="text-left">
+                <asp:Button ID="ButtonAddResource" runat="server" data-toggle="modal" data-target="#myModal2" Text="Add New Resource" OnClientClick="return false;" />
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="18">&nbsp;</td>
+        </tr>
+
+
+        <tr>
+            <td colspan="1" class="text-right">Description*:</td>
+            <td colspan="4">
+                <asp:TextBox ID="TextBoxDescription" runat="server" Height="168px" MaxLength="1000" TextMode="MultiLine" Width="351px"></asp:TextBox>
+            </td>
+
+            <td colspan="6"></td>
+            <td colspan="1">&nbsp;</td>
+            <td colspan="13">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="18">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="1" class="text-right">
+            Expected Start Date*:
+           
+            <td colspan="3">
+                <asp:TextBox ID="TextBoxExpectedStartDate" runat="server"></asp:TextBox>
+            </td>
+            <td colspan="1">
+                <asp:ImageButton ID="ImageButtonExpectedStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonExpectedStartDate_Click" Width="30px" />
+            </td>
+            <td colspan="1" class="text-right">Expected Due Date*:</td>
+            <td colspan="3">
+                <asp:TextBox ID="TextBoxExpectedDueDate" runat="server" Width="202px"></asp:TextBox>
+            </td>
+            <td colspan="1">
+                <asp:ImageButton ID="ImageButtonExpectedDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonExpectedDueDate_Click" Width="30px" />
+            </td>
+            <td colspan="1"></td>
+            <td colspan="1">Set Predecessor Task:</td>
+            <td colspan="6" class="text-left">
+                <asp:Button ID="ButtonPredecessorTask" runat="server" Text="Select Predecessor Task" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="3">
                 <asp:Calendar ID="CalendarExpectedStart" runat="server" OnSelectionChanged="CalendarExpectedStart_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="16px">
                     <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
                     <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
@@ -310,10 +221,10 @@
                     <SelectedDayStyle BackColor="#333399" ForeColor="White" />
                     <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
                     <TodayDayStyle BackColor="#CCCCCC" />
-                            </asp:Calendar>
-                            </td>
-                            <td class="auto-style22"></td>
-                            <td class="auto-style75">
+                </asp:Calendar>
+            </td>
+            <td colspan="2"></td>
+            <td colspan="3">
                 <asp:Calendar ID="CalendarExpectedDue" runat="server" OnSelectionChanged="CalendarExpectedDue_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="16px">
                     <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
                     <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
@@ -321,31 +232,139 @@
                     <SelectedDayStyle BackColor="#333399" ForeColor="White" />
                     <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
                     <TodayDayStyle BackColor="#CCCCCC" />
-                            </asp:Calendar>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table style="width: 100%;">
-                        <tr>
-                            <td class="auto-style83"></td>
-                            <td class="auto-style84"></td>
-                            <td class="auto-style3"></td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style53">&nbsp;</td>
-                            <td class="auto-style64">&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style53">List of Task(s) and Summary Task(s):</td>
-                            <td class="auto-style63">
-                                &nbsp;</td>
-                            <td class="text-right">
-                                &nbsp;</td>
-                        </tr>
-                    </table>
+                </asp:Calendar>
+            </td>
+            <td colspan="2"></td>
+            <td colspan="7">
+                <asp:DropDownList ID="DropDownListPre" runat="server" Height="16px" Width="140px">
+                    <asp:ListItem>Finish to Start</asp:ListItem>
+                    <asp:ListItem>Start to Start</asp:ListItem>
+                    <asp:ListItem>Finish to Finish</asp:ListItem>
+                    <asp:ListItem>Start to Finish</asp:ListItem>
+                </asp:DropDownList>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="18">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="1" class="text-right">ExpectExpected Duration:</td>
+            <td colspan="4">
+                <asp:TextBox ID="TextBoxExpectedDuration" runat="server"></asp:TextBox>
+            </td>
+            <td colspan="6">&nbsp;</td>
+            <td colspan="1">Set Successor Task:</td>
+            <td colspan="7" class="text-left">
+                <asp:Button ID="ButtonSuccessorTask" runat="server" Text="Select Successor Task" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" />
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="11">&nbsp;</td>
+            <td colspan="7">
+                <asp:DropDownList ID="DropDownListSuc" runat="server" Width="140px">
+                    <asp:ListItem>Finish to Start</asp:ListItem>
+                    <asp:ListItem>Start to Start</asp:ListItem>
+                    <asp:ListItem>Finish to Finish</asp:ListItem>
+                    <asp:ListItem>Start to Finish</asp:ListItem>
+                </asp:DropDownList>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="1" class="text-right">
+            Expected Effort:
+           
+            <td colspan="4">
+                <asp:TextBox ID="TextBoxExpectedEffort" runat="server"></asp:TextBox>
+            </td>
+            <td colspan="13"></td>
+        </tr>
+
+        <tr>
+            <td colspan="18">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="1" class="text-right">Percent Complete:</td>
+            <td colspan="4">&nbsp;</td>
+            <td colspan="13"></td>
+        </tr>
+
+        <tr>
+            <td colspan="18">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelActualStartDate" runat="server" Text="Actual Start Date:" Visible="False"></asp:Label>
+            </td>
+            <td colspan="3">
+                <asp:TextBox ID="TextBoxActualStartDate" runat="server" Width="107px" Visible="False"></asp:TextBox>
+            </td>
+            <td colspan="1">
+                <asp:ImageButton ID="ImageButtonActualStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonActualStartDate_Click" Width="30px" Visible="False" />
+            </td>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelActualEndDate" runat="server" Text="Actual End Date:" Visible="False"></asp:Label>
+            </td>
+            <td colspan="3">
+                <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="192px" Visible="False"></asp:TextBox>
+            </td>
+            <td colspan="1">
+                <asp:ImageButton ID="ImageButtonActualEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonActualEndDate_Click" Width="30px" Visible="False" />
+            </td>
+            <td colspan="1"></td>
+            <td colspan="1">Associate Issues:</td>
+            <td colspan="6" class="text-left">
+                <asp:Button ID="ButtonAssociateIssues" runat="server" Text="Associate Issues" />
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="3">
+                <asp:Calendar ID="CalendarActualStart" runat="server" OnSelectionChanged="CalendarActualStart_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="30px">
+                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
+                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
+                    <OtherMonthDayStyle ForeColor="#999999" />
+                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
+                    <TodayDayStyle BackColor="#CCCCCC" />
+                </asp:Calendar>
+            </td>
+            <td colspan="2"></td>
+            <td colspan="10">
+                <asp:Calendar ID="CalendarActualEnd" runat="server" OnSelectionChanged="CalendarActualEnd_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="30px" CssClass="auto-style91">
+                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
+                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
+                    <OtherMonthDayStyle ForeColor="#999999" />
+                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
+                    <TodayDayStyle BackColor="#CCCCCC" />
+                </asp:Calendar>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="18">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelActualDuration" runat="server" Text="Actual Duration:" Visible="False"></asp:Label>
+            </td>
+            <td colspan="4">
+                <asp:TextBox ID="TextBoxActualDuration" runat="server" Visible="False"></asp:TextBox>
+            </td>
+            <td colspan="13">List of Task(s) and Summary Task(s):</td>
+        </tr>
+
+        <tr>
+            <td colspan="5">&nbsp;</td>
+            <td colspan="13">
+                <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="id_GridviewScroll">
                     <asp:GridView ID="GridViewTaskList" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataSourceID="GridTasks">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
@@ -377,270 +396,54 @@
                         <SortedDescendingCellStyle BackColor="#FFFDF8" />
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
-                    <asp:SqlDataSource ID="GridTasks" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [TaskType], [Resource], [ExpectedStartDate], [SuccessorTask], [PredecessorTask], [ActualEffort], [ActualDuration], [ActualEndDate], [ActualStartDate], [ExpectedDuration], [ExpectedEndDate], [ExpectedEffort], [Issues] FROM [tblTasks] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
-                        <SelectParameters>
-                            <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
-                            <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
-                        </SelectParameters>
-                    </asp:SqlDataSource>
-                    <br />
-                    <table style="width: 100%;">
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td class="text-right">
-                                <asp:Button ID="ButtonChangeTaskType" runat="server" Text="Change Task Type" />
-                            </td>
-                            <td class="text-right">
-                                <asp:Button ID="ButtonGroupTasks" runat="server" Text="Group Tasks" />
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td class="auto-style10">Expected Duration:</td>
-                <td class="auto-style29">
-                    <asp:TextBox ID="TextBoxExpectedDuration" runat="server"></asp:TextBox>
-                </td>
-                <td class="auto-style9"></td>
-            </tr>
-            <tr>
-                <td class="auto-style10">Expected Effort:</td>
-                <td class="auto-style29">
-                    <asp:TextBox ID="TextBoxExpectedEffort" runat="server"></asp:TextBox>
-                </td>
-                <td class="auto-style9"></td>
-            </tr>
-            <tr>
-                <td class="auto-style12">Percent Complete:</td>
-                <td class="auto-style30"></td>
-                <td class="auto-style11"></td>
-            </tr>
-            <tr>
-                <td class="auto-style41">&nbsp;</td>
-                <td class="auto-style28">&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="auto-style42">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td class="text-right">
-                                <asp:Label ID="LabelActualStartDate" runat="server" Text="Actual Start Date:" Visible="False"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style9"></td>
-                            <td class="auto-style9"></td>
-                            <td class="auto-style9"></td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                            <td class="auto-style9">&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="auto-style28">
-                    <table class="nav-justified">
-                        <tr>
-                            <td class="auto-style71"></td>
-                            <td class="auto-style79"></td>
-                            <td class="auto-style9"></td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style81">
-                    <asp:TextBox ID="TextBoxActualStartDate" runat="server" Width="107px" Visible="False"></asp:TextBox>
-                                <asp:ImageButton ID="ImageButtonActualStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonActualStartDate_Click" Width="30px" Visible="False" />
-                            </td>
-                            <td class="auto-style18">
-                                <asp:Label ID="LabelActualEndDate" runat="server" Text="Actual End Date:" Visible="False"></asp:Label>
-                            </td>
-                            <td class="auto-style82">
-                    <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="105px" Visible="False"></asp:TextBox>
-                                <asp:ImageButton ID="ImageButtonActualEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonActualEndDate_Click" Width="30px" Visible="False" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style77">
-                <asp:Calendar ID="CalendarActualStart" runat="server" OnSelectionChanged="CalendarActualStart_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="30px">
-                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
-                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
-                    <OtherMonthDayStyle ForeColor="#999999" />
-                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
-                    <TodayDayStyle BackColor="#CCCCCC" />
-                            </asp:Calendar>
-                            </td>
-                            <td class="auto-style80">&nbsp;</td>
-                            <td>
-                <asp:Calendar ID="CalendarActualEnd" runat="server" OnSelectionChanged="CalendarActualEnd_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="30px">
-                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
-                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
-                    <OtherMonthDayStyle ForeColor="#999999" />
-                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
-                    <TodayDayStyle BackColor="#CCCCCC" />
-                            </asp:Calendar>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table style="width: 100%;">
-                        <tr>
-                            <td class="auto-style61"></td>
-                            <td class="auto-style9"></td>
-                            <td class="auto-style9"></td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style61">Associate Issue(s):</td>
-                            <td class="auto-style9"></td>
-                            <td class="auto-style58">
-                                <asp:Button ID="ButtonAssociateIssues" runat="server" Text="Associate Issues" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style60">&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td class="auto-style55">
-                    <asp:Label ID="LabelActualDuration" runat="server" Text="Actual Duration:" Visible="False"></asp:Label>
-                </td>
-                <td class="auto-style56">
-                    <asp:TextBox ID="TextBoxActualDuration" runat="server" Visible="False"></asp:TextBox>
-                </td>
-                <td class="auto-style57"></td>
-            </tr>
-            <tr>
-                <td class="auto-style42">
-                    <asp:Label ID="LabelActualEffort" runat="server" Text="Actual Effort:" Visible="False"></asp:Label>
-                </td>
-                <td class="auto-style28">
-                    <asp:TextBox ID="TextBoxActualEffort" runat="server" Visible="False"></asp:TextBox>
-                </td>
-                <td>
-                    <table style="width: 100%;">
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">
-                                <table style="width: 100%;">
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style9">
-                                            <asp:Button ID="ButtonNew" runat="server" Text="New" Width="101px" OnClick="ButtonNew_Click" />
-                                        </td>
-                                        <td class="auto-style9"></td>
-                                        <td class="auto-style58">
-                                            <asp:Button ID="ButtonGantt" runat="server" Text="Gantt Chart" Visible="False" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td class="text-right">
-                                <asp:Button ID="ButtonDelete" runat="server" Text="Delete" Width="96px" OnClick="ButtonDelete_Click" Visible="False" />
-                            </td>
-                            <td class="text-right">
-                                <asp:Button ID="ButtonSave" runat="server" Text="Save" Width="131px" OnClick="ButtonSave_Click" Visible="False" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </div>
-</asp:Content>
-<asp:Content ID="Content2" runat="server" ContentPlaceHolderID="head">
-    <style type="text/css">
-        
-        .auto-style3 {
-            height: 23px;
-        }
+                </div>
+                <asp:SqlDataSource ID="GridTasks" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [TaskType], [ExpectedStartDate], [ExpectedDuration], [ExpectedEffort], [ActualStartDate], [ActualEndDate], [ActualDuration], [EffortCompleted], [ActualEffort], [ExpectedEndDate], [PredecessorTask], [PredecessorDependency], [SuccessorTask], [SuccessorDependency] FROM [tblTasks] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                        <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+            </td>
+        </tr>
 
-        .auto-style83 {
-            width: 237px;
-            height: 23px;
-        }
-        .auto-style84 {
-            width: 183px;
-            height: 23px;
-        }
-    </style>
+
+        <tr>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelActualEffort" runat="server" Text="Actual Effort:" Visible="False"></asp:Label>
+            </td>
+            <td colspan="4">
+                <asp:TextBox ID="TextBoxActualEffort" runat="server" Visible="False"></asp:TextBox>
+            </td>
+            <td colspan="1">
+                <asp:Button ID="ButtonChangeTaskType" runat="server" Text="Change Task Type" />
+            </td>
+            <td colspan="1" class="text-center">
+                <asp:Button ID="ButtonGroupTasks" runat="server" Text="Group Tasks" />
+            </td>
+            <td colspan="11"></td>
+        </tr>
+
+        <tr>
+            <td colspan="18">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="6">
+                <asp:Button ID="ButtonNew" runat="server" Text="New" Width="101px" OnClick="ButtonNew_Click" />
+            </td>
+            <td colspan="3">
+                <asp:Button ID="ButtonGantt" runat="server" Text="Gantt Chart" Visible="False" />
+            </td>
+            <td colspan="4">
+                <asp:Button ID="ButtonDelete" runat="server" Text="Delete" Width="96px" OnClick="ButtonDelete_Click" Visible="False" />
+
+            </td>
+            <td colspan="5" class="text-right">
+                <asp:Button ID="ButtonSave" runat="server" Text="Save" Width="131px" OnClick="ButtonSave_Click" Visible="False" /></td>
+        </tr>
+
+    </table>
+
 </asp:Content>
 
 

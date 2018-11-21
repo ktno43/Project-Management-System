@@ -52,12 +52,6 @@ namespace _380_Project_3
                 Disconnect(conn);
             }
 
-            ButtonSave.Visible = true;
-            ButtonDel.Visible = true;
-        }
-
-        protected void ButtonModalAssociateTask_Click(object sender, EventArgs e)
-        {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
                 Connect(conn);
@@ -73,33 +67,80 @@ namespace _380_Project_3
                     }
                     sdr.Close();
                 }
+            }
+            this.id_GridviewScroll.Visible = true;
+            GridViewAssociatedTasks.DataBind();
+            ButtonSave.Visible = true;
+            ButtonDel.Visible = true;
+        }
 
-          
-                using (SqlCommand cmd = new SqlCommand("UPDATE tblTasks SET AssociatedDeliverable=@AsocDeliv WHERE UserID=@UserID AND ProjectID=@ProjID AND TaskID=@TaskID", conn))
+        protected void ButtonModalAssociateTask_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                try
                 {
-                    cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
-                    cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
-                    cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                    cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
-                    cmd.Parameters.AddWithValue("@DelivID", Session["_CurrentDelivID"]);
+                    Connect(conn);
 
-                    try
+
+                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT DeliverableID FROM tblDeliverables WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                     {
-                        cmd.ExecuteNonQuery();
+                        SqlDataReader sdr = cmd2.ExecuteReader();
+
+                        while (sdr.Read())
+                        {
+                            Session["_CurrentDelivID"] = sdr[0].ToString();
+
+                        }
+                        sdr.Close();
                     }
 
-                    catch (Exception ex)
+                    foreach (GridViewRow row in this.GridViewAssociateTasks.Rows)
                     {
-                        Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
-                    }
+                        CheckBox checkRow = (row.Cells[0].FindControl("CheckBoxAssociateTask") as CheckBox);
+                        String nSome = row.Cells[0].Text;
 
-                    finally
-                    {
-                        Disconnect(conn);
+
+                        if (checkRow.Checked)
+                        {
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblTasks SET AssociatedDeliverable=@AssocDeliv WHERE UserID=@UserID AND ProjectID=@ProjID AND TaskID=@TaskID", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@AssocDeliv", Session["_CurrentDelivID"]);
+                                cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                                cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                                cmd.Parameters.AddWithValue("@TaskID", row.Cells[0].Text);
+
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        else
+                        {
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblTasks SET AssociatedDeliverable=NULL WHERE UserID=@UserID AND ProjectID=@ProjID AND TaskID=@TaskID", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                                cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                                cmd.Parameters.AddWithValue("@TaskID", row.Cells[0].Text);
+
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
                     }
                 }
 
+                catch (Exception ex)
+                {
+                    Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                }
+
+                finally
+                {
+                    Disconnect(conn);
+                }
             }
+
+            GridViewAssociatedTasks.DataBind();
         }
 
         protected void Button_New_Click(object sender, EventArgs e)
@@ -194,6 +235,7 @@ namespace _380_Project_3
                     cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
                     cmd.Parameters.AddWithValue("@DelivID", Session["_CurrentDelivID"]);
 
+
                     try
                     {
                         cmd.ExecuteNonQuery();
@@ -245,11 +287,9 @@ namespace _380_Project_3
             CalendarDue.Visible = false;
         }
 
-        protected void ButtonTask_Click(object sender, EventArgs e)
+        protected void ButtonAssociateTasks_Click(object sender, EventArgs e)
         {
-
-
-
+            GridViewAssociateTask.DataBind();
         }
     }
 }

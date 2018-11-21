@@ -40,13 +40,13 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.WebControls.Button ButtonModalSearch;
         
         /// <summary>
-        /// GridView1 control.
+        /// GridViewAssociateTasks control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.GridView GridViewAssociateTasks;
         
         /// <summary>
         /// GridViewAssociateTask control.
@@ -103,6 +103,42 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
         
         /// <summary>
+        /// ButtonAssociateTasks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonAssociateTasks;
+        
+        /// <summary>
+        /// id_GridviewScroll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl id_GridviewScroll;
+        
+        /// <summary>
+        /// GridViewAssociatedTasks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewAssociatedTasks;
+        
+        /// <summary>
+        /// GridAssociatedTasks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource GridAssociatedTasks;
+        
+        /// <summary>
         /// TextBoxStartDate control.
         /// </summary>
         /// <remarks>
@@ -130,31 +166,31 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.WebControls.Calendar CalendarStart;
         
         /// <summary>
-        /// ButtonTask control.
+        /// DelivList_Scrollbar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonTask;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DelivList_Scrollbar;
         
         /// <summary>
-        /// GridViewAssociatedTasks control.
+        /// GridViewListDeliverables control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewAssociatedTasks;
+        protected global::System.Web.UI.WebControls.GridView GridViewListDeliverables;
         
         /// <summary>
-        /// GridAssociatedTasks control.
+        /// GridDeliverables control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource GridAssociatedTasks;
+        protected global::System.Web.UI.WebControls.SqlDataSource GridDeliverables;
         
         /// <summary>
         /// TextBoxDueDate control.
@@ -182,24 +218,6 @@ namespace _380_Project_3 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Calendar CalendarDue;
-        
-        /// <summary>
-        /// GridViewListDeliverables control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewListDeliverables;
-        
-        /// <summary>
-        /// GridDeliverables control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource GridDeliverables;
         
         /// <summary>
         /// ButtonNew control.
