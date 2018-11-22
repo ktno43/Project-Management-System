@@ -55,7 +55,7 @@
 
                     <div class="modal-body">
                         Resource List:
-                        <asp:DropDownList ID="DropDownListResourceSelect" runat="server" DataSourceID="DropDownListSummTaskDB" DataTextField="Name" DataValueField="ResourceID" Height="30px" Width="571px">
+                        <asp:DropDownList ID="DropDownListResourceSelect" runat="server" DataSourceID="DropDownListResourceDB" DataTextField="Name" DataValueField="ResourceID" Height="30px" Width="571px">
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="DropDownListResourceDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [ResourceID] FROM [tblResources] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
                             <SelectParameters>

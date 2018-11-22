@@ -82,25 +82,9 @@ namespace _380_Project_3
                 {
                     Connect(conn);
 
-
-                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT DeliverableID FROM tblDeliverables WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
-                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
-                    {
-                        SqlDataReader sdr = cmd2.ExecuteReader();
-
-                        while (sdr.Read())
-                        {
-                            Session["_CurrentDelivID"] = sdr[0].ToString();
-
-                        }
-                        sdr.Close();
-                    }
-
                     foreach (GridViewRow row in this.GridViewAssociateTasks.Rows)
                     {
                         CheckBox checkRow = (row.Cells[0].FindControl("CheckBoxAssociateTask") as CheckBox);
-                        String nSome = row.Cells[0].Text;
-
 
                         if (checkRow.Checked)
                         {

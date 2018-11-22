@@ -126,10 +126,9 @@
             </td>
 
             <td colspan="1">Set Predecessor Task:</td>
-            <td colspan="1">
+            <td colspan="7">
                 <asp:Button ID="ButtonPredecessorTask" runat="server" Text="Select Predecessor Task" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" />
             </td>
-            <td colspan="6" class="text-left">&nbsp;</td>
         </tr>
 
 

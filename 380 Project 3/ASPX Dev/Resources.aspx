@@ -40,51 +40,73 @@
 
     </div>
 
-    <div>
-        <table style="width: 100%;">
-            <tr>
-                <td class="auto-style6">Name<span class="auto-style2">*</span><span class="auto-style3">:<asp:TextBox ID="TextBoxName" runat="server"></asp:TextBox>
-                    <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
-                </span></td>
-                <td class="auto-style1">Availability Calendar<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
-                <td class="auto-style1"></td>
-            </tr>
-            <tr>
-                <td class="auto-style9">Title<span class="auto-style2">*</span><span class="auto-style3">:<asp:TextBox ID="TextBoxTitle" runat="server"></asp:TextBox>
-                </span></td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="auto-style4">Description<span class="auto-style2">*</span><span class="auto-style3">:<asp:TextBox ID="TextBoxDescription" runat="server" Height="128px" MaxLength="1000" TextMode="MultiLine" Width="238px"></asp:TextBox>
-                </span></td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="auto-style9">List of Skills<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="auto-style9">Pay Rate<span class="auto-style2">*</span><span class="auto-style3">:<asp:TextBox ID="TextBoxPayRate" runat="server"></asp:TextBox>
-                </span></td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="auto-style8">
+    <table style="width: 100%;">
+        <tr>
+            <td colspan="1">Name<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
+            <td colspan="3"><span class="auto-style3">
+                <asp:TextBox ID="TextBoxName" runat="server"></asp:TextBox>
+            </span></td>
+            <td colspan="1"><span class="auto-style3">
+                <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
+            </span></td>
+            <td colspan="10">Availability Calendar*:</td>
+        </tr>
+        <tr>
+            <td colspan="15"></td>
+        </tr>
+        <tr>
+            <td colspan="1">Title<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
+            <td colspan="14"><span class="auto-style3">
+                <asp:TextBox ID="TextBoxTitle" runat="server"></asp:TextBox>
+            </span></td>
+        </tr>
+
+        <tr>
+            <td colspan="15"></td>
+        </tr>
+        <tr>
+            <td colspan="1">Description<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
+            <td colspan="14"><span class="auto-style3">
+                <asp:TextBox ID="TextBoxDescription" runat="server" Height="128px" MaxLength="1000" TextMode="MultiLine" Width="238px"></asp:TextBox>
+            </span></td>
+        </tr>
+        <tr>
+            <td colspan="15"></td>
+        </tr>
+
+        <tr>
+            <td colspan="1">List of Skills<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
+            <td colspan="14"><span class="auto-style3">
+                <asp:TextBox ID="TextBoxSkillsDescription" runat="server" Height="128px" MaxLength="1000" TextMode="MultiLine" Width="238px"></asp:TextBox>
+            </span></td>
+        </tr>
+        <tr>
+            <td colspan="15"></td>
+        </tr>
+        <tr>
+            <td colspan="1">Pay Rate<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
+            <td colspan="14"><span class="auto-style3">
+                <asp:TextBox ID="TextBoxPayRate" runat="server"></asp:TextBox>
+            </span></td>
+        </tr>
+
+        <tr>
+            <td colspan="15"></td>
+        </tr>
+        <tr>
+            <td colspan="1">
                     <asp:Button ID="ButtonNew" runat="server" Text="New" OnClick="ButtonNew_Click" Width="68px" />
                 </td>
-                <td class="auto-style5">
+            <td colspan="4">
                     <asp:Button ID="ButtonDelete" runat="server" Text="Delete" OnClick="ButtonDelete_Click" Visible="False" />
                 </td>
-                <td class="auto-style5">
+            <td colspan="10">
                     <asp:Button ID="ButtonSave" runat="server" Text="Save" OnClick="ButtonSave_Click" Visible="False" />
                 </td>
-            </tr>
-        </table>
-    </div>
+        </tr>
+
+    </table>
+
 </asp:Content>
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
     <style type="text/css">

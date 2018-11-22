@@ -34,6 +34,13 @@
             height: 60px;
             text-align: right;
         }
+        .auto-style12 {
+            height: 19px;
+        }
+        .auto-style13 {
+            width: 100%;
+            margin-right: 0px;
+        }
     </style>
 
     <div class="container">
@@ -128,26 +135,22 @@
         </div>
     </div>
 
-    <table style="width: 100%;" border="0">
+    <table border="0" class="auto-style13">
         <tr>
             <td colspan="1" class="auto-style11">Name*:</td>
             <td colspan="3" class="auto-style8">
                 <asp:TextBox ID="TextBoxName" runat="server" Width="315px"></asp:TextBox></td>
             <td colspan="1" class="auto-style9">
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" CssClass="col-xs-offset-0" /></td>
-            <td colspan="2" class="auto-style8"></td>
-            <td colspan="3" class="auto-style11">Associated Requirement(s):</td>
+            <td colspan="2" class="auto-style11">Associated Requirement(s):</td>
 
             <td colspan="7" class="auto-style8">
                 <asp:Button ID="ButtonReqs" runat="server" Text="Associate Requirements" />
             </td>
         </tr>
+
         <tr>
-            <td colspan="10"></td>
-            <td colspan="7"></td>
-        </tr>
-        <tr>
-            <td colspan="17">&nbsp;</td>
+            <td colspan="14">&nbsp;</td>
         </tr>
 
         <tr>
@@ -155,16 +158,15 @@
             <td colspan="4">
                 <asp:TextBox ID="TextBoxDescription" runat="server" Height="168px" MaxLength="1000" TextMode="MultiLine" Width="351px"></asp:TextBox>
             </td>
-            <td colspan="2"></td>
-            <td colspan="3" class="text-right">Associated Task(s):</td>
+            <td colspan="2" class="text-right">Associated Task(s):</td>
             <td colspan="7" class="text-left">
                 <asp:Button ID="ButtonAssociateTasks" runat="server" data-toggle="modal" data-target="#myModal2" Text="Associate Tasks" OnClientClick="return false;" OnClick="ButtonAssociateTasks_Click" />
             </td>
         </tr>
 
         <tr>
-            <td colspan="10"></td>
-            <td colspan="6">
+            <td colspan="7"></td>
+            <td colspan="7">
                 <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="id_GridviewScroll" visible="false">
                     <asp:GridView ID="GridViewAssociatedTasks" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridAssociatedTasks" ForeColor="#333333" GridLines="None" AllowSorting="True" Width="100%" Height="121px">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
@@ -209,7 +211,7 @@
         </tr>
 
         <tr>
-            <td colspan="17">&nbsp;</td>
+            <td colspan="14">&nbsp;</td>
         </tr>
 
         <tr>
@@ -217,12 +219,9 @@
             <td colspan="3">
                 <asp:TextBox ID="TextBoxStartDate" runat="server" Width="203px"></asp:TextBox>
             </td>
-            <td colspan="2" class="text-left">
+            <td colspan="10" class="text-left">
                 <asp:ImageButton ID="ImageButtonStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonStartDate_Click" Width="30px" />
             </td>
-            <td colspan="1">&nbsp;</td>
-
-            <td colspan="10">&nbsp;</td>
         </tr>
 
         <tr>
@@ -237,8 +236,8 @@
                     <TodayDayStyle BackColor="#CCCCCC" />
                 </asp:Calendar>
             </td>
-            <td colspan="2">&nbsp;</td>
-            <td colspan="3" class="text-right">List of Deliverable(s):</td>
+
+            <td colspan="2" class="text-right">List of Deliverable(s):</td>
             <td colspan="7">
                 <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="DelivList_Scrollbar">
                     <asp:GridView ID="GridViewListDeliverables" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridDeliverables" ForeColor="#333333" GridLines="None" AllowSorting="True" Width="830px">
@@ -271,7 +270,7 @@
         </tr>
 
         <tr>
-            <td colspan="17" class="auto-style10"></td>
+            <td colspan="14" class="auto-style10"></td>
         </tr>
 
         <tr>
@@ -279,18 +278,14 @@
             <td colspan="3">
                 <asp:TextBox ID="TextBoxDueDate" runat="server" Width="203px"></asp:TextBox>
             </td>
-            <td colspan="2" class="auto-style6">
+            <td colspan="10" class="auto-style6">
                 <asp:ImageButton ID="ImageButtonDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonDueDate_Click" Width="30px" />
             </td>
-
-            <td colspan="1">&nbsp;</td>
-
-            <td colspan="10">&nbsp;</td>
         </tr>
 
         <tr>
             <td colspan="1"></td>
-            <td colspan="6">
+            <td colspan="13">
                 <asp:Calendar ID="CalendarDue" runat="server" OnSelectionChanged="CalendarDue_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" Width="121px">
                     <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
                     <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
@@ -301,21 +296,20 @@
                 </asp:Calendar>
 
             </td>
-            <td colspan="10">&nbsp;</td>
         </tr>
 
         <tr>
-            <td colspan="17">&nbsp;</td>
+            <td colspan="14" class="auto-style12"></td>
         </tr>
 
         <tr>
-            <td colspan="7" class="text-left">
+            <td colspan="5" class="text-left">
                 <asp:Button ID="ButtonNew" runat="server" Text="New" Width="101px" OnClick="Button_New_Click" />
             </td>
-            <td colspan="5" class="text-left">
+            <td colspan="3" class="text-left">
                 <asp:Button ID="ButtonDel" runat="server" Text="Delete" Width="96px" OnClick="Button_Del_Click" Visible="False" />
             </td>
-            <td colspan="5" class="text-right">
+            <td colspan="6" class="text-left">
                 <asp:Button ID="ButtonSave" runat="server" Text="Save" Width="131px" OnClick="Button_Save_Click" Visible="False" />
             </td>
         </tr>

@@ -12,6 +12,7 @@ namespace _380_Project_3.ASPX_Dev
 {
     public partial class Tasks : System.Web.UI.Page
     {
+
         private string g_sqlConn = ConfigurationManager.ConnectionStrings["devDB"].ConnectionString;
         private string g_TaskType = "Task";
 
@@ -34,10 +35,105 @@ namespace _380_Project_3.ASPX_Dev
 
         protected void ButtonModalSetPredTask_Click(object sender, EventArgs e)
         {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                Connect(conn);
+                using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT TaskID FROM tblTasks WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                    TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                {
+                    SqlDataReader sdr = cmd2.ExecuteReader();
 
+                    while (sdr.Read())
+                    {
+                        Session["_CurrentTaskID"] = sdr[0].ToString();
+
+                    }
+                    sdr.Close();
+                }
+                using (SqlCommand cmd = new SqlCommand("UPDATE tblTasks SET PredecessorTask=@PredTask, PredecessorDependency=@PredDependency " +
+                  "WHERE UserID=@UserID AND ProjectID=@ProjID AND TaskID=@TaskID", conn))
+                {
+                    cmd.Parameters.AddWithValue("@PredTask", this.DropDownListSetPredTask.SelectedValue);
+                    cmd.Parameters.AddWithValue("@PredDependency", this.DropDownListPredDependency.SelectedValue);
+                    cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                    cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                    cmd.Parameters.AddWithValue("@TaskID", Session["_CurrentTaskID"]);
+
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    catch (Exception ex)
+                    {
+                        Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                    }
+
+                    finally
+                    {
+                        Disconnect(conn);
+                    }
+                }
+            }
+            this.DropDownListSetPredTask.DataBind();
+            this.DropDownListSetSuccTask.DataBind();
+            GridViewTaskList.DataBind();
         }
 
         protected void ButtonModalSetSuccTask_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                Connect(conn);
+                using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT TaskID FROM tblTasks WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                    TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                {
+                    SqlDataReader sdr = cmd2.ExecuteReader();
+
+                    while (sdr.Read())
+                    {
+                        Session["_CurrentTaskID"] = sdr[0].ToString();
+
+                    }
+                    sdr.Close();
+                }
+                using (SqlCommand cmd = new SqlCommand("UPDATE tblTasks SET SuccessorTask=@PredTask, SuccessorDependency=@PredDependency " +
+                  "WHERE UserID=@UserID AND ProjectID=@ProjID AND TaskID=@TaskID", conn))
+                {
+                    cmd.Parameters.AddWithValue("@PredTask", this.DropDownListSetSuccTask.SelectedValue);
+                    cmd.Parameters.AddWithValue("@PredDependency", this.DropDownListSuccDependency.SelectedValue);
+                    cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                    cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                    cmd.Parameters.AddWithValue("@TaskID", Session["_CurrentTaskID"]);
+
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    catch (Exception ex)
+                    {
+                        Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                    }
+
+                    finally
+                    {
+                        Disconnect(conn);
+                    }
+                }
+            }
+
+            this.DropDownListSetSuccTask.DataBind();
+            this.DropDownListSetPredTask.DataBind();
+            this.GridViewTaskList.DataBind();
+        }
+
+        protected void ButtonModalResource_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ButtonAddResource_Click(object sender, EventArgs e)
         {
 
         }
@@ -92,10 +188,7 @@ namespace _380_Project_3.ASPX_Dev
             ButtonGantt.Visible = true;
         }
 
-        protected void ButtonModalResource_Click(object sender, EventArgs e)
-        {
 
-        }
 
         protected void ButtonNew_Click(object sender, EventArgs e)
         {
@@ -221,11 +314,6 @@ namespace _380_Project_3.ASPX_Dev
             GridViewTaskList.DataBind();
         }
 
-        protected void ButtonAddResource_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
         protected void ImageButtonExpectedStartDate_Click(object sender, ImageClickEventArgs e)
         {
@@ -287,5 +375,7 @@ namespace _380_Project_3.ASPX_Dev
             TextBoxActualEndDate.Text = CalendarActualEnd.SelectedDate.ToString("dddd, dd MMMM yyyy");
             CalendarActualEnd.Visible = false;
         }
+
+
     }
 }

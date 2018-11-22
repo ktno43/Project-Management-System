@@ -90,15 +90,24 @@
 
                     <div class="modal-body">
                         Tasks List:
-                        <asp:DropDownList ID="DropDownListSetPredTask" runat="server" DataSourceID="DropDownListTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
+                        <asp:DropDownList ID="DropDownListSetPredTask" runat="server" DataSourceID="DropDownListSetPredTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
                         </asp:DropDownList>
-                        <asp:SqlDataSource ID="DropDownListSetPredTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] FROM [tblTasks] 
-                            WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([PredecessorTask] IS NOT NULL) AND ([SuccessorTask] IS NOT NULL))">
+                        <asp:SqlDataSource ID="DropDownListSetPredTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] FROM [tblTasks] WHERE (([UserID] = @UserID) AND 
+                            ([ProjectID] = @ProjectID) AND ([TaskID] &lt;&gt; @TaskID)AND ([PredecessorTask] IS NULL) AND ([SuccessorTask] IS NULL))">
                             <SelectParameters>
                                 <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                                 <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                                <asp:ControlParameter ControlID="DropDownListTaskSelect" Name="TaskID" PropertyName="SelectedValue" Type="Int32" />
                             </SelectParameters>
                         </asp:SqlDataSource>
+                        <hr />
+                        Predecessor Task Dependency:
+                        <asp:DropDownList ID="DropDownListPredDependency" runat="server" Height="16px" Width="140px">
+                            <asp:ListItem>Finish to Start</asp:ListItem>
+                            <asp:ListItem>Start to Start</asp:ListItem>
+                            <asp:ListItem>Finish to Finish</asp:ListItem>
+                            <asp:ListItem>Start to Finish</asp:ListItem>
+                        </asp:DropDownList>
                     </div>
 
                     <div class="modal-footer">
@@ -112,9 +121,7 @@
 
     </div>
 
-
-
-    <div class="container4">
+    <div class="container3">
         <!-- Modal -->
         <div class="modal fade" id="myModal4" role="dialog">
             <div class="modal-dialog">
@@ -128,27 +135,39 @@
 
                     <div class="modal-body">
                         Tasks List:
-                        <asp:DropDownList ID="DropDownListSetSuccTask" runat="server" DataSourceID="DropDownListTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
+                        <asp:DropDownList ID="DropDownListSetSuccTask" runat="server" DataSourceID="DropDownListSetSuccTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
                         </asp:DropDownList>
-                        <asp:SqlDataSource ID="DropDownListSetSuccTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] 
-                            FROM [tblTasks]   
-                            WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([PredecessorTask] IS NOT NULL) AND ([SuccessorTask] IS NOT NULL))">
+                        <asp:SqlDataSource ID="DropDownListSetSuccTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] FROM [tblTasks] WHERE (([UserID] = @UserID) AND 
+                            ([ProjectID] = @ProjectID) AND ([TaskID] &lt;&gt; @TaskID) AND ([PredecessorTask] IS NULL) AND ([SuccessorTask] IS NULL))">
                             <SelectParameters>
                                 <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                                 <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                                <asp:ControlParameter ControlID="DropDownListTaskSelect" Name="TaskID" PropertyName="SelectedValue" Type="Int32" />
                             </SelectParameters>
                         </asp:SqlDataSource>
+                        <hr />
+                        Successor Task Dependency:
+                        <asp:DropDownList ID="DropDownListSuccDependency" runat="server" Height="16px" Width="140px">
+                            <asp:ListItem>Finish to Start</asp:ListItem>
+                            <asp:ListItem>Start to Start</asp:ListItem>
+                            <asp:ListItem>Finish to Finish</asp:ListItem>
+                            <asp:ListItem>Start to Finish</asp:ListItem>
+                        </asp:DropDownList>
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <asp:Button ID="ButtonModalSetSuccTask" runat="server" Text="Set Successor Task" CssClass="btn btn-default" OnClick="ButtonModalSetSuccTask_Click" UseSubmitBehavior="false" data-dismiss="modal" />
                     </div>
+
                 </div>
             </div>
         </div>
 
     </div>
+
+
+
 
     <table style="width: 100%;">
         <tr>
@@ -179,7 +198,7 @@
                 <asp:TextBox ID="TextBoxDescription" runat="server" Height="168px" MaxLength="1000" TextMode="MultiLine" Width="351px"></asp:TextBox>
             </td>
 
-            <td colspan="6"></td>
+            <td colspan="6">&nbsp;</td>
             <td colspan="1">&nbsp;</td>
             <td colspan="13">&nbsp;</td>
         </tr>
@@ -207,7 +226,10 @@
             </td>
             <td colspan="1"></td>
             <td colspan="1">Set Predecessor Task:</td>
-            <td colspan="6" class="text-left">
+            <td colspan="1">
+                <asp:TextBox ID="TextBoxPredecessorTask" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td colspan="5" class="text-left">
                 <asp:Button ID="ButtonPredecessorTask" runat="server" Text="Select Predecessor Task" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" />
             </td>
         </tr>
@@ -224,7 +246,7 @@
                 </asp:Calendar>
             </td>
             <td colspan="2"></td>
-            <td colspan="3">
+            <td colspan="12">
                 <asp:Calendar ID="CalendarExpectedDue" runat="server" OnSelectionChanged="CalendarExpectedDue_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="16px">
                     <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
                     <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
@@ -234,19 +256,10 @@
                     <TodayDayStyle BackColor="#CCCCCC" />
                 </asp:Calendar>
             </td>
-            <td colspan="2"></td>
-            <td colspan="7">
-                <asp:DropDownList ID="DropDownListPre" runat="server" Height="16px" Width="140px">
-                    <asp:ListItem>Finish to Start</asp:ListItem>
-                    <asp:ListItem>Start to Start</asp:ListItem>
-                    <asp:ListItem>Finish to Finish</asp:ListItem>
-                    <asp:ListItem>Start to Finish</asp:ListItem>
-                </asp:DropDownList>
-            </td>
         </tr>
 
         <tr>
-            <td colspan="18">&nbsp;</td>
+            <td colspan="18" class="auto-style1"></td>
         </tr>
 
         <tr>
@@ -256,31 +269,25 @@
             </td>
             <td colspan="6">&nbsp;</td>
             <td colspan="1">Set Successor Task:</td>
-            <td colspan="7" class="text-left">
+            <td colspan="1">
+                <asp:TextBox ID="TextBoxSuccessorTask" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td colspan="6" class="text-left">
                 <asp:Button ID="ButtonSuccessorTask" runat="server" Text="Select Successor Task" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" />
             </td>
         </tr>
 
         <tr>
-            <td colspan="11">&nbsp;</td>
-            <td colspan="7">
-                <asp:DropDownList ID="DropDownListSuc" runat="server" Width="140px">
-                    <asp:ListItem>Finish to Start</asp:ListItem>
-                    <asp:ListItem>Start to Start</asp:ListItem>
-                    <asp:ListItem>Finish to Finish</asp:ListItem>
-                    <asp:ListItem>Start to Finish</asp:ListItem>
-                </asp:DropDownList>
-            </td>
+            <td colspan="18">&nbsp;</td>
         </tr>
 
         <tr>
             <td colspan="1" class="text-right">
             Expected Effort:
            
-            <td colspan="4">
+            <td colspan="17">
                 <asp:TextBox ID="TextBoxExpectedEffort" runat="server"></asp:TextBox>
             </td>
-            <td colspan="13"></td>
         </tr>
 
         <tr>
@@ -445,4 +452,13 @@
     </table>
 
 </asp:Content>
+
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
+    <style type="text/css">
+        .auto-style1 {
+            height: 20px;
+        }
+    </style>
+</asp:Content>
+
 
