@@ -19,7 +19,9 @@
 
                     <div class="modal-body">
                         Resource List:
-                        <asp:DropDownList ID="DropDownListResourceSelect" runat="server" DataSourceID="DropDownListResourceDB" DataTextField="Name" DataValueField="ResourceID" Height="30px" Width="571px">
+                        <asp:DropDownList ID="DropDownListResourceSelect" runat="server" DataSourceID="DropDownListResourceDB" DataTextField="Name" DataValueField="ResourceID" Height="30px" Width="571px" AppendDataBoundItems="true">
+                            <asp:ListItem Text="" Value="" />
+
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="DropDownListResourceDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [ResourceID] FROM [tblResources] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
                             <SelectParameters>
@@ -95,14 +97,14 @@
         </tr>
         <tr>
             <td colspan="1">
-                    <asp:Button ID="ButtonNew" runat="server" Text="New" OnClick="ButtonNew_Click" Width="68px" />
-                </td>
+                <asp:Button ID="ButtonNew" runat="server" Text="New" OnClick="ButtonNew_Click" Width="68px" />
+            </td>
             <td colspan="4">
-                    <asp:Button ID="ButtonDelete" runat="server" Text="Delete" OnClick="ButtonDelete_Click" Visible="False" />
-                </td>
+                <asp:Button ID="ButtonDelete" runat="server" Text="Delete" OnClick="ButtonDelete_Click" Visible="False" />
+            </td>
             <td colspan="10">
-                    <asp:Button ID="ButtonSave" runat="server" Text="Save" OnClick="ButtonSave_Click" Visible="False" />
-                </td>
+                <asp:Button ID="ButtonSave" runat="server" Text="Save" OnClick="ButtonSave_Click" Visible="False" />
+            </td>
         </tr>
 
     </table>

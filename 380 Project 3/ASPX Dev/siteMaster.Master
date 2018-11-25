@@ -41,6 +41,7 @@
                 <StaticMenuItemStyle HorizontalPadding="10px" VerticalPadding="10px" />
                 <StaticSelectedStyle BackColor="#507CD1" />
             </asp:Menu>
+            <div style="height:25px"></div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>

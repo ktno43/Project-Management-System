@@ -204,35 +204,6 @@ namespace _380_Project_3.ASPX_Dev
             GridViewTaskList.DataBind();
         }
 
-        protected void ImageButtonExpectedDueDate_Click(object sender, ImageClickEventArgs e)
-        {
-            if (CalendarExpectedDue.Visible == false)
-                CalendarExpectedDue.Visible = true;
-
-            else
-                CalendarExpectedDue.Visible = false;
-        }
-
-        protected void ImageButtonActualEndDate_Click(object sender, ImageClickEventArgs e)
-        {
-            if (CalendarActualEnd.Visible == false)
-                CalendarActualEnd.Visible = true;
-
-            else
-                CalendarActualEnd.Visible = false;
-        }
-
-        protected void CalendarExpectedDue_SelectionChanged(object sender, EventArgs e)
-        {
-            TextBoxExpectedDueDate.Text = CalendarExpectedDue.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarExpectedDue.Visible = false;
-        }
-
-        protected void CalendarActualEnd_SelectionChanged(object sender, EventArgs e)
-        {
-            TextBoxActualEndDate.Text = CalendarActualEnd.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarActualEnd.Visible = false;
-        }
 
     }
 }

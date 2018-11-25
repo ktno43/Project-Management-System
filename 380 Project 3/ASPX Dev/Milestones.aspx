@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" MasterPageFile="siteMaster.Master" AutoEventWireup="true" CodeBehind="Milestones.aspx.cs" Inherits="_380_Project_3.ASPX_Dev.Milestones" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -20,7 +23,9 @@
 
                     <div class="modal-body">
                         Milestones List:
-                        <asp:DropDownList ID="DropDownListMilestoneSelect" runat="server" DataSourceID="DropDownListMilestoneDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
+                        <asp:DropDownList ID="DropDownListMilestoneSelect" runat="server" DataSourceID="DropDownListMilestoneDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px" AppendDataBoundItems="true">
+                            <asp:ListItem Text="" Value="" />
+
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="DropDownListMilestoneDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] FROM [tblTasks] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([TaskType] = 'Milestone')">
                             <SelectParameters>
@@ -57,8 +62,13 @@
                         Tasks List:
                         <asp:DropDownList ID="DropDownListSetPredTask" runat="server" DataSourceID="DropDownListMilestoneDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
                         </asp:DropDownList>
-                        <asp:SqlDataSource ID="DropDownListSetPredTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] FROM [tblTasks] 
-                            WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([PredecessorTask] IS NOT NULL) AND ([SuccessorTask] IS NOT NULL))">
+                        <asp:SqlDataSource ID="DropDownListSetPredTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] 
+                            FROM [tblTasks] a WHERE ((a.UserID = @UserID) AND 
+                            (a.ProjectID = @ProjectID) AND (a.TaskID &lt;&gt; @TaskID) AND 
+                            NOT EXISTS(
+                            SELECT [PredecessorTask], [SuccessorTask] FROM [tblTasks] b
+                            WHERE a.TaskID = b.PredecessorTask
+                            OR a.TaskID = b.SuccessorTask))">
                             <SelectParameters>
                                 <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                                 <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -96,8 +106,12 @@
                         <asp:DropDownList ID="DropDownListSetSuccTask" runat="server" DataSourceID="DropDownListMilestoneDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="DropDownListSetSuccTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] 
-                            FROM [tblTasks]   
-                            WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([PredecessorTask] IS NOT NULL) AND ([SuccessorTask] IS NOT NULL))">
+                            FROM [tblTasks] a WHERE ((a.UserID = @UserID) AND 
+                            (a.ProjectID = @ProjectID) AND (a.TaskID &lt;&gt; @TaskID) AND 
+                            NOT EXISTS(
+                            SELECT [PredecessorTask], [SuccessorTask] FROM [tblTasks] b
+                            WHERE a.TaskID = b.PredecessorTask
+                            OR a.TaskID = b.SuccessorTask))">
                             <SelectParameters>
                                 <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                                 <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -161,11 +175,12 @@
             <td colspan="1" class="text-right">
             Expected Due Date*:
            
-            <td colspan="3">
-                <asp:TextBox ID="TextBoxExpectedDueDate" runat="server" Width="202px"></asp:TextBox>
-            </td>
-            <td colspan="1">
-                <asp:ImageButton ID="ImageButtonExpectedDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonExpectedDueDate_Click" Width="30px" />
+            <td colspan="4">
+                <asp:ScriptManager ID="toolScriptManager" runat="server">
+                </asp:ScriptManager>
+                <asp:TextBox ID="TextBoxExpectedDueDate" runat="server" Width="202px" ReadOnly="True"></asp:TextBox>
+                <cc1:CalendarExtender ID="CalendarExpDueDate" PopupButtonID="ImageButtonExpectedDueDate" runat="server" TargetControlID="TextBoxExpectedDueDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                <asp:ImageButton ID="ImageButtonExpectedDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" />
             </td>
             <td colspan="1">Set Successor Task:</td>
             <td colspan="7" class="text-left">
@@ -174,16 +189,7 @@
         </tr>
         <tr>
             <td colspan="1"></td>
-            <td colspan="4">
-                <asp:Calendar ID="CalendarExpectedDue" runat="server" OnSelectionChanged="CalendarExpectedDue_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="16px">
-                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
-                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
-                    <OtherMonthDayStyle ForeColor="#999999" />
-                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
-                    <TodayDayStyle BackColor="#CCCCCC" />
-                </asp:Calendar>
-            </td>
+            <td colspan="4">&nbsp;</td>
 
             <td colspan="8">
                 <asp:DropDownList ID="DropDownListSuc" runat="server" Width="140px">
@@ -228,27 +234,17 @@
             <td colspan="1" class="text-right">
                 <asp:Label ID="LabelActualEndDate" runat="server" Text="Actual End Date:" Visible="False"></asp:Label>
             </td>
-            <td colspan="3">
-                <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="192px" Visible="False"></asp:TextBox>
-            </td>
-            <td colspan="1">
-                <asp:ImageButton ID="ImageButtonActualEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonActualEndDate_Click" Width="30px" Visible="False" />
+            <td colspan="4">
+                <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="192px" Visible="False" ReadOnly="True"></asp:TextBox>
+                <cc1:CalendarExtender ID="CalendarActEndDate" PopupButtonID="ImageButtonActualEndDate" runat="server" TargetControlID="TextBoxActualEndDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                <asp:ImageButton ID="ImageButtonActualEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" />
             </td>
             <td colspan="8">List of Task(s):</td>
         </tr>
 
         <tr>
             <td colspan="1"></td>
-            <td colspan="4">
-                <asp:Calendar ID="CalendarActualEnd" runat="server" OnSelectionChanged="CalendarActualEnd_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="30px" CssClass="auto-style91">
-                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
-                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
-                    <OtherMonthDayStyle ForeColor="#999999" />
-                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
-                    <TodayDayStyle BackColor="#CCCCCC" />
-                </asp:Calendar>
-            </td>
+            <td colspan="4">&nbsp;</td>
             <td colspan="8">
                 <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="id_GridviewScroll">
                     <asp:GridView ID="GridViewTaskList" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataSourceID="GridTasks">
@@ -338,7 +334,7 @@
 
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
-    </asp:Content>
+</asp:Content>
 
 
 

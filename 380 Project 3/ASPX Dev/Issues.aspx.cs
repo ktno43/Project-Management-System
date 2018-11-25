@@ -228,62 +228,6 @@ namespace _380_Project_3.ASPX_Dev
             this.DropDownListIssuesSelect.DataBind();
         }
 
-        protected void ImageButtonExpCompletionDate_Click(object sender, ImageClickEventArgs e)
-        {
-            if (this.CalendarExpCompletionDate.Visible == false)
-            {
-                this.CalendarExpCompletionDate.Visible = true;
-            }
-
-            else
-                this.CalendarExpCompletionDate.Visible = false;
-        }
-
-        protected void ImageButtonDateRaised_Click(object sender, ImageClickEventArgs e)
-        {
-            if (this.CalendarDateRaised.Visible == false)
-            {
-                this.CalendarDateRaised.Visible = true;
-            }
-
-            else
-                this.CalendarDateRaised.Visible = false;
-        }
-
-        protected void ImageButtonDateAssigned_Click(object sender, ImageClickEventArgs e)
-        {
-            if (this.CalendarDateAssigned.Visible == false)
-            {
-                this.CalendarDateAssigned.Visible = true;
-            }
-
-            else
-                this.CalendarDateAssigned.Visible = false;
-        }
-
-        protected void CalendarExpCompletionDate_SelectionChanged(object sender, EventArgs e)
-        {
-            TextBoxExpectedCompletionDate.Text = CalendarExpCompletionDate.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarExpCompletionDate.Visible = false;
-        }
-
-        protected void CalendarDateRaised_SelectionChanged(object sender, EventArgs e)
-        {
-            TextBoxDateRaised.Text = CalendarDateRaised.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarDateRaised.Visible = false;
-        }
-
-        protected void CalendarDateAssigned_SelectionChanged(object sender, EventArgs e)
-        {
-            TextBoxDateAssigned.Text = CalendarDateAssigned.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarDateAssigned.Visible = false;
-        }
-
-        protected void CalendarActCompletionDate_SelectionChanged(object sender, EventArgs e)
-        {
-            TextBoxActualCompletionDate.Text = CalendarActCompletionDate.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarActCompletionDate.Visible = false;
-        }
 
         protected void ButtonSave_Click(object sender, EventArgs e)
         {
@@ -365,6 +309,11 @@ namespace _380_Project_3.ASPX_Dev
             }
 
             this.DropDownListIssuesSelect.DataBind();
+        }
+
+        protected void ButtonRemoveSeverity_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

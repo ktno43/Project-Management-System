@@ -1,10 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="siteMaster.Master" CodeBehind="SummaryTasks.aspx.cs" Inherits="_380_Project_3.ASPX_Dev.SummaryTasks" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <asp:ScriptManager ID="toolScriptManager" runat="server">
+    </asp:ScriptManager>
 
     <div class="container">
         <!-- Modal -->
@@ -20,7 +24,9 @@
 
                     <div class="modal-body">
                         Summary Tasks List:
-                        <asp:DropDownList ID="DropDownListSummTaskSelect" runat="server" DataSourceID="DropDownListSummTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
+                        <asp:DropDownList ID="DropDownListSummTaskSelect" runat="server" DataSourceID="DropDownListSummTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px" AppendDataBoundItems="true">
+                            <asp:ListItem Text="" Value="" />
+
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="DropDownListSummTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] FROM [tblTasks] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([TaskType] = 'Summary Task')">
                             <SelectParameters>
@@ -92,8 +98,13 @@
                         Tasks List:
                         <asp:DropDownList ID="DropDownListSetPredTask" runat="server" DataSourceID="DropDownListSummTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
                         </asp:DropDownList>
-                        <asp:SqlDataSource ID="DropDownListSetPredTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] FROM [tblTasks] 
-                            WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([PredecessorTask] IS NOT NULL) AND ([SuccessorTask] IS NOT NULL))">
+                        <asp:SqlDataSource ID="DropDownListSetPredTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] 
+                            FROM [tblTasks] a WHERE ((a.UserID = @UserID) AND 
+                            (a.ProjectID = @ProjectID) AND (a.TaskID &lt;&gt; @TaskID) AND 
+                            NOT EXISTS(
+                            SELECT [PredecessorTask], [SuccessorTask] FROM [tblTasks] b
+                            WHERE a.TaskID = b.PredecessorTask
+                            OR a.TaskID = b.SuccessorTask))">
                             <SelectParameters>
                                 <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                                 <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -131,8 +142,12 @@
                         <asp:DropDownList ID="DropDownListSetSuccTask" runat="server" DataSourceID="DropDownListSummTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px">
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="DropDownListSetSuccTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] 
-                            FROM [tblTasks]   
-                            WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([PredecessorTask] IS NOT NULL) AND ([SuccessorTask] IS NOT NULL))">
+                            FROM [tblTasks] a WHERE ((a.UserID = @UserID) AND 
+                            (a.ProjectID = @ProjectID) AND (a.TaskID &lt;&gt; @TaskID) AND 
+                            NOT EXISTS(
+                            SELECT [PredecessorTask], [SuccessorTask] FROM [tblTasks] b
+                            WHERE a.TaskID = b.PredecessorTask
+                            OR a.TaskID = b.SuccessorTask))">
                             <SelectParameters>
                                 <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                                 <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -189,52 +204,27 @@
         </tr>
 
         <tr>
-            <td colspan="1" class="text-right">
+            <td colspan="1" class="auto-style1">
             Expected Start Date*:
            
-            <td colspan="3">
-                <asp:TextBox ID="TextBoxExpectedStartDate" runat="server"></asp:TextBox>
+            <td colspan="4" class="auto-style2">
+                <asp:TextBox ID="TextBoxExpectedStartDate" runat="server" ReadOnly="True"></asp:TextBox>
+                <cc1:CalendarExtender ID="CalendarExpStartDate" PopupButtonID="ImageButtonExpectedStartDate" runat="server" TargetControlID="TextBoxExpectedStartDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                <asp:ImageButton ID="ImageButtonExpectedStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" />
             </td>
-            <td colspan="1">
-                <asp:ImageButton ID="ImageButtonExpectedStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonExpectedStartDate_Click" Width="30px" />
+            <td colspan="1" class="auto-style1">Expected Due Date*:</td>
+            <td colspan="5" class="auto-style2">
+                <asp:TextBox ID="TextBoxExpectedDueDate" runat="server" Width="202px" ReadOnly="True"></asp:TextBox>
+                <cc1:CalendarExtender ID="CalendarExpDueDate" PopupButtonID="ImageButtonExpectedDueDate" runat="server" TargetControlID="TextBoxExpectedDueDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                <asp:ImageButton ID="ImageButtonExpectedDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" />
             </td>
-            <td colspan="1" class="text-right">Expected Due Date*:</td>
-            <td colspan="3">
-                <asp:TextBox ID="TextBoxExpectedDueDate" runat="server" Width="202px"></asp:TextBox>
-            </td>
-            <td colspan="1">
-                <asp:ImageButton ID="ImageButtonExpectedDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonExpectedDueDate_Click" Width="30px" />
-            </td>
-            <td colspan="1"></td>
-            <td colspan="1">Set Predecessor Task:</td>
-            <td colspan="6" class="text-left">
+            <td colspan="1" class="auto-style2">Set Predecessor Task:</td>
+            <td colspan="6" class="auto-style3">
                 <asp:Button ID="ButtonPredecessorTask" runat="server" Text="Select Predecessor Task" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" />
             </td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="3">
-                <asp:Calendar ID="CalendarExpectedStart" runat="server" OnSelectionChanged="CalendarExpectedStart_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="16px">
-                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
-                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
-                    <OtherMonthDayStyle ForeColor="#999999" />
-                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
-                    <TodayDayStyle BackColor="#CCCCCC" />
-                </asp:Calendar>
-            </td>
-            <td colspan="2"></td>
-            <td colspan="3">
-                <asp:Calendar ID="CalendarExpectedDue" runat="server" OnSelectionChanged="CalendarExpectedDue_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="16px">
-                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
-                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
-                    <OtherMonthDayStyle ForeColor="#999999" />
-                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
-                    <TodayDayStyle BackColor="#CCCCCC" />
-                </asp:Calendar>
-            </td>
-            <td colspan="2"></td>
+            <td colspan="11"></td>
             <td colspan="7">
                 <asp:DropDownList ID="DropDownListPre" runat="server" Height="16px" Width="140px">
                     <asp:ListItem>Finish to Start</asp:ListItem>
@@ -301,21 +291,20 @@
             <td colspan="1" class="text-right">
                 <asp:Label ID="LabelActualStartDate" runat="server" Text="Actual Start Date:" Visible="False"></asp:Label>
             </td>
-            <td colspan="3">
-                <asp:TextBox ID="TextBoxActualStartDate" runat="server" Width="107px" Visible="False"></asp:TextBox>
-            </td>
-            <td colspan="1">
-                <asp:ImageButton ID="ImageButtonActualStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonActualStartDate_Click" Width="30px" Visible="False" />
+            <td colspan="4">
+                <asp:TextBox ID="TextBoxActualStartDate" runat="server" Width="107px" Visible="False" ReadOnly="True"></asp:TextBox>
+                <cc1:CalendarExtender ID="CalendarActStartDate" PopupButtonID="ImageButtonActualStartDate" runat="server" TargetControlID="TextBoxActualStartDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                <asp:ImageButton ID="ImageButtonActualStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" />
             </td>
             <td colspan="1" class="text-right">
                 <asp:Label ID="LabelActualEndDate" runat="server" Text="Actual End Date:" Visible="False"></asp:Label>
             </td>
             <td colspan="3">
-                <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="192px" Visible="False"></asp:TextBox>
+                <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="192px" Visible="False" ReadOnly="True"></asp:TextBox>
+                <cc1:CalendarExtender ID="CalendarActEndDate" PopupButtonID="ImageButtonActualEndDate" runat="server" TargetControlID="TextBoxActualEndDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                <asp:ImageButton ID="ImageButtonActualEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" />
             </td>
-            <td colspan="1">
-                <asp:ImageButton ID="ImageButtonActualEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" OnClick="ImageButtonActualEndDate_Click" Width="30px" Visible="False" />
-            </td>
+            <td colspan="1">&nbsp;</td>
             <td colspan="1"></td>
             <td colspan="1">Associate Issues:</td>
             <td colspan="6" class="text-left">
@@ -324,28 +313,7 @@
         </tr>
 
         <tr>
-            <td colspan="1"></td>
-            <td colspan="3">
-                <asp:Calendar ID="CalendarActualStart" runat="server" OnSelectionChanged="CalendarActualStart_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="30px">
-                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
-                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
-                    <OtherMonthDayStyle ForeColor="#999999" />
-                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
-                    <TodayDayStyle BackColor="#CCCCCC" />
-                </asp:Calendar>
-            </td>
-            <td colspan="2"></td>
-            <td colspan="10">
-                <asp:Calendar ID="CalendarActualEnd" runat="server" OnSelectionChanged="CalendarActualEnd_SelectionChanged" Visible="False" BackColor="White" BorderColor="White" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="75px" NextPrevFormat="FullMonth" Width="30px" CssClass="auto-style91">
-                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
-                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
-                    <OtherMonthDayStyle ForeColor="#999999" />
-                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
-                    <TodayDayStyle BackColor="#CCCCCC" />
-                </asp:Calendar>
-            </td>
+            <td colspan="18"></td>
         </tr>
         <tr>
             <td colspan="18">&nbsp;</td>
@@ -445,6 +413,27 @@
     </table>
 
 </asp:Content>
+
+
+
+
+
+<asp:Content ID="Content1" runat="server" contentplaceholderid="head">
+    <style type="text/css">
+        .auto-style1 {
+            text-align: right;
+            height: 40px;
+        }
+        .auto-style2 {
+            height: 40px;
+        }
+        .auto-style3 {
+            text-align: left;
+            height: 40px;
+        }
+    </style>
+</asp:Content>
+
 
 
 

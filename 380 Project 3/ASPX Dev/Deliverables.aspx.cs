@@ -241,36 +241,6 @@ namespace _380_Project_3
             GridViewListDeliverables.DataBind();
         }
 
-        protected void ImageButtonStartDate_Click(object sender, ImageClickEventArgs e)
-        {
-            if (CalendarStart.Visible == false)
-                CalendarStart.Visible = true;
-
-            else
-                CalendarStart.Visible = false;
-        }
-
-        protected void ImageButtonDueDate_Click(object sender, ImageClickEventArgs e)
-        {
-            if (CalendarDue.Visible == false)
-                CalendarDue.Visible = true;
-
-            else
-                CalendarDue.Visible = false;
-        }
-
-        protected void CalendarStart_SelectionChanged(object sender, EventArgs e)
-        {
-            TextBoxStartDate.Text = CalendarStart.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarStart.Visible = false;
-        }
-
-        protected void CalendarDue_SelectionChanged(object sender, EventArgs e)
-        {
-            TextBoxDueDate.Text = CalendarDue.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarDue.Visible = false;
-        }
-
         protected void ButtonAssociateTasks_Click(object sender, EventArgs e)
         {
             GridViewAssociateTask.DataBind();

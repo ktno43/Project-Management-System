@@ -59,65 +59,6 @@ namespace _380_Project_3.ASPX_Dev
             }
 
         }
-        protected void ImageButtonDateCreated_Click(object sender, ImageClickEventArgs e)
-        {
-            if (CalendarCreated.Visible == false)
-                CalendarCreated.Visible = true;
-
-            else
-                CalendarCreated.Visible = false;
-        }
-
-        protected void ImageButtonDateAssigned_Click(object sender, ImageClickEventArgs e)
-        {
-            if (CalendarAssigned.Visible == false)
-                CalendarAssigned.Visible = true;
-
-            else
-                CalendarAssigned.Visible = false;
-        }
-
-        protected void ImageButtonExpectedCompletionDate_Click(object sender, ImageClickEventArgs e)
-        {
-            if (CalendarExpCompletion.Visible == false)
-                CalendarExpCompletion.Visible = true;
-
-            else
-                CalendarExpCompletion.Visible = false;
-        }
-
-        protected void ImageButtonActualCompletionDate_Click(object sender, ImageClickEventArgs e)
-        {
-            if (CalendarActualCompletion.Visible == false)
-                CalendarActualCompletion.Visible = true;
-
-            else
-                CalendarActualCompletion.Visible = false;
-        }
-
-        protected void CalendarActualCompletion_SelectionChanged(object sender, EventArgs e)
-        {
-            TextBoxActualCompletionDate.Text = CalendarActualCompletion.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarActualCompletion.Visible = false;
-        }
-
-        protected void CalendarExpCompletion_SelectionChanged(object sender, EventArgs e)
-        {
-            TextBoxExpectedCompletionDate.Text = CalendarExpCompletion.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarExpCompletion.Visible = false;
-        }
-
-        protected void CalendarAssigned_SelectionChanged(object sender, EventArgs e)
-        {
-            TextBoxDateAssigned.Text = CalendarAssigned.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarAssigned.Visible = false;
-        }
-
-        protected void CalendarCreated_SelectionChanged(object sender, EventArgs e)
-        {
-            TextBoxDateCreated.Text = CalendarCreated.SelectedDate.ToString("dddd, dd MMMM yyyy");
-            CalendarCreated.Visible = false;
-        }
 
         protected void ButtonNew_Click(object sender, EventArgs e)
         {
@@ -256,6 +197,39 @@ namespace _380_Project_3.ASPX_Dev
         protected void ButtonAddResource_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void ButtonMoveUp_Click(object sender, EventArgs e)
+        {
+            MoveItem(-1);
+        }
+
+        protected void ButtonMoveDown_Click(object sender, EventArgs e)
+        {
+            MoveItem(1);
+        }
+
+        private void MoveItem(int direction)
+        {
+            // Checking selected item
+            if (this.ListBoxStatus.SelectedItem == null || ListBoxStatus.SelectedIndex < 0)
+                return; // No selected item - nothing to do
+
+            // Calculate new index using move direction
+            int newIndex = ListBoxStatus.SelectedIndex + direction;
+
+            // Checking bounds of the range
+            if (newIndex < 0 || newIndex >= ListBoxStatus.Items.Count)
+                return; // Index out of range - nothing to do
+
+            ListItem selected = ListBoxStatus.SelectedItem;
+
+            // Removing removable element
+            ListBoxStatus.Items.Remove(selected);
+            // Insert it in new position
+            ListBoxStatus.Items.Insert(newIndex, selected);
+            // Restore selection
+            ListBoxStatus.SelectedIndex = newIndex;
         }
     }
 }

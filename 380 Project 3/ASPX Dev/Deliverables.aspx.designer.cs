@@ -13,6 +13,15 @@ namespace _380_Project_3 {
     public partial class Deliverables {
         
         /// <summary>
+        /// toolScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager toolScriptManager;
+        
+        /// <summary>
         /// DropDownListDelivSelect control.
         /// </summary>
         /// <remarks>
@@ -148,6 +157,15 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.WebControls.TextBox TextBoxStartDate;
         
         /// <summary>
+        /// CalendarStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarStartDate;
+        
+        /// <summary>
         /// ImageButtonStartDate control.
         /// </summary>
         /// <remarks>
@@ -155,15 +173,6 @@ namespace _380_Project_3 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonStartDate;
-        
-        /// <summary>
-        /// CalendarStart control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarStart;
         
         /// <summary>
         /// DelivList_Scrollbar control.
@@ -202,6 +211,15 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.WebControls.TextBox TextBoxDueDate;
         
         /// <summary>
+        /// CalendarDueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarDueDate;
+        
+        /// <summary>
         /// ImageButtonDueDate control.
         /// </summary>
         /// <remarks>
@@ -209,15 +227,6 @@ namespace _380_Project_3 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonDueDate;
-        
-        /// <summary>
-        /// CalendarDue control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarDue;
         
         /// <summary>
         /// ButtonNew control.

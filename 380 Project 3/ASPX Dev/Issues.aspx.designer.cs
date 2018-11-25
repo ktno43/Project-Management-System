@@ -13,6 +13,15 @@ namespace _380_Project_3.ASPX_Dev {
     public partial class Issues {
         
         /// <summary>
+        /// toolScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager toolScriptManager;
+        
+        /// <summary>
         /// DropDownListIssuesSelect control.
         /// </summary>
         /// <remarks>
@@ -112,13 +121,13 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonSearch;
         
         /// <summary>
-        /// DropDownListSeverity control.
+        /// TextBoxSeverity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListSeverity;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxSeverity;
         
         /// <summary>
         /// ButtonAddSeverity control.
@@ -139,6 +148,33 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonRemoveSeverity;
         
         /// <summary>
+        /// ListBoxSeverity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBoxSeverity;
+        
+        /// <summary>
+        /// ButtonSeverityMoveUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonSeverityMoveUp;
+        
+        /// <summary>
+        /// ButtonSeverityMoveDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonSeverityMoveDown;
+        
+        /// <summary>
         /// TextBoxDescription control.
         /// </summary>
         /// <remarks>
@@ -148,13 +184,13 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
         
         /// <summary>
-        /// DropDownListPriority control.
+        /// TextBoxPriority control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListPriority;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxPriority;
         
         /// <summary>
         /// ButtonAddPriority control.
@@ -175,13 +211,40 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonRemovePriority;
         
         /// <summary>
-        /// DropDownListStatus control.
+        /// ListBoxPriority control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListStatus;
+        protected global::System.Web.UI.WebControls.ListBox ListBoxPriority;
+        
+        /// <summary>
+        /// ButtonPriorityMoveUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonPriorityMoveUp;
+        
+        /// <summary>
+        /// ButtonPriorityMoveDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonPriorityMoveDown;
+        
+        /// <summary>
+        /// TextBoxStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxStatus;
         
         /// <summary>
         /// ButtonAddStatus control.
@@ -202,6 +265,33 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonRemoveStatus;
         
         /// <summary>
+        /// ListBoxStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBoxStatus;
+        
+        /// <summary>
+        /// ButtonStatusMoveUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonStatusMoveUp;
+        
+        /// <summary>
+        /// ButtonStatusMoveDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonStatusMoveDown;
+        
+        /// <summary>
         /// TextBoxExpectedCompletionDate control.
         /// </summary>
         /// <remarks>
@@ -209,6 +299,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxExpectedCompletionDate;
+        
+        /// <summary>
+        /// CalendarExpComplDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExpComplDate;
         
         /// <summary>
         /// ImageButtonExpCompletionDate control.
@@ -229,15 +328,6 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxStatusDescription;
         
         /// <summary>
-        /// CalendarExpCompletionDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarExpCompletionDate;
-        
-        /// <summary>
         /// TextBox8 control.
         /// </summary>
         /// <remarks>
@@ -256,6 +346,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxDateRaised;
         
         /// <summary>
+        /// CalendarDateRaised control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarDateRaised;
+        
+        /// <summary>
         /// ImageButtonDateRaised control.
         /// </summary>
         /// <remarks>
@@ -272,15 +371,6 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonAssociateActionItems;
-        
-        /// <summary>
-        /// CalendarDateRaised control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarDateRaised;
         
         /// <summary>
         /// GridViewActionItemScroll control.
@@ -319,6 +409,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxDateAssigned;
         
         /// <summary>
+        /// CalendarDateAssigned control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarDateAssigned;
+        
+        /// <summary>
         /// ImageButtonDateAssigned control.
         /// </summary>
         /// <remarks>
@@ -335,15 +434,6 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonAssociateDecisions;
-        
-        /// <summary>
-        /// CalendarDateAssigned control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarDateAssigned;
         
         /// <summary>
         /// GridViewDecisionScroll control.
@@ -391,6 +481,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxActualCompletionDate;
         
         /// <summary>
+        /// CalendarActComplDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarActComplDate;
+        
+        /// <summary>
         /// ImageButtonActCompletionDate control.
         /// </summary>
         /// <remarks>
@@ -398,15 +497,6 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonActCompletionDate;
-        
-        /// <summary>
-        /// CalendarActCompletionDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarActCompletionDate;
         
         /// <summary>
         /// ButtonNew control.

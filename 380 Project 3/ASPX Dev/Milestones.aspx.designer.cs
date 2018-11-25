@@ -139,6 +139,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
         
         /// <summary>
+        /// toolScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager toolScriptManager;
+        
+        /// <summary>
         /// TextBoxExpectedDueDate control.
         /// </summary>
         /// <remarks>
@@ -146,6 +155,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxExpectedDueDate;
+        
+        /// <summary>
+        /// CalendarExpDueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExpDueDate;
         
         /// <summary>
         /// ImageButtonExpectedDueDate control.
@@ -164,15 +182,6 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonSuccessorTask;
-        
-        /// <summary>
-        /// CalendarExpectedDue control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarExpectedDue;
         
         /// <summary>
         /// DropDownListSuc control.
@@ -220,6 +229,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxActualEndDate;
         
         /// <summary>
+        /// CalendarActEndDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarActEndDate;
+        
+        /// <summary>
         /// ImageButtonActualEndDate control.
         /// </summary>
         /// <remarks>
@@ -227,15 +245,6 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonActualEndDate;
-        
-        /// <summary>
-        /// CalendarActualEnd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarActualEnd;
         
         /// <summary>
         /// id_GridviewScroll control.

@@ -43,6 +43,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=18.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Documents\ASP.NET AJAX Control Toolkit\Bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -84,6 +88,7 @@
     <Content Include="ASPX Dev\Risks.aspx" />
     <Content Include="ASPX Dev\SummaryTasks.aspx" />
     <Content Include="ASPX Dev\Tasks.aspx" />
+    <Content Include="ASPX Dev\Testing.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\calendar.png" />
     <Content Include="Web.config" />
@@ -215,6 +220,13 @@
     </Compile>
     <Compile Include="ASPX Dev\Tasks.aspx.designer.cs">
       <DependentUpon>Tasks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASPX Dev\Testing.aspx.cs">
+      <DependentUpon>Testing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASPX Dev\Testing.aspx.designer.cs">
+      <DependentUpon>Testing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
