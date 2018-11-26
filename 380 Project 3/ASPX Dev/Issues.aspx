@@ -182,27 +182,27 @@
             </td>
 
             <td colspan="1">
-                <asp:Button ID="ButtonAddSeverity" runat="server" Text="Add Severity" />
+                <asp:Button ID="ButtonAddSeverity" runat="server" Text="Add Severity" OnClick="ButtonAddSeverity_Click" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonRemoveSeverity" runat="server" Text="Remove Severity" /></td>
+                <asp:Button ID="ButtonRemoveSeverity" runat="server" Text="Remove Severity" OnClick="ButtonRemoveSeverity_Click1" /></td>
 
             <td colspan="2" rowspan="2">
-                <asp:ListBox ID="ListBoxSeverity" runat="server" Height="89px" Width="245px" onchange="SeverityTextBoxJS(this)">
-                    <asp:ListItem></asp:ListItem>
-                    <asp:ListItem>Minor</asp:ListItem>
-                    <asp:ListItem>Low</asp:ListItem>
-                    <asp:ListItem>Medium</asp:ListItem>
-                    <asp:ListItem>High</asp:ListItem>
-                    <asp:ListItem>Critical</asp:ListItem>
+                <asp:ListBox ID="ListBoxSeverity" ClientIDMode="Static" runat="server" Height="89px" Width="245px" onchange="SeverityTextBoxJS(this)" DataSourceID="ListBoxSeverityDB" DataTextField="SeverityName" DataValueField="Sequence">
                 </asp:ListBox>
+                <asp:SqlDataSource ID="ListBoxSeverityDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [SeverityName], [Sequence] FROM [tblSeverity] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                        <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
             </td>
 
             <td colspan="1">
-                <asp:Button ID="ButtonSeverityMoveUp" runat="server" Text="Move Up" />
+                <asp:ImageButton ID="ImageSeverityMoveUp" runat="server" Height="30px" ImageUrl="~/Images/up.png" OnClientClick="listBoxMove('ListBoxSeverity', 'up'); return false;" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonSeverityMoveDown" runat="server" Text="Move Down" />
+                <asp:ImageButton ID="ImageButtonSeverityMoveDown" runat="server" Height="30px" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxSeverity', 'down'); return false;" />
 
             </td>
         </tr>
@@ -213,7 +213,7 @@
         </tr>
 
         <tr>
-            <td colspan="11">&nbsp;</td>
+            <td colspan="11" class="auto-style2"></td>
         </tr>
 
         <tr>
@@ -225,27 +225,31 @@
                 <asp:TextBox ID="TextBoxPriority" runat="server"></asp:TextBox>
             </td>
             <td colspan="1">
-                <asp:Button ID="ButtonAddPriority" runat="server" Text="Add Priority" />
+                <asp:Button ID="ButtonAddPriority" runat="server" Text="Add Priority" OnClick="ButtonAddPriority_Click" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonRemovePriority" runat="server" Text="Remove Priority" />
+                <asp:Button ID="ButtonRemovePriority" runat="server" Text="Remove Priority" OnClick="ButtonRemovePriority_Click" />
             </td>
             <td colspan="2" rowspan="2">
-                <asp:ListBox ID="ListBoxPriority" runat="server" Height="138px" Width="205px" onchange="PriorityTextBoxJS(this)">
-                    <asp:ListItem></asp:ListItem>
-                    <asp:ListItem>Low</asp:ListItem>
-                    <asp:ListItem>Medium</asp:ListItem>
-                    <asp:ListItem>High</asp:ListItem>
+                <asp:ListBox ID="ListBoxPriority" ClientIDMode="Static" runat="server" Height="138px" Width="205px" onchange="PriorityTextBoxJS(this)" DataSourceID="ListBoxPriorityDB" DataTextField="PriorityName" DataValueField="Sequence">
                 </asp:ListBox>
+
+
+                <asp:SqlDataSource ID="ListBoxPriorityDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [PriorityName], [Sequence] FROM [tblPriority] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                        <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
 
 
             </td>
 
             <td colspan="1">
-                <asp:Button ID="ButtonPriorityMoveUp" runat="server" Text="Move Up" />
+                <asp:ImageButton ID="ImageButtonPriorityMoveUp" runat="server" Height="30px" ImageUrl="~/Images/up.png" OnClientClick="listBoxMove('ListBoxPriority', 'up'); return false;" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonPriorityMoveDown" runat="server" Text="Move Down" />
+                <asp:ImageButton ID="ImageButtonPriorityMoveDown" runat="server" Height="30px" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxPriority', 'down'); return false;" />
             </td>
         </tr>
 
@@ -264,27 +268,30 @@
                 <asp:TextBox ID="TextBoxStatus" runat="server"></asp:TextBox>
             </td>
             <td colspan="1">
-                <asp:Button ID="ButtonAddStatus" runat="server" Text="Add Status" />
+                <asp:Button ID="ButtonAddStatus" runat="server" Text="Add Status" OnClick="ButtonAddStatus_Click" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" />
+                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" OnClick="ButtonRemoveStatus_Click" />
 
             </td>
 
             <td colspan="2" rowspan="2">
-                <asp:ListBox ID="ListBoxStatus" runat="server" Width="204px" Height="139px" onchange="StatusTextBoxJS(this)">
-                    <asp:ListItem></asp:ListItem>
-                    <asp:ListItem>Open</asp:ListItem>
-                    <asp:ListItem>Closed</asp:ListItem>
-                    <asp:ListItem>In Progress</asp:ListItem>
-                    <asp:ListItem>Hold</asp:ListItem>
-                    <asp:ListItem>Complete</asp:ListItem>
-                </asp:ListBox></td>
+                <asp:ListBox ID="ListBoxStatus" ClientIDMode="Static" runat="server" Width="204px" Height="139px" onchange="StatusTextBoxJS(this)" DataSourceID="ListBoxStatusDB" DataTextField="StatusName" DataValueField="Sequence">
+                </asp:ListBox>
+                <asp:SqlDataSource ID="ListBoxStatusDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [StatusName], [Sequence] FROM [tblStatus] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                        <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+            </td>
             <td colspan="1">
-                <asp:Button ID="ButtonStatusMoveUp" runat="server" Text="Move Up" />
+                <asp:ImageButton ID="ImageButtonStatusMoveUp" runat="server" Height="30px" ImageUrl="~/Images/up.png" OnClientClick="listBoxMove('ListBoxStatus', 'up'); return false;" />
+
                 <br />
                 <br />
-                <asp:Button ID="ButtonStatusMoveDown" runat="server" Text="Move Down" />
+                <asp:ImageButton ID="ImageButtonStatusMoveDown" runat="server" Height="30px" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxStatus', 'down'); return false;" />
+
             </td>
         </tr>
 
@@ -489,6 +496,34 @@
                 tbSeverity.value = ddl.value;
             }
         }
+
+        function listBoxMove(listBoxID, direction) {
+            var listBox = document.getElementById(listBoxID);
+            var selIndex = listBox.selectedIndex;
+            if (-1 == selIndex) {
+                alert("Please select an option to move.");
+                return;
+            }
+            var increment = -1;
+            if (direction == 'up')
+                increment = -1;
+            else
+                increment = 1;
+
+            if ((selIndex + increment) < 0 ||
+                (selIndex + increment) > (listBox.options.length - 1)) {
+                return;
+            }
+
+            var selValue = listBox.options[selIndex].value;
+            var selText = listBox.options[selIndex].text;
+
+            listBox.options[selIndex].value = listBox.options[selIndex + increment].value
+            listBox.options[selIndex].text = listBox.options[selIndex + increment].text
+            listBox.options[selIndex + increment].value = selValue;
+            listBox.options[selIndex + increment].text = selText;
+            listBox.selectedIndex = selIndex + increment;
+        }
     </script>
 
 
@@ -516,7 +551,6 @@
             height: 26px;
             text-align: right;
         }
-
-        </style>
+    </style>
 </asp:Content>
 

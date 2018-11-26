@@ -9,6 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <asp:ScriptManager ID="toolScriptManager" runat="server">
     </asp:ScriptManager>
+
     <div class="container">
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
@@ -45,109 +46,227 @@
         </div>
     </div>
 
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add New Status</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        Status Name:
+                    <br />
+                        <asp:TextBox ID="TextBoxAddStatus" runat="server" autofocus=""></asp:TextBox>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <asp:Button ID="ButtonModalAddStatus" runat="server" Text="Add New Status" CssClass="btn btn-default" OnClick="ButtonModalAddStatus_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <table style="width: 100%;">
         <tr>
-            <td colspan="1">Name<span class="auto-style1">*</span><span class="auto-style3">:</span></td>
-            <td colspan="3"><span class="auto-style3">
-                <asp:TextBox ID="TextBoxName" runat="server"></asp:TextBox>
-            </span></td>
-            <td colspan="1"><span class="auto-style3">
-                <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
-            </span></td>
-            <td colspan="1">Resource Assigned:</td>
-            <td colspan="2"></td>
-            <td colspan="7">
-                <asp:Button ID="ButtonAddResource" runat="server" OnClick="ButtonAddResource_Click" Text="Add New Resource" />
+            <td colspan="1" class="text-right">Name*:</td>
+            <td colspan="4">
+                <asp:TextBox ID="TextBoxName" runat="server" Width="300px" Height="20px"></asp:TextBox>
+                <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" Width="60px" />
             </td>
-        </tr>
-        <tr>
-            <td colspan="15">&nbsp;</td>
 
+            <td colspan="4">
+                Resource Assigned:<asp:DropDownList ID="DropDownListResourceSelect" runat="server" DataSourceID="DropDownListRescDB" DataTextField="Name" DataValueField="ResourceID" Height="20px" Width="300px">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="DropDownListRescDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [ResourceID] FROM [tblResources] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                        <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+            </td>
+
+            <td colspan="1">
+                <asp:Button ID="ButtonAddResource" runat="server" OnClick="ButtonAddResource_Click" Text="Add New Resource" Width="135px" /></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1" class="auto-style12"></td>
+            <td colspan="1"></td>
         </tr>
+
         <tr>
-            <td colspan="1">Description*:</td>
-            <td colspan="4"><span class="auto-style3">
-                <asp:TextBox ID="TextBoxDescription" runat="server" MaxLength="1000" TextMode="MultiLine"></asp:TextBox>
-            </span></td>
-            <td colspan="1">Status*:</td>
+            <td colspan="1">&nbsp;</td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1" class="auto-style12"></td>
+        </tr>
+
+        <tr style="vertical-align: top">
+            <td colspan="1" class="text-right">Description*:</td>
+            <td colspan="4" rowspan="2">
+                <asp:TextBox ID="TextBoxDescription" runat="server" MaxLength="1000" TextMode="MultiLine" Height="150px" Width="300px"></asp:TextBox></td>
             <td colspan="2">
-                <asp:TextBox ID="TextBoxAddStatus" runat="server"></asp:TextBox>
-            </td>
-            <td colspan="1">
-                <asp:Button ID="ButtonAddStatus" runat="server" OnClick="ButtonAddStatus_Click" Text="Add Status" /></td>
+                Status*:<asp:TextBox ID="TextBoxStatus" runat="server" Height="20px" Width="150px"></asp:TextBox></td>
             <td colspan="2" rowspan="2">
+                <asp:Button ID="ButtonAddStatus" runat="server" Text="Add Status" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" Width="85px" />
 
-                <asp:ListBox ID="ListBoxStatus" runat="server" Height="113px" Width="166px" onchange="StatusTextBoxJS(this)">
-                    <asp:ListItem></asp:ListItem>
-                    <asp:ListItem>Open</asp:ListItem>
-                    <asp:ListItem>Closed</asp:ListItem>
-                    <asp:ListItem>In Progress</asp:ListItem>
-                    <asp:ListItem>Hold</asp:ListItem>
-                    <asp:ListItem>Complete</asp:ListItem>
-                </asp:ListBox>
-            </td>
-            <td colspan="5">
-                <asp:Button ID="ButtonMoveUp" runat="server" Text="Move Up" OnClick="ButtonMoveUp_Click" />
+
+                <br />
+                <br />
+
+
+                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" Width="110px" />
+
+
             </td>
 
-        </tr>
-
-        <tr>
-            <td colspan="6"></td>
-            <td colspan="2"></td>
+            <td colspan="1" rowspan="2">
+                <asp:ListBox ID="ListBoxStatus" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="StatusTextBoxJS(this)" DataSourceID="ListBoxStatusDB" DataTextField="StatusName" DataValueField="Sequence"></asp:ListBox>
+                <asp:SqlDataSource ID="ListBoxStatusDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [StatusName], [Sequence] FROM [tblStatus] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
+                        <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+            </td>
             <td colspan="1">
-                <asp:Button ID="ButtonRemoveStatus" runat="server" OnClick="ButtonRemoveStatus_Click" Text="Remove Status" />
-            </td>
-            <td colspan="6">
-                <asp:Button ID="ButtonMoveDown" runat="server" Text="Move Down" OnClick="ButtonMoveDown_Click" />
-            </td>
+                <asp:ImageButton ID="ImageButtonStatusMoveUp" runat="server" Height="30px" ImageUrl="~/Images/up.png" OnClientClick="listBoxMove('ListBoxStatus', 'up'); return false;" />
+                <br />
+                <br />
+                <asp:ImageButton ID="ImageButtonStatusMoveDown" runat="server" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxStatus' , 'down'); return false;" Height="30px" /></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
 
         </tr>
+
         <tr>
-            <td colspan="15" class="auto-style14"></td>
+            <td colspan="1">&nbsp;</td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
+            <td colspan="1">&nbsp;</td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
         </tr>
         <tr>
-            <td colspan="1">Date Created<span class="auto-style1">*</span><span class="auto-style3">:</span></td>
-            <td colspan="4"><span class="auto-style3">
+            <td colspan="1">&nbsp;</td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
 
-                <asp:TextBox ID="TextBoxDateCreated" runat="server" Width="128px" ReadOnly="True"></asp:TextBox>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1" class="auto-style12"></td>
+        </tr>
+
+        <tr style="vertical-align: top">
+            <td colspan="1" class="auto-style5">
+            Date Created*:
+           
+            <td colspan="4" class="auto-style4">
+                <asp:TextBox ID="TextBoxDateCreated" runat="server" Width="80px" ReadOnly="True" Height="20px"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarDateCreated" PopupButtonID="ImageButtonDateCreated" runat="server" TargetControlID="TextBoxDateCreated" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonDateCreated" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" />
-            </span></td>
-            <td colspan="1">Status Description*:</td>
-            <td colspan="8" class="auto-style13"><span class="auto-style3">
-                <asp:TextBox ID="TextBoxStatusDescription" runat="server" Height="104px" MaxLength="1000" TextMode="MultiLine" Width="290px"></asp:TextBox>
-            </span></td>
-        </tr>
+                <asp:ImageButton ID="ImageButtonDateCreated" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" /></td>
 
-        <tr>
-            <td colspan="5"></td>
-            <td colspan="1">Last Updated:</td>
-            <td colspan="10">
-                <asp:TextBox ID="TextBoxLastUpdated" runat="server"></asp:TextBox>
+
+            <td colspan="5" class="auto-style4">
+                Status Description*:<asp:TextBox ID="TextBoxStatusDescription" runat="server" Height="150px" MaxLength="1000" TextMode="MultiLine" Width="300px"></asp:TextBox>
+                <br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Last Updated:<asp:TextBox ID="TextBoxLastUpdated" runat="server" Height="20px" Width="80px"></asp:TextBox>
             </td>
-        </tr>
-        <tr>
-            <td colspan="15">&nbsp;</td>
+
+
+            <td colspan="1" class="auto-style4"></td>
+            <td colspan="1" class="auto-style4"></td>
+            <td colspan="1" class="auto-style4"></td>
+            <td colspan="1" class="auto-style4"></td>
+            <td colspan="1" class="auto-style13"></td>
         </tr>
 
         <tr>
-            <td colspan="1">Date Assigned<span class="auto-style1">*</span><span class="auto-style3">:</span></td>
-            <td colspan="4"><span class="auto-style3">
-                <asp:TextBox ID="TextBoxDateAssigned" runat="server" ReadOnly="True"></asp:TextBox>
+            <td colspan="1">&nbsp;</td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1" class="auto-style12"></td>
+        </tr>
+
+        <tr>
+            <td colspan="1" class="text-right">Date Assigned<span class="auto-style1">*</span><span class="auto-style3">:</span></td>
+            <td colspan="4">
+                <asp:TextBox ID="TextBoxDateAssigned" runat="server" ReadOnly="True" Width="80px" Height="20px"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarDateAssigned" PopupButtonID="ImageButtonDateAssigned" runat="server" TargetControlID="TextBoxDateAssigned" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonDateAssigned" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" />
-            </span></td>
-            <td colspan="1">List of Available Action Items:</td>
-            <td colspan="10"></td>
+                <asp:ImageButton ID="ImageButtonDateAssigned" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" /></td>
+
+
+            <td colspan="1" class="text-left">List of Available Action Items:</td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1" class="auto-style12"></td>
         </tr>
 
         <tr>
+            <td colspan="1">&nbsp;</td>
             <td colspan="1"></td>
-            <td colspan="3">&nbsp;</td>
             <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
             <td colspan="10">
-                <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="DelivList_Scrollbar">
+                <div runat="server" id="DelivList_Scrollbar" class="auto-style5">
                     <asp:GridView ID="GridViewActionItemsList" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridActionItems" ForeColor="#333333" GridLines="None">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
@@ -172,81 +291,181 @@
                         <SortedDescendingCellStyle BackColor="#FFFDF8" />
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
-                </div>
                 <asp:SqlDataSource ID="GridActionItems" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [DateCreated], [DateAssigned], [ExpectedCompletionDate], [ActualCompletionDate], [Status], [StatusDescription], [UpdateDate] FROM [tblActionItems] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                         <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
                     </SelectParameters>
                 </asp:SqlDataSource>
+                </div>
             </td>
-        </tr>
-        <tr>
-            <td colspan="15"></td>
+
         </tr>
 
         <tr>
-            <td colspan="1">Expected Completion Date:</td>
+            <td colspan="1" class="text-right">Expected Completion Date:</td>
             <td colspan="4">
                 <asp:TextBox ID="TextBoxExpectedCompletionDate" runat="server" ReadOnly="True"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarExpComplDate" PopupButtonID="ImageButtonExpectedCompletionDate" runat="server" TargetControlID="TextBoxExpectedCompletionDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonExpectedCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" />
+                <asp:ImageButton ID="ImageButtonExpectedCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" /></td>
+
+        </tr>
+
+        <tr>
+            <td colspan="1">&nbsp;</td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
+
+        </tr>
+
+        <tr>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelActComplDate" runat="server" Text="Actual Completion Date:" Visible="False"></asp:Label>
             </td>
-            <td colspan="10"></td>
-        </tr>
-
-        <tr>
-            <td colspan="15"></td>
-        </tr>
-        <tr>
-            <td colspan="15"></td>
-        </tr>
-
-        <tr>
-            <td colspan="1">Actual Completion Date:</td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxActualCompletionDate" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="TextBoxActualCompletionDate" runat="server" ReadOnly="True" Visible="False"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarActComplDate" PopupButtonID="ImageButtonActualCompletionDate" runat="server" TargetControlID="TextBoxActualCompletionDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonActualCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" />
-            </td>
+                <asp:ImageButton ID="ImageButtonActualCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" /></td>
 
-            <td colspan="10"></td>
         </tr>
 
         <tr>
-            <td colspan="15"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1" class="auto-style12"></td>
         </tr>
 
         <tr>
-            <td colspan="15"></td>
+            <td colspan="1">&nbsp;</td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1" class="auto-style12"></td>
         </tr>
 
         <tr>
+            <td colspan="1">&nbsp;</td>
             <td colspan="1">
-                <asp:Button ID="ButtonNew" runat="server" OnClick="ButtonNew_Click" Text="New" />
+                <asp:Button ID="ButtonNew" runat="server" OnClick="ButtonNew_Click" Text="New" Width="100px" />
             </td>
-            <td colspan="4"></td>
-            <td colspan="1">
-                <asp:Button ID="ButtonDelete" runat="server" OnClick="ButtonDelete_Click" Text="Delete" />
+            <td colspan="1"></td>
+            <td colspan="1">&nbsp;</td>
+            <td colspan="1"></td>
+
+            <td colspan="1" class="text-right">
+                <asp:Button ID="ButtonDelete" runat="server" OnClick="ButtonDelete_Click" Text="Delete" Visible="False" Width="75px" />
             </td>
-            <td colspan="4"></td>
-            <td colspan="1">
-                <asp:Button ID="ButtonSave" runat="server" OnClick="ButtonSave_Click" Text="Save" />
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1">&nbsp;</td>
+            <td colspan="1" class="text-right">
+                <asp:Button ID="ButtonSave" runat="server" OnClick="ButtonSave_Click" Text="Save" Visible="False" Width="125px" />
             </td>
-            <td colspan="4"></td>
+
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1" class="auto-style12"></td>
         </tr>
     </table>
-
     <script type="text/javascript">
         function StatusTextBoxJS(ddl) {
-            var tbStatus = document.getElementById('<%= TextBoxAddStatus.ClientID %>');
+            var tbStatus = document.getElementById('<%= TextBoxStatus.ClientID %>');
 
-            if (tbStatus != null)
-            {
+            if (tbStatus != null) {
                 tbStatus.value = ddl.value;
             }
 
         }
+
+        function listBoxMove(listBoxID, direction) {
+            var listBox = document.getElementById(listBoxID);
+            var selIndex = listBox.selectedIndex;
+            if (-1 == selIndex) {
+                alert("Please select an option to move.");
+                return;
+            }
+            var increment = -1;
+            if (direction == 'up')
+                increment = -1;
+            else
+                increment = 1;
+
+            if ((selIndex + increment) < 0 ||
+                (selIndex + increment) > (listBox.options.length - 1)) {
+                return;
+            }
+
+            var selValue = listBox.options[selIndex].value;
+            var selText = listBox.options[selIndex].text;
+
+            listBox.options[selIndex].value = listBox.options[selIndex + increment].value
+            listBox.options[selIndex].text = listBox.options[selIndex + increment].text
+            listBox.options[selIndex + increment].value = selValue;
+            listBox.options[selIndex + increment].text = selText;
+            listBox.selectedIndex = selIndex + increment;
+        }
     </script>
 </asp:Content>
+
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
+    <style type="text/css">
+        .auto-style1 {
+            height: 20px;
+        }
+
+        .auto-style3 {
+            height: 32px;
+        }
+
+        .auto-style4 {
+            height: 26px;
+        }
+
+        .auto-style5 {
+            height: 26px;
+            text-align: right;
+        }
+
+        .auto-style12 {
+            width: 12px;
+        }
+
+        .auto-style13 {
+            height: 26px;
+            width: 12px;
+        }
+    </style>
+</asp:Content>
+
 

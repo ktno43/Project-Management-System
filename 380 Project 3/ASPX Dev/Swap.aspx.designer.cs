@@ -10,7 +10,7 @@
 namespace _380_Project_3.ASPX_Dev {
     
     
-    public partial class ActionItems {
+    public partial class Swap {
         
         /// <summary>
         /// toolScriptManager control.
@@ -22,49 +22,13 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.ScriptManager toolScriptManager;
         
         /// <summary>
-        /// DropDownListActItemSelect control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListActItemSelect;
-        
-        /// <summary>
-        /// DropDownListActItemDB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource DropDownListActItemDB;
-        
-        /// <summary>
-        /// ButtonModalSearch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonModalSearch;
-        
-        /// <summary>
-        /// TextBoxAddStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxAddStatus;
-        
-        /// <summary>
-        /// ButtonModalAddStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonModalAddStatus;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
         /// TextBoxName control.
@@ -85,22 +49,13 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonSearch;
         
         /// <summary>
-        /// DropDownListResourceSelect control.
+        /// DropDownListResources control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListResourceSelect;
-        
-        /// <summary>
-        /// DropDownListRescDB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource DropDownListRescDB;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListResources;
         
         /// <summary>
         /// ButtonAddResource control.
@@ -110,6 +65,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonAddResource;
+        
+        /// <summary>
+        /// DropDownListRescDB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DropDownListRescDB;
         
         /// <summary>
         /// TextBoxDescription control.

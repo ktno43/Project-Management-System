@@ -203,8 +203,8 @@ namespace _380_Project_3.ASPX_Dev
                     cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
                     cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
                     cmd.Parameters.AddWithValue("@TaskType", g_TaskType);
-                    cmd.Parameters.AddWithValue("@ExpStart", Convert.ToDateTime(TextBoxExpectedStartDate.Text));
-                    cmd.Parameters.AddWithValue("@ExpEnd", Convert.ToDateTime(TextBoxExpectedDueDate.Text));
+                    cmd.Parameters.AddWithValue("@ExpStart", TextBoxExpectedStartDate.Text);
+                    cmd.Parameters.AddWithValue("@ExpEnd", TextBoxExpectedDueDate.Text);
                     cmd.Parameters.AddWithValue("@ExpEffort", TextBoxExpectedEffort.Text);
 
                     try
@@ -283,11 +283,11 @@ namespace _380_Project_3.ASPX_Dev
                 {
                     cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
                     cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
-                    cmd.Parameters.AddWithValue("@ExpStartDate", Convert.ToDateTime(TextBoxExpectedStartDate.Text));
-                    cmd.Parameters.AddWithValue("@ExpEndDate", Convert.ToDateTime(TextBoxExpectedDueDate.Text));
+                    cmd.Parameters.AddWithValue("@ExpStartDate", TextBoxExpectedStartDate.Text);
+                    cmd.Parameters.AddWithValue("@ExpEndDate", TextBoxExpectedDueDate.Text);
                     cmd.Parameters.AddWithValue("@ExpEff", TextBoxExpectedEffort.Text);
-                    cmd.Parameters.AddWithValue("@ActStartDate", Convert.ToDateTime(TextBoxActualStartDate.Text));
-                    cmd.Parameters.AddWithValue("@ActEndDate", Convert.ToDateTime(TextBoxActualEndDate.Text));
+                    cmd.Parameters.AddWithValue("@ActStartDate", TextBoxActualStartDate.Text);
+                    cmd.Parameters.AddWithValue("@ActEndDate", TextBoxActualEndDate.Text);
                     cmd.Parameters.AddWithValue("@ActEff", TextBoxActualEffort.Text);
                     cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                     cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);

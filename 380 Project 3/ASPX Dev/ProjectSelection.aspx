@@ -96,7 +96,7 @@
 
                         <div class="modal-body">
                             Project Name:<br />
-                            <input id="projectName" autofocus="" type="text" name="ProjectName"/>
+                            <asp:TextBox ID="TextBoxProjectName" autofocus="" runat="server"></asp:TextBox>
                         </div>
 
                         <div class="modal-footer">

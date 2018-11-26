@@ -76,6 +76,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonGenReport;
         
         /// <summary>
+        /// TextBoxProjectName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxProjectName;
+        
+        /// <summary>
         /// ButtonModalCreate control.
         /// </summary>
         /// <remarks>

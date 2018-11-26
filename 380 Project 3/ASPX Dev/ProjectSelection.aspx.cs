@@ -27,8 +27,6 @@ namespace _380_Project_3.ASPX_Dev
 
         protected void ButtonModalCreate_Click(object sender, EventArgs e)
         {
-            string sProjectName = String.Format("{0}", Request.Form["projectName"]);
-
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
                 Connect(conn);
@@ -37,7 +35,7 @@ namespace _380_Project_3.ASPX_Dev
                     try
                     {
                         cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                        cmd.Parameters.AddWithValue("@ProjectName", sProjectName);
+                        cmd.Parameters.AddWithValue("@ProjectName", TextBoxProjectName.Text);
 
                         cmd.ExecuteNonQuery();
                     }
