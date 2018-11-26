@@ -135,7 +135,7 @@
                 <br />
 
 
-                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" Width="110px" />
+                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" Width="110px" OnClick="ButtonRemoveStatus_Click" />
 
 
             </td>

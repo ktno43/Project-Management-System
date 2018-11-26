@@ -103,6 +103,60 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonModalAssocDecisions;
         
         /// <summary>
+        /// TextBoxAddStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxAddStatus;
+        
+        /// <summary>
+        /// ButtonModalAddStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonModalAddStatus;
+        
+        /// <summary>
+        /// TextBoxAddSeverity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxAddSeverity;
+        
+        /// <summary>
+        /// ButtonModalAddSeverity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonModalAddSeverity;
+        
+        /// <summary>
+        /// TextBoxAddPriority control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxAddPriority;
+        
+        /// <summary>
+        /// ButtonModalAddPriority control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonModalAddPriority;
+        
+        /// <summary>
         /// TextBoxName control.
         /// </summary>
         /// <remarks>

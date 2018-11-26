@@ -166,6 +166,88 @@
         </div>
     </div>
 
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal4" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add New Status</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        Status Name:
+                    <br />
+                        <asp:TextBox ID="TextBoxAddStatus" autofocus="" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <asp:Button ID="ButtonModalAddStatus" runat="server" Text="Add New Status" CssClass="btn btn-default" OnClick="ButtonModalAddStatus_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal5" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add New Severity</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        Severity Name:
+                    <br />
+                        <asp:TextBox ID="TextBoxAddSeverity" autofocus="" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <asp:Button ID="ButtonModalAddSeverity" runat="server" Text="Add New Status" CssClass="btn btn-default" OnClick="ButtonModalAddSeverity_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal6" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add New Priority</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        Priority Name:
+                    <br />
+                        <asp:TextBox ID="TextBoxAddPriority" autofocus="" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <asp:Button ID="ButtonModalAddPriority" runat="server" Text="Add New Status" CssClass="btn btn-default" OnClick="ButtonModalAddPriority_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 
     <table style="width: 100%;">
         <tr>
@@ -182,10 +264,10 @@
             </td>
 
             <td colspan="1">
-                <asp:Button ID="ButtonAddSeverity" runat="server" Text="Add Severity" OnClick="ButtonAddSeverity_Click" />
+                <asp:Button ID="ButtonAddSeverity" runat="server" Text="Add Severity" data-toggle="modal" data-target="#myModal5" OnClientClick="return false;" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonRemoveSeverity" runat="server" Text="Remove Severity" OnClick="ButtonRemoveSeverity_Click1" /></td>
+                <asp:Button ID="ButtonRemoveSeverity" runat="server" Text="Remove Severity" OnClick="ButtonRemoveSeverity_Click" /></td>
 
             <td colspan="2" rowspan="2">
                 <asp:ListBox ID="ListBoxSeverity" ClientIDMode="Static" runat="server" Height="89px" Width="245px" onchange="SeverityTextBoxJS(this)" DataSourceID="ListBoxSeverityDB" DataTextField="SeverityName" DataValueField="Sequence">
@@ -225,7 +307,7 @@
                 <asp:TextBox ID="TextBoxPriority" runat="server"></asp:TextBox>
             </td>
             <td colspan="1">
-                <asp:Button ID="ButtonAddPriority" runat="server" Text="Add Priority" OnClick="ButtonAddPriority_Click" />
+                <asp:Button ID="ButtonAddPriority" runat="server" Text="Add Priority" data-toggle="modal" data-target="#myModal6" OnClientClick="return false;" />
                 <br />
                 <br />
                 <asp:Button ID="ButtonRemovePriority" runat="server" Text="Remove Priority" OnClick="ButtonRemovePriority_Click" />
@@ -268,7 +350,7 @@
                 <asp:TextBox ID="TextBoxStatus" runat="server"></asp:TextBox>
             </td>
             <td colspan="1">
-                <asp:Button ID="ButtonAddStatus" runat="server" Text="Add Status" OnClick="ButtonAddStatus_Click" />
+                <asp:Button ID="ButtonAddStatus" runat="server" Text="Add Status" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;"/>
                 <br />
                 <br />
                 <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" OnClick="ButtonRemoveStatus_Click" />

@@ -77,17 +77,20 @@ namespace _380_Project_3.ASPX_Dev
 
         protected void ButtonModalAddStatus_Click(object sender, EventArgs e)
         {
-
+            this.ListBoxStatus.Items.Add(TextBoxAddStatus.Text);
+            this.ListBoxStatus.SelectedIndex = ListBoxStatus.Items.Count - 1;
         }
 
         protected void ButtonModalAddImpact_Click(object sender, EventArgs e)
         {
-
+            this.ListBoxImpact.Items.Add(TextBoxAddImpact.Text);
+            this.ListBoxImpact.SelectedIndex = ListBoxImpact.Items.Count - 1;
         }
 
         protected void ButtonModalAddPriority_Click(object sender, EventArgs e)
         {
-
+            this.ListBoxPriority.Items.Add(TextBoxAddPriority.Text);
+            this.ListBoxPriority.SelectedIndex = ListBoxPriority.Items.Count - 1;
         }
 
         private void SaveListBoxes()
@@ -405,6 +408,24 @@ namespace _380_Project_3.ASPX_Dev
 
 
             this.DropDownListDecisionSelect.DataBind();
+        }
+
+        protected void ButtonRemoveImpact_Click(object sender, EventArgs e)
+        {
+            this.ListBoxImpact.Items.Remove(this.ListBoxImpact.SelectedItem.ToString());
+
+        }
+
+        protected void ButtonRemovePriority_Click(object sender, EventArgs e)
+        {
+            this.ListBoxPriority.Items.Remove(this.ListBoxPriority.SelectedItem.ToString());
+
+        }
+
+        protected void ButtonRemoveStatus_Click(object sender, EventArgs e)
+        {
+            this.ListBoxStatus.Items.Remove(this.ListBoxStatus.SelectedItem.ToString());
+
         }
     }
 }

@@ -132,10 +132,8 @@
     <table style="width: 100%;">
         <tr>
             <td colspan="1" class="text-right">Name*:</td>
-            <td colspan="3">
+            <td colspan="4">
                 <asp:TextBox ID="TextBoxName" runat="server" Width="315px"></asp:TextBox>
-            </td>
-            <td colspan="1">
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
             </td>
 

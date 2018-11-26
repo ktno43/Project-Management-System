@@ -161,7 +161,7 @@
             <td colspan="6"></td>
             <td colspan="1"></td>
             <td colspan="1">
-                <asp:Button ID="ButtonRemoveImpact" runat="server" Text="Remove Impact" Width="110px" />
+                <asp:Button ID="ButtonRemoveImpact" runat="server" Text="Remove Impact" Width="110px" OnClick="ButtonRemoveImpact_Click" />
             </td>
             <td colspan="7">
                 <asp:ImageButton ID="ImageButtonImpactMoveDown" runat="server" Height="30px" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxImpact', 'down'); return false;" />
@@ -201,7 +201,7 @@
             <td colspan="5"></td>
             <td colspan="2"></td>
             <td colspan="1">
-                <asp:Button ID="ButtonRemovePriority" runat="server" Text="Remove Priority" Width="110px" /></td>
+                <asp:Button ID="ButtonRemovePriority" runat="server" Text="Remove Priority" Width="110px" OnClick="ButtonRemovePriority_Click" /></td>
             <td colspan="7">
                 <asp:ImageButton ID="ImageButtonPriorityMoveDown" runat="server" Height="30px" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxPriority','down');return false;" />
 
@@ -248,7 +248,7 @@
             <td colspan="6"></td>
             <td colspan="1"></td>
             <td colspan="1">
-                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" Width="110px" /></td>
+                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" Width="110px" OnClick="ButtonRemoveStatus_Click" /></td>
             <td colspan="2">
 
                 <asp:ImageButton ID="ImageButtonStatusMoveDown" runat="server" Height="30px" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxStatus','down');return false;" />

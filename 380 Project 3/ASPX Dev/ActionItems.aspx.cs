@@ -106,7 +106,8 @@ namespace _380_Project_3.ASPX_Dev
 
         protected void ButtonModalAddStatus_Click(object sender, EventArgs e)
         {
-
+            this.ListBoxStatus.Items.Add(TextBoxAddStatus.Text);
+            this.ListBoxStatus.SelectedIndex = ListBoxStatus.Items.Count - 1;
         }
 
         protected void ButtonNew_Click(object sender, EventArgs e)
@@ -310,8 +311,12 @@ namespace _380_Project_3.ASPX_Dev
 
         protected void ButtonAddResource_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Resources.aspx");
         }
 
+        protected void ButtonRemoveStatus_Click(object sender, EventArgs e)
+        {
+            this.ListBoxStatus.Items.Remove(this.ListBoxStatus.SelectedItem.ToString());
+        }
     }
 }

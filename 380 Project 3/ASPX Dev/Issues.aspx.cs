@@ -85,6 +85,24 @@ namespace _380_Project_3.ASPX_Dev
             this.GridViewAssociatedDecisions.DataBind();
         }
 
+        protected void ButtonModalAddStatus_Click(object sender, EventArgs e)
+        {
+            this.ListBoxStatus.Items.Add(TextBoxAddStatus.Text);
+            this.ListBoxStatus.SelectedIndex = ListBoxStatus.Items.Count - 1;
+        }
+
+        protected void ButtonModalAddSeverity_Click(object sender, EventArgs e)
+        {
+            this.ListBoxSeverity.Items.Add(TextBoxAddSeverity.Text);
+            this.ListBoxSeverity.SelectedIndex = ListBoxSeverity.Items.Count - 1;
+        }
+
+        protected void ButtonModalAddPriority_Click(object sender, EventArgs e)
+        {
+            this.ListBoxPriority.Items.Add(TextBoxAddPriority.Text);
+            this.ListBoxPriority.SelectedIndex = ListBoxPriority.Items.Count - 1;
+        }
+
         protected void ButtonModalAssocActItems_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
@@ -481,36 +499,19 @@ namespace _380_Project_3.ASPX_Dev
 
         protected void ButtonRemoveSeverity_Click(object sender, EventArgs e)
         {
-
+            this.ListBoxSeverity.Items.Remove(this.ListBoxSeverity.SelectedItem.ToString());
         }
 
-        protected void ButtonAddSeverity_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void ButtonRemoveSeverity_Click1(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void ButtonAddPriority_Click(object sender, EventArgs e)
-        {
-
-        }
 
         protected void ButtonRemovePriority_Click(object sender, EventArgs e)
         {
-
-        }
-
-        protected void ButtonAddStatus_Click(object sender, EventArgs e)
-        {
+            this.ListBoxPriority.Items.Remove(this.ListBoxPriority.SelectedItem.ToString());
 
         }
 
         protected void ButtonRemoveStatus_Click(object sender, EventArgs e)
         {
+            this.ListBoxStatus.Items.Remove(this.ListBoxStatus.SelectedItem.ToString());
 
         }
 
