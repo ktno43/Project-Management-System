@@ -181,6 +181,7 @@ namespace _380_Project_3.ASPX_Dev
 
                     int statusRowCount = -1;
                     int priorityRowCount = -1;
+                    int impactRowCount = -1;
 
                     using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblStatus where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                     {
@@ -190,6 +191,11 @@ namespace _380_Project_3.ASPX_Dev
                     using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblPriority where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                     {
                         priorityRowCount = (int)cmdCount.ExecuteScalar();
+                    }
+
+                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblImpact where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    {
+                        impactRowCount = (int)cmdCount.ExecuteScalar();
                     }
 
                     if (statusRowCount == 0)
@@ -229,21 +235,25 @@ namespace _380_Project_3.ASPX_Dev
                         this.ListBoxPriority.DataBind();
                     }
 
-                    for (int k = 0; k < arrDefaultImpacts.Length; k += 1)
+                    if (impactRowCount == 0)
                     {
-                        using (SqlCommand cmd3 = new SqlCommand("insert into tblImpact(UserID,ProjectID,ImpactName,Sequence)" +
-                            " values(@UserID, @ProjectID, @ImpactName, @Sequence)", conn))
+
+                        for (int k = 0; k < arrDefaultImpacts.Length; k += 1)
                         {
-                            cmd3.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                            cmd3.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
-                            cmd3.Parameters.AddWithValue("@ImpactName", arrDefaultImpacts[k]);
-                            cmd3.Parameters.AddWithValue("@Sequence", k);
+                            using (SqlCommand cmd3 = new SqlCommand("insert into tblImpact(UserID,ProjectID,ImpactName,Sequence)" +
+                                " values(@UserID, @ProjectID, @ImpactName, @Sequence)", conn))
+                            {
+                                cmd3.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                                cmd3.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
+                                cmd3.Parameters.AddWithValue("@ImpactName", arrDefaultImpacts[k]);
+                                cmd3.Parameters.AddWithValue("@Sequence", k);
 
-                            cmd3.ExecuteNonQuery();
+                                cmd3.ExecuteNonQuery();
+                            }
                         }
-                    }
 
-                    this.ListBoxImpact.DataBind();
+                        this.ListBoxImpact.DataBind();
+                    }
                 }
 
                 catch (Exception ex)
@@ -294,7 +304,10 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
+            this.DropDownListDecisionSelect.Items.Clear();
             this.DropDownListDecisionSelect.DataBind();
+
+            this.GridViewListofDecisions.DataBind();
 
             ButtonSave.Visible = true;
             ButtonDelete.Visible = true;
@@ -338,6 +351,10 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
+
+            this.GridViewListofDecisions.DataBind();
+
+            this.DropDownListDecisionSelect.Items.Clear();
             this.DropDownListDecisionSelect.DataBind();
 
             ButtonSave.Visible = true;
@@ -407,6 +424,9 @@ namespace _380_Project_3.ASPX_Dev
             }
 
 
+            this.GridViewListofDecisions.DataBind();
+
+            this.DropDownListDecisionSelect.Items.Clear();
             this.DropDownListDecisionSelect.DataBind();
         }
 

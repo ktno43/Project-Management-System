@@ -81,23 +81,21 @@
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" Width="60px" />
             </td>
 
-            <td colspan="4">
-                Resource Assigned:<asp:DropDownList ID="DropDownListResourceSelect" runat="server" DataSourceID="DropDownListRescDB" DataTextField="Name" DataValueField="ResourceID" Height="20px" Width="300px">
-                </asp:DropDownList>
+            <td colspan="3">Resource Assigned:<asp:DropDownList ID="DropDownListResourceSelect" runat="server" DataSourceID="DropDownListRescDB" DataTextField="Name" DataValueField="ResourceID" Height="20px" Width="300px">
+            </asp:DropDownList>
                 <asp:SqlDataSource ID="DropDownListRescDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [ResourceID] FROM [tblResources] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                         <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
                     </SelectParameters>
                 </asp:SqlDataSource>
-            </td>
 
-            <td colspan="1">
-                <asp:Button ID="ButtonAddResource" runat="server" OnClick="ButtonAddResource_Click" Text="Add New Resource" Width="135px" /></td>
-            <td colspan="1"></td>
+            </td>
+            <td colspan="1">&nbsp;</td>
             <td colspan="1"></td>
             <td colspan="1"></td>
             <td colspan="1" class="auto-style12"></td>
+            <td colspan="1"></td>
             <td colspan="1"></td>
         </tr>
 
@@ -125,9 +123,8 @@
             <td colspan="1" class="text-right">Description*:</td>
             <td colspan="4" rowspan="2">
                 <asp:TextBox ID="TextBoxDescription" runat="server" MaxLength="1000" TextMode="MultiLine" Height="150px" Width="300px"></asp:TextBox></td>
-            <td colspan="2">
-                Status*:<asp:TextBox ID="TextBoxStatus" runat="server" Height="20px" Width="150px"></asp:TextBox></td>
-            <td colspan="2" rowspan="2">
+            <td colspan="1">Status*:<asp:TextBox ID="TextBoxStatus" runat="server" Height="20px" Width="150px"></asp:TextBox></td>
+            <td colspan="1" rowspan="2">
                 <asp:Button ID="ButtonAddStatus" runat="server" Text="Add Status" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" Width="85px" />
 
 
@@ -154,6 +151,8 @@
                 <br />
                 <br />
                 <asp:ImageButton ID="ImageButtonStatusMoveDown" runat="server" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxStatus' , 'down'); return false;" Height="30px" /></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
             <td colspan="1"></td>
             <td colspan="1"></td>
             <td colspan="1"></td>
@@ -202,8 +201,7 @@
                 <asp:ImageButton ID="ImageButtonDateCreated" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" /></td>
 
 
-            <td colspan="5" class="auto-style4">
-                Status Description*:<asp:TextBox ID="TextBoxStatusDescription" runat="server" Height="150px" MaxLength="1000" TextMode="MultiLine" Width="300px"></asp:TextBox>
+            <td colspan="5" style="vertical-align: text-top">Status Description*:<asp:TextBox ID="TextBoxStatusDescription" runat="server" Height="150px" MaxLength="1000" TextMode="MultiLine" Width="300px"></asp:TextBox>
                 <br />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 Last Updated:<asp:TextBox ID="TextBoxLastUpdated" runat="server" Height="20px" Width="80px"></asp:TextBox>
@@ -245,7 +243,7 @@
                 <asp:ImageButton ID="ImageButtonDateAssigned" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" /></td>
 
 
-            <td colspan="1" class="text-left">List of Available Action Items:</td>
+            <td colspan="1" class="text-left">List of Created Action Items:</td>
             <td colspan="1"></td>
             <td colspan="1"></td>
             <td colspan="1"></td>
@@ -266,7 +264,7 @@
             <td colspan="1"></td>
 
             <td colspan="10">
-                <div runat="server" id="DelivList_Scrollbar" class="auto-style5">
+                <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="GridViewActItemScroll">
                     <asp:GridView ID="GridViewActionItemsList" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridActionItems" ForeColor="#333333" GridLines="None">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
@@ -291,13 +289,13 @@
                         <SortedDescendingCellStyle BackColor="#FFFDF8" />
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
+                </div>
                 <asp:SqlDataSource ID="GridActionItems" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [DateCreated], [DateAssigned], [ExpectedCompletionDate], [ActualCompletionDate], [Status], [StatusDescription], [UpdateDate] FROM [tblActionItems] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                         <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
                     </SelectParameters>
                 </asp:SqlDataSource>
-                </div>
             </td>
 
         </tr>
@@ -403,7 +401,7 @@
             var tbStatus = document.getElementById('<%= TextBoxStatus.ClientID %>');
 
             if (tbStatus != null) {
-                tbStatus.value = ddl.value;
+                tbStatus.value = ddl.text;
             }
 
         }

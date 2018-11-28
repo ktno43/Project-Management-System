@@ -42,7 +42,10 @@
             height: 30px;
         }
 
-        </style>
+        .auto-style16 {
+            height: 26px;
+        }
+    </style>
 
     <div class="container">
         <!-- Modal -->
@@ -119,7 +122,9 @@
                                            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                                        </asp:GridView>
                                    </div>
-                        <asp:SqlDataSource ID="GridViewAssociateTask" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [TaskID], [Name], [TaskType], CASE WHEN [AssociatedDeliverable] is NULL THEN 0 ELSE 1 END AS [Checked] FROM [tblTasks] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([AssociatedDeliverable] = @AssocDeliv OR [AssociatedDeliverable] IS NULL))">
+                        <asp:SqlDataSource ID="GridViewAssociateTask" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [TaskID], [Name], [TaskType], 
+                            CASE WHEN [AssociatedDeliverable] is NULL THEN 0 ELSE 1 END AS [Checked] FROM [tblTasks] WHERE (([UserID] = @UserID) AND 
+                            ([ProjectID] = @ProjectID) AND ([AssociatedDeliverable] = @AssocDeliv OR [AssociatedDeliverable] IS NULL))">
                             <SelectParameters>
                                 <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                                 <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -141,14 +146,13 @@
     <table style="width: 100%">
         <tr>
             <td colspan="1" class="auto-style11">Name*:</td>
-            <td colspan="3" class="auto-style8">
-                <asp:TextBox ID="TextBoxName" runat="server" Width="315px"></asp:TextBox></td>
-            <td colspan="1" class="auto-style9">
-                <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" CssClass="col-xs-offset-0" /></td>
+            <td colspan="4" class="auto-style8">
+                <asp:TextBox ID="TextBoxName" runat="server" Width="300px" Height="20px"></asp:TextBox>
+                <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" CssClass="col-xs-offset-0" Width="60px" /></td>
             <td colspan="2" class="auto-style11">Associated Requirement(s):</td>
 
             <td colspan="7" class="auto-style8">
-                <asp:Button ID="ButtonReqs" runat="server" Text="Associate Requirements" />
+                <asp:Button ID="ButtonReqs" runat="server" Text="Associate Requirements" Width="165px" />
             </td>
         </tr>
 
@@ -156,14 +160,14 @@
             <td colspan="14">&nbsp;</td>
         </tr>
 
-        <tr>
+        <tr style="vertical-align: top">
             <td colspan="1" class="text-right">Description*:</td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxDescription" runat="server" Height="168px" MaxLength="1000" TextMode="MultiLine" Width="351px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxDescription" runat="server" Height="150px" MaxLength="1000" TextMode="MultiLine" Width="300px"></asp:TextBox>
             </td>
             <td colspan="2" class="text-right">Associated Task(s):</td>
             <td colspan="7" class="text-left">
-                <asp:Button ID="ButtonAssociateTasks" runat="server" data-toggle="modal" data-target="#myModal2" Text="Associate Tasks" OnClientClick="return false;" OnClick="ButtonAssociateTasks_Click" />
+                <asp:Button ID="ButtonAssociateTasks" runat="server" data-toggle="modal" data-target="#myModal2" Text="Associate Tasks" OnClientClick="return false;" OnClick="ButtonAssociateTasks_Click" Width="115px" />
             </td>
         </tr>
 
@@ -214,17 +218,18 @@
         </tr>
 
         <tr>
-            <td colspan="14" class="auto-style10"></td>
+            <td colspan="14" class="auto-style10">&nbsp;</td>
         </tr>
 
         <tr>
             <td colspan="1" class="auto-style14">Start Date:</td>
-            <td colspan="6" class="auto-style15">
+            <td colspan="5" class="auto-style15">
 
-                <asp:TextBox ID="TextBoxStartDate" runat="server" Width="203px" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="TextBoxStartDate" runat="server" Width="80px" ReadOnly="True" Height="20px"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarStartDate" PopupButtonID="ImageButtonStartDate" runat="server" TargetControlID="TextBoxStartDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" />
             </td>
+            <td colspan="1">List of Deliverable(s):</td>
             <td colspan="7" class="auto-style15"></td>
         </tr>
 
@@ -232,7 +237,7 @@
             <td colspan="1">&nbsp;</td>
             <td colspan="4">&nbsp;</td>
 
-            <td colspan="2" class="text-right">List of Deliverable(s):</td>
+            <td colspan="2" class="text-right">&nbsp;</td>
             <td colspan="7">
                 <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="DelivList_Scrollbar">
                     <asp:GridView ID="GridViewListDeliverables" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridDeliverables" ForeColor="#333333" GridLines="None" AllowSorting="True" Width="830px">
@@ -271,7 +276,7 @@
         <tr>
             <td colspan="1" class="text-right">Due Date:</td>
             <td colspan="6">
-                <asp:TextBox ID="TextBoxDueDate" runat="server" Width="203px" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="TextBoxDueDate" runat="server" Width="80px" ReadOnly="True" Height="20px"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarDueDate" PopupButtonID="ImageButtonDueDate" runat="server" TargetControlID="TextBoxDueDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" />
             </td>
@@ -283,19 +288,26 @@
         </tr>
 
         <tr>
-            <td colspan="14"></td>
+            <td colspan="14">&nbsp;</td>
         </tr>
 
         <tr>
-            <td colspan="5" class="text-left">
-                <asp:Button ID="ButtonNew" runat="server" Text="New" Width="101px" OnClick="Button_New_Click" />
-            </td>
-            <td colspan="2" class="text-left">
-                <asp:Button ID="ButtonDel" runat="server" Text="Delete" Width="96px" OnClick="Button_Del_Click" Visible="False" />
-            </td>
-            <td colspan="7" class="text-left">
-                <asp:Button ID="ButtonSave" runat="server" Text="Save" Width="131px" OnClick="Button_Save_Click" Visible="False" />
-            </td>
+            <td colspan="1" class="auto-style16"></td>
+            <td colspan="1" class="auto-style16">
+                <asp:Button ID="ButtonNew" runat="server" Text="New" Width="100px" OnClick="Button_New_Click" /></td>
+            <td colspan="1" class="auto-style16"></td>
+            <td colspan="1" class="auto-style16"></td>
+            <td colspan="1" class="auto-style16"></td>
+            <td colspan="1" class="auto-style16"></td>
+            <td colspan="1" class="auto-style16"></td>
+
+            <td colspan="3" class="auto-style16">
+                <asp:Button ID="ButtonDel" runat="server" Text="Delete" Width="75px" OnClick="Button_Del_Click" Visible="False" /></td>
+            <td colspan="1" class="auto-style16">&nbsp;<asp:Button ID="ButtonSave" runat="server" Text="Save" Width="125px" OnClick="Button_Save_Click" Visible="False" /></td>
+            <td colspan="1" class="auto-style16"></td>
+            <td colspan="1" class="auto-style16"></td>
+            <td colspan="1" class="auto-style16"></td>
+
         </tr>
     </table>
 

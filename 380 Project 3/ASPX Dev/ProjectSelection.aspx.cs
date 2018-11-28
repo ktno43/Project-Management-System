@@ -52,6 +52,7 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
+            DropDownListProjSelect.Items.Clear();
             DropDownListProjSelect.DataBind();
         }
 
@@ -80,7 +81,7 @@ namespace _380_Project_3.ASPX_Dev
                     }
                 }
             }
-
+            DropDownListProjSelect.Items.Clear();
             DropDownListProjSelect.DataBind();
         }
 
@@ -99,11 +100,6 @@ namespace _380_Project_3.ASPX_Dev
         {
             if (sqlConn.State == ConnectionState.Open)
                 sqlConn.Close();
-        }
-
-        protected void DropDownListProjSelect_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

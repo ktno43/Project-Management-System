@@ -89,6 +89,7 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
+            DropDownListResourceSelect.Items.Clear();
             DropDownListResourceSelect.DataBind();
         }
 
@@ -118,6 +119,7 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
+            DropDownListResourceSelect.Items.Clear();
             DropDownListResourceSelect.DataBind();
         }
 
@@ -168,6 +170,7 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
+            DropDownListResourceSelect.Items.Clear();
             DropDownListResourceSelect.DataBind();
         }
     }

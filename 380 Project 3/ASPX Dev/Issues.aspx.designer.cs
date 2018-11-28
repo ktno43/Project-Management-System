@@ -85,13 +85,13 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.GridView GridViewAssociateDecisions;
         
         /// <summary>
-        /// GridViewAssocDecisions control.
+        /// GridViewAssocDecisionsDS control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource GridViewAssocDecisions;
+        protected global::System.Web.UI.WebControls.SqlDataSource GridViewAssocDecisionsDS;
         
         /// <summary>
         /// ButtonModalAssocDecisions control.
@@ -409,13 +409,13 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxStatusDescription;
         
         /// <summary>
-        /// TextBox8 control.
+        /// TextBoxLastUpdated control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox8;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxLastUpdated;
         
         /// <summary>
         /// TextBoxDateRaised control.

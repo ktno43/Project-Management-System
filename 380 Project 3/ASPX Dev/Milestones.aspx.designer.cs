@@ -40,6 +40,33 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonModalSearch;
         
         /// <summary>
+        /// GridViewAssociateIssues control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewAssociateIssues;
+        
+        /// <summary>
+        /// GridViewAssociateIssueDS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource GridViewAssociateIssueDS;
+        
+        /// <summary>
+        /// ButtonModalAssociateIssue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonModalAssociateIssue;
+        
+        /// <summary>
         /// DropDownListSetPredTask control.
         /// </summary>
         /// <remarks>
@@ -56,6 +83,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource DropDownListSetPredTaskDB;
+        
+        /// <summary>
+        /// DropDownListPredDependency control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListPredDependency;
         
         /// <summary>
         /// ButtonModalSetPredTask control.
@@ -83,6 +119,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource DropDownListSetSuccTaskDB;
+        
+        /// <summary>
+        /// DropDownListSuccDependency control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListSuccDependency;
         
         /// <summary>
         /// ButtonModalSetSuccTask control.
@@ -119,15 +164,6 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonPredecessorTask;
-        
-        /// <summary>
-        /// DropDownListPre control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListPre;
         
         /// <summary>
         /// TextBoxDescription control.
@@ -184,15 +220,6 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonSuccessorTask;
         
         /// <summary>
-        /// DropDownListSuc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListSuc;
-        
-        /// <summary>
         /// TextBoxExpectedEffort control.
         /// </summary>
         /// <remarks>
@@ -209,6 +236,42 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonAssociateIssues;
+        
+        /// <summary>
+        /// GridViewAssocIssueScrollID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl GridViewAssocIssueScrollID;
+        
+        /// <summary>
+        /// GridViewAssociatedIssue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewAssociatedIssue;
+        
+        /// <summary>
+        /// GridViewAssociatedIssues control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource GridViewAssociatedIssues;
+        
+        /// <summary>
+        /// GridViewAssociatedTask control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource GridViewAssociatedTask;
         
         /// <summary>
         /// LabelActualEndDate control.

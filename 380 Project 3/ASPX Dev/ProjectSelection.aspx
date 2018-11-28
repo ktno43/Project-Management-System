@@ -50,7 +50,7 @@
             <tr>
                 <td class="auto-style2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Select Project</td>
                 <td class="auto-style4">
-                    <asp:DropDownList ID="DropDownListProjSelect" runat="server" DataSourceID="ProjectSelectDB" DataTextField="ProjectName" DataValueField="ProjectID" Height="30px" Width="571px" OnSelectedIndexChanged="DropDownListProjSelect_SelectedIndexChanged">
+                    <asp:DropDownList ID="DropDownListProjSelect" runat="server" DataSourceID="ProjectSelectDB" DataTextField="ProjectName" DataValueField="ProjectID" Height="30px" Width="571px">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="ProjectSelectDB" runat="server" ConnectionString="<%$ ConnectionStrings: DevDB %>" SelectCommand="SELECT [ProjectName], [ProjectID] FROM [tblProjSelect] WHERE ([UserID] = @UserID)">
                         <SelectParameters>

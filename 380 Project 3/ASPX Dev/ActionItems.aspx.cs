@@ -148,7 +148,7 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
-
+            DropDownListActItemSelect.Items.Clear();
             DropDownListActItemSelect.DataBind();
             GridViewActionItemsList.DataBind();
 
@@ -165,14 +165,12 @@ namespace _380_Project_3.ASPX_Dev
         {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
-                SqlTransaction trans = null;
-                
                 try
                 {
                     int rowCount = -1;
 
                     Connect(conn);
-                    
+
 
                     using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblStatus where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                     {
@@ -181,10 +179,8 @@ namespace _380_Project_3.ASPX_Dev
 
                     string[] arrDefaultStatuses = { "Open", "Closed", "In Progress", "Hold", "Complete" };
 
-                    trans = conn.BeginTransaction();
-
                     if (rowCount == 0)
-                    {                    
+                    {
                         for (int i = 0; i < arrDefaultStatuses.Length; i += 1)
                         {
                             using (SqlCommand cmd = new SqlCommand("insert into tblStatus(UserID,ProjectID,StatusName,Sequence)" +
@@ -202,12 +198,10 @@ namespace _380_Project_3.ASPX_Dev
                         this.ListBoxStatus.DataBind();
                     }
 
-                    trans.Commit();
                 }
 
                 catch (Exception ex)
                 {
-                    trans.Rollback();
                     Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
                 }
 
@@ -244,6 +238,7 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
+            DropDownListActItemSelect.Items.Clear();
             DropDownListActItemSelect.DataBind();
             GridViewActionItemsList.DataBind();
         }
@@ -301,7 +296,7 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
-
+            DropDownListActItemSelect.Items.Clear();
             DropDownListActItemSelect.DataBind();
             GridViewActionItemsList.DataBind();
         }

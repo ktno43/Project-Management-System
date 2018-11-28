@@ -42,6 +42,58 @@ namespace _380_Project_3.ASPX_Dev
 
         }
 
+        protected void ButtonModalAssociateIssue_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                try
+                {
+                    Connect(conn);
+
+                    foreach (GridViewRow row in this.GridViewAssociateIssues.Rows)
+                    {
+                        CheckBox checkRow = (row.Cells[0].FindControl("CheckBoxAssociateIssue") as CheckBox);
+
+                        if (checkRow.Checked)
+                        {
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblIssues SET AssociatedTask=@AssocTask WHERE UserID=@UserID AND ProjectID=@ProjID AND IssueID=@IssueID", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@AssocTask", Session["_CurrentTaskID"]);
+                                cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                                cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                                cmd.Parameters.AddWithValue("@IssueID", row.Cells[0].Text);
+
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        else
+                        {
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblIssues SET AssociatedTask=NULL WHERE UserID=@UserID AND ProjectID=@ProjID AND IssueID=@IssueID", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                                cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                                cmd.Parameters.AddWithValue("@IssueID", row.Cells[0].Text);
+
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                }
+
+                finally
+                {
+                    Disconnect(conn);
+                }
+            }
+
+            this.GridViewAssociatedIssues.DataBind();
+        }
 
         protected void ButtonModalSearch_Click(object sender, EventArgs e)
         {
@@ -68,6 +120,19 @@ namespace _380_Project_3.ASPX_Dev
                     sdr.Close();
                 }
 
+                using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT TaskID FROM tblTasks WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                    TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                {
+                    SqlDataReader sdr = cmd2.ExecuteReader();
+
+                    while (sdr.Read())
+                    {
+                        Session["_CurrentTaskID"] = sdr[0].ToString();
+                    }
+
+                    sdr.Close();
+                }
+
                 Disconnect(conn);
             }
 
@@ -81,6 +146,8 @@ namespace _380_Project_3.ASPX_Dev
             ButtonSave.Visible = true;
             ButtonDelete.Visible = true;
             ButtonGantt.Visible = true;
+
+            GridViewAssocIssueScrollID.Visible = true;
         }
 
         protected void ButtonNew_Click(object sender, EventArgs e)
@@ -116,8 +183,10 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
+            DropDownListMilestoneSelect.Items.Clear();
             DropDownListMilestoneSelect.DataBind();
             GridViewTaskList.DataBind();
+            GridViewAssocIssueScrollID.Visible = true;
         }
 
         protected void ButtonDelete_Click(object sender, EventArgs e)
@@ -146,6 +215,7 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
+            DropDownListMilestoneSelect.Items.Clear();
             DropDownListMilestoneSelect.DataBind();
             GridViewTaskList.DataBind();
         }
@@ -200,10 +270,14 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
+            DropDownListMilestoneSelect.Items.Clear();
             DropDownListMilestoneSelect.DataBind();
             GridViewTaskList.DataBind();
         }
 
-
+        protected void ButtonAssociateIssues_Click(object sender, EventArgs e)
+        {
+            this.GridViewAssociateIssues.DataBind();
+        }
     }
 }

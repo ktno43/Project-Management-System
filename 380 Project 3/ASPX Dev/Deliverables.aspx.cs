@@ -67,6 +67,7 @@ namespace _380_Project_3
                     }
                     sdr.Close();
                 }
+                Disconnect(conn);
             }
             this.id_GridviewScroll.Visible = true;
             GridViewAssociatedTasks.DataBind();
@@ -157,6 +158,7 @@ namespace _380_Project_3
                 }
             }
 
+            DropDownListDelivSelect.Items.Clear();
             DropDownListDelivSelect.DataBind();
             GridViewListDeliverables.DataBind();
             ButtonSave.Visible = true;
@@ -189,6 +191,7 @@ namespace _380_Project_3
                 }
             }
 
+            DropDownListDelivSelect.Items.Clear();
             DropDownListDelivSelect.DataBind();
             GridViewListDeliverables.DataBind();
         }
@@ -237,6 +240,7 @@ namespace _380_Project_3
                 }
             }
 
+            DropDownListDelivSelect.Items.Clear();
             DropDownListDelivSelect.DataBind();
             GridViewListDeliverables.DataBind();
         }

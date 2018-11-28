@@ -294,6 +294,7 @@ namespace _380_Project_3.ASPX_Dev
                     Connect(conn);
                     int statusRowCount = -1;
                     int priorityRowCount = -1;
+                    int severityRowCount = -1;
 
                     using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblStatus where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                     {
@@ -303,6 +304,11 @@ namespace _380_Project_3.ASPX_Dev
                     using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblPriority where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                     {
                         priorityRowCount = (int)cmdCount.ExecuteScalar();
+                    }
+
+                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblSeverity where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    {
+                        severityRowCount = (int)cmdCount.ExecuteScalar();
                     }
 
                     string[] arrDefaultStatuses = { "Open", "Closed", "In Progress", "Hold", "Complete" };
@@ -345,20 +351,23 @@ namespace _380_Project_3.ASPX_Dev
                         this.ListBoxPriority.DataBind();
                     }
 
-                    for (int k = 0; k < arrDefaultSeverities.Length; k += 1)
+                    if (severityRowCount == 0)
                     {
-                        using (SqlCommand cmd3 = new SqlCommand("insert into tblSeverity(UserID,ProjectID,SeverityName,Sequence)" +
-                            " values(@UserID, @ProjectID, @SeverityName, @Sequence)", conn))
+                        for (int k = 0; k < arrDefaultSeverities.Length; k += 1)
                         {
-                            cmd3.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                            cmd3.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
-                            cmd3.Parameters.AddWithValue("@SeverityName", arrDefaultSeverities[k]);
-                            cmd3.Parameters.AddWithValue("@Sequence", k);
+                            using (SqlCommand cmd3 = new SqlCommand("insert into tblSeverity(UserID,ProjectID,SeverityName,Sequence)" +
+                                " values(@UserID, @ProjectID, @SeverityName, @Sequence)", conn))
+                            {
+                                cmd3.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                                cmd3.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
+                                cmd3.Parameters.AddWithValue("@SeverityName", arrDefaultSeverities[k]);
+                                cmd3.Parameters.AddWithValue("@Sequence", k);
 
-                            cmd3.ExecuteNonQuery();
+                                cmd3.ExecuteNonQuery();
+                            }
                         }
+                        this.ListBoxSeverity.DataBind();
                     }
-                    this.ListBoxSeverity.DataBind();
                 }
 
                 catch (Exception ex)
@@ -408,6 +417,7 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
+            this.DropDownListIssuesSelect.Items.Clear();
             this.DropDownListIssuesSelect.DataBind();
         }
 
@@ -465,6 +475,7 @@ namespace _380_Project_3.ASPX_Dev
                     Disconnect(conn);
                 }
             }
+            this.DropDownListIssuesSelect.Items.Clear();
             this.DropDownListIssuesSelect.DataBind();
         }
 
@@ -494,6 +505,7 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
+            this.DropDownListIssuesSelect.Items.Clear();
             this.DropDownListIssuesSelect.DataBind();
         }
 

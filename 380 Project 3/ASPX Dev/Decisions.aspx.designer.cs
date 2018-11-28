@@ -139,6 +139,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonAddImpact;
         
         /// <summary>
+        /// ButtonRemoveImpact control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonRemoveImpact;
+        
+        /// <summary>
         /// ListBoxImpact control.
         /// </summary>
         /// <remarks>
@@ -164,15 +173,6 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonImpactMoveUp;
-        
-        /// <summary>
-        /// ButtonRemoveImpact control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonRemoveImpact;
         
         /// <summary>
         /// ImageButtonImpactMoveDown control.
@@ -211,6 +211,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonAddPriority;
         
         /// <summary>
+        /// ButtonRemovePriority control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonRemovePriority;
+        
+        /// <summary>
         /// ListBoxPriority control.
         /// </summary>
         /// <remarks>
@@ -236,15 +245,6 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonPriorityMoveUp;
-        
-        /// <summary>
-        /// ButtonRemovePriority control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonRemovePriority;
         
         /// <summary>
         /// ImageButtonPriorityMoveDown control.
@@ -301,6 +301,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonAddStatus;
         
         /// <summary>
+        /// ButtonRemoveStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonRemoveStatus;
+        
+        /// <summary>
         /// ListBoxStatus control.
         /// </summary>
         /// <remarks>
@@ -326,15 +335,6 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonStatusMoveUp;
-        
-        /// <summary>
-        /// ButtonRemoveStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonRemoveStatus;
         
         /// <summary>
         /// ImageButtonStatusMoveDown control.
@@ -542,6 +542,33 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonDecisionMaker;
+        
+        /// <summary>
+        /// GridViewDecisionScroll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl GridViewDecisionScroll;
+        
+        /// <summary>
+        /// GridViewListofDecisions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewListofDecisions;
+        
+        /// <summary>
+        /// GridViewDecisionsDB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource GridViewDecisionsDB;
         
         /// <summary>
         /// ButtonNew control.
