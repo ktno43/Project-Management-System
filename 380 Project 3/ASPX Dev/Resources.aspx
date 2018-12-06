@@ -1,10 +1,14 @@
 ﻿<%@ Page Language="C#" MasterPageFile="siteMaster.Master" AutoEventWireup="true" CodeBehind="Resources.aspx.cs" Inherits="_380_Project_3.ASPX_Dev.Resources" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <asp:ScriptManager ID="toolScriptManager" runat="server">
+    </asp:ScriptManager>
     <div class="container">
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
@@ -44,78 +48,102 @@
 
     <table style="width: 100%;">
         <tr>
-            <td colspan="1">Name<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
+            <td colspan="1" class="text-right">Name<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
             <td colspan="3"><span class="auto-style3">
-                <asp:TextBox ID="TextBoxName" runat="server"></asp:TextBox>
-            </span></td>
-            <td colspan="1"><span class="auto-style3">
+                <asp:TextBox ID="TextBoxName" runat="server" TabIndex="1"></asp:TextBox>
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" />
             </span></td>
-            <td colspan="10">Availability Calendar*:</td>
-        </tr>
-        <tr>
-            <td colspan="15"></td>
-        </tr>
-        <tr>
-            <td colspan="1">Title<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
-            <td colspan="14"><span class="auto-style3">
-                <asp:TextBox ID="TextBoxTitle" runat="server"></asp:TextBox>
-            </span></td>
-        </tr>
-
-        <tr>
-            <td colspan="15"></td>
-        </tr>
-        <tr>
-            <td colspan="1">Description<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
-            <td colspan="14"><span class="auto-style3">
-                <asp:TextBox ID="TextBoxDescription" runat="server" Height="128px" MaxLength="1000" TextMode="MultiLine" Width="238px"></asp:TextBox>
-            </span></td>
-        </tr>
-        <tr>
-            <td colspan="15"></td>
-        </tr>
-
-        <tr>
-            <td colspan="1">List of Skills<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
-            <td colspan="14"><span class="auto-style3">
-                <asp:TextBox ID="TextBoxSkillsDescription" runat="server" Height="128px" MaxLength="1000" TextMode="MultiLine" Width="238px"></asp:TextBox>
-            </span></td>
-        </tr>
-        <tr>
-            <td colspan="15"></td>
-        </tr>
-        <tr>
-            <td colspan="1">Pay Rate<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
-            <td colspan="14"><span class="auto-style3">
-                <asp:TextBox ID="TextBoxPayRate" runat="server"></asp:TextBox>
-            </span></td>
-        </tr>
-
-        <tr>
-            <td colspan="15"></td>
-        </tr>
-        <tr>
-            <td colspan="1">
-                <asp:Button ID="ButtonNew" runat="server" Text="New" OnClick="ButtonNew_Click" Width="68px" />
+            <td colspan="1">&nbsp;</td>
+            <td colspan="10">Availability Calendar*:<asp:TextBox ID="TextBoxAvailability" runat="server" ReadOnly="True"></asp:TextBox>
             </td>
-            <td colspan="4">
+        </tr>
+        <tr>
+            <td colspan="15" class="auto-style10"></td>
+        </tr>
+        <tr>
+            <td colspan="1" class="text-right">Title<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
+            <td colspan="5"><span class="auto-style3">
+                <asp:TextBox ID="TextBoxTitle" runat="server" TabIndex="2"></asp:TextBox>
+            </span></td>
+            <td colspan="1">Available Start Date:
+                <asp:TextBox ID="TextBoxStartDate" runat="server" Width="80px" Height="20px" onchange="fnOnDateChange()"></asp:TextBox>
+                <cc1:CalendarExtender ID="CalendarStartDate" PopupButtonID="ImageButtonStartDate" runat="server" TargetControlID="TextBoxStartDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                <asp:ImageButton ID="ImageButtonStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="6" />
+            </td>
+            <td colspan="8">Available End Date: 
+                                <asp:TextBox ID="TextBoxEndDate" runat="server" Width="80px" Height="20px" onchange="fnOnDateChange()"></asp:TextBox>
+                <cc1:CalendarExtender ID="CalendarEndDate" PopupButtonID="ImageButtonEndDate" runat="server" TargetControlID="TextBoxEndDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                <asp:ImageButton ID="ImageButtonEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="7" />
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="15">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="1" class="text-right">Description<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
+            <td colspan="14"><span class="auto-style3">
+                <asp:TextBox ID="TextBoxDescription" runat="server" Height="128px" MaxLength="1000" TextMode="MultiLine" Width="238px" TabIndex="3"></asp:TextBox>
+            </span></td>
+        </tr>
+        <tr>
+            <td colspan="15" class="auto-style10"></td>
+        </tr>
+
+        <tr>
+            <td colspan="1" class="text-right">List of Skills<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
+            <td colspan="14"><span class="auto-style3">
+                <asp:TextBox ID="TextBoxSkillsDescription" runat="server" Height="128px" MaxLength="1000" TextMode="MultiLine" Width="238px" TabIndex="4"></asp:TextBox>
+            </span></td>
+        </tr>
+        <tr>
+            <td colspan="15">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="1" class="text-right">Pay Rate<span class="auto-style2">*</span><span class="auto-style3">:</span></td>
+            <td colspan="14"><span class="auto-style3">
+                <asp:TextBox ID="TextBoxPayRate" runat="server" TabIndex="5"></asp:TextBox>
+            </span></td>
+        </tr>
+
+        <tr>
+            <td colspan="15">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="1">
+                <asp:Button ID="ButtonNew" runat="server" Text="New" OnClick="ButtonNew_Click" Width="68px" TabIndex="8" />
+            </td>
+            <td colspan="5">
                 <asp:Button ID="ButtonDelete" runat="server" Text="Delete" OnClick="ButtonDelete_Click" Visible="False" />
             </td>
-            <td colspan="10">
-                <asp:Button ID="ButtonSave" runat="server" Text="Save" OnClick="ButtonSave_Click" Visible="False" />
+            <td colspan="2">
+                <asp:Button ID="ButtonSave" runat="server" Text="Save" OnClick="ButtonSave_Click" Visible="False" TabIndex="9" />
             </td>
+            <td colspan="6">
+                &nbsp;</td>
         </tr>
 
     </table>
+    <script type="text/javascript">
+        function fnOnDateChange() {
+            var sStartDate = document.getElementById('<%= TextBoxStartDate.ClientID %>').value;
+            var sEndDate = document.getElementById('<%= TextBoxEndDate.ClientID %>').value;
 
+
+            if (sStartDate != null && sEndDate != null && sStartDate != '' && sEndDate != '') {
+                var startDate = new Date(sStartDate);
+                var endDate = new Date(sEndDate);
+
+                var availability = startDate.toLocaleDateString('en-US') + " to " + endDate.toLocaleDateString('en-US');
+                document.getElementById('<%= TextBoxAvailability.ClientID %>').value = availability;
+            }
+        }
+
+    </script>
 </asp:Content>
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
     <style type="text/css">
-        .auto-style1 {
-            height: 23px;
-        }
-
         .auto-style2 {
             color: #FF0000;
         }
@@ -124,27 +152,8 @@
             color: #000000;
         }
 
-        .auto-style4 {
-            text-align: justify;
-            width: 324px;
-        }
-
-        .auto-style5 {
-            text-align: right;
-        }
-
-        .auto-style6 {
-            height: 23px;
-            width: 324px;
-        }
-
-        .auto-style8 {
-            text-align: right;
-            width: 324px;
-        }
-
-        .auto-style9 {
-            width: 324px;
+        .auto-style10 {
+            height: 20px;
         }
     </style>
 </asp:Content>

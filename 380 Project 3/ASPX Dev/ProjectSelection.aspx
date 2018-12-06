@@ -50,7 +50,7 @@
             <tr>
                 <td class="auto-style2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Select Project</td>
                 <td class="auto-style4">
-                    <asp:DropDownList ID="DropDownListProjSelect" runat="server" DataSourceID="ProjectSelectDB" DataTextField="ProjectName" DataValueField="ProjectID" Height="30px" Width="571px">
+                    <asp:DropDownList ID="DropDownListProjSelect" runat="server" DataSourceID="ProjectSelectDB" DataTextField="ProjectName" DataValueField="ProjectID" Height="30px" Width="571px" TabIndex="1">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="ProjectSelectDB" runat="server" ConnectionString="<%$ ConnectionStrings: DevDB %>" SelectCommand="SELECT [ProjectName], [ProjectID] FROM [tblProjSelect] WHERE ([UserID] = @UserID)">
                         <SelectParameters>
@@ -59,14 +59,14 @@
                     </asp:SqlDataSource>
                 </td>
                 <td class="text-left">
-                    <asp:Button ID="ButtonOpen" runat="server" OnClick="ButtonOpen_Click" Text="Open Project" Width="160px" />
+                    <asp:Button ID="ButtonOpen" runat="server" OnClick="ButtonOpen_Click" Text="Open Project" Width="160px" TabIndex="2" />
                 </td>
             </tr>
             <tr>
                 <td class="auto-style5"></td>
                 <td class="auto-style6"></td>
                 <td class="auto-style8">
-                    <asp:Button ID="ButtonNew" runat="server" data-toggle="modal" data-target="#myModal" Text="New Project" Width="160px" OnClientClick="return false;" />
+                    <asp:Button ID="ButtonNew" runat="server" data-toggle="modal" data-target="#myModal" Text="New Project" Width="160px" OnClientClick="return false;" TabIndex="3" />
 
                 </td>
             </tr>
@@ -76,7 +76,7 @@
                     <asp:Button ID="ButtonDelete" runat="server" OnClick="ButtonDelete_Click" Text="Delete Project" Width="160px" />
                 </td>
                 <td class="auto-style8">
-                    <asp:Button ID="ButtonGenReport" runat="server" OnClick="ButtonGenReport_Click" Text="Generate Reports" Width="160px" />
+                    <asp:Button ID="ButtonGenReport" runat="server" OnClick="ButtonGenReport_Click" Text="Generate Reports" Width="160px" TabIndex="5" />
                 </td>
             </tr>
         </table>

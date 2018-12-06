@@ -19,6 +19,7 @@
         .auto-style4 {
             text-align: left;
             width: 168px;
+            margin-left: 40px;
         }
         .auto-style5 {
             width: 168px;
@@ -38,14 +39,14 @@
         <tr>
             <td class="auto-style3">Username:</td>
             <td class="auto-style4">
-                <asp:TextBox ID="TextBoxUsername" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBoxUsername" runat="server" TabIndex="1"></asp:TextBox>
             </td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style3">Password:</td>
             <td class="auto-style5">
-                <asp:TextBox ID="TextBoxPassword" runat="server" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="TextBoxPassword" runat="server" TextMode="Password" TabIndex="2"></asp:TextBox>
             </td>
             <td>
                 <asp:Label ID="Label" runat="server" Text="[Label 1]" Visible="False"></asp:Label>
@@ -55,7 +56,7 @@
             <td class="auto-style1">
                 &nbsp;</td>
             <td class="auto-style5">
-        <asp:Button ID="ButtonLogin" runat="server" OnClick="Button_Login_Click" Text="Login" Width="69px" />
+        <asp:Button ID="ButtonLogin" runat="server" OnClick="Button_Login_Click" Text="Login" Width="69px" TabIndex="3" />
             </td>
             <td>&nbsp;</td>
         </tr>

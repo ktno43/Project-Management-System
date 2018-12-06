@@ -67,6 +67,33 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonModalAddStatus;
         
         /// <summary>
+        /// GridViewAssociateResource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewAssociateResource;
+        
+        /// <summary>
+        /// SqlDataSourceAssociateResource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceAssociateResource;
+        
+        /// <summary>
+        /// ButtonModalAssociateResource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonModalAssociateResource;
+        
+        /// <summary>
         /// TextBoxName control.
         /// </summary>
         /// <remarks>
@@ -85,22 +112,22 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonSearch;
         
         /// <summary>
-        /// DropDownListResourceSelect control.
+        /// TextBoxResourceAssigned control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListResourceSelect;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxResourceAssigned;
         
         /// <summary>
-        /// DropDownListRescDB control.
+        /// ButtonSelectResource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource DropDownListRescDB;
+        protected global::System.Web.UI.WebControls.Button ButtonSelectResource;
         
         /// <summary>
         /// TextBoxDescription control.
@@ -173,6 +200,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonStatusMoveDown;
+        
+        /// <summary>
+        /// HiddenFieldListBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldListBox;
         
         /// <summary>
         /// TextBoxDateCreated control.

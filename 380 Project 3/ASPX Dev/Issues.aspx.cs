@@ -16,7 +16,13 @@ namespace _380_Project_3.ASPX_Dev
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            TextBoxExpectedCompletionDate.Attributes.Add("readonly", "readonly");
+            TextBoxDateRaised.Attributes.Add("readonly", "readonly");
+            TextBoxDateAssigned.Attributes.Add("readonly", "readonly");
+            TextBoxActualCompletionDate.Attributes.Add("readonly", "readonly");
+            TextBoxSeverity.Attributes.Add("readonly", "readonly");
+            TextBoxPriority.Attributes.Add("readonly", "readonly");
+            TextBoxStatus.Attributes.Add("readonly", "readonly");
         }
 
         public void Connect(SqlConnection sqlConn)
@@ -87,19 +93,22 @@ namespace _380_Project_3.ASPX_Dev
 
         protected void ButtonModalAddStatus_Click(object sender, EventArgs e)
         {
-            this.ListBoxStatus.Items.Add(TextBoxAddStatus.Text);
+            ListItem li = new ListItem(TextBoxAddStatus.Text, ListBoxStatus.Items.Count.ToString());
+            this.ListBoxStatus.Items.Add(li);
             this.ListBoxStatus.SelectedIndex = ListBoxStatus.Items.Count - 1;
         }
 
         protected void ButtonModalAddSeverity_Click(object sender, EventArgs e)
         {
-            this.ListBoxSeverity.Items.Add(TextBoxAddSeverity.Text);
+            ListItem li = new ListItem(TextBoxAddSeverity.Text, ListBoxSeverity.Items.Count.ToString());
+            this.ListBoxSeverity.Items.Add(li);
             this.ListBoxSeverity.SelectedIndex = ListBoxSeverity.Items.Count - 1;
         }
 
         protected void ButtonModalAddPriority_Click(object sender, EventArgs e)
         {
-            this.ListBoxPriority.Items.Add(TextBoxAddPriority.Text);
+            ListItem li = new ListItem(TextBoxAddPriority.Text, ListBoxPriority.Items.Count.ToString());
+            this.ListBoxPriority.Items.Add(li);
             this.ListBoxPriority.SelectedIndex = ListBoxPriority.Items.Count - 1;
         }
 
@@ -153,11 +162,20 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
-            GridViewAssociatedTasks.DataBind();
+            GridViewAssocActItem.DataBind();
         }
 
         private void SaveListBoxes()
         {
+            string severityListBoxItem = this.HiddenFieldSeverity.Value;
+            string[] arrSeverityListBox = severityListBoxItem.Split('|');
+
+            string priorityListBoxItem = this.HiddenFieldPriority.Value;
+            string[] arrPriorityListBox = priorityListBoxItem.Split('|');
+
+            string statusListBoxItem = this.HiddenFieldStatus.Value;
+            string[] arrStatusListBox = statusListBoxItem.Split('|');
+
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
                 try
@@ -174,47 +192,55 @@ namespace _380_Project_3.ASPX_Dev
                                 cmd.ExecuteNonQuery();
                                 cmd2.ExecuteNonQuery();
                                 cmd3.ExecuteNonQuery();
-
-                                for (int i = 0; i < ListBoxStatus.Items.Count; i += 1)
-                                {
-                                    using (SqlCommand cmd4 = new SqlCommand("insert into tblStatus(UserID,ProjectID,StatusName,Sequence) values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
-                                    {
-                                        cmd4.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                                        cmd4.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
-                                        cmd4.Parameters.AddWithValue("@StatusName", ListBoxStatus.Items[i].ToString());
-                                        cmd4.Parameters.AddWithValue("@Sequence", i);
-                                        cmd4.ExecuteNonQuery();
-                                    }
-                                }
-
-
-                                for (int j = 0; j < ListBoxPriority.Items.Count; j += 1)
-                                {
-                                    using (SqlCommand cmd5 = new SqlCommand("insert into tblPriority(UserID,ProjectID,PriorityName,Sequence) values(@UserID, @ProjectID, @PriorityName, @Sequence)", conn))
-                                    {
-                                        cmd5.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                                        cmd5.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
-                                        cmd5.Parameters.AddWithValue("@PriorityName", ListBoxPriority.Items[j].ToString());
-                                        cmd5.Parameters.AddWithValue("@Sequence", j);
-                                        cmd5.ExecuteNonQuery();
-                                    }
-                                }
-
-                                for (int k = 0; k < ListBoxSeverity.Items.Count; k += 1)
-                                {
-                                    using (SqlCommand cmd6 = new SqlCommand("insert into tblSeverity(UserID,ProjectID,SeverityName,Sequence) values(@UserID, @ProjectID, @SeverityName, @Sequence)", conn))
-                                    {
-                                        cmd6.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                                        cmd6.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
-                                        cmd6.Parameters.AddWithValue("@SeverityName", ListBoxSeverity.Items[k].ToString());
-                                        cmd6.Parameters.AddWithValue("@Sequence", k);
-                                        cmd6.ExecuteNonQuery();
-                                    }
-                                }
                             }
                         }
                     }
+                    int count = 0;
+
+                    foreach (string statusListItem in arrStatusListBox)
+                    {
+                        using (SqlCommand cmd4 = new SqlCommand("insert into tblStatus(UserID,ProjectID,StatusName,Sequence) values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
+                        {
+                            cmd4.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                            cmd4.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
+                            cmd4.Parameters.AddWithValue("@StatusName", statusListItem);
+                            cmd4.Parameters.AddWithValue("@Sequence", count);
+                            cmd4.ExecuteNonQuery();
+                        }
+                        count++;
+                    }
+
+
+                    count = 0;
+                    foreach (string priorityListItem in arrPriorityListBox)
+                    {
+                        using (SqlCommand cmd5 = new SqlCommand("insert into tblPriority(UserID,ProjectID,PriorityName,Sequence) values(@UserID, @ProjectID, @PriorityName, @Sequence)", conn))
+                        {
+                            cmd5.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                            cmd5.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
+                            cmd5.Parameters.AddWithValue("@PriorityName", priorityListItem);
+                            cmd5.Parameters.AddWithValue("@Sequence", count);
+                            cmd5.ExecuteNonQuery();
+                        }
+                        count++;
+                    }
+
+
+                    count = 0;
+                    foreach (string severityListItem in arrSeverityListBox)
+                    {
+                        using (SqlCommand cmd6 = new SqlCommand("insert into tblSeverity(UserID,ProjectID,SeverityName,Sequence) values(@UserID, @ProjectID, @SeverityName, @Sequence)", conn))
+                        {
+                            cmd6.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                            cmd6.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
+                            cmd6.Parameters.AddWithValue("@SeverityName", severityListItem);
+                            cmd6.Parameters.AddWithValue("@Sequence", count);
+                            cmd6.ExecuteNonQuery();
+                        }
+                        count++;
+                    }
                 }
+
 
                 catch (Exception ex)
                 {
@@ -225,17 +251,27 @@ namespace _380_Project_3.ASPX_Dev
                 {
                     Disconnect(conn);
                 }
-
             }
+
+            this.ListBoxPriority.DataBind();
+            this.ListBoxStatus.DataBind();
+            this.ListBoxSeverity.DataBind();
         }
 
+        private string SafeGetString(SqlDataReader reader, int colIndex)
+        {
+            if (!reader.IsDBNull(colIndex))
+                return reader[colIndex].ToString();
+            return string.Empty;
+        }
 
         protected void ButtonModalSearch_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
                 Connect(conn);
-                using (SqlCommand cmd = new SqlCommand(String.Format("SELECT Name, Description, ExpectedCompletionDate, DateRaised, DateAssigned " +
+                using (SqlCommand cmd = new SqlCommand(String.Format("SELECT Name, Description, ExpectedCompletionDate, DateRaised, DateAssigned," +
+                    "Severity, Priority, ActualCompletionDate, Status, Status Description " +
                     "FROM tblIssues WHERE IssueID={0} AND UserID={1} AND ProjectID={2}",
                     this.DropDownListIssuesSelect.SelectedValue, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                 {
@@ -243,12 +279,41 @@ namespace _380_Project_3.ASPX_Dev
 
                     while (sdr.Read())
                     {
-                        TextBoxName.Text = sdr[0].ToString();
-                        TextBoxDescription.Text = sdr[1].ToString();
-                        TextBoxExpectedCompletionDate.Text = sdr[2].ToString();
-                        TextBoxDateRaised.Text = sdr[3].ToString();
-                        TextBoxDateAssigned.Text = sdr[4].ToString();
+                        TextBoxName.Text = SafeGetString(sdr, 0);
+                        TextBoxDescription.Text = SafeGetString(sdr, 1);
+                        TextBoxExpectedCompletionDate.Text = SafeGetString(sdr, 2);
+                        TextBoxDateRaised.Text = SafeGetString(sdr, 3);
+                        TextBoxDateAssigned.Text = SafeGetString(sdr, 4);
+
+                        if (String.IsNullOrEmpty(SafeGetString(sdr, 5)))
+                            TextBoxSeverity.Text = "";
+                        else
+                        {
+                            ListBoxSeverity.SelectedIndex = Int32.Parse(SafeGetString(sdr, 5));
+                            TextBoxSeverity.Text = ListBoxSeverity.SelectedItem.ToString();
+                        }
+
+                        if (String.IsNullOrEmpty(SafeGetString(sdr, 6)))
+                            TextBoxPriority.Text = "";
+                        else
+                        {
+                            ListBoxPriority.SelectedIndex = Int32.Parse(SafeGetString(sdr, 6));
+                            TextBoxPriority.Text = ListBoxPriority.SelectedItem.ToString();
+                        }
+
+                        TextBoxActualCompletionDate.Text = SafeGetString(sdr, 7);
+
+                        if (String.IsNullOrEmpty(SafeGetString(sdr, 8)))
+                            TextBoxStatus.Text = "";
+                        else
+                        {
+                            ListBoxStatus.SelectedIndex = Int32.Parse(SafeGetString(sdr, 8));
+                            TextBoxStatus.Text = ListBoxStatus.SelectedItem.ToString();
+                        }
+
+                        TextBoxStatusDescription.Text = SafeGetString(sdr, 9);
                     }
+
                     sdr.Close();
                 }
 
@@ -384,53 +449,56 @@ namespace _380_Project_3.ASPX_Dev
 
         protected void ButtonNew_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            if (TextBoxName.Text.Length == 0 || TextBoxDescription.Text.Length == 0)
             {
-                try
-                {
-                    Connect(conn);
-                    using (SqlCommand cmd = new SqlCommand("insert into tblIssues(UserID,ProjectID,Name,Description,DateRaised,DateAssigned,ExpectedCompletionDate) " +
-                        "values(@UserID, @ProjectID, @Name, @Description,@DateRaised,@DateAssigned,@ExpectedCompletionDate)", conn))
-                    {
-
-                        cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                        cmd.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
-                        cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
-                        cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
-                        cmd.Parameters.AddWithValue("@DateRaised", TextBoxDateRaised.Text);
-                        cmd.Parameters.AddWithValue("@DateAssigned", TextBoxDateAssigned.Text);
-                        cmd.Parameters.AddWithValue("@ExpectedCompletionDate", TextBoxExpectedCompletionDate.Text);
-
-                        LoadDefaultStatusListBox();
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                catch (Exception ex)
-                {
-                    Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
-                }
-
-                finally
-                {
-                    Disconnect(conn);
-                }
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please enter a name and description for the Issue.');", true);
             }
 
-            this.DropDownListIssuesSelect.Items.Clear();
-            this.DropDownListIssuesSelect.DataBind();
-        }
-
-
-
-        protected void ButtonSave_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            else if (TextBoxExpectedCompletionDate.Text.Length == 0 || TextBoxDateRaised.Text.Length == 0 || TextBoxDateAssigned.Text.Length == 0)
             {
-                try
-                {
-                    Connect(conn);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please select a date for the Expected COmpletion Date, Date Raised, and Date Assigned fields.');", true);
+            }
 
+            else
+            {
+                using (SqlConnection conn = new SqlConnection(g_sqlConn))
+                {
+                    try
+                    {
+                        Connect(conn);
+                        using (SqlCommand cmd = new SqlCommand("insert into tblIssues(UserID,ProjectID,Name,Description,DateRaised,DateAssigned,ExpectedCompletionDate) " +
+                            "values(@UserID, @ProjectID, @Name, @Description,@DateRaised,@DateAssigned,@ExpectedCompletionDate)", conn))
+                        {
+
+                            cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                            cmd.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
+                            cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
+                            cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
+                            cmd.Parameters.AddWithValue("@DateRaised", TextBoxDateRaised.Text);
+                            cmd.Parameters.AddWithValue("@DateAssigned", TextBoxDateAssigned.Text);
+                            cmd.Parameters.AddWithValue("@ExpectedCompletionDate", TextBoxExpectedCompletionDate.Text);
+
+
+                            LoadDefaultStatusListBox();
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    catch (Exception ex)
+                    {
+                        Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                    }
+
+                    finally
+                    {
+                        Disconnect(conn);
+                    }
+
+                    Connect(conn);
                     using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT IssueID FROM tblIssues WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
                         TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                     {
@@ -443,54 +511,123 @@ namespace _380_Project_3.ASPX_Dev
                         }
                         sdr.Close();
                     }
-
-                    using (SqlCommand cmd = new SqlCommand("UPDATE tblIssues SET Name=@Name, Description=@Description, " +
-                        "DateRaised=@DateRaised, DateAssigned=@DateAssigned, ExpectedCompletionDate=@ExpCompl," +
-                        "ActualCompletionDate=@ActCompl " +
-                        "WHERE UserID=@UserID AND ProjectID=@ProjID AND IssueID=@IssueID", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                        cmd.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
-                        cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
-                        cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
-                        cmd.Parameters.AddWithValue("@DateRaised", TextBoxDateRaised.Text);
-                        cmd.Parameters.AddWithValue("@DateAssigned", TextBoxDateAssigned.Text);
-                        cmd.Parameters.AddWithValue("@ExpCompl", TextBoxExpectedCompletionDate.Text);
-                        cmd.Parameters.AddWithValue("@ActCompl", TextBoxActualCompletionDate.Text);
-                        cmd.Parameters.AddWithValue("@IssueID", Session["_CurrentIssueID"]);
-
-
-                        SaveListBoxes();
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                catch (Exception ex)
-                {
-                    Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
-                }
-
-                finally
-                {
                     Disconnect(conn);
                 }
+
+                this.DropDownListIssuesSelect.Items.Clear();
+                this.DropDownListIssuesSelect.DataBind();
+
+                this.LabelActualCompletionDate.Visible = true;
+                this.TextBoxActualCompletionDate.Visible = true;
+                this.ImageButtonActCompletionDate.Visible = true;
             }
-            this.DropDownListIssuesSelect.Items.Clear();
-            this.DropDownListIssuesSelect.DataBind();
         }
 
-        protected void ButtonDelete_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(g_sqlConn))
-            {
-                Connect(conn);
 
-                using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblIssues where UserID={0} and ProjectID={1} AND Name='{2}'",
-                    Session["_CurrentUserID"], Session["_CurrentProjID"], TextBoxName.Text), conn))
+
+        protected void ButtonSave_Click(object sender, EventArgs e)
+        {
+            if (TextBoxName.Text.Length == 0 || TextBoxDescription.Text.Length == 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please enter a name and description for the Issue.');", true);
+            }
+
+            else if (TextBoxExpectedCompletionDate.Text.Length == 0 || TextBoxDateRaised.Text.Length == 0 || TextBoxDateAssigned.Text.Length == 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please select a date for the Expected COmpletion Date, Date Raised, and Date Assigned fields.');", true);
+            }
+
+            else if (TextBoxSeverity.Text.Length == 0 || TextBoxPriority.Text.Length == 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please select a severity and priority.');", true);
+            }
+
+            else if (TextBoxStatus.Text.Length == 0 || TextBoxStatusDescription.Text.Length == 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please select a status and enter a status description.');", true);
+            }
+
+            else
+            {
+                using (SqlConnection conn = new SqlConnection(g_sqlConn))
                 {
                     try
                     {
-                        cmd.ExecuteNonQuery();
+                        Connect(conn);
+
+                        using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT IssueID FROM tblIssues WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                            TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                        {
+                            SqlDataReader sdr = cmd2.ExecuteReader();
+
+                            while (sdr.Read())
+                            {
+                                Session["_CurrentIssueID"] = sdr[0].ToString();
+
+                            }
+                            sdr.Close();
+                        }
+
+                        using (SqlCommand cmd = new SqlCommand("UPDATE tblIssues SET Name=@Name, Description=@Description, " +
+                            "DateRaised=@DateRaised, DateAssigned=@DateAssigned, ExpectedCompletionDate=@ExpCompl," +
+                            "ActualCompletionDate=@ActCompl, Priority=@Priority, Severity=@Severity, Status=@Status, StatusDescription=@StatusDescr " +
+                            "WHERE UserID=@UserID AND ProjectID=@ProjID AND IssueID=@IssueID", conn))
+                        {
+
+                            cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                            cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                            cmd.Parameters.AddWithValue("@IssueID", Session["_CurrentIssueID"]);
+
+                            cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
+                            cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
+                            cmd.Parameters.AddWithValue("@DateRaised", TextBoxDateRaised.Text);
+                            cmd.Parameters.AddWithValue("@DateAssigned", TextBoxDateAssigned.Text);
+                            cmd.Parameters.AddWithValue("@ExpCompl", TextBoxExpectedCompletionDate.Text);
+                            cmd.Parameters.AddWithValue("@ActCompl", string.IsNullOrEmpty(TextBoxActualCompletionDate.Text) ? (object)DBNull.Value : TextBoxActualCompletionDate.Text);
+
+                            string prevSelectedStatus = ListBoxStatus.SelectedItem.ToString();
+                            string prevSelectedSeverity = ListBoxSeverity.SelectedItem.ToString();
+                            string prevSelectedPriority = ListBoxPriority.SelectedItem.ToString();
+
+                            SaveListBoxes();
+
+                            int updatedStatusIndex = 0;
+                            for (int i = 0; i < ListBoxStatus.Items.Count; i++)
+                            {
+                                if (ListBoxStatus.Items[i].ToString().Equals(prevSelectedStatus))
+                                    updatedStatusIndex = i;
+                            }
+
+                            int updatedSeverityIndex = 0;
+                            for (int i = 0; i < ListBoxSeverity.Items.Count; i++)
+                            {
+                                if (ListBoxSeverity.Items[i].ToString().Equals(prevSelectedSeverity))
+                                    updatedSeverityIndex = i;
+                            }
+
+                            int updatedPriorityIndex = 0;
+                            for (int i = 0; i < ListBoxPriority.Items.Count; i++)
+                            {
+                                if (ListBoxPriority.Items[i].ToString().Equals(prevSelectedPriority))
+                                    updatedPriorityIndex = i;
+                            }
+
+                            cmd.Parameters.AddWithValue("@Priority", updatedPriorityIndex);
+                            cmd.Parameters.AddWithValue("@Severity", updatedSeverityIndex);
+                            cmd.Parameters.AddWithValue("@Status", updatedStatusIndex);
+                            cmd.Parameters.AddWithValue("@StatusDescr", TextBoxStatusDescription.Text);
+
+
+                            cmd.ExecuteNonQuery();
+                        }
                     }
 
                     catch (Exception ex)
@@ -503,10 +640,50 @@ namespace _380_Project_3.ASPX_Dev
                         Disconnect(conn);
                     }
                 }
+
+                this.DropDownListIssuesSelect.Items.Clear();
+                this.DropDownListIssuesSelect.DataBind();
+            }
+        }
+
+        protected void ButtonDelete_Click(object sender, EventArgs e)
+        {
+            if (TextBoxName.Text.Length == 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please enter a name of the Issue to delete.');", true);
             }
 
-            this.DropDownListIssuesSelect.Items.Clear();
-            this.DropDownListIssuesSelect.DataBind();
+            else
+            {
+                using (SqlConnection conn = new SqlConnection(g_sqlConn))
+                {
+                    Connect(conn);
+
+                    using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblIssues where UserID={0} and ProjectID={1} AND Name='{2}'",
+                        Session["_CurrentUserID"], Session["_CurrentProjID"], TextBoxName.Text), conn))
+                    {
+                        try
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                        }
+
+                        finally
+                        {
+                            Disconnect(conn);
+                        }
+                    }
+                }
+
+                this.DropDownListIssuesSelect.Items.Clear();
+                this.DropDownListIssuesSelect.DataBind();
+            }
         }
 
         protected void ButtonRemoveSeverity_Click(object sender, EventArgs e)
@@ -518,7 +695,6 @@ namespace _380_Project_3.ASPX_Dev
         protected void ButtonRemovePriority_Click(object sender, EventArgs e)
         {
             this.ListBoxPriority.Items.Remove(this.ListBoxPriority.SelectedItem.ToString());
-
         }
 
         protected void ButtonRemoveStatus_Click(object sender, EventArgs e)
@@ -527,5 +703,9 @@ namespace _380_Project_3.ASPX_Dev
 
         }
 
+        protected void TextBoxLastUpdated_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

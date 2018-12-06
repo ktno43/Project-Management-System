@@ -87,7 +87,6 @@
     <Content Include="ASPX Dev\Resources.aspx" />
     <Content Include="ASPX Dev\Risks.aspx" />
     <Content Include="ASPX Dev\SummaryTasks.aspx" />
-    <Content Include="ASPX Dev\Swap.aspx" />
     <Content Include="ASPX Dev\Tasks.aspx" />
     <Content Include="ASPX Dev\Testing.aspx" />
     <Content Include="Global.asax" />
@@ -216,13 +215,6 @@
     </Compile>
     <Compile Include="ASPX Dev\SummaryTasks.aspx.designer.cs">
       <DependentUpon>SummaryTasks.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ASPX Dev\Swap.aspx.cs">
-      <DependentUpon>Swap.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ASPX Dev\Swap.aspx.designer.cs">
-      <DependentUpon>Swap.aspx</DependentUpon>
     </Compile>
     <Compile Include="ASPX Dev\Tasks.aspx.cs">
       <DependentUpon>Tasks.aspx</DependentUpon>

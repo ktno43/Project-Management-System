@@ -184,6 +184,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxSeverity;
         
         /// <summary>
+        /// HiddenFieldSeverity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldSeverity;
+        
+        /// <summary>
         /// ButtonAddSeverity control.
         /// </summary>
         /// <remarks>
@@ -256,6 +265,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxPriority;
         
         /// <summary>
+        /// HiddenFieldPriority control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldPriority;
+        
+        /// <summary>
         /// ButtonAddPriority control.
         /// </summary>
         /// <remarks>
@@ -317,6 +335,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxStatus;
+        
+        /// <summary>
+        /// HiddenFieldStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldStatus;
         
         /// <summary>
         /// ButtonAddStatus control.

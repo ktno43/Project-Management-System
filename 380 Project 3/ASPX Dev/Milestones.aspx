@@ -209,11 +209,12 @@
         <tr>
             <td colspan="1" class="text-right">Name*:</td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxName" runat="server" Width="300px" Height="20px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxName" runat="server" Width="300px" Height="20px" TabIndex="1"></asp:TextBox>
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" Width="60px" />
             </td>
 
-            <td colspan="1">Set Predecessor Task:<asp:Button ID="ButtonPredecessorTask" runat="server" Text="Select Predecessor Task" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" />
+            <td colspan="1">Set Predecessor Task:<asp:TextBox ID="TextBoxPredTask" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:Button ID="ButtonPredecessorTask" runat="server" Text="Select Predecessor Task" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" TabIndex="9" />
             </td>
             <td colspan="7">&nbsp;</td>
         </tr>
@@ -221,7 +222,8 @@
 
         <tr>
             <td colspan="5">&nbsp;</td>
-            <td colspan="8">&nbsp;</td>
+            <td colspan="8">Predecessor Dependency:<asp:TextBox ID="TextBoxPredDepen" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
         </tr>
 
         <tr>
@@ -231,7 +233,7 @@
         <tr style="vertical-align: top">
             <td colspan="1" class="text-right">Description*:</td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxDescription" runat="server" Height="150px" MaxLength="1000" TextMode="MultiLine" Width="300px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxDescription" runat="server" Height="150px" MaxLength="1000" TextMode="MultiLine" Width="300px" TabIndex="3"></asp:TextBox>
             </td>
             <td colspan="8">&nbsp;</td>
         </tr>
@@ -247,11 +249,12 @@
             <td colspan="4">
                 <asp:ScriptManager ID="toolScriptManager" runat="server">
                 </asp:ScriptManager>
-                <asp:TextBox ID="TextBoxExpectedDueDate" runat="server" Width="80px" ReadOnly="True" Height="20px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxExpectedDueDate" runat="server" Width="80px" Height="20px"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarExpDueDate" PopupButtonID="ImageButtonExpectedDueDate" runat="server" TargetControlID="TextBoxExpectedDueDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonExpectedDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" />
+                <asp:ImageButton ID="ImageButtonExpectedDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="4" />
             </td>
-            <td colspan="1">Set Successor Task:<asp:Button ID="ButtonSuccessorTask" runat="server" Text="Select Successor Task" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" />
+            <td colspan="1">Set Successor Task:<asp:TextBox ID="TextBoxSuccTask" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:Button ID="ButtonSuccessorTask" runat="server" Text="Select Successor Task" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" TabIndex="10" />
             </td>
             <td colspan="7" class="text-left">&nbsp;</td>
         </tr>
@@ -259,7 +262,8 @@
             <td colspan="1" class="auto-style1"></td>
             <td colspan="4" class="auto-style1"></td>
 
-            <td colspan="8" class="auto-style1">&nbsp;</td>
+            <td colspan="8" class="auto-style1">Successor Dependency:<asp:TextBox ID="TextBoxSuccDepen" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
         </tr>
 
         <tr>
@@ -269,9 +273,9 @@
         <tr>
             <td colspan="1" class="text-right">Expected Effort:</td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxExpectedEffort" runat="server" Height="20px" Width="80px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxExpectedEffort" runat="server" Height="20px" Width="80px" TabIndex="5"></asp:TextBox>
             </td>
-            <td colspan="1">Associate Issues:<asp:Button ID="ButtonAssociateIssues" runat="server" Text="Associate Issues" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" OnClick="ButtonAssociateIssues_Click"/>
+            <td colspan="1">Associate Issues:<asp:Button ID="ButtonAssociateIssues" runat="server" Text="Associate Issues" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" OnClick="ButtonAssociateIssues_Click" TabIndex="11"/>
             </td>
             <td colspan="7" class="text-left">&nbsp;</td>
         </tr>
@@ -285,15 +289,15 @@
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                             <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-                            <asp:BoundField DataField="Priority" HeaderText="Priority" SortExpression="Priority" />
-                            <asp:BoundField DataField="Severity" HeaderText="Severity" SortExpression="Severity" />
-                            <asp:BoundField DataField="DateRaised" HeaderText="DateRaised" SortExpression="DateRaised" />
-                            <asp:BoundField DataField="DateAssigned" HeaderText="DateAssigned" SortExpression="DateAssigned" />
-                            <asp:BoundField DataField="ExpectedCompletionDate" HeaderText="ExpectedCompletionDate" SortExpression="ExpectedCompletionDate" />
-                            <asp:BoundField DataField="ActualCompletionDate" HeaderText="ActualCompletionDate" SortExpression="ActualCompletionDate" />
-                            <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
-                            <asp:BoundField DataField="StatusDescription" HeaderText="StatusDescription" SortExpression="StatusDescription" />
-                            <asp:BoundField DataField="UpdateDate" HeaderText="UpdateDate" SortExpression="UpdateDate" />
+                            <asp:BoundField DataField="Pri" HeaderText="Priority" SortExpression="Priority" />
+                            <asp:BoundField DataField="Sev" HeaderText="Severity" SortExpression="Severity" />
+                            <asp:BoundField DataField="DateRaised" HeaderText="Date Raised" SortExpression="DateRaised" />
+                            <asp:BoundField DataField="DateAssigned" HeaderText="Date Assigned" SortExpression="DateAssigned" />
+                            <asp:BoundField DataField="ExpectedCompletionDate" HeaderText="Expected Completion Date" SortExpression="ExpectedCompletionDate" />
+                            <asp:BoundField DataField="ActualCompletionDate" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
+                            <asp:BoundField DataField="Stat" HeaderText="Status" SortExpression="Status" />
+                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription" />
+                            <asp:BoundField DataField="UpdateDate" HeaderText="Update Date" SortExpression="UpdateDate" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -307,7 +311,14 @@
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
                 </div>
-                <asp:SqlDataSource ID="GridViewAssociatedIssues" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [Priority], [Severity], [DateRaised], [DateAssigned], [ExpectedCompletionDate], [ActualCompletionDate], [Status], [StatusDescription], [UpdateDate] FROM [tblIssues] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([AssociatedTask] = @AssociatedTask))">
+                <asp:SqlDataSource ID="GridViewAssociatedIssues" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand=
+                    "SELECT I.[Name], I.[Description], I.[DateRaised], I.[DateAssigned], I.[ExpectedCompletionDate], I.[ActualCompletionDate], 
+                    I.[StatusDescription], I.[UpdateDate], P.[PriorityName] Pri, V.[SeverityName] Sev, S.[StatusName] Stat 
+                    FROM [tblIssues] I
+                    LEFT JOIN [tblPriority] P ON P.[Sequence] = I.[Priority]
+                    LEFT JOIN [tblSeverity] V ON V.[Sequence] = I.[Severity]
+                    LEFT JOIN [tblStatus] S ON S.[Sequence] = I.[Status]
+                    WHERE ((I.[AssociatedTask] = @AssociatedTask) AND (I.[UserID] = @UserID) AND (I.[ProjectID] = @ProjectID))">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                         <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -337,16 +348,20 @@
                 <asp:Label ID="LabelActualEndDate" runat="server" Text="Actual End Date:" Visible="False"></asp:Label>
             </td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="80px" Visible="False" ReadOnly="True" Height="20px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="80px" Visible="False" Height="20px"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarActEndDate" PopupButtonID="ImageButtonActualEndDate" runat="server" TargetControlID="TextBoxActualEndDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonActualEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" />
+                <asp:ImageButton ID="ImageButtonActualEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="6" />
             </td>
             <td colspan="8">List of Task(s):</td>
         </tr>
 
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">&nbsp;</td>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelEffortCompleted" runat="server" Text="Effort Completed:" Visible="False"></asp:Label>
+            </td>
+            <td colspan="4">
+                <asp:TextBox ID="TextBoxEffortCompleted" runat="server" Visible="False" Height="20px" Width="80px" TabIndex="10"></asp:TextBox>
+                </td>
             <td colspan="8">
                 <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="id_GridviewScroll">
                     <asp:GridView ID="GridViewTaskList" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataSourceID="GridTasks">
@@ -354,20 +369,20 @@
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                             <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-                            <asp:BoundField DataField="TaskType" HeaderText="TaskType" SortExpression="TaskType" />
-                            <asp:BoundField DataField="ExpectedStartDate" HeaderText="ExpectedStartDate" SortExpression="ExpectedStartDate" />
-                            <asp:BoundField DataField="ExpectedDuration" HeaderText="ExpectedDuration" SortExpression="ExpectedDuration" />
-                            <asp:BoundField DataField="ExpectedEffort" HeaderText="ExpectedEffort" SortExpression="ExpectedEffort" />
-                            <asp:BoundField DataField="ActualStartDate" HeaderText="ActualStartDate" SortExpression="ActualStartDate" />
-                            <asp:BoundField DataField="ActualEndDate" HeaderText="ActualEndDate" SortExpression="ActualEndDate" />
-                            <asp:BoundField DataField="ActualDuration" HeaderText="ActualDuration" SortExpression="ActualDuration" />
-                            <asp:BoundField DataField="EffortCompleted" HeaderText="EffortCompleted" SortExpression="EffortCompleted" />
-                            <asp:BoundField DataField="ActualEffort" HeaderText="ActualEffort" SortExpression="ActualEffort" />
-                            <asp:BoundField DataField="ExpectedEndDate" HeaderText="ExpectedEndDate" SortExpression="ExpectedEndDate" />
-                            <asp:BoundField DataField="PredecessorTask" HeaderText="PredecessorTask" SortExpression="PredecessorTask" />
-                            <asp:BoundField DataField="PredecessorDependency" HeaderText="PredecessorDependency" SortExpression="PredecessorDependency" />
-                            <asp:BoundField DataField="SuccessorTask" HeaderText="SuccessorTask" SortExpression="SuccessorTask" />
-                            <asp:BoundField DataField="SuccessorDependency" HeaderText="SuccessorDependency" SortExpression="SuccessorDependency" />
+                            <asp:BoundField DataField="TaskType" HeaderText="Task Type" SortExpression="TaskType" />
+                            <asp:BoundField DataField="ExpectedStartDate" HeaderText="Expected Start Date" SortExpression="ExpectedStartDate" />
+                            <asp:BoundField DataField="ExpectedDuration" HeaderText="Expected Duration" SortExpression="ExpectedDuration" />
+                            <asp:BoundField DataField="ExpectedEffort" HeaderText="Expected Effort" SortExpression="ExpectedEffort" />
+                            <asp:BoundField DataField="ActualStartDate" HeaderText="Actual Start Date" SortExpression="ActualStartDate" />
+                            <asp:BoundField DataField="ActualEndDate" HeaderText="Actual End Date" SortExpression="ActualEndDate" />
+                            <asp:BoundField DataField="ActualDuration" HeaderText="Actual Duration" SortExpression="ActualDuration" />
+                            <asp:BoundField DataField="EffortCompleted" HeaderText="Effort Completed" SortExpression="EffortCompleted" />
+                            <asp:BoundField DataField="ActualEffort" HeaderText="Actual Effort" SortExpression="ActualEffort" />
+                            <asp:BoundField DataField="ExpectedEndDate" HeaderText="Expected End Date" SortExpression="ExpectedEndDate" />
+                            <asp:BoundField DataField="PredName" HeaderText="Predecessor Task" SortExpression="PredecessorTask" />
+                            <asp:BoundField DataField="PredecessorDependency" HeaderText="Predecessor Dependency" SortExpression="PredecessorDependency" />
+                            <asp:BoundField DataField="SuccName" HeaderText="Successor Task" SortExpression="SuccessorTask" />
+                            <asp:BoundField DataField="SuccessorDependency" HeaderText="Successor Dependency" SortExpression="SuccessorDependency" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -381,7 +396,14 @@
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
                 </div>
-                <asp:SqlDataSource ID="GridTasks" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [TaskType], [ExpectedStartDate], [ExpectedDuration], [ExpectedEffort], [ActualStartDate], [ActualEndDate], [ActualDuration], [EffortCompleted], [ActualEffort], [ExpectedEndDate], [PredecessorTask], [PredecessorDependency], [SuccessorTask], [SuccessorDependency] FROM [tblTasks] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID))">
+                <asp:SqlDataSource ID="GridTasks" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand=
+                    "SELECT T.[Name], T.[Description], T.[TaskType], T.[ExpectedStartDate], T.[ExpectedDuration], T.[ExpectedEffort], 
+                    T.[ActualStartDate], T.[ActualEndDate], T.[ActualDuration], T.[EffortCompleted], T.[ActualEffort], T.[ExpectedEndDate], 
+                    T.[PredecessorDependency], T.[SuccessorDependency], S.[Name] SuccName, P.[Name] PredName 
+                    FROM [tblTasks] T
+                    LEFT JOIN [tblTasks] S ON S.TaskID = T.SuccessorTask
+                    LEFT JOIN [tblTasks] P ON P.TaskID = T.PredecessorTask
+                    WHERE ((T.[UserID] = @UserID) AND (T.[ProjectID] = @ProjectID))">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                         <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -393,7 +415,7 @@
         <tr>
             <td colspan="5"></td>
             <td colspan="8">
-                <asp:Button ID="ButtonGroupTasks" runat="server" Text="Group Tasks" Width="100px" />
+                <asp:Button ID="ButtonGroupTasks" runat="server" Text="Group Tasks" Width="100px" TabIndex="12" />
             </td>
 
 
@@ -403,7 +425,7 @@
                 <asp:Label ID="LabelActualEffort" runat="server" Text="Actual Effort:" Visible="False"></asp:Label>
             </td>
             <td colspan="17">
-                <asp:TextBox ID="TextBoxActualEffort" runat="server" Visible="False" Height="20px" Width="80px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxActualEffort" runat="server" Visible="False" Height="20px" Width="80px" TabIndex="7"></asp:TextBox>
             </td>
         </tr>
 
@@ -415,18 +437,18 @@
         <tr>
             <td colspan="1"></td>
             <td colspan="1">
-                <asp:Button ID="ButtonNew" runat="server" Text="New" Width="100px" OnClick="ButtonNew_Click" />
+                <asp:Button ID="ButtonNew" runat="server" Text="New" Width="100px" OnClick="ButtonNew_Click" TabIndex="8" />
             </td>
             <td colspan="1">&nbsp;</td>
             <td colspan="1">
-                <asp:Button ID="ButtonGantt" runat="server" Text="Gantt Chart" Visible="False" Width="85px" />
+                <asp:Button ID="ButtonGantt" runat="server" Text="Gantt Chart" Visible="False" Width="85px" TabIndex="13" />
             </td>
             <td colspan="1">&nbsp;</td>
             <td colspan="1">
                 <asp:Button ID="ButtonDelete" runat="server" Text="Delete" Width="75px" OnClick="ButtonDelete_Click" Visible="False" />
 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="ButtonSave" runat="server" Text="Save" Width="125px" OnClick="ButtonSave_Click" Visible="False" />
+                <asp:Button ID="ButtonSave" runat="server" Text="Save" Width="125px" OnClick="ButtonSave_Click" Visible="False" TabIndex="14" />
 
             </td>
             <td colspan="1">&nbsp;</td>

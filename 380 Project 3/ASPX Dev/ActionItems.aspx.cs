@@ -17,6 +17,11 @@ namespace _380_Project_3.ASPX_Dev
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            TextBoxDateAssigned.Attributes.Add("readonly", "readonly");
+            TextBoxDateCreated.Attributes.Add("readonly", "readonly");
+            TextBoxExpectedCompletionDate.Attributes.Add("readonly", "readonly");
+            TextBoxActualCompletionDate.Attributes.Add("readonly", "readonly");
+            TextBoxStatus.Attributes.Add("readonly", "readonly");
         }
 
         public void Connect(SqlConnection sqlConn)
@@ -31,41 +36,7 @@ namespace _380_Project_3.ASPX_Dev
                 sqlConn.Close();
         }
 
-        protected void ButtonModalSearch_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(g_sqlConn))
-            {
-                Connect(conn);
-                using (SqlCommand cmd = new SqlCommand(String.Format("SELECT Name, Description, DateCreated, DateAssigned," +
-                    "ExpectedCompletionDate, StatusDescription FROM tblActionItems WHERE ActionItemID={0} AND UserID={1} AND ProjectID={2}",
-                    DropDownListActItemSelect.SelectedValue, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
-                {
-                    SqlDataReader sdr = cmd.ExecuteReader();
-
-                    while (sdr.Read())
-                    {
-                        TextBoxName.Text = sdr[0].ToString();
-                        TextBoxDescription.Text = sdr[1].ToString();
-                        TextBoxDateCreated.Text = sdr[2].ToString();
-                        TextBoxDateAssigned.Text = sdr[3].ToString();
-                        TextBoxExpectedCompletionDate.Text = sdr[4].ToString();
-                        TextBoxStatusDescription.Text = sdr[5].ToString();
-
-                    }
-                    sdr.Close();
-                }
-
-                Disconnect(conn);
-            }
-
-            TextBoxActualCompletionDate.Visible = true;
-            LabelActComplDate.Visible = true;
-            ImageButtonActualCompletionDate.Visible = true;
-            ButtonDelete.Visible = true;
-            ButtonSave.Visible = true;
-        }
-
-        private void SaveListBoxes()
+        protected void ButtonModalAssociateResource_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
@@ -73,20 +44,33 @@ namespace _380_Project_3.ASPX_Dev
                 {
                     Connect(conn);
 
-                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatus where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    foreach (GridViewRow row in this.GridViewAssociateResource.Rows)
                     {
+                        RadioButton checkRow = (row.Cells[0].FindControl("RadioButtonResource") as RadioButton);
 
-                        cmd.ExecuteNonQuery();
-
-                        for (int i = 0; i < ListBoxStatus.Items.Count; i += 1)
+                        if (checkRow.Checked)
                         {
-                            using (SqlCommand cmd2 = new SqlCommand("insert into tblStatus(UserID,ProjectID,StatusName,Sequence) values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblResources SET AssociatedActionItem=@AssocActItem WHERE UserID=@UserID AND ProjectID=@ProjID AND ResourceID=@RescID", conn))
                             {
-                                cmd2.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                                cmd2.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
-                                cmd2.Parameters.AddWithValue("@StatusName", ListBoxStatus.Items[i].ToString());
-                                cmd2.Parameters.AddWithValue("@Sequence", i);
-                                cmd2.ExecuteNonQuery();
+                                cmd.Parameters.AddWithValue("@AssocActItem", Session["_CurrentActionItemID"]);
+                                cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                                cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                                cmd.Parameters.AddWithValue("@RescID", row.Cells[0].Text);
+
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        else
+                        {
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblResources SET AssociatedActionItem=NULL WHERE UserID=@UserID AND ProjectID=@ProjID AND ResourceID=@RescID", conn))
+                            {
+
+                                cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                                cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                                cmd.Parameters.AddWithValue("@RescID", row.Cells[0].Text);
+
+                                cmd.ExecuteNonQuery();
                             }
                         }
                     }
@@ -101,39 +85,137 @@ namespace _380_Project_3.ASPX_Dev
                 {
                     Disconnect(conn);
                 }
+
+
+                Connect(conn);
+                using (SqlCommand cmd3 = new SqlCommand(String.Format("SELECT Name FROM tblResources WHERE AssociatedActionItem={0} AND UserID={1} AND ProjectID={2}",
+                    Session["_CurrentActionItemID"], Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                {
+                    SqlDataReader sdr = cmd3.ExecuteReader();
+
+                    TextBoxResourceAssigned.Text = "";
+
+                    while (sdr.Read())
+                    {
+                        TextBoxResourceAssigned.Text = SafeGetString(sdr, 0);
+                    }
+
+                    sdr.Close();
+                }
+                Disconnect(conn);
             }
         }
 
-        protected void ButtonModalAddStatus_Click(object sender, EventArgs e)
+        private string SafeGetString(SqlDataReader reader, int colIndex)
         {
-            this.ListBoxStatus.Items.Add(TextBoxAddStatus.Text);
-            this.ListBoxStatus.SelectedIndex = ListBoxStatus.Items.Count - 1;
+            if (!reader.IsDBNull(colIndex))
+                return reader[colIndex].ToString();
+            return string.Empty;
         }
 
-        protected void ButtonNew_Click(object sender, EventArgs e)
+        protected void ButtonModalSearch_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
+                Connect(conn);
 
+                using (SqlCommand cmd = new SqlCommand(String.Format("SELECT Name, Description, DateCreated, DateAssigned," +
+                    "ExpectedCompletionDate, ActualCompletionDate, Status, StatusDescription " +
+                    "FROM tblActionItems WHERE ActionItemID={0} AND UserID={1} AND ProjectID={2}",
+                    DropDownListActItemSelect.SelectedValue, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                {
+                    SqlDataReader sdr = cmd.ExecuteReader();
+
+                    while (sdr.Read())
+                    {
+                        TextBoxName.Text = SafeGetString(sdr, 0);
+                        TextBoxDescription.Text = SafeGetString(sdr, 1);
+                        TextBoxDateCreated.Text = SafeGetString(sdr, 2);
+                        TextBoxDateAssigned.Text = SafeGetString(sdr, 3);
+                        TextBoxExpectedCompletionDate.Text = SafeGetString(sdr, 4);
+                        TextBoxActualCompletionDate.Text = SafeGetString(sdr, 5);
+
+                        if (String.IsNullOrEmpty(SafeGetString(sdr, 6)))
+                            TextBoxStatus.Text = "";
+                        else
+                        {
+                            ListBoxStatus.SelectedIndex = Int32.Parse(SafeGetString(sdr, 6));
+                            TextBoxStatus.Text = ListBoxStatus.SelectedItem.ToString();
+                        }
+
+                        TextBoxStatusDescription.Text = SafeGetString(sdr, 7);
+                    }
+                    sdr.Close();
+                }
+
+                using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT ActionItemID FROM tblActionItems WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                    TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                {
+                    SqlDataReader sdr = cmd2.ExecuteReader();
+
+                    while (sdr.Read())
+                    {
+                        Session["_CurrentActionItemID"] = sdr[0].ToString();
+
+                    }
+                    sdr.Close();
+                }
+
+                using (SqlCommand cmd3 = new SqlCommand(String.Format("SELECT Name FROM tblResources WHERE AssociatedActionItem={0} AND UserID={1} AND ProjectID={2}",
+                    Session["_CurrentActionItemID"], Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                {
+                    SqlDataReader sdr = cmd3.ExecuteReader();
+
+                    TextBoxResourceAssigned.Text = "";
+
+                    while (sdr.Read())
+                    {
+                        TextBoxResourceAssigned.Text = SafeGetString(sdr, 0);
+                    }
+
+                    sdr.Close();
+                }
+
+                Disconnect(conn);
+            }
+
+            TextBoxActualCompletionDate.Visible = true;
+            LabelActComplDate.Visible = true;
+            ImageButtonActualCompletionDate.Visible = true;
+            ButtonDelete.Visible = true;
+            ButtonSave.Visible = true;
+            GridViewAssociateResource.DataBind();
+        }
+
+        private void SaveListBoxes()
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
                 try
                 {
                     Connect(conn);
 
-                    using (SqlCommand cmd = new SqlCommand("insert into tblACtionItems(UserID,ProjectID,Name,Description,DateCreated,DateAssigned,ExpectedCompletionDate, StatusDescription)" +
-                        " values(@UserID, @ProjectID, @Name, @Description,@DateCreated,@DateAssigned, @ExpCompletionDate, @StatusDescription)", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                        cmd.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
-                        cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
-                        cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
-                        cmd.Parameters.AddWithValue("@DateCreated", TextBoxDateCreated.Text);
-                        cmd.Parameters.AddWithValue("@DateAssigned", TextBoxDateAssigned.Text);
-                        cmd.Parameters.AddWithValue("@ExpCompletionDate", TextBoxExpectedCompletionDate.Text);
-                        cmd.Parameters.AddWithValue("@StatusDescription", TextBoxStatusDescription.Text);
+                    string statusListBoxItems = this.HiddenFieldListBox.Value;
+                    string[] arrListItems = statusListBoxItems.Split('|');
 
+                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatus where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    {
 
                         cmd.ExecuteNonQuery();
-                        LoadDefaultStatusListBox();
+
+                        int count = 0;
+                        foreach (string listItem in arrListItems)
+                        {
+                            using (SqlCommand cmd2 = new SqlCommand("insert into tblStatus(UserID,ProjectID,StatusName,Sequence) values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
+                            {
+                                cmd2.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                                cmd2.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
+                                cmd2.Parameters.AddWithValue("@StatusName", listItem);
+                                cmd2.Parameters.AddWithValue("@Sequence", count);
+                                cmd2.ExecuteNonQuery();
+                            }
+                            count++;
+                        }
                     }
                 }
 
@@ -148,16 +230,100 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
-            DropDownListActItemSelect.Items.Clear();
-            DropDownListActItemSelect.DataBind();
-            GridViewActionItemsList.DataBind();
+            this.ListBoxStatus.DataBind();
+        }
 
-            TextBoxActualCompletionDate.Visible = true;
-            LabelActComplDate.Visible = true;
-            ImageButtonActualCompletionDate.Visible = true;
+        protected void ButtonModalAddStatus_Click(object sender, EventArgs e)
+        {
+            ListItem li = new ListItem(TextBoxAddStatus.Text, ListBoxStatus.Items.Count.ToString());
+            this.ListBoxStatus.Items.Add(li);
+            this.ListBoxStatus.SelectedIndex = ListBoxStatus.Items.Count - 1;
+        }
 
-            ButtonDelete.Visible = true;
-            ButtonSave.Visible = true;
+        protected void ButtonNew_Click(object sender, EventArgs e)
+        {
+            if (TextBoxName.Text.Length == 0 || TextBoxDescription.Text.Length == 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please enter a name and description for the Action Item.');", true);
+            }
+
+            else if (TextBoxDateCreated.Text.Length == 0 || TextBoxDateAssigned.Text.Length == 0 || TextBoxExpectedCompletionDate.Text.Length == 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please select a date for the Date Created, Date Assigned, and Expected Completion Date fields.');", true);
+            }
+
+
+            else
+            {
+                using (SqlConnection conn = new SqlConnection(g_sqlConn))
+                {
+
+                    try
+                    {
+                        Connect(conn);
+
+                        using (SqlCommand cmd = new SqlCommand("insert into tblACtionItems(UserID,ProjectID,Name,Description,DateCreated,DateAssigned,ExpectedCompletionDate)" +
+                            " values(@UserID, @ProjectID, @Name, @Description,@DateCreated,@DateAssigned, @ExpCompletionDate)", conn))
+                        {
+
+                            cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                            cmd.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
+                            cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
+                            cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
+
+
+                            cmd.Parameters.AddWithValue("@DateCreated", TextBoxDateCreated.Text);
+                            cmd.Parameters.AddWithValue("@DateAssigned", TextBoxDateAssigned.Text);
+                            cmd.Parameters.AddWithValue("@ExpCompletionDate", TextBoxExpectedCompletionDate.Text);
+
+                            LoadDefaultStatusListBox();
+                            cmd.ExecuteNonQuery();
+
+                        }
+                    }
+
+                    catch (Exception ex)
+                    {
+                        Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                    }
+
+                    finally
+                    {
+                        Disconnect(conn);
+                    }
+
+                    Connect(conn);
+                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT ActionItemID FROM tblActionItems WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    {
+                        SqlDataReader sdr = cmd2.ExecuteReader();
+
+                        while (sdr.Read())
+                        {
+                            Session["_CurrentActionItemID"] = sdr[0].ToString();
+
+                        }
+                        sdr.Close();
+                    }
+                    Disconnect(conn);
+                }
+
+                DropDownListActItemSelect.Items.Clear();
+                DropDownListActItemSelect.DataBind();
+                GridViewActionItemsList.DataBind();
+                GridViewAssociateResource.DataBind();
+
+                TextBoxActualCompletionDate.Visible = true;
+                LabelActComplDate.Visible = true;
+                ImageButtonActualCompletionDate.Visible = true;
+
+                ButtonDelete.Visible = true;
+                ButtonSave.Visible = true;
+            }
         }
 
 
@@ -214,18 +380,119 @@ namespace _380_Project_3.ASPX_Dev
 
         protected void ButtonDelete_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            if (TextBoxName.Text.Length == 0)
             {
-                Connect(conn);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please enter a name of the Action Item you want to delete.');", true);
+            }
 
-                using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblActionItems where UserID={0} and ProjectID={1} AND Name='{2}'",
-                    Session["_CurrentUserID"], Session["_CurrentProjID"], TextBoxName.Text), conn))
+            else
+            {
+                using (SqlConnection conn = new SqlConnection(g_sqlConn))
+                {
+                    Connect(conn);
+
+                    using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblActionItems where UserID={0} and ProjectID={1} AND Name='{2}'",
+                        Session["_CurrentUserID"], Session["_CurrentProjID"], TextBoxName.Text), conn))
+                    {
+                        try
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                        }
+
+                        finally
+                        {
+                            Disconnect(conn);
+                        }
+                    }
+                }
+
+                DropDownListActItemSelect.Items.Clear();
+                DropDownListActItemSelect.DataBind();
+                GridViewActionItemsList.DataBind();
+            }
+        }
+
+        protected void ButtonSave_Click(object sender, EventArgs e)
+        {
+            if (TextBoxName.Text.Length == 0 || TextBoxDescription.Text.Length == 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please enter a name and description for the Action Item.');", true);
+            }
+
+            else if (TextBoxDateCreated.Text.Length == 0 || TextBoxDateAssigned.Text.Length == 0 || TextBoxExpectedCompletionDate.Text.Length == 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please select a date for the Date Created, Date Assigned, and Expected Completion Date fields.');", true);
+            }
+
+            else if (TextBoxStatus.Text.Length == 0 || TextBoxStatusDescription.Text.Length == 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
+                    "alertMessage",
+                    "alert('Please select a status and enter a status description.');", true);
+            }
+
+            else
+            {
+                using (SqlConnection conn = new SqlConnection(g_sqlConn))
                 {
                     try
                     {
-                        cmd.ExecuteNonQuery();
-                    }
+                        Connect(conn);
+                        using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT ActionItemID FROM tblActionItems WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                            TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                        {
+                            SqlDataReader sdr = cmd2.ExecuteReader();
 
+                            while (sdr.Read())
+                            {
+                                Session["_CurrentActionItemID"] = sdr[0].ToString();
+
+                            }
+                            sdr.Close();
+                        }
+
+                        using (SqlCommand cmd = new SqlCommand("UPDATE tblActionItems SET Name=@Name, Description=@Description, " +
+                            "DateCreated=@DateCreated, DateAssigned=@DateAssigned, ExpectedCompletionDate=@ExpComplDate," +
+                            "ActualCompletionDate=@ActComplDate, Status=@Status, StatusDescription=@StatusDescription, UpdateDate=@LastUpdated" +
+                            " WHERE UserID=@UserID AND ProjectID=@ProjID AND ActionItemID=@ActionID", conn))
+                        {
+                            cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                            cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                            cmd.Parameters.AddWithValue("@ActionID", Session["_CurrentActionItemID"]);
+
+                            cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
+                            cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
+                            cmd.Parameters.AddWithValue("@DateCreated", TextBoxDateCreated.Text);
+                            cmd.Parameters.AddWithValue("@DateAssigned", TextBoxDateAssigned.Text);
+                            cmd.Parameters.AddWithValue("@ExpComplDate", TextBoxExpectedCompletionDate.Text);
+                            cmd.Parameters.AddWithValue("@ActComplDate", string.IsNullOrEmpty(TextBoxActualCompletionDate.Text) ? (object)DBNull.Value : TextBoxActualCompletionDate.Text);
+
+                            string prevSelectedVal = ListBoxStatus.SelectedItem.ToString();
+                            SaveListBoxes();
+                            int updatedIndex = 0;
+                            for (int i = 0; i < ListBoxStatus.Items.Count; i++)
+                            {
+                                if (ListBoxStatus.Items[i].ToString().Equals(prevSelectedVal))
+                                    updatedIndex = i;
+                            }
+                            cmd.Parameters.AddWithValue("@Status", updatedIndex);
+                            cmd.Parameters.AddWithValue("@StatusDescription", TextBoxStatusDescription.Text);
+                            cmd.Parameters.AddWithValue("@LastUpdated", DateTime.Today);
+
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
                     catch (Exception ex)
                     {
                         Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
@@ -236,72 +503,13 @@ namespace _380_Project_3.ASPX_Dev
                         Disconnect(conn);
                     }
                 }
+
+                DropDownListActItemSelect.Items.Clear();
+                DropDownListActItemSelect.DataBind();
+                GridViewAssociateResource.DataBind();
+                GridViewActionItemsList.DataBind();
             }
-
-            DropDownListActItemSelect.Items.Clear();
-            DropDownListActItemSelect.DataBind();
-            GridViewActionItemsList.DataBind();
         }
-
-        protected void ButtonSave_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(g_sqlConn))
-            {
-                try
-                {
-                    Connect(conn);
-                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT ActionItemID FROM tblActionItems WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
-                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
-                    {
-                        SqlDataReader sdr = cmd2.ExecuteReader();
-
-                        while (sdr.Read())
-                        {
-                            Session["_CurrentActionItemID"] = sdr[0].ToString();
-
-                        }
-                        sdr.Close();
-                    }
-
-                    using (SqlCommand cmd = new SqlCommand("UPDATE tblACtionItems SET Name=@Name, Description=@Description, " +
-                        "DateCreated=@DateCreated, DateAssigned=@DateAssigned, ExpectedCompletionDate=@ExpComplDate," +
-                        "ActualCompletionDate=@ActComplDate, StatusDescription=@StatusDescription" +
-                        " WHERE UserID=@UserID AND ProjectID=@ProjID AND ActionItemID=@ActionID", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                        cmd.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
-                        cmd.Parameters.AddWithValue("@ActionItemID", Session["_CurrentActionItemID"]);
-
-                        cmd.Parameters.AddWithValue("@Name", TextBoxName.Text);
-                        cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
-                        cmd.Parameters.AddWithValue("@DateCreated", TextBoxDateCreated.Text);
-                        cmd.Parameters.AddWithValue("@DateAssigned", TextBoxDateAssigned.Text);
-                        cmd.Parameters.AddWithValue("@ExpComplDate", TextBoxExpectedCompletionDate.Text);
-                        cmd.Parameters.AddWithValue("@ActComplDate", TextBoxActualCompletionDate.Text);
-                        cmd.Parameters.AddWithValue("@StatusDescription", TextBoxStatusDescription.Text);
-
-
-                        SaveListBoxes();
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
-                }
-
-                finally
-                {
-                    Disconnect(conn);
-                }
-            }
-
-            DropDownListActItemSelect.Items.Clear();
-            DropDownListActItemSelect.DataBind();
-            GridViewActionItemsList.DataBind();
-        }
-
-
 
 
         protected void ButtonAddResource_Click(object sender, EventArgs e)

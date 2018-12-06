@@ -212,7 +212,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <asp:Button ID="ButtonModalAddSeverity" runat="server" Text="Add New Status" CssClass="btn btn-default" OnClick="ButtonModalAddSeverity_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                        <asp:Button ID="ButtonModalAddSeverity" runat="server" Text="Add New Severity" CssClass="btn btn-default" OnClick="ButtonModalAddSeverity_Click" UseSubmitBehavior="false" data-dismiss="modal" />
                     </div>
                 </div>
 
@@ -239,7 +239,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <asp:Button ID="ButtonModalAddPriority" runat="server" Text="Add New Status" CssClass="btn btn-default" OnClick="ButtonModalAddPriority_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                        <asp:Button ID="ButtonModalAddPriority" runat="server" Text="Add New Priority" CssClass="btn btn-default" OnClick="ButtonModalAddPriority_Click" UseSubmitBehavior="false" data-dismiss="modal" />
                     </div>
                 </div>
 
@@ -247,12 +247,12 @@
         </div>
     </div>
 
-    
+
     <table style="width: 100%;">
         <tr style="vertical-align: top">
             <td colspan="1" class="text-right">Name:*</td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxName" runat="server" Height="20px" Width="300px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxName" runat="server" Height="20px" Width="300px" TabIndex="1"></asp:TextBox>
 
 
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" Width="60px" /></td>
@@ -260,16 +260,17 @@
             <td colspan="1" class="text-right">Severity*:</td>
             <td colspan="1">
                 <asp:TextBox ID="TextBoxSeverity" runat="server"></asp:TextBox>
+                <asp:HiddenField ID="HiddenFieldSeverity" runat="server" />
             </td>
 
             <td colspan="1">
-                <asp:Button ID="ButtonAddSeverity" runat="server" Text="Add Severity" data-toggle="modal" data-target="#myModal5" OnClientClick="return false;" Width="95px" />
+                <asp:Button ID="ButtonAddSeverity" runat="server" Text="Add Severity" data-toggle="modal" data-target="#myModal5" OnClientClick="return false;" Width="95px" TabIndex="10" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonRemoveSeverity" runat="server" Text="Remove Severity" OnClick="ButtonRemoveSeverity_Click" Width="120px" /></td>
+                <asp:Button ID="ButtonRemoveSeverity" runat="server" Text="Remove Severity" OnClick="ButtonRemoveSeverity_Click" Width="120px" TabIndex="11" /></td>
 
             <td colspan="2" rowspan="2">
-                <asp:ListBox ID="ListBoxSeverity" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="SeverityTextBoxJS(this)" DataSourceID="ListBoxSeverityDB" DataTextField="SeverityName" DataValueField="Sequence"></asp:ListBox>
+                <asp:ListBox ID="ListBoxSeverity" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="SeverityTextBoxJS(this)" DataSourceID="ListBoxSeverityDB" DataTextField="SeverityName" DataValueField="Sequence" TabIndex="9"></asp:ListBox>
                 <asp:SqlDataSource ID="ListBoxSeverityDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [SeverityName], [Sequence] FROM [tblSeverity] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
@@ -300,19 +301,20 @@
         <tr style="vertical-align: top">
             <td colspan="1" style="vertical-align: text-top" class="text-right">Description*:</td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxDescription" runat="server" TextMode="MultiLine" Height="150px" Width="300px"></asp:TextBox></td>
+                <asp:TextBox ID="TextBoxDescription" runat="server" TextMode="MultiLine" Height="150px" Width="300px" TabIndex="3"></asp:TextBox></td>
             <td colspan="1" class="auto-style15">Priority<span class="auto-style1">*</span><span class="auto-style3">:</span></td>
             <td colspan="1">
                 <asp:TextBox ID="TextBoxPriority" runat="server"></asp:TextBox>
+                <asp:HiddenField ID="HiddenFieldPriority" runat="server" />
             </td>
             <td colspan="1">
-                <asp:Button ID="ButtonAddPriority" runat="server" Text="Add Priority" data-toggle="modal" data-target="#myModal6" OnClientClick="return false;" Width="85px" />
+                <asp:Button ID="ButtonAddPriority" runat="server" Text="Add Priority" data-toggle="modal" data-target="#myModal6" OnClientClick="return false;" Width="85px" TabIndex="13" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonRemovePriority" runat="server" Text="Remove Priority" OnClick="ButtonRemovePriority_Click" Width="110px" />
+                <asp:Button ID="ButtonRemovePriority" runat="server" Text="Remove Priority" OnClick="ButtonRemovePriority_Click" Width="110px" TabIndex="14" />
             </td>
             <td colspan="2" rowspan="2">
-                <asp:ListBox ID="ListBoxPriority" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="PriorityTextBoxJS(this)" DataSourceID="ListBoxPriorityDB" DataTextField="PriorityName" DataValueField="Sequence"></asp:ListBox>
+                <asp:ListBox ID="ListBoxPriority" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="PriorityTextBoxJS(this)" DataSourceID="ListBoxPriorityDB" DataTextField="PriorityName" DataValueField="Sequence" TabIndex="12"></asp:ListBox>
 
 
                 <asp:SqlDataSource ID="ListBoxPriorityDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [PriorityName], [Sequence] FROM [tblPriority] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
@@ -347,17 +349,18 @@
             <td colspan="1" class="text-right">Status*:</td>
             <td colspan="1">
                 <asp:TextBox ID="TextBoxStatus" runat="server"></asp:TextBox>
+                <asp:HiddenField ID="HiddenFieldStatus" runat="server" />
             </td>
             <td colspan="1">
-                <asp:Button ID="ButtonAddStatus" runat="server" Text="Add Status" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" Width="85px" />
+                <asp:Button ID="ButtonAddStatus" runat="server" Text="Add Status" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" Width="85px" TabIndex="16" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" OnClick="ButtonRemoveStatus_Click" Width="110px" />
+                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" OnClick="ButtonRemoveStatus_Click" Width="110px" TabIndex="17" />
 
             </td>
 
             <td colspan="2" rowspan="2">
-                <asp:ListBox ID="ListBoxStatus" ClientIDMode="Static" runat="server" Width="185px" Height="150px" onchange="StatusTextBoxJS(this)" DataSourceID="ListBoxStatusDB" DataTextField="StatusName" DataValueField="Sequence"></asp:ListBox>
+                <asp:ListBox ID="ListBoxStatus" ClientIDMode="Static" runat="server" Width="185px" Height="150px" onchange="StatusTextBoxJS(this)" DataSourceID="ListBoxStatusDB" DataTextField="StatusName" DataValueField="Sequence" TabIndex="15"></asp:ListBox>
                 <asp:SqlDataSource ID="ListBoxStatusDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [StatusName], [Sequence] FROM [tblStatus] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
@@ -387,12 +390,12 @@
         <tr style="vertical-align: top">
             <td colspan="1" class="text-right">Expected Completion Date*:</td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxExpectedCompletionDate" runat="server" ReadOnly="True" Height="20px" Width="80px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxExpectedCompletionDate" runat="server" Height="20px" Width="80px"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarExpComplDate" PopupButtonID="ImageButtonExpCompletionDate" runat="server" TargetControlID="TextBoxExpectedCompletionDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonExpCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" /></td>
+                <asp:ImageButton ID="ImageButtonExpCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="4" /></td>
             <td colspan="1" class="text-right" style="vertical-align: text-top">Status Description*:</td>
             <td colspan="5"><span class="auto-style3">
-                <asp:TextBox ID="TextBoxStatusDescription" runat="server" TextMode="MultiLine" Height="150px" Width="300px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxStatusDescription" runat="server" TextMode="MultiLine" Height="150px" Width="300px" TabIndex="18"></asp:TextBox>
             </span>
             </td>
 
@@ -400,7 +403,7 @@
         <tr>
             <td colspan="5" class="auto-style1"></td>
             <td colspan="1">&nbsp;</td>
-            <td colspan="5">Last Updated:<asp:TextBox ID="TextBoxLastUpdated" runat="server" Height="20px" Width="80px"></asp:TextBox>
+            <td colspan="5">Last Updated:<asp:TextBox ID="TextBoxLastUpdated" runat="server" Height="20px" Width="80px" OnTextChanged="TextBoxLastUpdated_TextChanged" ReadOnly="True"></asp:TextBox>
             </td>
         </tr>
 
@@ -411,12 +414,12 @@
         <tr>
             <td colspan="1" class="text-right">Date Raised*:</td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxDateRaised" runat="server" ReadOnly="True" Height="20px" Width="80px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxDateRaised" runat="server" Height="20px" Width="80px"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarDateRaised" PopupButtonID="ImageButtonDateRaised" runat="server" TargetControlID="TextBoxDateRaised" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonDateRaised" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" /></td>
+                <asp:ImageButton ID="ImageButtonDateRaised" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="5" /></td>
             <td colspan="1" class="text-right">Associated Action Item(s):</td>
             <td colspan="4">
-                <asp:Button ID="ButtonAssociateActionItems" runat="server" Text="Associate Action Items" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" Width="160px" /></td>
+                <asp:Button ID="ButtonAssociateActionItems" runat="server" Text="Associate Action Items" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" Width="160px" TabIndex="19" /></td>
         </tr>
 
         <tr>
@@ -428,13 +431,13 @@
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                             <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-                            <asp:BoundField DataField="DateCreated" HeaderText="DateCreated" SortExpression="DateCreated" />
-                            <asp:BoundField DataField="DateAssigned" HeaderText="DateAssigned" SortExpression="DateAssigned" />
-                            <asp:BoundField DataField="ExpectedCompletionDate" HeaderText="ExpectedCompletionDate" SortExpression="ExpectedCompletionDate" />
-                            <asp:BoundField DataField="ActualCompletionDate" HeaderText="ActualCompletionDate" SortExpression="ActualCompletionDate" />
-                            <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
-                            <asp:BoundField DataField="StatusDescription" HeaderText="StatusDescription" SortExpression="StatusDescription" />
-                            <asp:BoundField DataField="UpdateDate" HeaderText="UpdateDate" SortExpression="UpdateDate" />
+                            <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
+                            <asp:BoundField DataField="DateAssigned" HeaderText="Date Assigned" SortExpression="DateAssigned" />
+                            <asp:BoundField DataField="ExpectedCompletionDate" HeaderText="ExpectedCompletion Date" SortExpression="ExpectedCompletionDate" />
+                            <asp:BoundField DataField="ActualCompletionDate" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
+                            <asp:BoundField DataField="Stat" HeaderText="Status" SortExpression="Status" />
+                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription" />
+                            <asp:BoundField DataField="UpdateDate" HeaderText="Update Date" SortExpression="UpdateDate" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -448,7 +451,11 @@
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
                 </div>
-                <asp:SqlDataSource ID="AssociatedActionItems" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [DateCreated], [DateAssigned], [ExpectedCompletionDate], [ActualCompletionDate], [Status], [StatusDescription], [UpdateDate], [AssociatedIssue] FROM [tblActionItems] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([AssociatedIssue] = @AssocIssueID))">
+                <asp:SqlDataSource ID="AssociatedActionItems" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT A.[Name], A.[Description], A.[DateCreated], A.[DateAssigned], A.[ExpectedCompletionDate],
+                    A.[ActualCompletionDate], A.[StatusDescription], A.[UpdateDate], S.[StatusName] Stat 
+                    FROM [tblActionItems] A
+                    LEFT JOIN [tblStatus] S ON S.[Sequence] = A.[Status]
+                    WHERE ((A.[UserID] = @UserID) AND (A.[ProjectID] = @ProjectID) AND (A.[AssociatedIssue] = @AssocIssueID))">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                         <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -466,14 +473,14 @@
         <tr>
             <td colspan="1" class="text-right">Date Assigned*:</td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxDateAssigned" runat="server" ReadOnly="True" Height="20px" Width="80px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxDateAssigned" runat="server" Height="20px" Width="80px"></asp:TextBox>
 
                 <cc1:CalendarExtender ID="CalendarDateAssigned" PopupButtonID="ImageButtonDateAssigned" runat="server" TargetControlID="TextBoxDateAssigned" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonDateAssigned" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" /></td>
+                <asp:ImageButton ID="ImageButtonDateAssigned" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="6" /></td>
 
             <td colspan="1" class="text-right">Associated Decision(s):</td>
             <td colspan="4">
-                <asp:Button ID="ButtonAssociateDecisions" runat="server" Text="Associate Decisions" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" Width="150px" />
+                <asp:Button ID="ButtonAssociateDecisions" runat="server" Text="Associate Decisions" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" Width="150px" TabIndex="20" />
             </td>
         </tr>
 
@@ -486,17 +493,17 @@
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                             <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-                            <asp:BoundField DataField="Priority" HeaderText="Priority" SortExpression="Priority" />
-                            <asp:BoundField DataField="Impact" HeaderText="Impact" SortExpression="Impact" />
-                            <asp:BoundField DataField="DateCreated" HeaderText="DateCreated" SortExpression="DateCreated" />
-                            <asp:BoundField DataField="DateNeeded" HeaderText="DateNeeded" SortExpression="DateNeeded" />
-                            <asp:BoundField DataField="DateMade" HeaderText="DateMade" SortExpression="DateMade" />
-                            <asp:BoundField DataField="ExpectedCompletionDate" HeaderText="ExpectedCompletionDate" SortExpression="ExpectedCompletionDate" />
-                            <asp:BoundField DataField="ActualCompletionDate" HeaderText="ActualCompletionDate" SortExpression="ActualCompletionDate" />
+                            <asp:BoundField DataField="Pri" HeaderText="Priority" SortExpression="Priority" />
+                            <asp:BoundField DataField="Imp" HeaderText="Impact" SortExpression="Impact" />
+                            <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
+                            <asp:BoundField DataField="DateNeeded" HeaderText="Date Needed" SortExpression="DateNeeded" />
+                            <asp:BoundField DataField="DateMade" HeaderText="Date Made" SortExpression="DateMade" />
+                            <asp:BoundField DataField="ExpectedCompletionDate" HeaderText="Expected Completion Date" SortExpression="ExpectedCompletionDate" />
+                            <asp:BoundField DataField="ActualCompletionDate" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
                             <asp:BoundField DataField="NoteDate" HeaderText="NoteDate" SortExpression="NoteDate" />
-                            <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
-                            <asp:BoundField DataField="StatusDescription" HeaderText="StatusDescription" SortExpression="StatusDescription" />
-                            <asp:BoundField DataField="UpdateDate" HeaderText="UpdateDate" SortExpression="UpdateDate" />
+                            <asp:BoundField DataField="Stat" HeaderText="Status" SortExpression="Status" />
+                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription" />
+                            <asp:BoundField DataField="UpdateDate" HeaderText="Update Date" SortExpression="UpdateDate" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -509,8 +516,13 @@
                         <SortedDescendingCellStyle BackColor="#FFFDF8" />
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
-                    <asp:SqlDataSource ID="AssociatedDecisions" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [Description], [Priority], [Impact],
-                        [DateCreated], [DateNeeded], [DateMade], [ExpectedCompletionDate], [ActualCompletionDate], [NoteDate], [Status], [StatusDescription], [UpdateDate] FROM [tblDecisions] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([AssociatedIssue] = @AssociatedIssue))">
+                    <asp:SqlDataSource ID="AssociatedDecisions" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT D.[Name], D.[Description], D.[DateCreated], D.[DateNeeded], D.[DateMade], D.[ExpectedCompletionDate], 
+                    D.[ActualCompletionDate], D.[NoteDate], D.[StatusDescription], D.[UpdateDate], P.[PriorityName] Pri, I.[ImpactName] Imp, S.[StatusName] Stat 
+                    FROM [tblDecisions] D
+                    LEFT JOIN [tblPriority] P ON P.[Sequence] = D.[Priority]
+                    LEFT JOIN [tblImpact] I ON I.[Sequence] = D.[Impact]
+                    LEFT JOIN [tblStatus] S ON S.[Sequence] = D.[Status]
+                        WHERE ((D.[UserID] = @UserID) AND (D.[ProjectID] = @ProjectID) AND (D.[AssociatedIssue] = @AssociatedIssue))">
                         <SelectParameters>
                             <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                             <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -529,9 +541,9 @@
             <td colspan="1">
                 <asp:Label ID="LabelActualCompletionDate" runat="server" Text="Actual Completion Date: " Visible="False"></asp:Label></td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxActualCompletionDate" runat="server" Visible="False" ReadOnly="True" Height="20px" Width="80px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxActualCompletionDate" runat="server" Visible="False" Height="20px" Width="80px"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarActComplDate" PopupButtonID="ImageButtonActCompletionDate" runat="server" TargetControlID="TextBoxActualCompletionDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonActCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" /></td>
+                <asp:ImageButton ID="ImageButtonActCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="7" /></td>
             <td colspan="6"></td>
         </tr>
 
@@ -542,7 +554,7 @@
         <tr>
             <td colspan="1"></td>
             <td colspan="1">
-                <asp:Button ID="ButtonNew" runat="server" Text="New" OnClick="ButtonNew_Click" Width="100px" /></td>
+                <asp:Button ID="ButtonNew" runat="server" Text="New" OnClick="ButtonNew_Click" Width="100px" TabIndex="8" /></td>
             <td colspan="1"></td>
             <td colspan="1"></td>
             <td colspan="1"></td>
@@ -552,7 +564,7 @@
             <td colspan="1"></td>
             <td colspan="1" class="text-right">&nbsp;</td>
             <td colspan="1">
-                <asp:Button ID="ButtonSave" runat="server" Text="Save" OnClick="ButtonSave_Click" Width="125px" />
+                <asp:Button ID="ButtonSave" runat="server" Text="Save" OnClientClick="return listboxSave();" OnClick="ButtonSave_Click" Width="125px" TabIndex="21" />
             </td>
             <td colspan="1">&nbsp;</td>
             <td colspan="1">&nbsp;</td>
@@ -560,11 +572,64 @@
     </table>
 
     <script type="text/javascript">
+        function listboxSave() {
+            getClientStatusListBox('<%= ListBoxStatus.ClientID %>');
+            getClientPriorityListBox('<%= ListBoxPriority.ClientID %>');
+            getClientSeverityListBox('<%= ListBoxSeverity.ClientID %>');
+
+            return true;
+        }
+
+        function getClientStatusListBox(listID) {
+            var hiddenBox = document.getElementById('<%= HiddenFieldStatus.ClientID %>');
+            var listBoxVal = '';
+            var listbox = document.getElementById(listID);
+            for (var count = 0; count < listbox.options.length; count++) {
+                if (listBoxVal.length > 0) {
+                    listBoxVal += '|';
+                }
+
+                listBoxVal += listbox.options[count].text;
+
+            }
+            hiddenBox.value = listBoxVal;
+        }
+
+        function getClientPriorityListBox(listID) {
+            var hiddenBox = document.getElementById('<%= HiddenFieldPriority.ClientID %>');
+            var listBoxVal = '';
+            var listbox = document.getElementById(listID);
+            for (var count = 0; count < listbox.options.length; count++) {
+                if (listBoxVal.length > 0) {
+                    listBoxVal += '|';
+                }
+
+                listBoxVal += listbox.options[count].text;
+
+            }
+            hiddenBox.value = listBoxVal;
+        }
+
+        function getClientSeverityListBox(listID) {
+            var hiddenBox = document.getElementById('<%= HiddenFieldSeverity.ClientID %>');
+            var listBoxVal = '';
+            var listbox = document.getElementById(listID);
+            for (var count = 0; count < listbox.options.length; count++) {
+                if (listBoxVal.length > 0) {
+                    listBoxVal += '|';
+                }
+
+                listBoxVal += listbox.options[count].text;
+
+            }
+            hiddenBox.value = listBoxVal;
+        }
+
         function StatusTextBoxJS(ddl) {
             var tbStatus = document.getElementById('<%= TextBoxStatus.ClientID %>');
 
             if (tbStatus != null) {
-                tbStatus.value = ddl.text;
+                tbStatus.value = ddl.options[ddl.selectedIndex].text;
             }
         }
 
@@ -572,7 +637,7 @@
             var tbPriority = document.getElementById('<%= TextBoxPriority.ClientID %>');
 
             if (tbPriority != null) {
-                tbPriority.value = ddl.text;
+                tbPriority.value = ddl.options[ddl.selectedIndex].text;
             }
         }
 
@@ -580,7 +645,7 @@
             var tbSeverity = document.getElementById('<%= TextBoxSeverity.ClientID %>');
 
             if (tbSeverity != null) {
-                tbSeverity.value = ddl.text;
+                tbSeverity.value = ddl.options[ddl.selectedIndex].text;
             }
         }
 
