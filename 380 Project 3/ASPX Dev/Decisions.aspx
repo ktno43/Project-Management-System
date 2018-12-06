@@ -461,15 +461,15 @@
                             <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
                             <asp:BoundField DataField="Pri" HeaderText="Priority" SortExpression="Priority" />
                             <asp:BoundField DataField="Imp" HeaderText="Impact" SortExpression="Impact" />
-                            <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
-                            <asp:BoundField DataField="DateNeeded" HeaderText="Date Needed" SortExpression="DateNeeded" />
-                            <asp:BoundField DataField="DateMade" HeaderText="Date Made" SortExpression="DateMade" />
-                            <asp:BoundField DataField="ExpectedCompletionDate" HeaderText="Expected Completion Date" SortExpression="ExpectedCompletionDate" />
-                            <asp:BoundField DataField="ActualCompletionDate" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
-                            <asp:BoundField DataField="NoteDate" HeaderText="Note Date" SortExpression="NoteDate" />
+                            <asp:BoundField DataField="DateCreated" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Created" SortExpression="DateCreated" />
+                            <asp:BoundField DataField="DateNeeded" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Needed" SortExpression="DateNeeded" />
+                            <asp:BoundField DataField="DateMade" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Made" SortExpression="DateMade" />
+                            <asp:BoundField DataField="ExpectedCompletionDate" DataFormatString="{0:MM/dd/yyyy}"  HeaderText="Expected Completion Date" SortExpression="ExpectedCompletionDate" />
+                            <asp:BoundField DataField="ActualCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
+                            <asp:BoundField DataField="NoteDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Note Date" SortExpression="NoteDate" />
                             <asp:BoundField DataField="Stat" HeaderText="Status" SortExpression="Status" />
                             <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription" />
-                            <asp:BoundField DataField="UpdateDate" HeaderText="Update Date" SortExpression="UpdateDate" />
+                            <asp:BoundField DataField="UpdateDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Update Date" SortExpression="UpdateDate" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

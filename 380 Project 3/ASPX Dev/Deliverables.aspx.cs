@@ -36,7 +36,12 @@ namespace _380_Project_3
         private string SafeGetString(SqlDataReader reader, int colIndex)
         {
             if (!reader.IsDBNull(colIndex))
-                return reader[colIndex].ToString();
+            {
+                if (reader[colIndex].GetType() == typeof(DateTime))
+                    return Convert.ToDateTime(reader[colIndex]).ToShortDateString();
+                else
+                    return reader[colIndex].ToString();
+            }
             return string.Empty;
         }
 
