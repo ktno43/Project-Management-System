@@ -250,16 +250,16 @@
 
     <table style="width: 100%;">
         <tr style="vertical-align: top">
-            <td colspan="1" class="text-right">Name:*</td>
+            <td colspan="1" class="auto-style16">Name<span class="auto-style1">*</span>:&nbsp;&nbsp;&nbsp; </td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxName" runat="server" Height="20px" Width="300px" TabIndex="1"></asp:TextBox>
+                <asp:TextBox ID="TextBoxName" runat="server" Height="20px" Width="240px" TabIndex="1"></asp:TextBox>
 
 
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" Width="60px" /></td>
 
-            <td colspan="1" class="text-right">Severity*:</td>
+            <td colspan="1" class="text-right">Severity:&nbsp;&nbsp;&nbsp; </td>
             <td colspan="1">
-                <asp:TextBox ID="TextBoxSeverity" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBoxSeverity" runat="server" BackColor="#CCCCCC" Height="20px" Width="100px"></asp:TextBox>
                 <asp:HiddenField ID="HiddenFieldSeverity" runat="server" />
             </td>
 
@@ -271,7 +271,7 @@
 
             <td colspan="2" rowspan="2">
                 <asp:ListBox ID="ListBoxSeverity" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="SeverityTextBoxJS(this)" DataSourceID="ListBoxSeverityDB" DataTextField="SeverityName" DataValueField="Sequence" TabIndex="9"></asp:ListBox>
-                <asp:SqlDataSource ID="ListBoxSeverityDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [SeverityName], [Sequence] FROM [tblSeverity] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
+                <asp:SqlDataSource ID="ListBoxSeverityDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [SeverityName], [Sequence] FROM [tblSeverityIssues] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                         <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -299,25 +299,25 @@
         </tr>
 
         <tr style="vertical-align: top">
-            <td colspan="1" style="vertical-align: text-top" class="text-right">Description*:</td>
+            <td colspan="1" style="vertical-align: text-top" class="auto-style16">Description<span class="auto-style1">*</span>:&nbsp;&nbsp;&nbsp; </td>
             <td colspan="4">
                 <asp:TextBox ID="TextBoxDescription" runat="server" TextMode="MultiLine" Height="150px" Width="300px" TabIndex="3"></asp:TextBox></td>
-            <td colspan="1" class="auto-style15">Priority<span class="auto-style1">*</span><span class="auto-style3">:</span></td>
+            <td colspan="1" class="auto-style15">Priority<span class="auto-style3">:&nbsp;&nbsp;&nbsp; </span></td>
             <td colspan="1">
-                <asp:TextBox ID="TextBoxPriority" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBoxPriority" runat="server" BackColor="#CCCCCC" Height="20px" Width="100px"></asp:TextBox>
                 <asp:HiddenField ID="HiddenFieldPriority" runat="server" />
             </td>
             <td colspan="1">
                 <asp:Button ID="ButtonAddPriority" runat="server" Text="Add Priority" data-toggle="modal" data-target="#myModal6" OnClientClick="return false;" Width="85px" TabIndex="13" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonRemovePriority" runat="server" Text="Remove Priority" OnClick="ButtonRemovePriority_Click" Width="110px" TabIndex="14" />
+                <asp:Button ID="ButtonRemovePriority" runat="server" Text="Remove Priority" OnClick="ButtonRemovePriority_Click" Width="120px" TabIndex="14" />
             </td>
             <td colspan="2" rowspan="2">
                 <asp:ListBox ID="ListBoxPriority" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="PriorityTextBoxJS(this)" DataSourceID="ListBoxPriorityDB" DataTextField="PriorityName" DataValueField="Sequence" TabIndex="12"></asp:ListBox>
 
 
-                <asp:SqlDataSource ID="ListBoxPriorityDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [PriorityName], [Sequence] FROM [tblPriority] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
+                <asp:SqlDataSource ID="ListBoxPriorityDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [PriorityName], [Sequence] FROM [tblPriorityIssues] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                         <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -345,10 +345,15 @@
         </tr>
 
         <tr style="vertical-align: top">
-            <td colspan="5"></td>
-            <td colspan="1" class="text-right">Status*:</td>
+
+            <td colspan="1" class="auto-style16">Expected Completion Date<span class="auto-style1">*</span>:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="4">
+                <asp:TextBox ID="TextBoxExpectedCompletionDate" runat="server" Height="20px" Width="80px" BackColor="#CCCCCC"></asp:TextBox>
+                <cc1:CalendarExtender ID="CalendarExpComplDate" PopupButtonID="ImageButtonExpCompletionDate" runat="server" TargetControlID="TextBoxExpectedCompletionDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                <asp:ImageButton ID="ImageButtonExpCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="4" /></td>
+            <td colspan="1" class="text-right">Status:&nbsp;&nbsp;&nbsp; </td>
             <td colspan="1">
-                <asp:TextBox ID="TextBoxStatus" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBoxStatus" runat="server" BackColor="#CCCCCC" Height="20px" Width="100px"></asp:TextBox>
                 <asp:HiddenField ID="HiddenFieldStatus" runat="server" />
             </td>
             <td colspan="1">
@@ -361,7 +366,7 @@
 
             <td colspan="2" rowspan="2">
                 <asp:ListBox ID="ListBoxStatus" ClientIDMode="Static" runat="server" Width="185px" Height="150px" onchange="StatusTextBoxJS(this)" DataSourceID="ListBoxStatusDB" DataTextField="StatusName" DataValueField="Sequence" TabIndex="15"></asp:ListBox>
-                <asp:SqlDataSource ID="ListBoxStatusDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [StatusName], [Sequence] FROM [tblStatus] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
+                <asp:SqlDataSource ID="ListBoxStatusDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [StatusName], [Sequence] FROM [tblStatusIssues] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
                         <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
@@ -379,23 +384,20 @@
             </td>
         </tr>
 
-        <tr>
-            <td colspan="11"></td>
-        </tr>
 
         <tr>
-            <td colspan="11"></td>
+            <td colspan="11">&nbsp;</td>
         </tr>
 
         <tr style="vertical-align: top">
-            <td colspan="1" class="text-right">Expected Completion Date*:</td>
+            <td colspan="1" class="auto-style16">Date Raised<span class="auto-style1">*</span>:&nbsp;&nbsp;&nbsp; </td>
             <td colspan="4">
-                <asp:TextBox ID="TextBoxExpectedCompletionDate" runat="server" Height="20px" Width="80px"></asp:TextBox>
-                <cc1:CalendarExtender ID="CalendarExpComplDate" PopupButtonID="ImageButtonExpCompletionDate" runat="server" TargetControlID="TextBoxExpectedCompletionDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonExpCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="4" /></td>
-            <td colspan="1" class="text-right" style="vertical-align: text-top">Status Description*:</td>
+                <asp:TextBox ID="TextBoxDateRaised" runat="server" Height="20px" Width="80px" BackColor="#CCCCCC"></asp:TextBox>
+                <cc1:CalendarExtender ID="CalendarDateRaised" PopupButtonID="ImageButtonDateRaised" runat="server" TargetControlID="TextBoxDateRaised" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                <asp:ImageButton ID="ImageButtonDateRaised" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="5" /></td>
+            <td colspan="1" class="text-right" style="vertical-align: text-top">Status Description:&nbsp;&nbsp;&nbsp; </td>
             <td colspan="5"><span class="auto-style3">
-                <asp:TextBox ID="TextBoxStatusDescription" runat="server" TextMode="MultiLine" Height="150px" Width="300px" TabIndex="18"></asp:TextBox>
+                <asp:TextBox ID="TextBoxStatusDescription" runat="server" TextMode="MultiLine" Height="150px" Width="300px" TabIndex="18" OnTextChanged="TextBoxStatusDescription_TextChanged"></asp:TextBox>
             </span>
             </td>
 
@@ -403,29 +405,31 @@
         <tr>
             <td colspan="5" class="auto-style1"></td>
             <td colspan="1">&nbsp;</td>
-            <td colspan="5">Last Updated:<asp:TextBox ID="TextBoxLastUpdated" runat="server" Height="20px" Width="80px" OnTextChanged="TextBoxLastUpdated_TextChanged" ReadOnly="True"></asp:TextBox>
+            <td colspan="5">Last Updated:<asp:TextBox ID="TextBoxLastUpdated" runat="server" Height="20px" Width="80px" OnTextChanged="TextBoxLastUpdated_TextChanged" ReadOnly="True" BackColor="#CCCCCC"></asp:TextBox>
             </td>
         </tr>
 
         <tr>
-            <td colspan="11">&nbsp;</td>
+            <td colspan="11" class="auto-style2">&nbsp;</td>
         </tr>
 
         <tr>
-            <td colspan="1" class="text-right">Date Raised*:</td>
-            <td colspan="4">
-                <asp:TextBox ID="TextBoxDateRaised" runat="server" Height="20px" Width="80px"></asp:TextBox>
-                <cc1:CalendarExtender ID="CalendarDateRaised" PopupButtonID="ImageButtonDateRaised" runat="server" TargetControlID="TextBoxDateRaised" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonDateRaised" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="5" /></td>
-            <td colspan="1" class="text-right">Associated Action Item(s):</td>
-            <td colspan="4">
-                <asp:Button ID="ButtonAssociateActionItems" runat="server" Text="Associate Action Items" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" Width="160px" TabIndex="19" /></td>
+            <td colspan="1" class="auto-style18">Date Assigned<span class="auto-style1">*</span>:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="4" class="auto-style19">
+                <asp:TextBox ID="TextBoxDateAssigned" runat="server" Height="20px" Width="80px" BackColor="#CCCCCC"></asp:TextBox>
+
+                <cc1:CalendarExtender ID="CalendarDateAssigned" PopupButtonID="ImageButtonDateAssigned" runat="server" TargetControlID="TextBoxDateAssigned" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                <asp:ImageButton ID="ImageButtonDateAssigned" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="6" /></td>
+            <td colspan="5" class="auto-style20" style="vertical-align: top">Associated Action Item(s):&nbsp;&nbsp;&nbsp; <asp:Button ID="ButtonAssociateActionItems" runat="server" Text="Associate Action Items" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" Width="160px" TabIndex="19" />
+            </td>
+
+
         </tr>
 
         <tr>
             <td colspan="5"></td>
             <td colspan="6">
-                <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="GridViewActionItemScroll" visible="false">
+                <div id="GridViewActionItemScroll" runat="server" style="overflow: scroll; height: 250px; width: 800px" visible="false">
                     <asp:GridView ID="GridViewAssociatedTasks" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="AssociatedActionItems" ForeColor="#333333" GridLines="None">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
@@ -454,7 +458,7 @@
                 <asp:SqlDataSource ID="AssociatedActionItems" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT A.[Name], A.[Description], A.[DateCreated], A.[DateAssigned], A.[ExpectedCompletionDate],
                     A.[ActualCompletionDate], A.[StatusDescription], A.[UpdateDate], S.[StatusName] Stat 
                     FROM [tblActionItems] A
-                    LEFT JOIN [tblStatus] S ON S.[Sequence] = A.[Status]
+                    LEFT JOIN [tblStatusActItem] S ON S.[Sequence] = A.[Status]
                     WHERE ((A.[UserID] = @UserID) AND (A.[ProjectID] = @ProjectID) AND (A.[AssociatedIssue] = @AssocIssueID))">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
@@ -463,6 +467,10 @@
                     </SelectParameters>
                 </asp:SqlDataSource>
             </td>
+        </tr>
+        <tr>
+            <td colspan="5"></td>
+            <td colspan="6"></td>
 
         </tr>
 
@@ -471,23 +479,22 @@
         </tr>
 
         <tr>
-            <td colspan="1" class="text-right">Date Assigned*:</td>
-            <td colspan="4">
-                <asp:TextBox ID="TextBoxDateAssigned" runat="server" Height="20px" Width="80px"></asp:TextBox>
+            <td colspan="1" class="auto-style18">
+                <asp:Label ID="LabelActualCompletionDate" runat="server" Text="Actual Completion Date: " Visible="False"></asp:Label></td>
+            <td colspan="4" class="auto-style19">
+                <asp:TextBox ID="TextBoxActualCompletionDate" runat="server" Visible="False" Height="20px" Width="80px" BackColor="#CCCCCC"></asp:TextBox>
+                <cc1:CalendarExtender ID="CalendarActComplDate" PopupButtonID="ImageButtonActCompletionDate" runat="server" TargetControlID="TextBoxActualCompletionDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                <asp:ImageButton ID="ImageButtonActCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="7" /></td>
 
-                <cc1:CalendarExtender ID="CalendarDateAssigned" PopupButtonID="ImageButtonDateAssigned" runat="server" TargetControlID="TextBoxDateAssigned" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonDateAssigned" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="6" /></td>
-
-            <td colspan="1" class="text-right">Associated Decision(s):</td>
-            <td colspan="4">
-                <asp:Button ID="ButtonAssociateDecisions" runat="server" Text="Associate Decisions" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" Width="150px" TabIndex="20" />
+            <td colspan="1" class="auto-style20" style="vertical-align: top">Associated Decision(s):&nbsp;&nbsp;&nbsp; <asp:Button ID="ButtonAssociateDecisions" runat="server" Text="Associate Decisions" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" Width="150px" TabIndex="20" />
             </td>
+            <td colspan="4" class="auto-style19"></td>
         </tr>
 
         <tr>
             <td colspan="5"></td>
             <td colspan="6">
-                <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="GridViewDecisionScroll" visible="false">
+                <div id="GridViewDecisionScroll" runat="server" style="overflow: scroll; height: 250px; width: 800px" visible="false">
                     <asp:GridView ID="GridViewAssociatedDecisions" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="AssociatedDecisions" ForeColor="#333333" GridLines="None">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
@@ -519,9 +526,9 @@
                     <asp:SqlDataSource ID="AssociatedDecisions" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT D.[Name], D.[Description], D.[DateCreated], D.[DateNeeded], D.[DateMade], D.[ExpectedCompletionDate], 
                     D.[ActualCompletionDate], D.[NoteDate], D.[StatusDescription], D.[UpdateDate], P.[PriorityName] Pri, I.[ImpactName] Imp, S.[StatusName] Stat 
                     FROM [tblDecisions] D
-                    LEFT JOIN [tblPriority] P ON P.[Sequence] = D.[Priority]
-                    LEFT JOIN [tblImpact] I ON I.[Sequence] = D.[Impact]
-                    LEFT JOIN [tblStatus] S ON S.[Sequence] = D.[Status]
+                    LEFT JOIN [tblPriorityDec] P ON P.[Sequence] = D.[Priority]
+                    LEFT JOIN [tblImpactDec] I ON I.[Sequence] = D.[Impact]
+                    LEFT JOIN [tblStatusDec] S ON S.[Sequence] = D.[Status]
                         WHERE ((D.[UserID] = @UserID) AND (D.[ProjectID] = @ProjectID) AND (D.[AssociatedIssue] = @AssociatedIssue))">
                         <SelectParameters>
                             <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
@@ -534,36 +541,22 @@
         </tr>
 
         <tr>
-            <td colspan="11"></td>
-        </tr>
-
-        <tr>
-            <td colspan="1">
-                <asp:Label ID="LabelActualCompletionDate" runat="server" Text="Actual Completion Date: " Visible="False"></asp:Label></td>
-            <td colspan="4">
-                <asp:TextBox ID="TextBoxActualCompletionDate" runat="server" Visible="False" Height="20px" Width="80px"></asp:TextBox>
-                <cc1:CalendarExtender ID="CalendarActComplDate" PopupButtonID="ImageButtonActCompletionDate" runat="server" TargetControlID="TextBoxActualCompletionDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonActCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="7" /></td>
-            <td colspan="6"></td>
-        </tr>
-
-        <tr>
             <td colspan="11">&nbsp;</td>
         </tr>
 
         <tr>
-            <td colspan="1"></td>
+            <td colspan="1" class="auto-style17"></td>
             <td colspan="1">
                 <asp:Button ID="ButtonNew" runat="server" Text="New" OnClick="ButtonNew_Click" Width="100px" TabIndex="8" /></td>
             <td colspan="1"></td>
             <td colspan="1"></td>
             <td colspan="1"></td>
-            <td colspan="1" class="text-right">
+            <td colspan="1">
                 <asp:Button ID="ButtonDelete" runat="server" Text="Delete" OnClick="ButtonDelete_Click" Width="75px" />
             </td>
-            <td colspan="1"></td>
-            <td colspan="1" class="text-right">&nbsp;</td>
-            <td colspan="1">
+            <td colspan="1" class="text-left">&nbsp;</td>
+            <td colspan="1">&nbsp;</td>
+            <td colspan="1" class="text-left">
                 <asp:Button ID="ButtonSave" runat="server" Text="Save" OnClientClick="return listboxSave();" OnClick="ButtonSave_Click" Width="125px" TabIndex="21" />
             </td>
             <td colspan="1">&nbsp;</td>
@@ -702,6 +695,30 @@
         .auto-style15 {
             height: 26px;
             text-align: right;
+        }
+
+        .auto-style16 {
+            text-align: right;
+            width: 200px;
+        }
+
+        .auto-style17 {
+            width: 200px;
+        }
+
+        .auto-style18 {
+            text-align: right;
+            width: 200px;
+            height: 40px;
+        }
+
+        .auto-style19 {
+            height: 40px;
+        }
+
+        .auto-style20 {
+            text-align: left;
+            height: 40px;
         }
     </style>
 </asp:Content>

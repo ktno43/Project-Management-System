@@ -125,7 +125,7 @@ namespace _380_Project_3.ASPX_Dev
                 Connect(conn);
 
                 using (SqlCommand cmd = new SqlCommand(String.Format("SELECT Name, Description, DateCreated, DateAssigned," +
-                    "ExpectedCompletionDate, ActualCompletionDate, Status, StatusDescription " +
+                    "ExpectedCompletionDate, ActualCompletionDate, Status, StatusDescription, UpdateDate " +
                     "FROM tblActionItems WHERE ActionItemID={0} AND UserID={1} AND ProjectID={2}",
                     DropDownListActItemSelect.SelectedValue, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                 {
@@ -149,6 +149,8 @@ namespace _380_Project_3.ASPX_Dev
                         }
 
                         TextBoxStatusDescription.Text = SafeGetString(sdr, 7);
+
+                        TextBoxLastUpdated.Text = SafeGetString(sdr, 8);
                     }
                     sdr.Close();
                 }
@@ -203,7 +205,7 @@ namespace _380_Project_3.ASPX_Dev
                     string statusListBoxItems = this.HiddenFieldListBox.Value;
                     string[] arrListItems = statusListBoxItems.Split('|');
 
-                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatus where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatusActItem where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                     {
 
                         cmd.ExecuteNonQuery();
@@ -211,7 +213,7 @@ namespace _380_Project_3.ASPX_Dev
                         int count = 0;
                         foreach (string listItem in arrListItems)
                         {
-                            using (SqlCommand cmd2 = new SqlCommand("insert into tblStatus(UserID,ProjectID,StatusName,Sequence) values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
+                            using (SqlCommand cmd2 = new SqlCommand("insert into tblStatusActItem(UserID,ProjectID,StatusName,Sequence) values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
                             {
                                 cmd2.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                                 cmd2.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
@@ -343,7 +345,7 @@ namespace _380_Project_3.ASPX_Dev
                     Connect(conn);
 
 
-                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblStatus where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblStatusActItem where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                     {
                         rowCount = (int)cmdCount.ExecuteScalar();
                     }
@@ -354,7 +356,7 @@ namespace _380_Project_3.ASPX_Dev
                     {
                         for (int i = 0; i < arrDefaultStatuses.Length; i += 1)
                         {
-                            using (SqlCommand cmd = new SqlCommand("insert into tblStatus(UserID,ProjectID,StatusName,Sequence)" +
+                            using (SqlCommand cmd = new SqlCommand("insert into tblStatusActItem(UserID,ProjectID,StatusName,Sequence)" +
                                 " values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
                             {
                                 cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
@@ -469,7 +471,7 @@ namespace _380_Project_3.ASPX_Dev
 
                         using (SqlCommand cmd = new SqlCommand("UPDATE tblActionItems SET Name=@Name, Description=@Description, " +
                             "DateCreated=@DateCreated, DateAssigned=@DateAssigned, ExpectedCompletionDate=@ExpComplDate," +
-                            "ActualCompletionDate=@ActComplDate, Status=@Status, StatusDescription=@StatusDescription, UpdateDate=@LastUpdated" +
+                            "ActualCompletionDate=@ActComplDate, Status=@Status, StatusDescription=@StatusDescription" +
                             " WHERE UserID=@UserID AND ProjectID=@ProjID AND ActionItemID=@ActionID", conn))
                         {
                             cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
@@ -493,7 +495,6 @@ namespace _380_Project_3.ASPX_Dev
                             }
                             cmd.Parameters.AddWithValue("@Status", updatedIndex);
                             cmd.Parameters.AddWithValue("@StatusDescription", TextBoxStatusDescription.Text);
-                            cmd.Parameters.AddWithValue("@LastUpdated", DateTime.Today);
 
                             cmd.ExecuteNonQuery();
                         }
@@ -525,6 +526,54 @@ namespace _380_Project_3.ASPX_Dev
         protected void ButtonRemoveStatus_Click(object sender, EventArgs e)
         {
             this.ListBoxStatus.Items.Remove(this.ListBoxStatus.SelectedItem.ToString());
+        }
+
+        protected void TextBoxStatusDescription_TextChanged(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                try
+                {
+                    Connect(conn);
+                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT ActionItemID FROM tblActionItems WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    {
+                        SqlDataReader sdr = cmd2.ExecuteReader();
+
+                        while (sdr.Read())
+                        {
+                            Session["_CurrentActionItemID"] = sdr[0].ToString();
+
+                        }
+                        sdr.Close();
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand("UPDATE tblActionItems SET UpdateDate=@LastUpdated" +
+                        " WHERE UserID=@UserID AND ProjectID=@ProjID AND ActionItemID=@ActionID", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                        cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                        cmd.Parameters.AddWithValue("@ActionID", Session["_CurrentActionItemID"]);
+
+
+                        cmd.Parameters.AddWithValue("@LastUpdated", DateTime.Today);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                }
+
+                finally
+                {
+                    Disconnect(conn);
+                }
+
+                TextBoxLastUpdated.Text = DateTime.Today.ToShortDateString();
+            }
         }
     }
 }

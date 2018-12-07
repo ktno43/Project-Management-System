@@ -207,8 +207,12 @@ namespace _380_Project_3.ASPX_Dev
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
                 Connect(conn);
-                using (SqlCommand cmd = new SqlCommand(String.Format("SELECT Name, Description, ExpectedEndDate, ExpectedEffort," +
-                    "ActualEndDate, ActualEffort, EffortCompleted, PredecessorTask, PredecessorDependency, SuccessorTask, SuccessorDependency FROM tblTasks WHERE TaskID={0} AND UserID={1} AND ProjectID={2}",
+                using (SqlCommand cmd = new SqlCommand(String.Format("SELECT T.Name, T.Description, T.ExpectedEndDate, T.ExpectedEffort," +
+                    "T.ActualEndDate, T.ActualEffort, T.EffortCompleted, P.Name,T.PredecessorDependency, S.Name, T.SuccessorDependency" +
+                    " FROM tblTasks T " +
+                    "LEFT JOIN tblTasks S ON S.TaskID = T.SuccessorTask " +
+                    "LEFT JOIN tblTasks P ON P.TaskID = T.PredecessorTask " +
+                    "WHERE T.TaskID={0} AND T.UserID={1} AND T.ProjectID={2}",
                     DropDownListMilestoneSelect.SelectedValue, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                 {
                     SqlDataReader sdr = cmd.ExecuteReader();

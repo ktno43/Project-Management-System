@@ -112,6 +112,33 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
         
         /// <summary>
+        /// TextBoxStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxStartDate;
+        
+        /// <summary>
+        /// CalendarStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarStartDate;
+        
+        /// <summary>
+        /// ImageButtonStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonStartDate;
+        
+        /// <summary>
         /// ButtonAssociateTasks control.
         /// </summary>
         /// <remarks>
@@ -148,31 +175,31 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.WebControls.SqlDataSource GridAssociatedTasks;
         
         /// <summary>
-        /// TextBoxStartDate control.
+        /// TextBoxDueDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxStartDate;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxDueDate;
         
         /// <summary>
-        /// CalendarStartDate control.
+        /// CalendarDueDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarStartDate;
+        protected global::AjaxControlToolkit.CalendarExtender CalendarDueDate;
         
         /// <summary>
-        /// ImageButtonStartDate control.
+        /// ImageButtonDueDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButtonStartDate;
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonDueDate;
         
         /// <summary>
         /// DelivList_Scrollbar control.
@@ -200,33 +227,6 @@ namespace _380_Project_3 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource GridDeliverables;
-        
-        /// <summary>
-        /// TextBoxDueDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxDueDate;
-        
-        /// <summary>
-        /// CalendarDueDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarDueDate;
-        
-        /// <summary>
-        /// ImageButtonDueDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButtonDueDate;
         
         /// <summary>
         /// ButtonNew control.

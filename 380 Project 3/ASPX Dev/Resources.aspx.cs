@@ -162,7 +162,7 @@ namespace _380_Project_3.ASPX_Dev
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(),
                     "alertMessage",
-                    "alert('Please enter the name of theResource to be deleted.');", true);
+                    "alert('Please enter the name of the Resource to be deleted.');", true);
             }
 
             else

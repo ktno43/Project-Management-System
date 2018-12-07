@@ -7,13 +7,14 @@
     <title></title>
     <style type="text/css">
         .auto-style1 {
-            width: 516px;
+            width: 868px;
+            height: 37px;
         }
         .auto-style2 {
             text-align: center;
         }
         .auto-style3 {
-            width: 516px;
+            width: 868px;
             text-align: right;
         }
         .auto-style4 {
@@ -27,6 +28,13 @@
         .auto-style6 {
             width: 100%;
             height: 101px;
+        }
+        .auto-style7 {
+            width: 168px;
+            height: 37px;
+        }
+        .auto-style8 {
+            height: 37px;
         }
     </style>
 </head>
@@ -54,11 +62,11 @@
         </tr>
         <tr>
             <td class="auto-style1">
-                &nbsp;</td>
-            <td class="auto-style5">
+                </td>
+            <td class="auto-style7">
         <asp:Button ID="ButtonLogin" runat="server" OnClick="Button_Login_Click" Text="Login" Width="69px" TabIndex="3" />
             </td>
-            <td>&nbsp;</td>
+            <td class="auto-style8"></td>
         </tr>
     </table>
     </form>

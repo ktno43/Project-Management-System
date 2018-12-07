@@ -17,17 +17,13 @@
         }
 
         .auto-style2 {
-            width: 327px;
+            width: 694px;
+            text-align: right;
         }
 
         .auto-style4 {
             width: 578px;
             text-align: justify;
-        }
-
-        .auto-style5 {
-            width: 327px;
-            height: 59px;
         }
 
         .auto-style6 {
@@ -39,6 +35,10 @@
             text-align: left;
             height: 59px;
         }
+        .auto-style9 {
+            width: 694px;
+            height: 59px;
+        }
     </style>
 </head>
 <body>
@@ -48,7 +48,7 @@
         </div>
         <table style="width: 100%;">
             <tr>
-                <td class="auto-style2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Select Project</td>
+                <td class="auto-style2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Select Project&nbsp;&nbsp;&nbsp; </td>
                 <td class="auto-style4">
                     <asp:DropDownList ID="DropDownListProjSelect" runat="server" DataSourceID="ProjectSelectDB" DataTextField="ProjectName" DataValueField="ProjectID" Height="30px" Width="571px" TabIndex="1">
                     </asp:DropDownList>
@@ -63,7 +63,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="auto-style5"></td>
+                <td class="auto-style9"></td>
                 <td class="auto-style6"></td>
                 <td class="auto-style8">
                     <asp:Button ID="ButtonNew" runat="server" data-toggle="modal" data-target="#myModal" Text="New Project" Width="160px" OnClientClick="return false;" TabIndex="3" />
@@ -71,7 +71,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="auto-style5"></td>
+                <td class="auto-style9"></td>
                 <td class="auto-style6">
                     <asp:Button ID="ButtonDelete" runat="server" OnClick="ButtonDelete_Click" Text="Delete Project" Width="160px" />
                 </td>
