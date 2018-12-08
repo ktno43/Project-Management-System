@@ -56,6 +56,18 @@
         .auto-style22 {
             width: 200px;
         }
+        .auto-style23 {
+            text-align: right;
+            width: 200px;
+            height: 156px;
+        }
+        .auto-style24 {
+            height: 156px;
+        }
+        .auto-style25 {
+            text-align: right;
+            height: 156px;
+        }
     </style>
 
     <div class="container">
@@ -73,7 +85,7 @@
                     <div class="modal-body">
                         Deliverables List:
                         <asp:DropDownList ID="DropDownListDelivSelect" runat="server" DataSourceID="DropDownListDelivDB" DataTextField="Name" DataValueField="DeliverableID" Height="30px" Width="571px" AppendDataBoundItems="true">
-                            <asp:ListItem Text="" Value="" />
+
                         </asp:DropDownList>
 
                         <asp:SqlDataSource ID="DropDownListDelivDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [DeliverableID] FROM [tblDeliverables] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
@@ -171,11 +183,11 @@
         </tr>
 
         <tr style="vertical-align: top">
-            <td colspan="1" class="auto-style20">Description<span class="auto-style17">*</span>:&nbsp;&nbsp;&nbsp; </td>
-            <td colspan="4">
+            <td colspan="1" class="auto-style23">Description<span class="auto-style17">*</span>:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="4" class="auto-style24">
                 <asp:TextBox ID="TextBoxDescription" runat="server" Height="150px" MaxLength="1000" TextMode="MultiLine" Width="300px" TabIndex="3"></asp:TextBox>
             </td>
-            <td colspan="2" class="text-right">&nbsp;</td>
+            <td colspan="2" class="auto-style25"></td>
             <td colspan="7" rowspan="2" class="text-left">
                 <br />
                 <br />
@@ -204,12 +216,16 @@
             <td colspan="9">
                 <div id="id_GridviewScroll" runat="server" style="overflow: scroll; height: 250px; width: 800px" visible="false">
                     <br />
-                    <asp:GridView ID="GridViewAssociatedTasks" runat="server" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridAssociatedTasks" ForeColor="#333333" GridLines="None" Height="121px" Width="100%">
+                    <asp:GridView ID="GridViewAssociatedTasks" runat="server" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridAssociatedTasks" ForeColor="#333333" GridLines="None" Height="50px" Width="2500px">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
-                            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-                            <asp:BoundField DataField="TaskType" HeaderText="Task Type" SortExpression="TaskType" />
+                            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" >
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" >
+                            <ItemStyle Width="300px" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="TaskType" HeaderText="Task Type" SortExpression="TaskType" >
+                            </asp:BoundField>
                             <asp:BoundField DataField="ExpectedStartDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected Start Date" SortExpression="ExpectedStartDate" />
                             <asp:BoundField DataField="ExpectedEndDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected End Date" SortExpression="ExpectedEndDate" />
                             <asp:BoundField DataField="ExpectedDuration" HeaderText="Expected Duration" SortExpression="ExpectedDuration" />
@@ -273,7 +289,7 @@
 
             <td colspan="9" class="auto-style18">
                 <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="DelivList_Scrollbar">
-                    <asp:GridView ID="GridViewListDeliverables" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridDeliverables" ForeColor="#333333" GridLines="None" AllowSorting="True" Width="830px">
+                    <asp:GridView ID="GridViewListDeliverables" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridDeliverables" ForeColor="#333333" GridLines="none" AllowSorting="True" Height="50px" Width="800px">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />

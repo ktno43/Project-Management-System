@@ -118,11 +118,14 @@ namespace _380_Project_3.ASPX_Dev
             return string.Empty;
         }
 
+
         protected void ButtonModalSearch_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
                 Connect(conn);
+                Session["_CurrentActionItemID"] = DropDownListActItemSelect.SelectedValue;
+                this.ListBoxStatus.DataBind();
 
                 using (SqlCommand cmd = new SqlCommand(String.Format("SELECT Name, Description, DateCreated, DateAssigned," +
                     "ExpectedCompletionDate, ActualCompletionDate, Status, StatusDescription, UpdateDate " +
@@ -205,25 +208,41 @@ namespace _380_Project_3.ASPX_Dev
                     string statusListBoxItems = this.HiddenFieldListBox.Value;
                     string[] arrListItems = statusListBoxItems.Split('|');
 
-                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatusActItem where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    using (SqlCommand cmd3 = new SqlCommand(String.Format("UPDATE tblActionItems SET Status = NULL WHERE ActionItemID={0}",
+                          Session["_CurrentActionItemID"]), conn))
+                    {
+                        try
+                        {
+                            cmd3.ExecuteNonQuery();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                        }
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatusActItem where UserID={0} and ProjectID={1} and AssociatedActionItem={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentActionItemID"]), conn))
                     {
 
                         cmd.ExecuteNonQuery();
-
-                        int count = 0;
-                        foreach (string listItem in arrListItems)
-                        {
-                            using (SqlCommand cmd2 = new SqlCommand("insert into tblStatusActItem(UserID,ProjectID,StatusName,Sequence) values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
-                            {
-                                cmd2.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
-                                cmd2.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
-                                cmd2.Parameters.AddWithValue("@StatusName", listItem);
-                                cmd2.Parameters.AddWithValue("@Sequence", count);
-                                cmd2.ExecuteNonQuery();
-                            }
-                            count++;
-                        }
                     }
+
+                    int count = 0;
+                    foreach (string listItem in arrListItems)
+                    {
+                        using (SqlCommand cmd2 = new SqlCommand("insert into tblStatusActItem(UserID,ProjectID,StatusName,Sequence,AssociatedActionItem) values(@UserID, @ProjectID, @StatusName, @Sequence,@AssocActItem)", conn))
+                        {
+                            cmd2.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                            cmd2.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
+                            cmd2.Parameters.AddWithValue("@StatusName", listItem);
+                            cmd2.Parameters.AddWithValue("@Sequence", count);
+                            cmd2.Parameters.AddWithValue("@AssocActItem", Session["_CurrentActionItemID"]);
+                            cmd2.ExecuteNonQuery();
+                        }
+                        count++;
+                    }
+
                 }
 
                 catch (Exception ex)
@@ -287,9 +306,8 @@ namespace _380_Project_3.ASPX_Dev
                             cmd.Parameters.AddWithValue("@DateAssigned", TextBoxDateAssigned.Text);
                             cmd.Parameters.AddWithValue("@ExpCompletionDate", TextBoxExpectedCompletionDate.Text);
 
-                            LoadDefaultStatusListBox();
                             cmd.ExecuteNonQuery();
-
+                            LoadDefaultStatusListBox();
                         }
                     }
 
@@ -344,8 +362,21 @@ namespace _380_Project_3.ASPX_Dev
 
                     Connect(conn);
 
+                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT ActionItemID FROM tblActionItems WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    {
+                        SqlDataReader sdr = cmd2.ExecuteReader();
 
-                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblStatusActItem where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                        while (sdr.Read())
+                        {
+                            Session["_CurrentActionItemID"] = sdr[0].ToString();
+
+                        }
+                        sdr.Close();
+                    }
+
+
+                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblStatusActItem where UserID={0} and ProjectID={1} AND AssociatedActionItem={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentActionItemID"]), conn))
                     {
                         rowCount = (int)cmdCount.ExecuteScalar();
                     }
@@ -356,13 +387,14 @@ namespace _380_Project_3.ASPX_Dev
                     {
                         for (int i = 0; i < arrDefaultStatuses.Length; i += 1)
                         {
-                            using (SqlCommand cmd = new SqlCommand("insert into tblStatusActItem(UserID,ProjectID,StatusName,Sequence)" +
-                                " values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
+                            using (SqlCommand cmd = new SqlCommand("insert into tblStatusActItem(UserID,ProjectID,StatusName,Sequence,AssociatedActionItem)" +
+                                " values(@UserID, @ProjectID, @StatusName, @Sequence,@AssocActItem)", conn))
                             {
                                 cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                                 cmd.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                                 cmd.Parameters.AddWithValue("@StatusName", arrDefaultStatuses[i]);
                                 cmd.Parameters.AddWithValue("@Sequence", i);
+                                cmd.Parameters.AddWithValue("@AssocActItem", Session["_CurrentActionItemID"]);
 
                                 cmd.ExecuteNonQuery();
                             }
@@ -400,6 +432,38 @@ namespace _380_Project_3.ASPX_Dev
                 {
                     Connect(conn);
 
+                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT ActionItemID FROM tblActionItems WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    {
+                        SqlDataReader sdr = cmd2.ExecuteReader();
+
+                        while (sdr.Read())
+                        {
+                            Session["_CurrentActionItemID"] = sdr[0].ToString();
+
+                        }
+                        sdr.Close();
+                    }
+
+                    using (SqlCommand cmd3 = new SqlCommand(String.Format("UPDATE tblResources SET AssociatedActionItem = NULL WHERE AssociatedActionItem={0}", Session["_CurrentActionItemID"]), conn))
+                    {
+                        try
+                        {
+                            cmd3.ExecuteNonQuery();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                        }
+                    }
+
+
+                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatusActItem where UserID={0} and ProjectID={1} and AssociatedActionItem={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentActionItemID"]), conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
                     using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblActionItems where UserID={0} and ProjectID={1} AND Name='{2}'",
                         Session["_CurrentUserID"], Session["_CurrentProjID"], TextBoxName.Text), conn))
                     {
@@ -423,6 +487,7 @@ namespace _380_Project_3.ASPX_Dev
                 DropDownListActItemSelect.Items.Clear();
                 DropDownListActItemSelect.DataBind();
                 GridViewActionItemsList.DataBind();
+
             }
         }
 

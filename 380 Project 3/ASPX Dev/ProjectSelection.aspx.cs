@@ -62,6 +62,8 @@ namespace _380_Project_3.ASPX_Dev
             {
                 Connect(conn);
 
+
+
                 using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblProjSelect where UserID={0} AND ProjectName='{1}'",
                     Session["_CurrentUserID"], DropDownListProjSelect.SelectedItem.Text), conn))
                 {

@@ -25,8 +25,6 @@
                     <div class="modal-body">
                         Decisions List:
                         <asp:DropDownList ID="DropDownListDecisionSelect" runat="server" DataSourceID="DropDownListDecisionDB" DataTextField="Name" DataValueField="DecisionID" Height="30px" Width="571px" AppendDataBoundItems="true">
-                            <asp:ListItem Text="" Value="" />
-
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="DropDownListDecisionDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [DecisionID] FROM [tblDecisions] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
                             <SelectParameters>
@@ -214,10 +212,9 @@
 
             <td colspan="2" rowspan="2">
                 <asp:ListBox ID="ListBoxImpact" ClientIDMode="Static" runat="server" Width="185px" onchange="ImpactTextBoxJS(this)" DataSourceID="ListBoxImpactDB" DataTextField="ImpactName" DataValueField="Sequence" Height="150px" TabIndex="11"></asp:ListBox>
-                <asp:SqlDataSource ID="ListBoxImpactDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [ImpactName], [Sequence] FROM [tblImpactDec] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
+                <asp:SqlDataSource ID="ListBoxImpactDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [ImpactName], [Sequence] FROM [tblImpactDec] WHERE ([AssociatedDecision] = @AssocDec) ORDER BY [Sequence] ASC">
                     <SelectParameters>
-                        <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
-                        <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                        <asp:SessionParameter Name="AssocDec" SessionField="_CurrentDecisionID" Type="Int32" />
                     </SelectParameters>
                 </asp:SqlDataSource>
             </td>
@@ -259,10 +256,10 @@
                 <asp:Button ID="ButtonRemovePriority" runat="server" Text="Remove Priority" Width="120px" OnClick="ButtonRemovePriority_Click" TabIndex="16" /></td>
             <td colspan="2" rowspan="2">
                 <asp:ListBox ID="ListBoxPriority" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="PriorityTextBoxJS(this)" DataSourceID="ListBoxPriorityDB" DataTextField="PriorityName" DataValueField="Sequence" TabIndex="14"></asp:ListBox>
-                <asp:SqlDataSource ID="ListBoxPriorityDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [PriorityName], [Sequence] FROM [tblPriorityDec] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
+                <asp:SqlDataSource ID="ListBoxPriorityDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [PriorityName], [Sequence] FROM [tblPriorityDec] WHERE ([AssociatedDecision] = @AssocDec) ORDER BY [Sequence] ASC">
                     <SelectParameters>
-                        <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
-                        <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                        <asp:SessionParameter Name="AssocDec" SessionField="_CurrentDecisionID" Type="Int32" />
+
                     </SelectParameters>
                 </asp:SqlDataSource>
             </td>
@@ -310,10 +307,9 @@
 
                 <asp:ListBox ID="ListBoxStatus" ClientIDMode="Static" runat="server" Width="185px" Height="150px" onchange="StatusTextBoxJS(this)" DataSourceID="ListBoxStatusDB" DataTextField="StatusName" DataValueField="Sequence" TabIndex="17"></asp:ListBox>
 
-                <asp:SqlDataSource ID="ListBoxStatusDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [StatusName], [Sequence] FROM [tblStatusDec] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
+                <asp:SqlDataSource ID="ListBoxStatusDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [StatusName], [Sequence] FROM [tblStatusDec] WHERE ([AssociatedDecision] = @AssocDec) ORDER BY [Sequence] ASC">
                     <SelectParameters>
-                        <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
-                        <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                        <asp:SessionParameter Name="AssocDec" SessionField="_CurrentDecisionID" Type="Int32" />
                     </SelectParameters>
                 </asp:SqlDataSource>
 
@@ -422,7 +418,7 @@
         <tr>
             <td colspan="1" class="auto-style17">
                 <asp:Label ID="LabelDateMade" runat="server" Text="Date Made:" Visible="False"></asp:Label>
-            &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
             </td>
             <td colspan="4">
                 <asp:TextBox ID="TextBoxDateMade" runat="server" Visible="False" Height="20px" Width="80px" BackColor="#CCCCCC"></asp:TextBox>
@@ -444,7 +440,7 @@
         <tr>
             <td colspan="1" class="auto-style17">
                 <asp:Label ID="LabelDecisionMaker" runat="server" Text="Decision Maker:" Visible="False"></asp:Label>
-            &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
             </td>
             <td colspan="4">
                 <asp:TextBox ID="TextBoxDecisionMaker" runat="server" Visible="False" Width="150px" BackColor="#CCCCCC" Height="20px" ReadOnly="True"></asp:TextBox>
@@ -457,11 +453,13 @@
             <td colspan="5"></td>
             <td colspan="5">
                 <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="GridViewDecisionScroll">
-                    <asp:GridView ID="GridViewListofDecisions" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridViewDecisionsDB" ForeColor="#333333" GridLines="None">
+                    <asp:GridView ID="GridViewListofDecisions" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridViewDecisionsDB" ForeColor="#333333" GridLines="None" Height="50px" Width="1750px">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
+                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description">
+                                <ItemStyle Width="300px" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="Pri" HeaderText="Priority" SortExpression="Priority" />
                             <asp:BoundField DataField="Imp" HeaderText="Impact" SortExpression="Impact" />
                             <asp:BoundField DataField="DateCreated" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Created" SortExpression="DateCreated" />
@@ -471,7 +469,9 @@
                             <asp:BoundField DataField="ActualCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
                             <asp:BoundField DataField="NoteDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Note Date" SortExpression="NoteDate" />
                             <asp:BoundField DataField="Stat" HeaderText="Status" SortExpression="Status" />
-                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription" />
+                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription">
+                                <ItemStyle Width="300px" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="UpdateDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Update Date" SortExpression="UpdateDate" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
@@ -486,12 +486,12 @@
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
                 </div>
-                <asp:SqlDataSource ID="GridViewDecisionsDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT D.[Name], D.[Description], D.[DateCreated], D.[DateNeeded], D.[DateMade], D.[ExpectedCompletionDate], 
+                <asp:SqlDataSource ID="GridViewDecisionsDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT DISTINCT D.[Name], D.[Description], D.[DateCreated], D.[DateNeeded], D.[DateMade], D.[ExpectedCompletionDate], 
                     D.[ActualCompletionDate], D.[NoteDate], D.[StatusDescription], D.[UpdateDate], P.[PriorityName] Pri, I.[ImpactName] Imp, S.[StatusName] Stat 
                     FROM [tblDecisions] D
-                    LEFT JOIN [tblPriorityDec] P ON P.[Sequence] = D.[Priority]
-                    LEFT JOIN [tblImpactDec] I ON I.[Sequence] = D.[Impact]
-                    LEFT JOIN [tblStatusDec] S ON S.[Sequence] = D.[Status]
+                    LEFT JOIN [tblPriorityDec] P ON P.[Sequence] = D.[Priority] AND P.[AssociatedDecision] = D.[DecisionID]
+                    LEFT JOIN [tblImpactDec] I ON I.[Sequence] = D.[Impact] AND I.[AssociatedDecision] = D.[DecisionID]
+                    LEFT JOIN [tblStatusDec] S ON S.[Sequence] = D.[Status] AND S.[AssociatedDecision] = D.[DecisionID]
                     WHERE ((D.[UserID] = @UserID) AND (D.[ProjectID] = @ProjectID))">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />

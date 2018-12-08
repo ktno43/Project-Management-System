@@ -123,6 +123,11 @@ namespace _380_Project_3.ASPX_Dev
 
         protected void ButtonModalSearch_Click(object sender, EventArgs e)
         {
+            Session["_CurrentDecisionID"] = this.DropDownListDecisionSelect.SelectedValue;
+            this.ListBoxImpact.DataBind();
+            this.ListBoxPriority.DataBind();
+            this.ListBoxStatus.DataBind();
+
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
                 Connect(conn);
@@ -262,11 +267,25 @@ namespace _380_Project_3.ASPX_Dev
                     string statusListBoxItem = this.HiddenFieldStatus.Value;
                     string[] arrStatusListBox = statusListBoxItem.Split('|');
 
-                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatusDec where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    using (SqlCommand cmd3 = new SqlCommand(String.Format("UPDATE tblDecisions SET Status = NULL, Priority = NULL, Impact = NULL WHERE DecisionID={0}",
+                        Session["_CurrentDecisionID"]), conn))
                     {
-                        using (SqlCommand cmd2 = new SqlCommand(string.Format("delete from tblPriorityDec where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                        try
                         {
-                            using (SqlCommand cmd3 = new SqlCommand(string.Format("delete from tblImpactDec where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                            cmd3.ExecuteNonQuery();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                        }
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatusDec where UserID={0} and ProjectID={1} AND AssociatedDecision={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDecisionID"]), conn))
+                    {
+                        using (SqlCommand cmd2 = new SqlCommand(string.Format("delete from tblPriorityDec where UserID={0} and ProjectID={1} AND AssociatedDecision={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDecisionID"]), conn))
+                        {
+                            using (SqlCommand cmd3 = new SqlCommand(string.Format("delete from tblImpactDec where UserID={0} and ProjectID={1} AND AssociatedDecision={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDecisionID"]), conn))
                             {
 
                                 cmd.ExecuteNonQuery();
@@ -279,12 +298,13 @@ namespace _380_Project_3.ASPX_Dev
                     int count = 0;
                     foreach (string statusListItem in arrStatusListBox)
                     {
-                        using (SqlCommand cmd4 = new SqlCommand("insert into tblStatusDec(UserID,ProjectID,StatusName,Sequence) values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
+                        using (SqlCommand cmd4 = new SqlCommand("insert into tblStatusDec(UserID,ProjectID,StatusName,Sequence,AssociatedDecision) values(@UserID, @ProjectID, @StatusName, @Sequence,@AssocDec)", conn))
                         {
                             cmd4.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                             cmd4.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                             cmd4.Parameters.AddWithValue("@StatusName", statusListItem);
                             cmd4.Parameters.AddWithValue("@Sequence", count);
+                            cmd4.Parameters.AddWithValue("@AssocDec", Session["_CurrentDecisionID"]);
                             cmd4.ExecuteNonQuery();
                         }
                         count++;
@@ -295,12 +315,13 @@ namespace _380_Project_3.ASPX_Dev
                     count = 0;
                     foreach (string priorityListItem in arrPriorityListBox)
                     {
-                        using (SqlCommand cmd5 = new SqlCommand("insert into tblPriorityDec(UserID,ProjectID,PriorityName,Sequence) values(@UserID, @ProjectID, @PriorityName, @Sequence)", conn))
+                        using (SqlCommand cmd5 = new SqlCommand("insert into tblPriorityDec(UserID,ProjectID,PriorityName,Sequence,AssociatedDecision) values(@UserID, @ProjectID, @PriorityName, @Sequence,@AssocDec)", conn))
                         {
                             cmd5.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                             cmd5.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                             cmd5.Parameters.AddWithValue("@PriorityName", priorityListItem);
                             cmd5.Parameters.AddWithValue("@Sequence", count);
+                            cmd5.Parameters.AddWithValue("@AssocDec", Session["_CurrentDecisionID"]);
                             cmd5.ExecuteNonQuery();
                         }
                         count++;
@@ -310,12 +331,13 @@ namespace _380_Project_3.ASPX_Dev
                     count = 0;
                     foreach (string impactListItem in arrImpactListBox)
                     {
-                        using (SqlCommand cmd6 = new SqlCommand("insert into tblImpactDec(UserID,ProjectID,ImpactName,Sequence) values(@UserID, @ProjectID, @ImpactName, @Sequence)", conn))
+                        using (SqlCommand cmd6 = new SqlCommand("insert into tblImpactDec(UserID,ProjectID,ImpactName,Sequence,AssociatedDecision) values(@UserID, @ProjectID, @ImpactName, @Sequence,@AssocDec)", conn))
                         {
                             cmd6.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                             cmd6.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                             cmd6.Parameters.AddWithValue("@ImpactName", impactListItem);
                             cmd6.Parameters.AddWithValue("@Sequence", count);
+                            cmd6.Parameters.AddWithValue("@AssocDec", Session["_CurrentDecisionID"]);
                             cmd6.ExecuteNonQuery();
                         }
                         count++;
@@ -347,6 +369,18 @@ namespace _380_Project_3.ASPX_Dev
                 try
                 {
                     Connect(conn);
+                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT DecisionID FROM tblDecisions WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    {
+                        SqlDataReader sdr = cmd2.ExecuteReader();
+
+                        while (sdr.Read())
+                        {
+                            Session["_CurrentDecisionID"] = sdr[0].ToString();
+
+                        }
+                        sdr.Close();
+                    }
 
                     string[] arrDefaultStatuses = { "Open", "Closed", "In Progress", "Hold", "Complete" };
                     string[] arrDefaultPriorities = { "Low", "Medium", "High" };
@@ -356,17 +390,17 @@ namespace _380_Project_3.ASPX_Dev
                     int priorityRowCount = -1;
                     int impactRowCount = -1;
 
-                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblStatusDec where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblStatusDec where UserID={0} and ProjectID={1} AND AssociatedDecision={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDecisionID"]), conn))
                     {
                         statusRowCount = (int)cmdCount.ExecuteScalar();
                     }
 
-                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblPriorityDec where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblPriorityDec where UserID={0} and ProjectID={1} AND AssociatedDecision={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDecisionID"]), conn))
                     {
                         priorityRowCount = (int)cmdCount.ExecuteScalar();
                     }
 
-                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblImpactDec where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblImpactDec where UserID={0} and ProjectID={1} AND AssociatedDecision={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDecisionID"]), conn))
                     {
                         impactRowCount = (int)cmdCount.ExecuteScalar();
                     }
@@ -375,13 +409,14 @@ namespace _380_Project_3.ASPX_Dev
                     {
                         for (int i = 0; i < arrDefaultStatuses.Length; i += 1)
                         {
-                            using (SqlCommand cmd = new SqlCommand("insert into tblStatusDec(UserID,ProjectID,StatusName,Sequence)" +
-                                " values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
+                            using (SqlCommand cmd = new SqlCommand("insert into tblStatusDec(UserID,ProjectID,StatusName,Sequence, AssociatedDecision)" +
+                                " values(@UserID, @ProjectID, @StatusName, @Sequence, @AssocDec)", conn))
                             {
                                 cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                                 cmd.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                                 cmd.Parameters.AddWithValue("@StatusName", arrDefaultStatuses[i]);
                                 cmd.Parameters.AddWithValue("@Sequence", i);
+                                cmd.Parameters.AddWithValue("@AssocDec", Session["_CurrentDecisionID"]);
 
                                 cmd.ExecuteNonQuery();
                             }
@@ -394,13 +429,14 @@ namespace _380_Project_3.ASPX_Dev
                     {
                         for (int j = 0; j < arrDefaultPriorities.Length; j += 1)
                         {
-                            using (SqlCommand cmd2 = new SqlCommand("insert into tblPriorityDec(UserID,ProjectID,PriorityName,Sequence)" +
-                                " values(@UserID, @ProjectID, @PriorityName, @Sequence)", conn))
+                            using (SqlCommand cmd2 = new SqlCommand("insert into tblPriorityDec(UserID,ProjectID,PriorityName,Sequence,AssociatedDecision)" +
+                                " values(@UserID, @ProjectID, @PriorityName, @Sequence,@AssocDec)", conn))
                             {
                                 cmd2.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                                 cmd2.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                                 cmd2.Parameters.AddWithValue("@PriorityName", arrDefaultStatuses[j]);
                                 cmd2.Parameters.AddWithValue("@Sequence", j);
+                                cmd2.Parameters.AddWithValue("@AssocDec", Session["_CurrentDecisionID"]);
 
                                 cmd2.ExecuteNonQuery();
                             }
@@ -413,13 +449,14 @@ namespace _380_Project_3.ASPX_Dev
 
                         for (int k = 0; k < arrDefaultImpacts.Length; k += 1)
                         {
-                            using (SqlCommand cmd3 = new SqlCommand("insert into tblImpactDec(UserID,ProjectID,ImpactName,Sequence)" +
-                                " values(@UserID, @ProjectID, @ImpactName, @Sequence)", conn))
+                            using (SqlCommand cmd3 = new SqlCommand("insert into tblImpactDec(UserID,ProjectID,ImpactName,Sequence,AssociatedDecision)" +
+                                " values(@UserID, @ProjectID, @ImpactName, @Sequence, @AssocDec)", conn))
                             {
                                 cmd3.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                                 cmd3.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                                 cmd3.Parameters.AddWithValue("@ImpactName", arrDefaultImpacts[k]);
                                 cmd3.Parameters.AddWithValue("@Sequence", k);
+                                cmd3.Parameters.AddWithValue("@AssocDec", Session["_CurrentDecisionID"]);
 
                                 cmd3.ExecuteNonQuery();
                             }
@@ -480,8 +517,9 @@ namespace _380_Project_3.ASPX_Dev
                             cmd.Parameters.AddWithValue("@DateNeeded", TextBoxDateNeeded.Text);
                             cmd.Parameters.AddWithValue("@ExpComp", TextBoxExpCompletionDate.Text);
 
-                            LoadDefaultStatusListBox();
                             cmd.ExecuteNonQuery();
+                            LoadDefaultStatusListBox();
+
                         }
                     }
 
@@ -547,6 +585,45 @@ namespace _380_Project_3.ASPX_Dev
                 using (SqlConnection conn = new SqlConnection(g_sqlConn))
                 {
                     Connect(conn);
+                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT DecisionID FROM tblDecisions WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    {
+                        SqlDataReader sdr = cmd2.ExecuteReader();
+
+                        while (sdr.Read())
+                        {
+                            Session["_CurrentDecisionID"] = sdr[0].ToString();
+
+                        }
+                        sdr.Close();
+                    }
+
+                    using (SqlCommand cmd3 = new SqlCommand(String.Format("UPDATE tblResources SET AssociatedDecision = NULL WHERE AssociatedDecision={0}", Session["_CurrentDecisionID"]), conn))
+                    {
+                        try
+                        {
+                            cmd3.ExecuteNonQuery();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                        }
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatusDec where UserID={0} and ProjectID={1} AND AssociatedDecision={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDecisionID"]), conn))
+                    {
+                        using (SqlCommand cmd2 = new SqlCommand(string.Format("delete from tblPriorityDec where UserID={0} and ProjectID={1} AND AssociatedDecision={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDecisionID"]), conn))
+                        {
+                            using (SqlCommand cmd3 = new SqlCommand(string.Format("delete from tblImpactDec where UserID={0} and ProjectID={1} AND AssociatedDecision={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentDecisionID"]), conn))
+                            {
+
+                                cmd.ExecuteNonQuery();
+                                cmd2.ExecuteNonQuery();
+                                cmd3.ExecuteNonQuery();
+                            }
+                        }
+                    }
 
                     using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblDecisions where UserID={0} and ProjectID={1} AND Name='{2}'",
                         Session["_CurrentUserID"], Session["_CurrentProjID"], TextBoxName.Text), conn))
@@ -657,7 +734,7 @@ namespace _380_Project_3.ASPX_Dev
                             cmd.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
                             cmd.Parameters.AddWithValue("@DateCreated", TextBoxDateCreated.Text);
                             cmd.Parameters.AddWithValue("@DateNeeded", TextBoxDateNeeded.Text);
-                            cmd.Parameters.AddWithValue("@DateMade", TextBoxDateMade.Text);
+                            cmd.Parameters.AddWithValue("@DateMade", string.IsNullOrEmpty(TextBoxDateMade.Text) ? (object)DBNull.Value : TextBoxDateMade.Text);
                             cmd.Parameters.AddWithValue("@ExpDate", TextBoxExpCompletionDate.Text);
                             cmd.Parameters.AddWithValue("@ActComplDate", string.IsNullOrEmpty(TextBoxActCompletionDate.Text) ? (object)DBNull.Value : TextBoxActCompletionDate.Text);
 

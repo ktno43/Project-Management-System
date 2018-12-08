@@ -162,7 +162,7 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
-            GridViewAssocActItem.DataBind();
+            GridViewAssociatedActItem.DataBind();
         }
 
         private void SaveListBoxes()
@@ -182,11 +182,39 @@ namespace _380_Project_3.ASPX_Dev
                 {
                     Connect(conn);
 
-                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatusIssues where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT IssueID FROM tblIssues WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                     {
-                        using (SqlCommand cmd2 = new SqlCommand(string.Format("delete from tblPriorityIssues where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                        SqlDataReader sdr = cmd2.ExecuteReader();
+
+                        while (sdr.Read())
                         {
-                            using (SqlCommand cmd3 = new SqlCommand(string.Format("delete from tblSeverityIssues where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                            Session["_CurrentIssueID"] = sdr[0].ToString();
+
+                        }
+                        sdr.Close();
+                    }
+
+                    using (SqlCommand cmd3 = new SqlCommand(String.Format("UPDATE tblIssues SET Status = NULL, Priority = NULL, Severity = NULL WHERE IssueID={0}",
+                        Session["_CurrentIssueID"]), conn))
+                    {
+                        try
+                        {
+                            cmd3.ExecuteNonQuery();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                        }
+                    }
+
+
+                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatusIssues where UserID={0} and ProjectID={1} AND AssociatedIssue={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentIssueID"]), conn))
+                    {
+                        using (SqlCommand cmd2 = new SqlCommand(string.Format("delete from tblPriorityIssues where UserID={0} and ProjectID={1} AND AssociatedIssue={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentIssueID"]), conn))
+                        {
+                            using (SqlCommand cmd3 = new SqlCommand(string.Format("delete from tblSeverityIssues where UserID={0} and ProjectID={1} AND AssociatedIssue={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentIssueID"]), conn))
                             {
 
                                 cmd.ExecuteNonQuery();
@@ -199,12 +227,13 @@ namespace _380_Project_3.ASPX_Dev
 
                     foreach (string statusListItem in arrStatusListBox)
                     {
-                        using (SqlCommand cmd4 = new SqlCommand("insert into tblStatusIssues(UserID,ProjectID,StatusName,Sequence) values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
+                        using (SqlCommand cmd4 = new SqlCommand("insert into tblStatusIssues(UserID,ProjectID,StatusName,Sequence, AssociatedIssue) values(@UserID, @ProjectID, @StatusName, @Sequence, @AssocIssue)", conn))
                         {
                             cmd4.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                             cmd4.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                             cmd4.Parameters.AddWithValue("@StatusName", statusListItem);
                             cmd4.Parameters.AddWithValue("@Sequence", count);
+                            cmd4.Parameters.AddWithValue("@AssocIssue", Session["_CurrentIssueID"]);
                             cmd4.ExecuteNonQuery();
                         }
                         count++;
@@ -214,12 +243,13 @@ namespace _380_Project_3.ASPX_Dev
                     count = 0;
                     foreach (string priorityListItem in arrPriorityListBox)
                     {
-                        using (SqlCommand cmd5 = new SqlCommand("insert into tblPriorityIssues(UserID,ProjectID,PriorityName,Sequence) values(@UserID, @ProjectID, @PriorityName, @Sequence)", conn))
+                        using (SqlCommand cmd5 = new SqlCommand("insert into tblPriorityIssues(UserID,ProjectID,PriorityName,Sequence, AssociatedIssue) values(@UserID, @ProjectID, @PriorityName, @Sequence, @AssocIssue)", conn))
                         {
                             cmd5.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                             cmd5.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                             cmd5.Parameters.AddWithValue("@PriorityName", priorityListItem);
                             cmd5.Parameters.AddWithValue("@Sequence", count);
+                            cmd5.Parameters.AddWithValue("@AssocIssue", Session["_CurrentIssueID"]);
                             cmd5.ExecuteNonQuery();
                         }
                         count++;
@@ -229,12 +259,13 @@ namespace _380_Project_3.ASPX_Dev
                     count = 0;
                     foreach (string severityListItem in arrSeverityListBox)
                     {
-                        using (SqlCommand cmd6 = new SqlCommand("insert into tblSeverityIssues(UserID,ProjectID,SeverityName,Sequence) values(@UserID, @ProjectID, @SeverityName, @Sequence)", conn))
+                        using (SqlCommand cmd6 = new SqlCommand("insert into tblSeverityIssues(UserID,ProjectID,SeverityName,Sequence,AssociatedIssue) values(@UserID, @ProjectID, @SeverityName, @Sequence,@AssocIssue)", conn))
                         {
                             cmd6.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                             cmd6.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                             cmd6.Parameters.AddWithValue("@SeverityName", severityListItem);
                             cmd6.Parameters.AddWithValue("@Sequence", count);
+                            cmd6.Parameters.AddWithValue("@AssocIssue", Session["_CurrentIssueID"]);
                             cmd6.ExecuteNonQuery();
                         }
                         count++;
@@ -256,6 +287,7 @@ namespace _380_Project_3.ASPX_Dev
             this.ListBoxPriority.DataBind();
             this.ListBoxStatus.DataBind();
             this.ListBoxSeverity.DataBind();
+
         }
 
         private string SafeGetString(SqlDataReader reader, int colIndex)
@@ -272,11 +304,16 @@ namespace _380_Project_3.ASPX_Dev
 
         protected void ButtonModalSearch_Click(object sender, EventArgs e)
         {
+
+            Session["_CurrentIssueID"] = this.DropDownListIssuesSelect.SelectedValue;
+            this.ListBoxSeverity.DataBind();
+            this.ListBoxPriority.DataBind();
+            this.ListBoxStatus.DataBind();
             using (SqlConnection conn = new SqlConnection(g_sqlConn))
             {
                 Connect(conn);
                 using (SqlCommand cmd = new SqlCommand(String.Format("SELECT Name, Description, ExpectedCompletionDate, DateRaised, DateAssigned," +
-                    "Severity, Priority, ActualCompletionDate, Status, Status Description, UpdateDate " +
+                    "Severity, Priority, ActualCompletionDate,Status, StatusDescription, UpdateDate " +
                     "FROM tblIssues WHERE IssueID={0} AND UserID={1} AND ProjectID={2}",
                     this.DropDownListIssuesSelect.SelectedValue, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
                 {
@@ -344,7 +381,7 @@ namespace _380_Project_3.ASPX_Dev
             }
 
             this.GridViewActionItemScroll.Visible = true;
-            this.GridViewAssociatedTasks.DataBind();
+            this.GridViewAssociatedActItem.DataBind();
             this.GridViewDecisionScroll.Visible = true;
             this.GridViewAssociatedDecisions.DataBind();
             ButtonSave.Visible = true;
@@ -363,21 +400,35 @@ namespace _380_Project_3.ASPX_Dev
                 try
                 {
                     Connect(conn);
+
+                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT IssueID FROM tblIssues WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    {
+                        SqlDataReader sdr = cmd2.ExecuteReader();
+
+                        while (sdr.Read())
+                        {
+                            Session["_CurrentIssueID"] = sdr[0].ToString();
+
+                        }
+                        sdr.Close();
+                    }
+
                     int statusRowCount = -1;
                     int priorityRowCount = -1;
                     int severityRowCount = -1;
 
-                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblStatusIssues where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblStatusIssues where UserID={0} and ProjectID={1} AND AssociatedIssue={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentIssueID"]), conn))
                     {
                         statusRowCount = (int)cmdCount.ExecuteScalar();
                     }
 
-                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblPriorityIssues where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblPriorityIssues where UserID={0} and ProjectID={1} AND AssociatedIssue={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentIssueID"]), conn))
                     {
                         priorityRowCount = (int)cmdCount.ExecuteScalar();
                     }
 
-                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblSeverityIssues where UserID={0} and ProjectID={1}", Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    using (SqlCommand cmdCount = new SqlCommand(String.Format("select count(*) from tblSeverityIssues where UserID={0} and ProjectID={1} AND AssociatedIssue={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentIssueID"]), conn))
                     {
                         severityRowCount = (int)cmdCount.ExecuteScalar();
                     }
@@ -390,13 +441,14 @@ namespace _380_Project_3.ASPX_Dev
                     {
                         for (int i = 0; i < arrDefaultStatuses.Length; i += 1)
                         {
-                            using (SqlCommand cmd = new SqlCommand("insert into tblStatusIssues(UserID,ProjectID,StatusName,Sequence)" +
-                                " values(@UserID, @ProjectID, @StatusName, @Sequence)", conn))
+                            using (SqlCommand cmd = new SqlCommand("insert into tblStatusIssues(UserID,ProjectID,StatusName,Sequence, AssociatedIssue)" +
+                                " values(@UserID, @ProjectID, @StatusName, @Sequence,@AssocIssue)", conn))
                             {
                                 cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                                 cmd.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                                 cmd.Parameters.AddWithValue("@StatusName", arrDefaultStatuses[i]);
                                 cmd.Parameters.AddWithValue("@Sequence", i);
+                                cmd.Parameters.AddWithValue("@AssocIssue", Session["_CurrentIssueID"]);
 
                                 cmd.ExecuteNonQuery();
                             }
@@ -408,13 +460,14 @@ namespace _380_Project_3.ASPX_Dev
                     {
                         for (int j = 0; j < arrDefaultPriorities.Length; j += 1)
                         {
-                            using (SqlCommand cmd2 = new SqlCommand("insert into tblPriorityIssues(UserID,ProjectID,PriorityName,Sequence)" +
-                                " values(@UserID, @ProjectID, @PriorityName, @Sequence)", conn))
+                            using (SqlCommand cmd2 = new SqlCommand("insert into tblPriorityIssues(UserID,ProjectID,PriorityName,Sequence,AssociatedIssue)" +
+                                " values(@UserID, @ProjectID, @PriorityName, @Sequence,@AssocIssue)", conn))
                             {
                                 cmd2.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                                 cmd2.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                                 cmd2.Parameters.AddWithValue("@PriorityName", arrDefaultStatuses[j]);
                                 cmd2.Parameters.AddWithValue("@Sequence", j);
+                                cmd2.Parameters.AddWithValue("@AssocIssue", Session["_CurrentIssueID"]);
 
                                 cmd2.ExecuteNonQuery();
                             }
@@ -426,13 +479,14 @@ namespace _380_Project_3.ASPX_Dev
                     {
                         for (int k = 0; k < arrDefaultSeverities.Length; k += 1)
                         {
-                            using (SqlCommand cmd3 = new SqlCommand("insert into tblSeverityIssues(UserID,ProjectID,SeverityName,Sequence)" +
-                                " values(@UserID, @ProjectID, @SeverityName, @Sequence)", conn))
+                            using (SqlCommand cmd3 = new SqlCommand("insert into tblSeverityIssues(UserID,ProjectID,SeverityName,Sequence,AssociatedIssue)" +
+                                " values(@UserID, @ProjectID, @SeverityName, @Sequence,@AssocIssue)", conn))
                             {
                                 cmd3.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
                                 cmd3.Parameters.AddWithValue("@ProjectID", Session["_CurrentProjID"]);
                                 cmd3.Parameters.AddWithValue("@SeverityName", arrDefaultSeverities[k]);
                                 cmd3.Parameters.AddWithValue("@Sequence", k);
+                                cmd3.Parameters.AddWithValue("@AssocIssue", Session["_CurrentIssueID"]);
 
                                 cmd3.ExecuteNonQuery();
                             }
@@ -488,9 +542,8 @@ namespace _380_Project_3.ASPX_Dev
                             cmd.Parameters.AddWithValue("@DateAssigned", TextBoxDateAssigned.Text);
                             cmd.Parameters.AddWithValue("@ExpectedCompletionDate", TextBoxExpectedCompletionDate.Text);
 
-
-                            LoadDefaultStatusListBox();
                             cmd.ExecuteNonQuery();
+                            LoadDefaultStatusListBox();
                         }
                     }
 
@@ -667,6 +720,46 @@ namespace _380_Project_3.ASPX_Dev
                 {
                     Connect(conn);
 
+                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT IssueID FROM tblIssues WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    {
+                        SqlDataReader sdr = cmd2.ExecuteReader();
+
+                        while (sdr.Read())
+                        {
+                            Session["_CurrentIssueID"] = sdr[0].ToString();
+
+                        }
+                        sdr.Close();
+                    }
+
+                    using (SqlCommand cmd3 = new SqlCommand(String.Format("UPDATE tblActionItems SET AssociatedIssue = NULL WHERE AssociatedIssue={0}", Session["_CurrentIssueID"]), conn))
+                    {
+                        try
+                        {
+                            cmd3.ExecuteNonQuery();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                        }
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(string.Format("delete from tblStatusIssues where UserID={0} and ProjectID={1} AND AssociatedIssue={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentIssueID"]), conn))
+                    {
+                        using (SqlCommand cmd2 = new SqlCommand(string.Format("delete from tblPriorityIssues where UserID={0} and ProjectID={1} AND AssociatedIssue={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentIssueID"]), conn))
+                        {
+                            using (SqlCommand cmd3 = new SqlCommand(string.Format("delete from tblSeverityIssues where UserID={0} and ProjectID={1} AND AssociatedIssue={2}", Session["_CurrentUserID"], Session["_CurrentProjID"], Session["_CurrentIssueID"]), conn))
+                            {
+
+                                cmd.ExecuteNonQuery();
+                                cmd2.ExecuteNonQuery();
+                                cmd3.ExecuteNonQuery();
+                            }
+                        }
+                    }
+
                     using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblIssues where UserID={0} and ProjectID={1} AND Name='{2}'",
                         Session["_CurrentUserID"], Session["_CurrentProjID"], TextBoxName.Text), conn))
                     {
@@ -689,6 +782,8 @@ namespace _380_Project_3.ASPX_Dev
 
                 this.DropDownListIssuesSelect.Items.Clear();
                 this.DropDownListIssuesSelect.DataBind();
+                GridViewAssociatedActItem.DataBind();
+                GridViewAssociatedDecisions.DataBind();
             }
         }
 

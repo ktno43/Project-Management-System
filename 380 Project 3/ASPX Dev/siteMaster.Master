@@ -35,7 +35,7 @@
                     <asp:MenuItem Text="Reference Documents" Value="Reference Documents" NavigateUrl="~/ASPX Dev/ReferenceDocuments.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="Components" Value="Components" NavigateUrl="~/ASPX Dev/Components.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="Defects" Value="Defects" NavigateUrl="~/ASPX Dev/Defects.aspx"></asp:MenuItem>
-                    <asp:MenuItem Text="Logout" Value="Logout"></asp:MenuItem>
+                    <asp:MenuItem Text="Logout" Value="Logout" NavigateUrl="~/ASPX Dev/Login.aspx"></asp:MenuItem>
                 </Items>
                 <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
                 <StaticMenuItemStyle HorizontalPadding="10px" VerticalPadding="10px" />

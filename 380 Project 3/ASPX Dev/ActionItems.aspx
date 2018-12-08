@@ -25,8 +25,6 @@
                     <div class="modal-body">
                         Action Items List:
                         <asp:DropDownList ID="DropDownListActItemSelect" runat="server" DataSourceID="DropDownListActItemDB" DataTextField="Name" DataValueField="ActionItemID" Height="30px" Width="571px" AppendDataBoundItems="true">
-                            <asp:ListItem Text="" Value="" />
-
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="DropDownListActItemDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [ActionItemID] FROM [tblActionItems] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
                             <SelectParameters>
@@ -206,10 +204,9 @@
 
             <td colspan="1" rowspan="2">
                 <asp:ListBox ID="ListBoxStatus" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="StatusTextBoxJS(this)" DataSourceID="ListBoxStatusDB" DataTextField="StatusName" DataValueField="Sequence" TabIndex="9"></asp:ListBox>
-                <asp:SqlDataSource ID="ListBoxStatusDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [StatusName], [Sequence] FROM [tblStatusActItem] WHERE (([UserID] = @UserID) AND ([ProjectID] = @ProjectID)) ORDER BY [Sequence] ASC">
+                <asp:SqlDataSource ID="ListBoxStatusDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [StatusName], [Sequence] FROM [tblStatusActItem] WHERE ([AssociatedActionItem] = @AssocActItem) ORDER BY [Sequence] ASC">
                     <SelectParameters>
-                        <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
-                        <asp:SessionParameter Name="ProjectID" SessionField="_CurrentProjID" Type="Int32" />
+                        <asp:SessionParameter Name="AssocActItem" SessionField="_CurrentActionItemID" Type="Int32" />
                     </SelectParameters>
                 </asp:SqlDataSource>
             </td>
@@ -246,7 +243,8 @@
         </tr>
 
         <tr style="vertical-align: top">
-            <td colspan="1" class="auto-style5">Date Created<span class="auto-style14">*</span>:&nbsp;&nbsp;&nbsp;&nbsp;
+            <td colspan="1" class="auto-style5">Date Created<span class="auto-style14">*</span>
+            :&nbsp;&nbsp;&nbsp;&nbsp;
            
             <td colspan="4" class="auto-style4">
                 <asp:TextBox ID="TextBoxDateCreated" runat="server" Width="80px" Height="20px" BackColor="#CCCCCC"></asp:TextBox>
@@ -323,17 +321,21 @@
 
             <td colspan="10">
                 <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="GridViewActItemScroll">
-                    <asp:GridView ID="GridViewActionItemsList" runat="server" AutoGenerateColumns="False" CellPadding="10" DataSourceID="GridActionItems" ForeColor="#333333" GridLines="None">
+                    <asp:GridView ID="GridViewActionItemsList" runat="server" AutoGenerateColumns="False" CellPadding="10" DataSourceID="GridActionItems" ForeColor="#333333" GridLines="None" Height="50px" Width="1400px">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
+                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description">
+                                <ItemStyle Width="300px" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" DataFormatString="{0:MM/dd/yyyy}" />
                             <asp:BoundField DataField="DateAssigned" HeaderText="Date Assigned" SortExpression="DateAssigned" DataFormatString="{0:MM/dd/yyyy}" />
                             <asp:BoundField DataField="ExpectedCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected Completion Date" SortExpression="ExpectedCompletionDate" />
                             <asp:BoundField DataField="ActualCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
                             <asp:BoundField DataField="Stat" HeaderText="Status" SortExpression="Status" />
-                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription" />
+                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription">
+                                <ItemStyle Width="300px" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="UpdateDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Update Date" SortExpression="UpdateDate" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
@@ -351,7 +353,7 @@
                 <asp:SqlDataSource ID="GridActionItems" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT A.[Name], A.[Description], A.[DateCreated], A.[DateAssigned], A.[ExpectedCompletionDate],
                     A.[ActualCompletionDate], A.[StatusDescription], A.[UpdateDate], S.[StatusName] Stat 
                     FROM [tblActionItems] A
-                    LEFT JOIN [tblStatusActItem] S ON S.[Sequence] = A.[Status]
+                    LEFT JOIN [tblStatusActItem] S ON S.[Sequence] = A.[Status] AND S.[AssociatedActionItem] = A.[ActionItemID]
                     WHERE ((A.[UserID] = @UserID) AND (A.[ProjectID] = @ProjectID))">
                     <SelectParameters>
                         <asp:SessionParameter Name="UserID" SessionField="_CurrentUserID" Type="Int32" />
@@ -367,7 +369,7 @@
         <tr>
             <td colspan="1" class="auto-style15">
                 <asp:Label ID="LabelActComplDate" runat="server" Text="Actual Completion Date:" Visible="False"></asp:Label>
-            &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
             </td>
             <td colspan="4">
                 <asp:TextBox ID="TextBoxActualCompletionDate" runat="server" Visible="False" Height="20px" Width="80px" BackColor="#CCCCCC"></asp:TextBox>

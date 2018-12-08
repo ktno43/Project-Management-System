@@ -25,7 +25,7 @@
                     <div class="modal-body">
                         Summary Tasks List:
                         <asp:DropDownList ID="DropDownListSummTaskSelect" runat="server" DataSourceID="DropDownListSummTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px" AppendDataBoundItems="true">
-                            <asp:ListItem Text="" Value="" />
+
 
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="DropDownListSummTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] FROM [tblTasks] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([TaskType] = 'Summary Task')">
@@ -163,7 +163,7 @@
                     <div class="modal-body">
                         Tasks List:
                         <asp:DropDownList ID="DropDownListChangeTaskType" runat="server" DataSourceID="ChangeTaskTypeDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px" AppendDataBoundItems="true">
-                            <asp:ListItem Text="" Value="" />
+
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="ChangeTaskTypeDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID], [TaskType] FROM [tblTasks] WHERE ([UserID] = @UserID) AND 
                             ([ProjectID] = @ProjectID) AND ([TaskType] = 'Summary Task')">
@@ -472,11 +472,14 @@
             <td colspan="13" class="auto-style1">
                 <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="Div1">
                     <br />
-                    <asp:GridView ID="GridViewAssociatedIssues" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridViewAssociatedIssuesDS" ForeColor="#333333" GridLines="None">
+                    <div class="text-left">
+                    <asp:GridView ID="GridViewAssociatedIssues" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridViewAssociatedIssuesDS" ForeColor="#333333" GridLines="None" Height="50px" Width="1750px">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
+                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" >
+                            <ItemStyle Width="300px" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="Pri" HeaderText="Priority" SortExpression="Priority" />
                             <asp:BoundField DataField="Sev" HeaderText="Severity" SortExpression="Severity" />
                             <asp:BoundField DataField="DateRaised" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Raised" SortExpression="DateRaised" />
@@ -484,7 +487,9 @@
                             <asp:BoundField DataField="ExpectedCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected Completion Date" SortExpression="ExpectedCompletionDate" />
                             <asp:BoundField DataField="ActualCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
                             <asp:BoundField DataField="Stat" HeaderText="Status" SortExpression="Status" />
-                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription" />
+                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription" >
+                            <ItemStyle Width="300px" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="UpdateDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Update Date" SortExpression="UpdateDate" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
@@ -498,13 +503,14 @@
                         <SortedDescendingCellStyle BackColor="#FFFDF8" />
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
+                    </div>
                 </div>
                 <asp:SqlDataSource ID="GridViewAssociatedIssuesDS" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT I.[Name], I.[Description], I.[DateRaised], I.[DateAssigned], I.[ExpectedCompletionDate], I.[ActualCompletionDate], 
                     I.[StatusDescription], I.[UpdateDate], P.[PriorityName] Pri, V.[SeverityName] Sev, S.[StatusName] Stat 
                     FROM [tblIssues] I
-                    LEFT JOIN [tblPriorityIssues] P ON P.[Sequence] = I.[Priority]
-                    LEFT JOIN [tblSeverityIssues] V ON V.[Sequence] = I.[Severity]
-                    LEFT JOIN [tblStatusIssues] S ON S.[Sequence] = I.[Status]
+                    LEFT JOIN [tblPriorityIssues] P ON P.[Sequence] = I.[Priority] AND P.[AssociatedIssue] = I.[IssueID]
+                    LEFT JOIN [tblSeverityIssues] V ON V.[Sequence] = I.[Severity] AND V.[AssociatedIssue] = I.[IssueID]
+                    LEFT JOIN [tblStatusIssues] S ON S.[Sequence] = I.[Status] AND S.[AssociatedIssue] = I.[IssueID]
                     WHERE ((I.[AssociatedTask] = @AssociatedTask) AND (I.[UserID] = @UserID) AND (I.[ProjectID] = @ProjectID))">
                     <SelectParameters>
                         <asp:SessionParameter Name="AssociatedTask" SessionField="_CurrentTaskID" Type="Int32" />
@@ -547,11 +553,13 @@
             </td>
             <td colspan="13">
                 <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="id_GridviewScroll">
-                    <asp:GridView ID="GridViewTaskList" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataSourceID="GridTasks">
+                    <asp:GridView ID="GridViewTaskList" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataSourceID="GridTasks" Height="50px" Width="2500px">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
+                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" >
+                            <ItemStyle Width="300px" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="TaskType" HeaderText="Task Type" SortExpression="TaskType" />
                             <asp:BoundField DataField="ExpectedStartDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected Start Date" SortExpression="ExpectedStartDate" />
                             <asp:BoundField DataField="ExpectedDuration" HeaderText="Expected Duration" SortExpression="ExpectedDuration" />

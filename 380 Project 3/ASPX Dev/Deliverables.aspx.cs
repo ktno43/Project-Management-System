@@ -247,6 +247,31 @@ namespace _380_Project_3
                 using (SqlConnection conn = new SqlConnection(g_sqlConn))
                 {
                     Connect(conn);
+                    using (SqlCommand cmd2 = new SqlCommand(String.Format("SELECT DeliverableID FROM tblDeliverables WHERE Name='{0}' AND UserID={1} AND ProjectID={2}",
+                        TextBoxName.Text, Session["_CurrentUserID"], Session["_CurrentProjID"]), conn))
+                    {
+                        SqlDataReader sdr = cmd2.ExecuteReader();
+
+                        while (sdr.Read())
+                        {
+                            Session["_CurrentDelivID"] = sdr[0].ToString();
+
+                        }
+                        sdr.Close();
+                    }
+
+                    using (SqlCommand cmd3 = new SqlCommand(String.Format("UPDATE tblTasks SET AssociatedDeliverable = NULL WHERE AssociatedDeliverable={0}", Session["_CurrentDelivID"]), conn))
+                    {
+                        try
+                        {
+                            cmd3.ExecuteNonQuery();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                        }
+                    }
 
                     using (SqlCommand cmd = new SqlCommand(String.Format("delete from tblDeliverables where UserID={0} and ProjectID={1} AND Name='{2}'",
                         Session["_CurrentUserID"], Session["_CurrentProjID"], TextBoxName.Text), conn))
@@ -268,9 +293,11 @@ namespace _380_Project_3
                     }
                 }
 
+    
                 DropDownListDelivSelect.Items.Clear();
                 DropDownListDelivSelect.DataBind();
                 GridViewListDeliverables.DataBind();
+                GridViewAssociatedTasks.DataBind();
             }
         }
 
