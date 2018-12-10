@@ -444,7 +444,7 @@ namespace _380_Project_3.ASPX_Dev
                         cmd.Parameters.AddWithValue("@ExpStart", TextBoxExpectedStartDate.Text);
                         cmd.Parameters.AddWithValue("@ExpEnd", TextBoxExpectedDueDate.Text);
                         cmd.Parameters.AddWithValue("@ExpEffort", TextBoxExpectedEffort.Text);
-                        cmd.Parameters.AddWithValue("@ExpDuration", TextBoxActualDuration.Text);
+                        cmd.Parameters.AddWithValue("@ExpDuration", TextBoxExpectedDuration.Text);
 
                         try
                         {

@@ -319,12 +319,12 @@
                             <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description">
                                 <ItemStyle Width="300px" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Pri" HeaderText="Priority" SortExpression="Priority" />
-                            <asp:BoundField DataField="Sev" HeaderText="Severity" SortExpression="Severity" />
                             <asp:BoundField DataField="DateRaised" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Raised" SortExpression="DateRaised" />
                             <asp:BoundField DataField="DateAssigned" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Assigned" SortExpression="DateAssigned" />
                             <asp:BoundField DataField="ExpectedCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected Completion Date" SortExpression="ExpectedCompletionDate" />
                             <asp:BoundField DataField="ActualCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
+                            <asp:BoundField DataField="Sev" HeaderText="Severity" SortExpression="Severity" />
+                            <asp:BoundField DataField="Pri" HeaderText="Priority" SortExpression="Priority" />
                             <asp:BoundField DataField="Stat" HeaderText="Status" SortExpression="Status" />
                             <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription">
                                 <ItemStyle Width="300px" />
@@ -403,6 +403,7 @@
                             </asp:BoundField>
                             <asp:BoundField DataField="TaskType" HeaderText="Task Type" SortExpression="TaskType" />
                             <asp:BoundField DataField="ExpectedStartDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected Start Date" SortExpression="ExpectedStartDate" />
+                            <asp:BoundField DataField="ExpectedEndDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected End Date" SortExpression="ExpectedEndDate" />
                             <asp:BoundField DataField="ExpectedDuration" HeaderText="Expected Duration" SortExpression="ExpectedDuration" />
                             <asp:BoundField DataField="ExpectedEffort" HeaderText="Expected Effort" SortExpression="ExpectedEffort" />
                             <asp:BoundField DataField="ActualStartDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Actual Start Date" SortExpression="ActualStartDate" />
@@ -410,7 +411,6 @@
                             <asp:BoundField DataField="ActualDuration" HeaderText="Actual Duration" SortExpression="ActualDuration" />
                             <asp:BoundField DataField="EffortCompleted" HeaderText="Effort Completed" SortExpression="EffortCompleted" />
                             <asp:BoundField DataField="ActualEffort" HeaderText="Actual Effort" SortExpression="ActualEffort" />
-                            <asp:BoundField DataField="ExpectedEndDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected End Date" SortExpression="ExpectedEndDate" />
                             <asp:BoundField DataField="PredName" HeaderText="Predecessor Task" SortExpression="PredecessorTask" />
                             <asp:BoundField DataField="PredecessorDependency" HeaderText="Predecessor Dependency" SortExpression="PredecessorDependency" />
                             <asp:BoundField DataField="SuccName" HeaderText="Successor Task" SortExpression="SuccessorTask" />

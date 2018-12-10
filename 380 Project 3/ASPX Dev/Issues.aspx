@@ -26,8 +26,6 @@
                     <div class="modal-body">
                         Issues List:
                         <asp:DropDownList ID="DropDownListIssuesSelect" runat="server" DataSourceID="DropDownListIssuesDB" DataTextField="Name" DataValueField="IssueID" Height="30px" Width="571px" AppendDataBoundItems="true">
-
-
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="DropDownListIssuesDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [IssueID] FROM [tblIssues] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID)">
                             <SelectParameters>
@@ -418,7 +416,8 @@
 
                 <cc1:CalendarExtender ID="CalendarDateAssigned" PopupButtonID="ImageButtonDateAssigned" runat="server" TargetControlID="TextBoxDateAssigned" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonDateAssigned" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="6" /></td>
-            <td colspan="5" class="auto-style20" style="vertical-align: top">Associated Action Item(s):&nbsp;&nbsp;&nbsp; <asp:Button ID="ButtonAssociateActionItems" runat="server" Text="Associate Action Items" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" Width="160px" TabIndex="19" />
+            <td colspan="5" class="auto-style20" style="vertical-align: top">Associated Action Item(s):&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="ButtonAssociateActionItems" runat="server" Text="Associate Action Items" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" Width="160px" TabIndex="19" />
             </td>
 
 
@@ -432,16 +431,16 @@
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" >
-                            <ItemStyle Width="300px" />
+                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description">
+                                <ItemStyle Width="300px" />
                             </asp:BoundField>
                             <asp:BoundField DataField="DateCreated" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Created" SortExpression="DateCreated" />
                             <asp:BoundField DataField="DateAssigned" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Assigned" SortExpression="DateAssigned" />
                             <asp:BoundField DataField="ExpectedCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="ExpectedCompletion Date" SortExpression="ExpectedCompletionDate" />
                             <asp:BoundField DataField="ActualCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
                             <asp:BoundField DataField="Stat" HeaderText="Status" SortExpression="Status" />
-                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription" >
-                            <HeaderStyle Width="300px" />
+                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription">
+                                <HeaderStyle Width="300px" />
                             </asp:BoundField>
                             <asp:BoundField DataField="UpdateDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Update Date" SortExpression="UpdateDate" />
                         </Columns>
@@ -488,7 +487,8 @@
                 <cc1:CalendarExtender ID="CalendarActComplDate" PopupButtonID="ImageButtonActCompletionDate" runat="server" TargetControlID="TextBoxActualCompletionDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonActCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="7" /></td>
 
-            <td colspan="1" class="auto-style20" style="vertical-align: top">Associated Decision(s):&nbsp;&nbsp;&nbsp; <asp:Button ID="ButtonAssociateDecisions" runat="server" Text="Associate Decisions" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" Width="150px" TabIndex="20" />
+            <td colspan="1" class="auto-style20" style="vertical-align: top">Associated Decision(s):&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="ButtonAssociateDecisions" runat="server" Text="Associate Decisions" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" Width="150px" TabIndex="20" />
             </td>
             <td colspan="4" class="auto-style19"></td>
         </tr>
@@ -501,20 +501,20 @@
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" >
-                            <ItemStyle Width="300px" />
+                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description">
+                                <ItemStyle Width="300px" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Pri" HeaderText="Priority" SortExpression="Priority" />
-                            <asp:BoundField DataField="Imp" HeaderText="Impact" SortExpression="Impact" />
                             <asp:BoundField DataField="DateCreated" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Created" SortExpression="DateCreated" />
                             <asp:BoundField DataField="DateNeeded" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Needed" SortExpression="DateNeeded" />
                             <asp:BoundField DataField="DateMade" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Made" SortExpression="DateMade" />
                             <asp:BoundField DataField="ExpectedCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected Completion Date" SortExpression="ExpectedCompletionDate" />
                             <asp:BoundField DataField="ActualCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
                             <asp:BoundField DataField="NoteDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="NoteDate" SortExpression="NoteDate" />
+                            <asp:BoundField DataField="Imp" HeaderText="Impact" SortExpression="Impact" />
+                            <asp:BoundField DataField="Pri" HeaderText="Priority" SortExpression="Priority" />
                             <asp:BoundField DataField="Stat" HeaderText="Status" SortExpression="Status" />
-                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription" >
-                            <ItemStyle Width="300px" />
+                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription">
+                                <ItemStyle Width="300px" />
                             </asp:BoundField>
                             <asp:BoundField DataField="UpdateDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Update Date" SortExpression="UpdateDate" />
                         </Columns>

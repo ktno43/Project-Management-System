@@ -24,7 +24,6 @@
                     <div class="modal-body">
                         Tasks List:
                         <asp:DropDownList ID="DropDownListTaskSelect" runat="server" DataSourceID="DropDownListTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px" AppendDataBoundItems="true">
-
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="DropDownListTaskDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID] FROM [tblTasks] WHERE ([UserID] = @UserID) AND ([ProjectID] = @ProjectID) AND ([TaskType] = 'Task')">
                             <SelectParameters>
@@ -162,7 +161,6 @@
                     <div class="modal-body">
                         Tasks List:
                         <asp:DropDownList ID="DropDownListChangeTaskType" runat="server" DataSourceID="DropDownListTaskDB" DataTextField="Name" DataValueField="TaskID" Height="30px" Width="571px" AppendDataBoundItems="true">
-
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="ChangeTaskTypeDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [Name], [TaskID], [TaskType] FROM [tblTasks] WHERE ([UserID] = @UserID) AND 
                             ([ProjectID] = @ProjectID) AND ([TaskType] = 'Task')">
@@ -340,7 +338,8 @@
 
 
         <tr>
-            <td colspan="1" class="auto-style9" style="vertical-align: text-top">Description<span class="auto-style11">*</span>:&nbsp;&nbsp;&nbsp;&nbsp;
+            <td colspan="1" class="auto-style9" style="vertical-align: text-top">Description<span class="auto-style11">*</span>
+            :&nbsp;&nbsp;&nbsp;&nbsp;
            
             <td colspan="4">
                 <asp:TextBox ID="TextBoxDescription" runat="server" Height="150px" MaxLength="1000" TextMode="MultiLine" Width="300px" TabIndex="3"></asp:TextBox>
@@ -356,11 +355,12 @@
         </tr>
 
         <tr>
-            <td colspan="1" class="auto-style9">Expected Start Date<span class="auto-style11">*</span><span class="auto-style14">:&nbsp;&nbsp;&nbsp; </span>&nbsp;<td colspan="4">
-                <asp:TextBox ID="TextBoxExpectedStartDate" runat="server" Height="20px" Width="80px" onchange="fnOnDateChange()" BackColor="#CCCCCC"></asp:TextBox>
-                <cc1:CalendarExtender ID="CalendarExpStartDate" PopupButtonID="ImageButtonExpectedStartDate" runat="server" TargetControlID="TextBoxExpectedStartDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonExpectedStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" CssClass="auto-style7" TabIndex="4" />
-            </td>
+            <td colspan="1" class="auto-style9">Expected Start Date<span class="auto-style11">*</span><span class="auto-style14">:&nbsp;&nbsp;&nbsp; </span>
+                &nbsp;<td colspan="4">
+                    <asp:TextBox ID="TextBoxExpectedStartDate" runat="server" Height="20px" Width="80px" onchange="fnOnDateChange()" BackColor="#CCCCCC"></asp:TextBox>
+                    <cc1:CalendarExtender ID="CalendarExpStartDate" PopupButtonID="ImageButtonExpectedStartDate" runat="server" TargetControlID="TextBoxExpectedStartDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
+                    <asp:ImageButton ID="ImageButtonExpectedStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" CssClass="auto-style7" TabIndex="4" />
+                </td>
             <td colspan="1" class="text-right">Expected Due Date<span class="auto-style11">*</span>:&nbsp;&nbsp;&nbsp; </td>
             <td colspan="5" class="auto-style3">
                 <asp:TextBox ID="TextBoxExpectedDueDate" runat="server" Width="80px" onchange="fnOnDateChange()" Height="20px" BackColor="#CCCCCC"></asp:TextBox>
@@ -443,14 +443,15 @@
         <tr>
             <td colspan="1" class="auto-style9">
                 <asp:Label ID="LabelActualStartDate" runat="server" Text="Actual Start Date:" Visible="False"></asp:Label>
-            &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
             </td>
             <td colspan="4">
                 <asp:TextBox ID="TextBoxActualStartDate" runat="server" Width="80px" Visible="False" Height="20px" onchange="fnOnDateChangeAct()" BackColor="#CCCCCC"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarActStartDate" PopupButtonID="ImageButtonActualStartDate" runat="server" TargetControlID="TextBoxActualStartDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonActualStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="8" />
             </td>
-            <td colspan="1" class="text-left">Associate Issues:&nbsp;&nbsp;&nbsp; <asp:Button ID="ButtonAssociateIssues" runat="server" Text="Associate Issues" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" OnClick="ButtonAssociateIssues_Click" TabIndex="17" Width="125px" />
+            <td colspan="1" class="text-left">Associate Issues:&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="ButtonAssociateIssues" runat="server" Text="Associate Issues" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" OnClick="ButtonAssociateIssues_Click" TabIndex="17" Width="125px" />
             </td>
             <td colspan="5">&nbsp;</td>
 
@@ -461,7 +462,7 @@
         <tr>
             <td colspan="1" class="auto-style9">
                 <asp:Label ID="LabelActualEndDate" runat="server" Text="Actual End Date:" Visible="False"></asp:Label>
-            &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
             </td>
             <td colspan="4" class="auto-style3">
                 <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="80px" Visible="False" onchange="fnOnDateChangeAct()" Height="20px" BackColor="#CCCCCC"></asp:TextBox>
@@ -472,36 +473,37 @@
                 <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="Div1">
                     <br />
                     <div class="text-left">
-                    <asp:GridView ID="GridViewAssociatedIssues" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridViewAssociatedIssuesDS" ForeColor="#333333" GridLines="None" Height="50px" Width="1750px">
-                        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                        <Columns>
-                            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" >
-                            <ItemStyle Width="300px" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="Pri" HeaderText="Priority" SortExpression="Priority" />
-                            <asp:BoundField DataField="Sev" HeaderText="Severity" SortExpression="Severity" />
-                            <asp:BoundField DataField="DateRaised" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Raised" SortExpression="DateRaised" />
-                            <asp:BoundField DataField="DateAssigned" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Assigned" SortExpression="DateAssigned" />
-                            <asp:BoundField DataField="ExpectedCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected Completion Date" SortExpression="ExpectedCompletionDate" />
-                            <asp:BoundField DataField="ActualCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
-                            <asp:BoundField DataField="Stat" HeaderText="Status" SortExpression="Status" />
-                            <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription" >
-                            <ItemStyle Width="300px" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="UpdateDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Update Date" SortExpression="UpdateDate" />
-                        </Columns>
-                        <EditRowStyle BackColor="#999999" />
-                        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                        <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                        <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                        <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-                    </asp:GridView>
+                        <asp:GridView ID="GridViewAssociatedIssues" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GridViewAssociatedIssuesDS" ForeColor="#333333" GridLines="None" Height="50px" Width="1750px">
+                            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                            <Columns>
+                                <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                                <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description">
+                                    <ItemStyle Width="300px" />
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="DateRaised" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Raised" SortExpression="DateRaised" />
+                                <asp:BoundField DataField="DateAssigned" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date Assigned" SortExpression="DateAssigned" />
+                                <asp:BoundField DataField="ExpectedCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected Completion Date" SortExpression="ExpectedCompletionDate" />
+                                <asp:BoundField DataField="ActualCompletionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Actual Completion Date" SortExpression="ActualCompletionDate" />
+                                <asp:BoundField DataField="Sev" HeaderText="Severity" SortExpression="Severity" />
+                                <asp:BoundField DataField="Pri" HeaderText="Priority" SortExpression="Priority" />
+                                <asp:BoundField DataField="Stat" HeaderText="Status" SortExpression="Status" />
+                                <asp:BoundField DataField="StatusDescription" HeaderText="Status Description" SortExpression="StatusDescription">
+                                    <ItemStyle Width="300px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="UpdateDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Update Date" SortExpression="UpdateDate" />
+                            </Columns>
+                            <EditRowStyle BackColor="#999999" />
+                            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                            <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                            <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                            <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                        </asp:GridView>
                     </div>
                 </div>
                 <asp:SqlDataSource ID="GridViewAssociatedIssuesDS" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT I.[Name], I.[Description], I.[DateRaised], I.[DateAssigned], I.[ExpectedCompletionDate], I.[ActualCompletionDate], 
@@ -529,11 +531,12 @@
         <tr>
             <td colspan="1" class="auto-style10">
                 <asp:Label ID="LabelActualDuration" runat="server" Text="Actual Duration:" Visible="False"></asp:Label>
-            &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
             </td>
             <td colspan="4" class="auto-style8">
                 <asp:TextBox ID="TextBoxActualDuration" runat="server" Visible="False" Height="20px" Width="80px" TabIndex="10"></asp:TextBox>
-                &nbsp; <asp:Label ID="LabelDays" runat="server" Text="days" Visible="False"></asp:Label>
+                &nbsp;
+                <asp:Label ID="LabelDays" runat="server" Text="days" Visible="False"></asp:Label>
             </td>
             <td colspan="1" class="auto-style3">List of Task(s):</td>
             <td colspan="12" class="auto-style8"></td>
@@ -543,7 +546,7 @@
         <tr>
             <td colspan="1" class="auto-style9">
                 <asp:Label ID="LabelEffortCompleted" runat="server" Text="Effort Completed:" Visible="False"></asp:Label>
-            &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
             </td>
             <td colspan="4">
                 <asp:TextBox ID="TextBoxEffortCompleted" runat="server" Visible="False" Height="20px" Width="80px" TabIndex="10"></asp:TextBox>
@@ -554,11 +557,12 @@
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" >
-                            <ItemStyle Width="300px" />
+                            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description">
+                                <ItemStyle Width="300px" />
                             </asp:BoundField>
                             <asp:BoundField DataField="TaskType" HeaderText="Task Type" SortExpression="TaskType" />
                             <asp:BoundField DataField="ExpectedStartDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected Start Date" SortExpression="ExpectedStartDate" />
+                            <asp:BoundField DataField="ExpectedEndDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected End Date" SortExpression="ExpectedEndDate" />
                             <asp:BoundField DataField="ExpectedDuration" HeaderText="Expected Duration" SortExpression="ExpectedDuration" />
                             <asp:BoundField DataField="ExpectedEffort" HeaderText="Expected Effort" SortExpression="ExpectedEffort" />
                             <asp:BoundField DataField="ActualStartDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Actual Start Date" SortExpression="ActualStartDate" />
@@ -566,7 +570,6 @@
                             <asp:BoundField DataField="ActualDuration" HeaderText="Actual Duration" SortExpression="ActualDuration" />
                             <asp:BoundField DataField="EffortCompleted" HeaderText="Effort Completed" SortExpression="EffortCompleted" />
                             <asp:BoundField DataField="ActualEffort" HeaderText="Actual Effort" SortExpression="ActualEffort" />
-                            <asp:BoundField DataField="ExpectedEndDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Expected End Date" SortExpression="ExpectedEndDate" />
                             <asp:BoundField DataField="PredName" HeaderText="Predecessor Task" SortExpression="PredecessorTask" />
                             <asp:BoundField DataField="PredecessorDependency" HeaderText="Predecessor Dependency" SortExpression="PredecessorDependency" />
                             <asp:BoundField DataField="SuccName" HeaderText="Successor Task" SortExpression="SuccessorTask" />
@@ -603,7 +606,7 @@
         <tr>
             <td colspan="1" class="auto-style9">
                 <asp:Label ID="LabelActualEffort" runat="server" Text="Actual Effort:" Visible="False"></asp:Label>
-            &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
             </td>
             <td colspan="4">
                 <asp:TextBox ID="TextBoxActualEffort" runat="server" Visible="False" TabIndex="11" Height="20px" Width="80px"></asp:TextBox>
@@ -747,6 +750,7 @@
         .auto-style13 {
             width: 200px;
         }
+
         .auto-style14 {
             color: #000000;
         }
