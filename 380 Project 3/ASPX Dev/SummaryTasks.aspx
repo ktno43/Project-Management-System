@@ -265,8 +265,8 @@
                                             <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
                                             <asp:BoundField DataField="ListOfSkills" HeaderText="List Of Skills" SortExpression="ListOfSkills" />
                                             <asp:BoundField DataField="PayRate" HeaderText="Pay Rate" SortExpression="PayRate" />
-                                            <asp:BoundField DataField="AvailableStartDate" HeaderText="Available Start Date" SortExpression="AvailableStartDate" />
-                                            <asp:BoundField DataField="AvailableEndDate" HeaderText="Available End Date" SortExpression="AvailableEndDate" />
+                                            <asp:BoundField DataField="AvailableStartDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Available Start Date" SortExpression="AvailableStartDate" />
+                                            <asp:BoundField DataField="AvailableEndDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Available End Date" SortExpression="AvailableEndDate" />
                                             <asp:TemplateField>
                                                 <ItemTemplate>
                                                     <asp:RadioButton ID="RadioButtonResource" runat="server" OnClick="checkRadioBtn(this.id)" Checked='<%#Convert.ToBoolean(Eval("Checked")) %>' />
