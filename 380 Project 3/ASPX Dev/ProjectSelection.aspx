@@ -5,9 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -15,29 +15,15 @@
         .auto-style1 {
             text-align: center;
         }
-
         .auto-style2 {
-            width: 694px;
-            text-align: right;
+            width: 600px;
         }
-
+        .auto-style3 {
+            height: 40px;
+        }
         .auto-style4 {
-            width: 578px;
-            text-align: justify;
-        }
-
-        .auto-style6 {
-            width: 578px;
-            height: 59px;
-        }
-
-        .auto-style8 {
-            text-align: left;
-            height: 59px;
-        }
-        .auto-style9 {
-            width: 694px;
-            height: 59px;
+            width: 600px;
+            height: 40px;
         }
     </style>
 </head>
@@ -46,10 +32,10 @@
         <div>
             <h1 class="auto-style1">Welcome to the Project Management System</h1>
         </div>
-        <table style="width: 100%;">
+        <table align="center">
             <tr>
-                <td class="auto-style2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Select Project&nbsp;&nbsp;&nbsp; </td>
-                <td class="auto-style4">
+                <td colspan="1" class="auto-style10">Select Project:&nbsp;&nbsp;&nbsp; </td>
+                <td colspan="1" class="auto-style2">
                     <asp:DropDownList ID="DropDownListProjSelect" runat="server" DataSourceID="ProjectSelectDB" DataTextField="ProjectName" DataValueField="ProjectID" Height="30px" Width="571px" TabIndex="1">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="ProjectSelectDB" runat="server" ConnectionString="<%$ ConnectionStrings: DevDB %>" SelectCommand="SELECT [ProjectName], [ProjectID] FROM [tblProjSelect] WHERE ([UserID] = @UserID)">
@@ -58,26 +44,33 @@
                         </SelectParameters>
                     </asp:SqlDataSource>
                 </td>
-                <td class="text-left">
+                <td colspan="1" class="auto-style25">
                     <asp:Button ID="ButtonOpen" runat="server" OnClick="ButtonOpen_Click" Text="Open Project" Width="160px" TabIndex="2" />
                 </td>
             </tr>
+
             <tr>
-                <td class="auto-style9"></td>
-                <td class="auto-style6"></td>
-                <td class="auto-style8">
+                <td colspan="1" class="auto-style3"></td>
+                <td colspan="1" class="auto-style4"></td>
+                <td class="auto-style3">
                     <asp:Button ID="ButtonNew" runat="server" data-toggle="modal" data-target="#myModal" Text="New Project" Width="160px" OnClientClick="return false;" TabIndex="3" />
 
                 </td>
             </tr>
+
             <tr>
-                <td class="auto-style9"></td>
-                <td class="auto-style6">
+                <td colspan="4">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td colspan="1" class="auto-style19"></td>
+                <td colspan="1" class="auto-style2">
                     <asp:Button ID="ButtonDelete" runat="server" OnClick="ButtonDelete_Click" Text="Delete Project" Width="160px" />
                 </td>
-                <td class="auto-style8">
+                <td colspan="1" class="auto-style23">
                     <asp:Button ID="ButtonGenReport" runat="server" OnClick="ButtonGenReport_Click" Text="Generate Reports" Width="160px" TabIndex="5" />
                 </td>
+
             </tr>
         </table>
 

@@ -6,35 +6,11 @@
 <head runat="server">
     <title></title>
     <style type="text/css">
-        .auto-style1 {
-            width: 868px;
-            height: 37px;
-        }
         .auto-style2 {
             text-align: center;
         }
         .auto-style3 {
-            width: 868px;
-            text-align: right;
-        }
-        .auto-style4 {
-            text-align: left;
-            width: 168px;
-            margin-left: 40px;
-        }
-        .auto-style5 {
-            width: 168px;
-        }
-        .auto-style6 {
-            width: 100%;
-            height: 101px;
-        }
-        .auto-style7 {
-            width: 168px;
-            height: 37px;
-        }
-        .auto-style8 {
-            height: 37px;
+            height: 30px;
         }
     </style>
 </head>
@@ -43,32 +19,33 @@
         <div class="auto-style2">
             <h1>Welcome to the Project Management System</h1>
         </div>
-    <table class="auto-style6">
-        <tr>
-            <td class="auto-style3">Username:</td>
-            <td class="auto-style4">
-                <asp:TextBox ID="TextBoxUsername" runat="server" TabIndex="1"></asp:TextBox>
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style3">Password:</td>
-            <td class="auto-style5">
-                <asp:TextBox ID="TextBoxPassword" runat="server" TextMode="Password" TabIndex="2"></asp:TextBox>
-            </td>
-            <td>
-                <asp:Label ID="Label" runat="server" Text="[Label 1]" Visible="False"></asp:Label>
-            </td>
-        </tr>
-        <tr>
-            <td class="auto-style1">
-                </td>
-            <td class="auto-style7">
-        <asp:Button ID="ButtonLogin" runat="server" OnClick="Button_Login_Click" Text="Login" Width="69px" TabIndex="3" />
-            </td>
-            <td class="auto-style8"></td>
-        </tr>
-    </table>
+        <div>
+            <table align="center">
+                <tr>
+                    <td>Username:</td>
+                    <td>
+                        <asp:TextBox ID="TextBoxUsername" runat="server" TabIndex="1"></asp:TextBox>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td>
+                        <asp:TextBox ID="TextBoxPassword" runat="server" TextMode="Password" TabIndex="2"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label" runat="server" Text="[Label 1]" Visible="False"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style3"></td>
+                    <td class="auto-style3">
+                        <asp:Button ID="ButtonLogin" runat="server" OnClick="Button_Login_Click" Text="Login" Width="69px" TabIndex="3" />
+                    </td>
+                    <td class="auto-style3"></td>
+                </tr>
+            </table>
+        </div>
     </form>
-    </body>
+</body>
 </html>

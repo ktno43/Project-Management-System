@@ -220,6 +220,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonSearch;
         
         /// <summary>
+        /// LabelRescource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelRescource;
+        
+        /// <summary>
         /// TextBoxResourceAssigned control.
         /// </summary>
         /// <remarks>
@@ -227,6 +236,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxResourceAssigned;
+        
+        /// <summary>
+        /// ImageButtonClearResc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonClearResc;
         
         /// <summary>
         /// ButtonSelectResource control.
@@ -310,6 +328,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonExpectedDueDate;
         
         /// <summary>
+        /// LabelPred control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelPred;
+        
+        /// <summary>
         /// TextBoxPredecessorTask control.
         /// </summary>
         /// <remarks>
@@ -319,6 +346,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxPredecessorTask;
         
         /// <summary>
+        /// ImageButtonClearPred control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonClearPred;
+        
+        /// <summary>
         /// ButtonPredecessorTask control.
         /// </summary>
         /// <remarks>
@@ -326,6 +362,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonPredecessorTask;
+        
+        /// <summary>
+        /// LabelPredDep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelPredDep;
         
         /// <summary>
         /// TextBoxPredDepend control.
@@ -346,6 +391,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxExpectedDuration;
         
         /// <summary>
+        /// LabelSucc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelSucc;
+        
+        /// <summary>
         /// TextBoxSuccessorTask control.
         /// </summary>
         /// <remarks>
@@ -355,6 +409,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxSuccessorTask;
         
         /// <summary>
+        /// ImageButtonClearSuc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonClearSuc;
+        
+        /// <summary>
         /// ButtonSuccessorTask control.
         /// </summary>
         /// <remarks>
@@ -362,6 +425,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonSuccessorTask;
+        
+        /// <summary>
+        /// LabelSuccDep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelSuccDep;
         
         /// <summary>
         /// TextBoxSuccDepend control.
@@ -418,6 +490,24 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonActualStartDate;
         
         /// <summary>
+        /// ImageButtonClearStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonClearStart;
+        
+        /// <summary>
+        /// LabelAssocIssue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelAssocIssue;
+        
+        /// <summary>
         /// ButtonAssociateIssues control.
         /// </summary>
         /// <remarks>
@@ -461,6 +551,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonActualEndDate;
+        
+        /// <summary>
+        /// ImageButtonClearEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonClearEnd;
         
         /// <summary>
         /// Div1 control.

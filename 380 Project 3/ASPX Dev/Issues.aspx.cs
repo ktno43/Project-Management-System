@@ -380,9 +380,7 @@ namespace _380_Project_3.ASPX_Dev
                 }
             }
 
-            this.GridViewActionItemScroll.Visible = true;
             this.GridViewAssociatedActItem.DataBind();
-            this.GridViewDecisionScroll.Visible = true;
             this.GridViewAssociatedDecisions.DataBind();
             ButtonSave.Visible = true;
             ButtonDelete.Visible = true;
@@ -390,6 +388,45 @@ namespace _380_Project_3.ASPX_Dev
             this.LabelActualCompletionDate.Visible = true;
             this.TextBoxActualCompletionDate.Visible = true;
             this.ImageButtonActCompletionDate.Visible = true;
+
+            ImageButtonClearActCompl.Visible = true;
+
+            LabelSeverity.Visible = true;
+            TextBoxSeverity.Visible = true;
+            ButtonAddSeverity.Visible = true;
+            ButtonRemoveSeverity.Visible = true;
+            ListBoxSeverity.Visible = true;
+            ImageButtonSeverityMoveDown.Visible = true;
+            ImageSeverityMoveUp.Visible = true;
+
+            LabelPri.Visible = true;
+            TextBoxPriority.Visible = true;
+            ButtonAddPriority.Visible = true;
+            ButtonRemovePriority.Visible = true;
+            ListBoxPriority.Visible = true;
+            ImageButtonPriorityMoveDown.Visible = true;
+            ImageButtonPriorityMoveUp.Visible = true;
+
+            LabelStatus.Visible = true;
+            TextBoxStatus.Visible = true;
+            ButtonAddStatus.Visible = true;
+            ButtonRemoveStatus.Visible = true;
+            ListBoxStatus.Visible = true;
+            ImageButtonStatusMoveDown.Visible = true;
+            ImageButtonStatusMoveUp.Visible = true;
+
+            LabelStatusDescr.Visible = true;
+            TextBoxStatusDescription.Visible = true;
+            LabelUpdated.Visible = true;
+            TextBoxLastUpdated.Visible = true;
+
+            LabelAssocItem.Visible = true;
+            ButtonAssociateActionItems.Visible = true;
+            GridViewActionItemScroll.Visible = true;
+
+            LabelAssocDec.Visible = true;
+            ButtonAssociateDecisions.Visible = true;
+            GridViewDecisionScroll.Visible = true;
         }
 
         private void LoadDefaultStatusListBox()
@@ -579,6 +616,41 @@ namespace _380_Project_3.ASPX_Dev
                 this.LabelActualCompletionDate.Visible = true;
                 this.TextBoxActualCompletionDate.Visible = true;
                 this.ImageButtonActCompletionDate.Visible = true;
+
+                LabelSeverity.Visible = true;
+                TextBoxSeverity.Visible = true;
+                ButtonAddSeverity.Visible = true;
+                ButtonRemoveSeverity.Visible = true;
+                ListBoxSeverity.Visible = true;
+                ImageButtonSeverityMoveDown.Visible = true;
+                ImageSeverityMoveUp.Visible = true;
+
+                LabelPri.Visible = true;
+                TextBoxPriority.Visible = true;
+                ButtonAddPriority.Visible = true;
+                ButtonRemovePriority.Visible = true;
+                ListBoxPriority.Visible = true;
+                ImageButtonPriorityMoveDown.Visible = true;
+                ImageButtonPriorityMoveUp.Visible = true;
+
+                LabelStatus.Visible = true;
+                TextBoxStatus.Visible = true;
+                ButtonAddStatus.Visible = true;
+                ButtonRemoveStatus.Visible = true;
+                ListBoxStatus.Visible = true;
+                ImageButtonStatusMoveDown.Visible = true;
+                ImageButtonStatusMoveUp.Visible = true;
+
+                LabelStatusDescr.Visible = true;
+                TextBoxStatusDescription.Visible = true;
+                LabelUpdated.Visible = true;
+                TextBoxLastUpdated.Visible = true;
+
+                LabelAssocItem.Visible = true;
+                ButtonAssociateActionItems.Visible = true;
+
+                LabelAssocDec.Visible = true;
+                ButtonAssociateDecisions.Visible = true;
             }
         }
 
@@ -857,6 +929,11 @@ namespace _380_Project_3.ASPX_Dev
 
                 TextBoxLastUpdated.Text = DateTime.Today.ToShortDateString();
             }
+        }
+
+        protected void ImageButtonClearActCompl_Click(object sender, ImageClickEventArgs e)
+        {
+            TextBoxActualCompletionDate.Text = "";
         }
     }
 }

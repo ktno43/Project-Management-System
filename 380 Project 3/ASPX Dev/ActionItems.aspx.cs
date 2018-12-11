@@ -195,6 +195,28 @@ namespace _380_Project_3.ASPX_Dev
             ButtonDelete.Visible = true;
             ButtonSave.Visible = true;
             GridViewAssociateResource.DataBind();
+
+            ImageButtonClearActCompl.Visible = true;
+            ImageButtonClearResource.Visible = true;
+
+            LabelResourceAssigned.Visible = true;
+            TextBoxResourceAssigned.Visible = true;
+            ButtonSelectResource.Visible = true;
+
+            LabelStatus.Visible = true;
+            TextBoxStatus.Visible = true;
+            ButtonAddStatus.Visible = true;
+            ButtonRemoveStatus.Visible = true;
+            ListBoxStatus.Visible = true;
+            ImageButtonStatusMoveUp.Visible = true;
+            ImageButtonStatusMoveDown.Visible = true;
+
+            LabelStatusDescr.Visible = true;
+            TextBoxStatusDescription.Visible = true;
+
+
+            LabelLastUpdated.Visible = true;
+            TextBoxLastUpdated.Visible = true;
         }
 
         private void SaveListBoxes()
@@ -342,12 +364,34 @@ namespace _380_Project_3.ASPX_Dev
                 GridViewActionItemsList.DataBind();
                 GridViewAssociateResource.DataBind();
 
+                ImageButtonClearActCompl.Visible = true;
+                ImageButtonClearResource.Visible = true;
+
                 TextBoxActualCompletionDate.Visible = true;
                 LabelActComplDate.Visible = true;
                 ImageButtonActualCompletionDate.Visible = true;
 
                 ButtonDelete.Visible = true;
                 ButtonSave.Visible = true;
+
+                LabelResourceAssigned.Visible = true;
+                TextBoxResourceAssigned.Visible = true;
+                ButtonSelectResource.Visible = true;
+
+                LabelStatus.Visible = true;
+                TextBoxStatus.Visible = true;
+                ButtonAddStatus.Visible = true;
+                ButtonRemoveStatus.Visible = true;
+                ListBoxStatus.Visible = true;
+                ImageButtonStatusMoveUp.Visible = true;
+                ImageButtonStatusMoveDown.Visible = true;
+
+                LabelStatusDescr.Visible = true;
+                TextBoxStatusDescription.Visible = true;
+
+
+                LabelLastUpdated.Visible = true;
+                TextBoxLastUpdated.Visible = true;
             }
         }
 
@@ -639,6 +683,44 @@ namespace _380_Project_3.ASPX_Dev
 
                 TextBoxLastUpdated.Text = DateTime.Today.ToShortDateString();
             }
+        }
+
+        protected void ImageButtonClearResource_Click(object sender, ImageClickEventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                try
+                {
+                    Connect(conn);
+
+                    using (SqlCommand cmd = new SqlCommand("UPDATE tblResources SET AssociatedActionItem=NULL WHERE UserID=@UserID AND ProjectID=@ProjID AND AssociatedActionItem=@ActItem", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                        cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                        cmd.Parameters.AddWithValue("@ActItem", Session["_CurrentActionItemID"]);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                }
+
+                catch (Exception ex)
+                {
+                    Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                }
+
+                finally
+                {
+                    Disconnect(conn);
+                }
+
+                GridViewAssociateResource.DataBind();
+                TextBoxResourceAssigned.Text = "";
+            }
+        }
+
+        protected void ImageButtonClearActCompl_Click(object sender, ImageClickEventArgs e)
+        {
+            TextBoxActualCompletionDate.Text = "";
         }
     }
 }

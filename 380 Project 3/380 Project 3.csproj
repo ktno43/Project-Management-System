@@ -93,6 +93,7 @@
     <Content Include="Images\calendar.png" />
     <Content Include="Images\down.png" />
     <Content Include="Images\up.png" />
+    <Content Include="Images\x.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

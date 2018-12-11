@@ -112,6 +112,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonSearch;
         
         /// <summary>
+        /// LabelResourceAssigned control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelResourceAssigned;
+        
+        /// <summary>
         /// TextBoxResourceAssigned control.
         /// </summary>
         /// <remarks>
@@ -119,6 +128,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxResourceAssigned;
+        
+        /// <summary>
+        /// ImageButtonClearResource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonClearResource;
         
         /// <summary>
         /// ButtonSelectResource control.
@@ -137,6 +155,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
+        
+        /// <summary>
+        /// LabelStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelStatus;
         
         /// <summary>
         /// TextBoxStatus control.
@@ -238,6 +265,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonDateCreated;
         
         /// <summary>
+        /// LabelStatusDescr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelStatusDescr;
+        
+        /// <summary>
         /// TextBoxStatusDescription control.
         /// </summary>
         /// <remarks>
@@ -245,6 +281,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxStatusDescription;
+        
+        /// <summary>
+        /// LabelLastUpdated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelLastUpdated;
         
         /// <summary>
         /// TextBoxLastUpdated control.
@@ -371,6 +416,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonActualCompletionDate;
+        
+        /// <summary>
+        /// ImageButtonClearActCompl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonClearActCompl;
         
         /// <summary>
         /// ButtonNew control.

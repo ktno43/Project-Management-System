@@ -157,6 +157,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.Button ButtonSearch;
         
         /// <summary>
+        /// LabelPredTask control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelPredTask;
+        
+        /// <summary>
         /// TextBoxPredTask control.
         /// </summary>
         /// <remarks>
@@ -166,6 +175,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxPredTask;
         
         /// <summary>
+        /// ImageButtonClearPred control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonClearPred;
+        
+        /// <summary>
         /// ButtonPredecessorTask control.
         /// </summary>
         /// <remarks>
@@ -173,6 +191,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonPredecessorTask;
+        
+        /// <summary>
+        /// LabelPredTaskDep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelPredTaskDep;
         
         /// <summary>
         /// TextBoxPredDepen control.
@@ -193,6 +220,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
         
         /// <summary>
+        /// LabelSuccTask control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelSuccTask;
+        
+        /// <summary>
         /// TextBoxSuccTask control.
         /// </summary>
         /// <remarks>
@@ -202,6 +238,15 @@ namespace _380_Project_3.ASPX_Dev {
         protected global::System.Web.UI.WebControls.TextBox TextBoxSuccTask;
         
         /// <summary>
+        /// ImageButtonClearSuc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonClearSuc;
+        
+        /// <summary>
         /// ButtonSuccessorTask control.
         /// </summary>
         /// <remarks>
@@ -209,6 +254,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonSuccessorTask;
+        
+        /// <summary>
+        /// LabelSuccDep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelSuccDep;
         
         /// <summary>
         /// TextBoxSuccDepen control.
@@ -263,6 +317,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxExpectedEffort;
+        
+        /// <summary>
+        /// LabelAssocIssue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelAssocIssue;
         
         /// <summary>
         /// ButtonAssociateIssues control.
@@ -344,6 +407,15 @@ namespace _380_Project_3.ASPX_Dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonActualEndDate;
+        
+        /// <summary>
+        /// ImageButtonClearActDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonClearActDate;
         
         /// <summary>
         /// id_GridviewScroll control.

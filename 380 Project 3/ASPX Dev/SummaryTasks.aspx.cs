@@ -344,6 +344,12 @@ namespace _380_Project_3.ASPX_Dev
             ImageButtonActualStartDate.Visible = true;
             TextBoxActualStartDate.Visible = true;
 
+            ImageButtonClearActEnd.Visible = true;
+            ImageButtonClearPred.Visible = true;
+            ImageButtonClearResc.Visible = true;
+            ImageButtonClearActStart.Visible = true;
+            ImageButtonClearSuc.Visible = true;
+
             LabelActualEndDate.Visible = true;
             ImageButtonActualEndDate.Visible = true;
             TextBoxActualEndDate.Visible = true;
@@ -361,6 +367,27 @@ namespace _380_Project_3.ASPX_Dev
             ButtonSave.Visible = true;
             ButtonDelete.Visible = true;
             ButtonGantt.Visible = true;
+
+            LabelRescource.Visible = true;
+            TextBoxResourceAssigned.Visible = true;
+            ButtonSelectResource.Visible = true;
+            ButtonAddResource.Visible = true;
+
+            LabelSucc.Visible = true;
+            LabelSuccDep.Visible = true;
+            TextBoxSuccessorTask.Visible = true;
+            TextBoxSuccDepend.Visible = true;
+            ButtonSuccessorTask.Visible = true;
+
+            LabelPred.Visible = true;
+            LabelPredDep.Visible = true;
+            TextBoxPredecessorTask.Visible = true;
+            TextBoxPredDepend.Visible = true;
+            ButtonPredecessorTask.Visible = true;
+
+            LabelAssocIssue.Visible = true;
+            ButtonAssociateIssues.Visible = true;
+
         }
 
         protected void ButtonModalChangeTaskType_Click(object sender, EventArgs e)
@@ -482,6 +509,12 @@ namespace _380_Project_3.ASPX_Dev
                 DropDownListSummTaskSelect.DataBind();
                 GridViewTaskList.DataBind();
 
+                ImageButtonClearActEnd.Visible = true;
+                ImageButtonClearPred.Visible = true;
+                ImageButtonClearResc.Visible = true;
+                ImageButtonClearActStart.Visible = true;
+                ImageButtonClearSuc.Visible = true;
+
                 id_GridviewScroll.Visible = true;
                 LabelActualStartDate.Visible = true;
                 ImageButtonActualStartDate.Visible = true;
@@ -504,6 +537,26 @@ namespace _380_Project_3.ASPX_Dev
                 ButtonSave.Visible = true;
                 ButtonDelete.Visible = true;
                 ButtonGantt.Visible = true;
+
+                LabelRescource.Visible = true;
+                TextBoxResourceAssigned.Visible = true;
+                ButtonSelectResource.Visible = true;
+                ButtonAddResource.Visible = true;
+
+                LabelSucc.Visible = true;
+                LabelSuccDep.Visible = true;
+                TextBoxSuccessorTask.Visible = true;
+                TextBoxSuccDepend.Visible = true;
+                ButtonSuccessorTask.Visible = true;
+
+                LabelPred.Visible = true;
+                LabelPredDep.Visible = true;
+                TextBoxPredecessorTask.Visible = true;
+                TextBoxPredDepend.Visible = true;
+                ButtonPredecessorTask.Visible = true;
+
+                LabelAssocIssue.Visible = true;
+                ButtonAssociateIssues.Visible = true;
             }
         }
 
@@ -680,5 +733,118 @@ namespace _380_Project_3.ASPX_Dev
             this.GridViewAssociateIssues.DataBind();
         }
 
+        protected void ImageButtonClearActStart_Click(object sender, ImageClickEventArgs e)
+        {
+            TextBoxActualStartDate.Text = "";
+        }
+
+        protected void ImageButtonClearActEnd_Click(object sender, ImageClickEventArgs e)
+        {
+            TextBoxActualEndDate.Text = "";
+        }
+
+        protected void ImageButtonClearResc_Click(object sender, ImageClickEventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                try
+                {
+                    Connect(conn);
+
+                    using (SqlCommand cmd = new SqlCommand("UPDATE tblResources SET AssociatedTask=NULL WHERE UserID=@UserID AND ProjectID=@ProjID AND AssociatedTask=@AsscTask", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                        cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                        cmd.Parameters.AddWithValue("@AsscTask", Session["_CurrentTaskID"]);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                }
+
+                catch (Exception ex)
+                {
+                    Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                }
+
+                finally
+                {
+                    Disconnect(conn);
+                }
+
+                GridViewAssociateResource.DataBind();
+                TextBoxResourceAssigned.Text = "";
+            }
+        }
+
+        protected void ImageButtonClearPred_Click(object sender, ImageClickEventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                try
+                {
+                    Connect(conn);
+
+                    using (SqlCommand cmd = new SqlCommand("UPDATE tblTasks SET PredecessorTask=NULL, PredecessorDependency=NULL WHERE UserID=@UserID AND ProjectID=@ProjID AND TaskID=@TaskID", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                        cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                        cmd.Parameters.AddWithValue("@TaskID", Session["_CurrentTaskID"]);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                }
+
+                catch (Exception ex)
+                {
+                    Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                }
+
+                finally
+                {
+                    Disconnect(conn);
+                }
+                TextBoxPredDepend.Text = "";
+                TextBoxPredecessorTask.Text = "";
+                GridViewTaskList.DataBind();
+                DropDownListSetPredTask.DataBind();
+                DropDownListSetSuccTask.DataBind();
+
+            }
+        }
+
+        protected void ImageButtonClearSuc_Click(object sender, ImageClickEventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                try
+                {
+                    Connect(conn);
+
+                    using (SqlCommand cmd = new SqlCommand("UPDATE tblTasks SET SuccessorTask=NULL, SuccessorDependency=NULL WHERE UserID=@UserID AND ProjectID=@ProjID AND TaskID=@TaskID", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                        cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                        cmd.Parameters.AddWithValue("@TaskID", Session["_CurrentTaskID"]);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                }
+
+                catch (Exception ex)
+                {
+                    Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                }
+
+                finally
+                {
+                    Disconnect(conn);
+                }
+                TextBoxSuccDepend.Text = "";
+                TextBoxSuccessorTask.Text = "";
+                GridViewTaskList.DataBind();
+                DropDownListSetPredTask.DataBind();
+                DropDownListSetSuccTask.DataBind();
+            }
+        }
     }
 }

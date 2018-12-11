@@ -146,14 +146,20 @@
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" Width="60px" />
             </td>
 
-            <td colspan="1" class="text-right">Resource Assigned:&nbsp;&nbsp;&nbsp; </td>
-            <td colspan="1">
-                <asp:TextBox ID="TextBoxResourceAssigned" runat="server" Width="100px" ReadOnly="True" BackColor="#CCCCCC" Height="20px"></asp:TextBox>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelResourceAssigned" runat="server" Text="Resource Assigned:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp;
+            </td>
+            <td colspan="1" class="auto-style17">
+                <asp:TextBox ID="TextBoxResourceAssigned" runat="server" Width="100px" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Visible="False"></asp:TextBox>
+
+
+                <asp:ImageButton ID="ImageButtonClearResource" runat="server" ImageUrl="~/Images/x.png" OnClick="ImageButtonClearResource_Click" Visible="False" Width="25px" />
 
 
             </td>
             <td colspan="1" class="text-left">
-                <asp:Button ID="ButtonSelectResource" runat="server" Text="Select Resource" Width="125px" data-toggle="modal" data-target="#myModal6" OnClientClick="return false;" /></td>
+                <asp:Button ID="ButtonSelectResource" runat="server" Text="Select Resource" Width="125px" data-toggle="modal" data-target="#myModal6" OnClientClick="return false;" Visible="False" /></td>
             <td colspan="1">&nbsp;</td>
             <td colspan="1"></td>
             <td colspan="1"></td>
@@ -163,47 +169,49 @@
         </tr>
 
         <tr>
-            <td colspan="1" class="auto-style16">&nbsp;</td>
-            <td colspan="1"></td>
-            <td colspan="1"></td>
-            <td colspan="1"></td>
-            <td colspan="1"></td>
+            <td colspan="1" class="auto-style19"></td>
+            <td colspan="1" class="auto-style20"></td>
+            <td colspan="1" class="auto-style20"></td>
+            <td colspan="1" class="auto-style20"></td>
+            <td colspan="1" class="auto-style20"></td>
 
-            <td colspan="1"></td>
-            <td colspan="1"></td>
-            <td colspan="1"></td>
-            <td colspan="1"></td>
-            <td colspan="1"></td>
+            <td colspan="1" class="auto-style20"></td>
+            <td colspan="1" class="auto-style21"></td>
+            <td colspan="1" class="auto-style20"></td>
+            <td colspan="1" class="auto-style20"></td>
+            <td colspan="1" class="auto-style20"></td>
 
-            <td colspan="1"></td>
-            <td colspan="1"></td>
-            <td colspan="1"></td>
-            <td colspan="1"></td>
-            <td colspan="1" class="auto-style12"></td>
+            <td colspan="1" class="auto-style20"></td>
+            <td colspan="1" class="auto-style20"></td>
+            <td colspan="1" class="auto-style20"></td>
+            <td colspan="1" class="auto-style20"></td>
+            <td colspan="1" class="auto-style22"></td>
         </tr>
 
         <tr style="vertical-align: top">
             <td colspan="1" class="auto-style15">Description<span class="auto-style14">*</span>:&nbsp;&nbsp;&nbsp; </td>
             <td colspan="4" rowspan="2">
                 <asp:TextBox ID="TextBoxDescription" runat="server" MaxLength="1000" TextMode="MultiLine" Height="150px" Width="300px" TabIndex="2"></asp:TextBox></td>
-            <td colspan="1" class="text-right">Status:&nbsp;&nbsp;&nbsp; </td>
-            <td colspan="1">
-                <asp:TextBox ID="TextBoxStatus" runat="server" Height="20px" Width="150px" BackColor="#CCCCCC"></asp:TextBox></td>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelStatus" runat="server" Text="Status:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp; </td>
+            <td colspan="1" class="auto-style17">
+                <asp:TextBox ID="TextBoxStatus" runat="server" Height="20px" Width="150px" BackColor="#CCCCCC" Visible="False"></asp:TextBox></td>
             <td colspan="1" rowspan="2" class="text-left">
-                <asp:Button ID="ButtonAddStatus" runat="server" Text="Add Status" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" Width="85px" TabIndex="10" />
+                <asp:Button ID="ButtonAddStatus" runat="server" Text="Add Status" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" Width="85px" TabIndex="10" Visible="False" />
 
 
                 <br />
                 <br />
 
 
-                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" Width="110px" OnClick="ButtonRemoveStatus_Click" TabIndex="11" />
+                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" Width="110px" OnClick="ButtonRemoveStatus_Click" TabIndex="11" Visible="False" />
 
 
             </td>
 
             <td colspan="1" rowspan="2">
-                <asp:ListBox ID="ListBoxStatus" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="StatusTextBoxJS(this)" DataSourceID="ListBoxStatusDB" DataTextField="StatusName" DataValueField="Sequence" TabIndex="9"></asp:ListBox>
+                <asp:ListBox ID="ListBoxStatus" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="StatusTextBoxJS(this)" DataSourceID="ListBoxStatusDB" DataTextField="StatusName" DataValueField="Sequence" TabIndex="9" Visible="False"></asp:ListBox>
                 <asp:SqlDataSource ID="ListBoxStatusDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [StatusName], [Sequence] FROM [tblStatusActItem] WHERE ([AssociatedActionItem] = @AssocActItem) ORDER BY [Sequence] ASC">
                     <SelectParameters>
                         <asp:SessionParameter Name="AssocActItem" SessionField="_CurrentActionItemID" Type="Int32" />
@@ -212,10 +220,10 @@
             </td>
             <td colspan="1">
                 <br />
-                <asp:ImageButton ID="ImageButtonStatusMoveUp" runat="server" Height="30px" ImageUrl="~/Images/up.png" OnClientClick="listBoxMove('ListBoxStatus', 'up'); return false;" />
+                <asp:ImageButton ID="ImageButtonStatusMoveUp" runat="server" Height="30px" ImageUrl="~/Images/up.png" OnClientClick="listBoxMove('ListBoxStatus', 'up'); return false;" Visible="False" />
                 <br />
                 <br />
-                <asp:ImageButton ID="ImageButtonStatusMoveDown" runat="server" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxStatus' , 'down'); return false;" Height="30px" /></td>
+                <asp:ImageButton ID="ImageButtonStatusMoveDown" runat="server" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxStatus' , 'down'); return false;" Height="30px" Visible="False" /></td>
             <td colspan="1">
                 <asp:HiddenField ID="HiddenFieldListBox" runat="server" />
             </td>
@@ -229,7 +237,7 @@
         <tr>
             <td colspan="1" class="auto-style16">&nbsp;</td>
             <td colspan="1"></td>
-            <td colspan="1"></td>
+            <td colspan="1" class="auto-style17"></td>
             <td colspan="1"></td>
             <td colspan="1"></td>
 
@@ -251,11 +259,13 @@
                 <cc1:CalendarExtender ID="CalendarDateCreated" PopupButtonID="ImageButtonDateCreated" runat="server" TargetControlID="TextBoxDateCreated" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonDateCreated" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="3" /></td>
 
-            <td colspan="1" class="text-right">Status Description:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelStatusDescr" runat="server" Text="Status Description:&nbsp;" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp; </td>
 
             <td colspan="3" style="vertical-align: top" class="text-left">
 
-                <asp:TextBox ID="TextBoxStatusDescription" runat="server" Height="150px" MaxLength="1000" TextMode="MultiLine" Width="300px" TabIndex="12" OnTextChanged="TextBoxStatusDescription_TextChanged"></asp:TextBox></td>
+                <asp:TextBox ID="TextBoxStatusDescription" runat="server" Height="150px" MaxLength="1000" TextMode="MultiLine" Width="300px" TabIndex="12" OnTextChanged="TextBoxStatusDescription_TextChanged" Visible="False"></asp:TextBox></td>
 
 
             <td colspan="1" class="auto-style4"></td>
@@ -272,7 +282,9 @@
             <td colspan="1"></td>
 
             <td colspan="1"></td>
-            <td colspan="1" class="text-left">Last Updated:<asp:TextBox ID="TextBoxLastUpdated" runat="server" Height="20px" Width="80px" ReadOnly="True" BackColor="#CCCCCC"></asp:TextBox>
+            <td colspan="1" class="auto-style18">
+                <asp:Label ID="LabelLastUpdated" runat="server" Text="Last Updated:" Visible="False"></asp:Label>
+                <asp:TextBox ID="TextBoxLastUpdated" runat="server" Height="20px" Width="80px" ReadOnly="True" BackColor="#CCCCCC" Visible="False"></asp:TextBox>
             </td>
             <td colspan="1" class="text-left">&nbsp;</td>
             <td colspan="1"></td>
@@ -297,7 +309,7 @@
 
 
             <td colspan="1" class="text-left">List of Created Action Items:</td>
-            <td colspan="1"></td>
+            <td colspan="1" class="auto-style17"></td>
             <td colspan="1"></td>
             <td colspan="1"></td>
             <td colspan="1"></td>
@@ -374,7 +386,9 @@
             <td colspan="4">
                 <asp:TextBox ID="TextBoxActualCompletionDate" runat="server" Visible="False" Height="20px" Width="80px" BackColor="#CCCCCC"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarActComplDate" PopupButtonID="ImageButtonActualCompletionDate" runat="server" TargetControlID="TextBoxActualCompletionDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonActualCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="6" /></td>
+                <asp:ImageButton ID="ImageButtonActualCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="6" />
+                <asp:ImageButton ID="ImageButtonClearActCompl" runat="server" ImageUrl="~/Images/x.png" OnClick="ImageButtonClearActCompl_Click" Visible="False" Width="25px" />
+            </td>
             <td colspan="9"></td>
 
         </tr>
@@ -396,7 +410,7 @@
             <td colspan="1" class="text-right">
                 <asp:Button ID="ButtonDelete" runat="server" OnClick="ButtonDelete_Click" Text="Delete" Visible="False" Width="75px" />
             </td>
-            <td colspan="1"></td>
+            <td colspan="1" class="auto-style17"></td>
             <td colspan="1"></td>
             <td colspan="1">&nbsp;</td>
             <td colspan="1" class="text-right">&nbsp;</td>
@@ -518,6 +532,34 @@
 
         .auto-style16 {
             width: 200px;
+        }
+
+        .auto-style17 {
+            width: 16px;
+        }
+
+        .auto-style18 {
+            text-align: left;
+            width: 16px;
+        }
+
+        .auto-style19 {
+            width: 200px;
+            height: 20px;
+        }
+
+        .auto-style20 {
+            height: 20px;
+        }
+
+        .auto-style21 {
+            width: 16px;
+            height: 20px;
+        }
+
+        .auto-style22 {
+            width: 12px;
+            height: 20px;
         }
     </style>
 </asp:Content>

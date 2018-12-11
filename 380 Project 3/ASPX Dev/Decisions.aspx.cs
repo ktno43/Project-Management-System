@@ -216,6 +216,10 @@ namespace _380_Project_3.ASPX_Dev
 
             this.GridViewListofDecisions.DataBind();
 
+            ImageButtonClearActDate.Visible = true;
+            ImageButtonClearDateMade.Visible = true;
+            ImageButtonClearResource.Visible = true;
+
             LabelActualCompletionDate.Visible = true;
             ImageButtonActCompletionDate.Visible = true;
             TextBoxActCompletionDate.Visible = true;
@@ -227,6 +231,41 @@ namespace _380_Project_3.ASPX_Dev
             LabelDecisionMaker.Visible = true;
             TextBoxDecisionMaker.Visible = true;
             ButtonDecisionMaker.Visible = true;
+
+            LabelImpact.Visible = true;
+            TextBoxImpact.Visible = true;
+            ButtonAddImpact.Visible = true;
+            ButtonRemoveImpact.Visible = true;
+            ListBoxImpact.Visible = true;
+            ImageButtonImpactMoveDown.Visible = true;
+            ImageButtonImpactMoveUp.Visible = true;
+
+            LabelPri.Visible = true;
+            TextBoxPriority.Visible = true;
+            ButtonAddPriority.Visible = true;
+            ButtonRemovePriority.Visible = true;
+            ListBoxPriority.Visible = true;
+            ImageButtonPriorityMoveDown.Visible = true;
+            ImageButtonPriorityMoveUp.Visible = true;
+
+            LabelStatus.Visible = true;
+            TextBoxStatus.Visible = true;
+            ButtonAddStatus.Visible = true;
+            ButtonRemoveStatus.Visible = true;
+            ListBoxStatus.Visible = true;
+            ImageButtonStatusMoveDown.Visible = true;
+            ImageButtonStatusMoveUp.Visible = true;
+
+            LabelStatusDescr.Visible = true;
+            TextBoxStatusDescription.Visible = true;
+            LabelUpdStatus.Visible = true;
+            TextBoxLastUpdatedStatus.Visible = true;
+
+            LabelLastUpdatedNote.Visible = true;
+            TextBoxLastUpdatedNote.Visible = true;
+
+            LabelRefDoc.Visible = true;
+            ButtonAssociateRefDocs.Visible = true;
         }
 
         protected void ButtonModalAddStatus_Click(object sender, EventArgs e)
@@ -561,6 +600,10 @@ namespace _380_Project_3.ASPX_Dev
                 ImageButtonActCompletionDate.Visible = true;
                 TextBoxActCompletionDate.Visible = true;
 
+                ImageButtonClearActDate.Visible = true;
+                ImageButtonClearDateMade.Visible = true;
+                ImageButtonClearResource.Visible = true;
+
                 LabelDateMade.Visible = true;
                 ImageButtonDateMade.Visible = true;
                 TextBoxDateMade.Visible = true;
@@ -568,6 +611,43 @@ namespace _380_Project_3.ASPX_Dev
                 LabelDecisionMaker.Visible = true;
                 TextBoxDecisionMaker.Visible = true;
                 ButtonDecisionMaker.Visible = true;
+
+                LabelImpact.Visible = true;
+                TextBoxImpact.Visible = true;
+                ButtonAddImpact.Visible = true;
+                ButtonRemoveImpact.Visible = true;
+                ListBoxImpact.Visible = true;
+                ImageButtonImpactMoveDown.Visible = true;
+                ImageButtonImpactMoveUp.Visible = true;
+
+                LabelPri.Visible = true;
+                TextBoxPriority.Visible = true;
+                ButtonAddPriority.Visible = true;
+                ButtonRemovePriority.Visible = true;
+                ListBoxPriority.Visible = true;
+                ImageButtonPriorityMoveDown.Visible = true;
+                ImageButtonPriorityMoveUp.Visible = true;
+
+                LabelStatus.Visible = true;
+                TextBoxStatus.Visible = true;
+                ButtonAddStatus.Visible = true;
+                ButtonRemoveStatus.Visible = true;
+                ListBoxStatus.Visible = true;
+                ImageButtonStatusMoveDown.Visible = true;
+                ImageButtonStatusMoveUp.Visible = true;
+
+                LabelStatusDescr.Visible = true;
+                TextBoxStatusDescription.Visible = true;
+                LabelUpdStatus.Visible = true;
+                TextBoxLastUpdatedStatus.Visible = true;
+
+                LabelMeeting.Visible = true;
+                ButtonAssociateMeetingNotes.Visible = true;
+                LabelLastUpdatedNote.Visible = true;
+                TextBoxLastUpdatedNote.Visible = true;
+
+                LabelRefDoc.Visible = true;
+                ButtonAssociateRefDocs.Visible = true;
             }
         }
 
@@ -857,6 +937,49 @@ namespace _380_Project_3.ASPX_Dev
                 }
 
                 TextBoxLastUpdatedStatus.Text = DateTime.Today.ToShortDateString();
+            }
+        }
+
+        protected void ImageButtonClearActDate_Click(object sender, ImageClickEventArgs e)
+        {
+            TextBoxActCompletionDate.Text = "";
+        }
+
+        protected void ImageButtonClearDateMade_Click(object sender, ImageClickEventArgs e)
+        {
+            TextBoxDateMade.Text = "";
+        }
+
+        protected void ImageButtonClearResource_Click(object sender, ImageClickEventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(g_sqlConn))
+            {
+                try
+                {
+                    Connect(conn);
+
+                    using (SqlCommand cmd = new SqlCommand("UPDATE tblResources SET AssociatedDecision=NULL WHERE UserID=@UserID AND ProjectID=@ProjID AND AssociatedDecision=@AsscDec", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", Session["_CurrentUserID"]);
+                        cmd.Parameters.AddWithValue("@ProjID", Session["_CurrentProjID"]);
+                        cmd.Parameters.AddWithValue("@AsscDec", Session["_CurrentDecisionID"]);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                }
+
+                catch (Exception ex)
+                {
+                    Response.Write(String.Format("Error while executing query...{0}", ex.ToString()));
+                }
+
+                finally
+                {
+                    Disconnect(conn);
+                }
+
+                GridViewAssociateResource.DataBind();
+                TextBoxDecisionMaker.Text = "";
             }
         }
     }

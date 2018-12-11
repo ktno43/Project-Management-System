@@ -90,6 +90,12 @@ namespace _380_Project_3
             GridViewAssociatedTasks.DataBind();
             ButtonSave.Visible = true;
             ButtonDel.Visible = true;
+
+            LabelAssocReq.Visible = true;
+            ButtonReqs.Visible = true;
+
+            LabelAssocTask.Visible = true;
+            ButtonAssociateTasks.Visible = true;
         }
 
         protected void ButtonModalAssociateTask_Click(object sender, EventArgs e)
@@ -230,6 +236,16 @@ namespace _380_Project_3
                 GridViewListDeliverables.DataBind();
                 ButtonSave.Visible = true;
                 ButtonDel.Visible = true;
+
+                this.id_GridviewScroll.Visible = true;
+
+                LabelAssocReq.Visible = true;
+                ButtonReqs.Visible = true;
+
+                LabelAssocTask.Visible = true;
+                ButtonAssociateTasks.Visible = true;
+
+
             }
         }
 
@@ -293,7 +309,7 @@ namespace _380_Project_3
                     }
                 }
 
-    
+
                 DropDownListDelivSelect.Items.Clear();
                 DropDownListDelivSelect.DataBind();
                 GridViewListDeliverables.DataBind();

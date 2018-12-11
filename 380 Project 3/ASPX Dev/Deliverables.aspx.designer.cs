@@ -94,6 +94,15 @@ namespace _380_Project_3 {
         protected global::System.Web.UI.WebControls.Button ButtonSearch;
         
         /// <summary>
+        /// LabelAssocReq control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelAssocReq;
+        
+        /// <summary>
         /// ButtonReqs control.
         /// </summary>
         /// <remarks>
@@ -137,6 +146,15 @@ namespace _380_Project_3 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonStartDate;
+        
+        /// <summary>
+        /// LabelAssocTask control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelAssocTask;
         
         /// <summary>
         /// ButtonAssociateTasks control.

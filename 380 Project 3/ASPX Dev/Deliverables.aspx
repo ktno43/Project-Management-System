@@ -172,7 +172,9 @@
             <td colspan="4" class="auto-style8">
                 <asp:TextBox ID="TextBoxName" runat="server" Width="240px" Height="20px" TabIndex="1"></asp:TextBox>
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" CssClass="col-xs-offset-0" Width="60px" /></td>
-            <td colspan="2" class="auto-style11">Associated Requirement(s):&nbsp;&nbsp;&nbsp; <asp:Button ID="ButtonReqs" runat="server" Text="Associate Requirements" Width="165px" TabIndex="7" />
+            <td colspan="2" class="auto-style11">
+                <asp:Label ID="LabelAssocReq" runat="server" Text="Associated Requirement(s):" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp; <asp:Button ID="ButtonReqs" runat="server" Text="Associate Requirements" Width="165px" TabIndex="7" Visible="False" />
             </td>
 
             <td colspan="7" class="auto-style8">&nbsp;</td>
@@ -206,7 +208,9 @@
                 <asp:ImageButton ID="ImageButtonStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="4" />
             </td>
 
-            <td colspan="2" class="text-left">Associated Task(s):&nbsp;&nbsp;&nbsp; <asp:Button ID="ButtonAssociateTasks" runat="server" data-toggle="modal" data-target="#myModal2" Text="Associate Tasks" OnClientClick="return false;" OnClick="ButtonAssociateTasks_Click" Width="115px" TabIndex="8" />
+            <td colspan="2" class="text-left">
+                <asp:Label ID="LabelAssocTask" runat="server" Text="Associated Task(s):" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp; <asp:Button ID="ButtonAssociateTasks" runat="server" data-toggle="modal" data-target="#myModal2" Text="Associate Tasks" OnClientClick="return false;" OnClick="ButtonAssociateTasks_Click" Width="115px" TabIndex="8" Visible="False" />
             </td>
             <td colspan="7"></td>
         </tr>

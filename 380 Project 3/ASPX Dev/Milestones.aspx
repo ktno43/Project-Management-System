@@ -205,30 +205,34 @@
     </div>
     <table style="width: 100%;">
         <tr>
-            <td colspan="1" class="auto-style12">Name<span class="auto-style2">*</span>:&nbsp;&nbsp;&nbsp; </td>
-            <td colspan="4" class="auto-style10">
+            <td colspan="1" class="auto-style23">Name<span class="auto-style2">*</span>:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="4" class="auto-style24">
                 <asp:TextBox ID="TextBoxName" runat="server" Width="240px" Height="20px" TabIndex="1"></asp:TextBox>
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" Width="60px" />
             </td>
 
-            <td colspan="1" class="auto-style11">Predecessor Task:&nbsp;&nbsp;&nbsp;
-                <br />
+            <td colspan="1" class="auto-style25">
+                <asp:Label ID="LabelPredTask" runat="server" Text="Predecessor Task:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp;
             </td>
-            <td colspan="1" class="auto-style10">
-                <asp:TextBox ID="TextBoxPredTask" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px"></asp:TextBox>
+            <td colspan="1" class="auto-style24">
+                <asp:TextBox ID="TextBoxPredTask" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px" Visible="False"></asp:TextBox>
+                <asp:ImageButton ID="ImageButtonClearPred" runat="server" ImageUrl="~/Images/x.png" OnClick="ImageButtonClearPred_Click" Visible="False" Width="25px" />
             </td>
-            <td colspan="1" class="auto-style10">
-                <asp:Button ID="ButtonPredecessorTask" runat="server" Text="Select Predecessor Task" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" TabIndex="9" Width="175px" />
+            <td colspan="1" class="auto-style24">
+                <asp:Button ID="ButtonPredecessorTask" runat="server" Text="Select Predecessor Task" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" TabIndex="9" Width="175px" Visible="False" />
             </td>
-            <td colspan="5" class="auto-style10"></td>
+            <td colspan="5" class="auto-style24"></td>
         </tr>
 
 
         <tr>
             <td colspan="5">&nbsp;</td>
-            <td colspan="1" class="text-right">Predecessor Dependency:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelPredTaskDep" runat="server" Text="Predecessor Dependency:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp; </td>
             <td colspan="1" class="auto-style14">
-                <asp:TextBox ID="TextBoxPredDepen" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxPredDepen" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px" Visible="False"></asp:TextBox>
             </td>
             <td colspan="6"></td>
         </tr>
@@ -244,22 +248,27 @@
         </tr>
 
         <tr style="vertical-align: top">
-            <td colspan="5" class="auto-style10"></td>
-            <td colspan="1" class="auto-style3">Successor Task:&nbsp;&nbsp;&nbsp; </td>
-            <td colspan="1" class="auto-style4">
-                <asp:TextBox ID="TextBoxSuccTask" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px"></asp:TextBox>
+            <td colspan="5" class="auto-style24"></td>
+            <td colspan="1" class="auto-style25">&nbsp;&nbsp;&nbsp;
+                <asp:Label ID="LabelSuccTask" runat="server" Text="Successor Task:" Visible="False"></asp:Label>
             </td>
-            <td colspan="1" class="auto-style10">
-                <asp:Button ID="ButtonSuccessorTask" runat="server" Text="Select Successor Task" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" TabIndex="10" Width="175px" />
+            <td colspan="1" class="auto-style26">
+                <asp:TextBox ID="TextBoxSuccTask" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px" Visible="False"></asp:TextBox>
+                <asp:ImageButton ID="ImageButtonClearSuc" runat="server" ImageUrl="~/Images/x.png" OnClick="ImageButtonClearSuc_Click" Visible="False" Width="25px" />
             </td>
-            <td colspan="5" class="auto-style10"></td>
+            <td colspan="1" class="auto-style24">
+                <asp:Button ID="ButtonSuccessorTask" runat="server" Text="Select Successor Task" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" TabIndex="10" Width="175px" Visible="False" />
+            </td>
+            <td colspan="5" class="auto-style24"></td>
         </tr>
 
         <tr>
             <td colspan="5"></td>
-            <td colspan="1" class="text-right">Successor Dependency:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelSuccDep" runat="server" Text="Successor Dependency:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp; </td>
             <td colspan="7">
-                <asp:TextBox ID="TextBoxSuccDepen" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxSuccDepen" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px" Visible="False"></asp:TextBox>
             </td>
 
         </tr>
@@ -294,8 +303,10 @@
             <td colspan="4">
                 <asp:TextBox ID="TextBoxExpectedEffort" runat="server" Height="20px" Width="80px" TabIndex="5"></asp:TextBox>
             </td>
-            <td colspan="1" class="text-left" style="vertical-align: top">Associated Issue(s):&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="ButtonAssociateIssues" runat="server" Text="Associate Issues" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" OnClick="ButtonAssociateIssues_Click" TabIndex="11" />
+            <td colspan="1" class="auto-style18" style="vertical-align: top">
+                <asp:Label ID="LabelAssocIssue" runat="server" Text="Associated Issue(s):" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp;
+                <asp:Button ID="ButtonAssociateIssues" runat="server" Text="Associate Issues" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" OnClick="ButtonAssociateIssues_Click" TabIndex="11" Visible="False" />
 
             </td>
             <td colspan="7">
@@ -386,8 +397,9 @@
                 <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="80px" Visible="False" Height="20px" BackColor="#CCCCCC"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarActEndDate" PopupButtonID="ImageButtonActualEndDate" runat="server" TargetControlID="TextBoxActualEndDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonActualEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="6" />
+                <asp:ImageButton ID="ImageButtonClearActDate" runat="server" ImageUrl="~/Images/x.png" OnClick="ImageButtonClearActDate_Click" Visible="False" Width="25px" />
             </td>
-            <td colspan="1" class="text-left" style="vertical-align: top">List of Task(s):</td>
+            <td colspan="1" class="auto-style22" style="vertical-align: top">List of Task(s):</td>
             <td colspan="7"></td>
         </tr>
         <tr>
@@ -462,8 +474,8 @@
             <td colspan="4">
                 <asp:TextBox ID="TextBoxEffortCompleted" runat="server" Visible="False" Height="20px" Width="80px" TabIndex="10"></asp:TextBox>
             </td>
-            <td colspan="1"></td>
-            <td colspan="1">&nbsp;</td>
+            <td colspan="1" class="auto-style19"></td>
+            <td colspan="1" class="auto-style14">&nbsp;</td>
             <td colspan="1"></td>
             <td colspan="1"></td>
             <td colspan="1"></td>
@@ -502,11 +514,11 @@
             <td colspan="1">
                 <asp:Button ID="ButtonGantt" runat="server" Text="Gantt Chart" Visible="False" Width="85px" TabIndex="13" />
             </td>
-            <td colspan="1">
+            <td colspan="1" class="auto-style19">
                 <asp:Button ID="ButtonDelete" runat="server" Text="Delete" Width="75px" OnClick="ButtonDelete_Click" Visible="False" />
 
             </td>
-            <td colspan="1">
+            <td colspan="1" class="auto-style14">
                 <asp:Button ID="ButtonSave" runat="server" Text="Save" Width="125px" OnClick="ButtonSave_Click" Visible="False" TabIndex="14" />
 
             </td>
@@ -536,18 +548,6 @@
             color: #FF0000;
         }
 
-        .auto-style3 {
-            text-align: right;
-            height: 40px;
-            width: 816px;
-        }
-
-        .auto-style4 {
-            text-align: left;
-            height: 40px;
-            width: 8%;
-        }
-
         .auto-style7 {
             text-align: right;
             height: 60px;
@@ -563,33 +563,46 @@
             height: 52px;
         }
 
-        .auto-style10 {
-            height: 40px;
-        }
-
-        .auto-style11 {
-            text-align: right;
-            height: 40px;
-        }
-
-        .auto-style12 {
-            text-align: right;
-            height: 40px;
-            width: 200px;
-        }
-
         .auto-style13 {
             text-align: right;
             width: 200px;
         }
 
-        .auto-style14 {
-            width: 181px;
-        }
 
         .auto-style15 {
             width: 200px;
         }
+        .auto-style17 {
+            height: 39px;
+        }
+        .auto-style18 {
+            text-align: right;
+            height: 39px;
+        }
+        .auto-style19 {
+            height: 35px;
+        }
+        .auto-style22 {
+            text-align: left;
+            height: 39px;
+        }
+        .auto-style23 {
+            text-align: right;
+            width: 200px;
+            height: 40px;
+        }
+        .auto-style24 {
+            height: 40px;
+        }
+        .auto-style25 {
+            text-align: right;
+            height: 40px;
+        }
+        .auto-style26 {
+            text-align: left;
+            height: 40px;
+        }
+
     </style>
 </asp:Content>
 

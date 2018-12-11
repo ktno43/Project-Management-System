@@ -255,20 +255,22 @@
 
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" Width="60px" /></td>
 
-            <td colspan="1" class="text-right">Severity:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelSeverity" runat="server" Text="Severity:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp; </td>
             <td colspan="1">
-                <asp:TextBox ID="TextBoxSeverity" runat="server" BackColor="#CCCCCC" Height="20px" Width="100px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxSeverity" runat="server" BackColor="#CCCCCC" Height="20px" Width="100px" Visible="False"></asp:TextBox>
                 <asp:HiddenField ID="HiddenFieldSeverity" runat="server" />
             </td>
 
             <td colspan="1">
-                <asp:Button ID="ButtonAddSeverity" runat="server" Text="Add Severity" data-toggle="modal" data-target="#myModal5" OnClientClick="return false;" Width="95px" TabIndex="10" />
+                <asp:Button ID="ButtonAddSeverity" runat="server" Text="Add Severity" data-toggle="modal" data-target="#myModal5" OnClientClick="return false;" Width="95px" TabIndex="10" Visible="False" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonRemoveSeverity" runat="server" Text="Remove Severity" OnClick="ButtonRemoveSeverity_Click" Width="120px" TabIndex="11" /></td>
+                <asp:Button ID="ButtonRemoveSeverity" runat="server" Text="Remove Severity" OnClick="ButtonRemoveSeverity_Click" Width="120px" TabIndex="11" Visible="False" /></td>
 
             <td colspan="2" rowspan="2">
-                <asp:ListBox ID="ListBoxSeverity" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="SeverityTextBoxJS(this)" DataSourceID="ListBoxSeverityDB" DataTextField="SeverityName" DataValueField="Sequence" TabIndex="9"></asp:ListBox>
+                <asp:ListBox ID="ListBoxSeverity" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="SeverityTextBoxJS(this)" DataSourceID="ListBoxSeverityDB" DataTextField="SeverityName" DataValueField="Sequence" TabIndex="9" Visible="False"></asp:ListBox>
                 <asp:SqlDataSource ID="ListBoxSeverityDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [SeverityName], [Sequence] FROM [tblSeverityIssues] WHERE ([AssociatedIssue] = @AssocIssue)  ORDER BY [Sequence] ASC">
                     <SelectParameters>
                         <asp:SessionParameter Name="AssocIssue" SessionField="_CurrentIssueID" Type="Int32" />
@@ -278,10 +280,10 @@
 
             <td colspan="1">
                 <br />
-                <asp:ImageButton ID="ImageSeverityMoveUp" runat="server" Height="30px" ImageUrl="~/Images/up.png" OnClientClick="listBoxMove('ListBoxSeverity', 'up'); return false;" />
+                <asp:ImageButton ID="ImageSeverityMoveUp" runat="server" Height="30px" ImageUrl="~/Images/up.png" OnClientClick="listBoxMove('ListBoxSeverity', 'up'); return false;" Visible="False" />
                 <br />
                 <br />
-                <asp:ImageButton ID="ImageButtonSeverityMoveDown" runat="server" Height="30px" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxSeverity', 'down'); return false;" />
+                <asp:ImageButton ID="ImageButtonSeverityMoveDown" runat="server" Height="30px" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxSeverity', 'down'); return false;" Visible="False" />
 
             </td>
         </tr>
@@ -299,19 +301,21 @@
             <td colspan="1" style="vertical-align: text-top" class="auto-style16">Description<span class="auto-style1">*</span>:&nbsp;&nbsp;&nbsp; </td>
             <td colspan="4">
                 <asp:TextBox ID="TextBoxDescription" runat="server" TextMode="MultiLine" Height="150px" Width="300px" TabIndex="3"></asp:TextBox></td>
-            <td colspan="1" class="auto-style15">Priority<span class="auto-style3">:&nbsp;&nbsp;&nbsp; </span></td>
+            <td colspan="1" class="auto-style15">
+                <asp:Label ID="LabelPri" runat="server" Text="Priority:" Visible="False"></asp:Label>
+                <span class="auto-style3">&nbsp;&nbsp;&nbsp; </span></td>
             <td colspan="1">
-                <asp:TextBox ID="TextBoxPriority" runat="server" BackColor="#CCCCCC" Height="20px" Width="100px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxPriority" runat="server" BackColor="#CCCCCC" Height="20px" Width="100px" Visible="False"></asp:TextBox>
                 <asp:HiddenField ID="HiddenFieldPriority" runat="server" />
             </td>
             <td colspan="1">
-                <asp:Button ID="ButtonAddPriority" runat="server" Text="Add Priority" data-toggle="modal" data-target="#myModal6" OnClientClick="return false;" Width="85px" TabIndex="13" />
+                <asp:Button ID="ButtonAddPriority" runat="server" Text="Add Priority" data-toggle="modal" data-target="#myModal6" OnClientClick="return false;" Width="85px" TabIndex="13" Visible="False" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonRemovePriority" runat="server" Text="Remove Priority" OnClick="ButtonRemovePriority_Click" Width="120px" TabIndex="14" />
+                <asp:Button ID="ButtonRemovePriority" runat="server" Text="Remove Priority" OnClick="ButtonRemovePriority_Click" Width="120px" TabIndex="14" Visible="False" />
             </td>
             <td colspan="2" rowspan="2">
-                <asp:ListBox ID="ListBoxPriority" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="PriorityTextBoxJS(this)" DataSourceID="ListBoxPriorityDB" DataTextField="PriorityName" DataValueField="Sequence" TabIndex="12"></asp:ListBox>
+                <asp:ListBox ID="ListBoxPriority" ClientIDMode="Static" runat="server" Height="150px" Width="185px" onchange="PriorityTextBoxJS(this)" DataSourceID="ListBoxPriorityDB" DataTextField="PriorityName" DataValueField="Sequence" TabIndex="12" Visible="False"></asp:ListBox>
 
 
                 <asp:SqlDataSource ID="ListBoxPriorityDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [PriorityName], [Sequence] FROM [tblPriorityIssues] WHERE ([AssociatedIssue] = @AssocIssue) ORDER BY [Sequence] ASC">
@@ -325,10 +329,10 @@
 
             <td colspan="1">
                 <br />
-                <asp:ImageButton ID="ImageButtonPriorityMoveUp" runat="server" Height="30px" ImageUrl="~/Images/up.png" OnClientClick="listBoxMove('ListBoxPriority', 'up'); return false;" />
+                <asp:ImageButton ID="ImageButtonPriorityMoveUp" runat="server" Height="30px" ImageUrl="~/Images/up.png" OnClientClick="listBoxMove('ListBoxPriority', 'up'); return false;" Visible="False" />
                 <br />
                 <br />
-                <asp:ImageButton ID="ImageButtonPriorityMoveDown" runat="server" Height="30px" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxPriority', 'down'); return false;" />
+                <asp:ImageButton ID="ImageButtonPriorityMoveDown" runat="server" Height="30px" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxPriority', 'down'); return false;" Visible="False" />
             </td>
         </tr>
 
@@ -347,21 +351,23 @@
                 <asp:TextBox ID="TextBoxExpectedCompletionDate" runat="server" Height="20px" Width="80px" BackColor="#CCCCCC"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarExpComplDate" PopupButtonID="ImageButtonExpCompletionDate" runat="server" TargetControlID="TextBoxExpectedCompletionDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonExpCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="4" /></td>
-            <td colspan="1" class="text-right">Status:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelStatus" runat="server" Text="Status:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp; </td>
             <td colspan="1">
-                <asp:TextBox ID="TextBoxStatus" runat="server" BackColor="#CCCCCC" Height="20px" Width="100px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxStatus" runat="server" BackColor="#CCCCCC" Height="20px" Width="100px" Visible="False"></asp:TextBox>
                 <asp:HiddenField ID="HiddenFieldStatus" runat="server" />
             </td>
             <td colspan="1">
-                <asp:Button ID="ButtonAddStatus" runat="server" Text="Add Status" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" Width="85px" TabIndex="16" />
+                <asp:Button ID="ButtonAddStatus" runat="server" Text="Add Status" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" Width="85px" TabIndex="16" Visible="False" />
                 <br />
                 <br />
-                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" OnClick="ButtonRemoveStatus_Click" Width="110px" TabIndex="17" />
+                <asp:Button ID="ButtonRemoveStatus" runat="server" Text="Remove Status" OnClick="ButtonRemoveStatus_Click" Width="110px" TabIndex="17" Visible="False" />
 
             </td>
 
             <td colspan="2" rowspan="2">
-                <asp:ListBox ID="ListBoxStatus" ClientIDMode="Static" runat="server" Width="185px" Height="150px" onchange="StatusTextBoxJS(this)" DataSourceID="ListBoxStatusDB" DataTextField="StatusName" DataValueField="Sequence" TabIndex="15"></asp:ListBox>
+                <asp:ListBox ID="ListBoxStatus" ClientIDMode="Static" runat="server" Width="185px" Height="150px" onchange="StatusTextBoxJS(this)" DataSourceID="ListBoxStatusDB" DataTextField="StatusName" DataValueField="Sequence" TabIndex="15" Visible="False"></asp:ListBox>
                 <asp:SqlDataSource ID="ListBoxStatusDB" runat="server" ConnectionString="<%$ ConnectionStrings:DevDB %>" SelectCommand="SELECT [StatusName], [Sequence] FROM [tblStatusIssues] WHERE ([AssociatedIssue] = @AssocIssue) ORDER BY [Sequence] ASC">
                     <SelectParameters>
                         <asp:SessionParameter Name="AssocIssue" SessionField="_CurrentIssueID" Type="Int32" />
@@ -371,11 +377,11 @@
             </td>
             <td colspan="1">
                 <br />
-                <asp:ImageButton ID="ImageButtonStatusMoveUp" runat="server" Height="30px" ImageUrl="~/Images/up.png" OnClientClick="listBoxMove('ListBoxStatus', 'up'); return false;" />
+                <asp:ImageButton ID="ImageButtonStatusMoveUp" runat="server" Height="30px" ImageUrl="~/Images/up.png" OnClientClick="listBoxMove('ListBoxStatus', 'up'); return false;" Visible="False" />
 
                 <br />
                 <br />
-                <asp:ImageButton ID="ImageButtonStatusMoveDown" runat="server" Height="30px" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxStatus', 'down'); return false;" />
+                <asp:ImageButton ID="ImageButtonStatusMoveDown" runat="server" Height="30px" ImageUrl="~/Images/down.png" OnClientClick="listBoxMove('ListBoxStatus', 'down'); return false;" Visible="False" />
 
             </td>
         </tr>
@@ -391,9 +397,11 @@
                 <asp:TextBox ID="TextBoxDateRaised" runat="server" Height="20px" Width="80px" BackColor="#CCCCCC"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarDateRaised" PopupButtonID="ImageButtonDateRaised" runat="server" TargetControlID="TextBoxDateRaised" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonDateRaised" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="5" /></td>
-            <td colspan="1" class="text-right" style="vertical-align: text-top">Status Description:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="1" class="text-right" style="vertical-align: text-top">
+                <asp:Label ID="LabelStatusDescr" runat="server" Text="Status Description:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp; </td>
             <td colspan="5"><span class="auto-style3">
-                <asp:TextBox ID="TextBoxStatusDescription" runat="server" TextMode="MultiLine" Height="150px" Width="300px" TabIndex="18" OnTextChanged="TextBoxStatusDescription_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxStatusDescription" runat="server" TextMode="MultiLine" Height="150px" Width="300px" TabIndex="18" OnTextChanged="TextBoxStatusDescription_TextChanged" Visible="False"></asp:TextBox>
             </span>
             </td>
 
@@ -401,7 +409,9 @@
         <tr>
             <td colspan="5" class="auto-style1"></td>
             <td colspan="1">&nbsp;</td>
-            <td colspan="5">Last Updated:<asp:TextBox ID="TextBoxLastUpdated" runat="server" Height="20px" Width="80px" OnTextChanged="TextBoxLastUpdated_TextChanged" ReadOnly="True" BackColor="#CCCCCC"></asp:TextBox>
+            <td colspan="5">
+                <asp:Label ID="LabelUpdated" runat="server" Text="Last Updated:" Visible="False"></asp:Label>
+                <asp:TextBox ID="TextBoxLastUpdated" runat="server" Height="20px" Width="80px" OnTextChanged="TextBoxLastUpdated_TextChanged" ReadOnly="True" BackColor="#CCCCCC" Visible="False"></asp:TextBox>
             </td>
         </tr>
 
@@ -416,8 +426,10 @@
 
                 <cc1:CalendarExtender ID="CalendarDateAssigned" PopupButtonID="ImageButtonDateAssigned" runat="server" TargetControlID="TextBoxDateAssigned" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonDateAssigned" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="6" /></td>
-            <td colspan="5" class="auto-style20" style="vertical-align: top">Associated Action Item(s):&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="ButtonAssociateActionItems" runat="server" Text="Associate Action Items" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" Width="160px" TabIndex="19" />
+            <td colspan="5" class="auto-style20" style="vertical-align: top">
+                <asp:Label ID="LabelAssocItem" runat="server" Text="Associated Action Item(s):&nbsp;" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp;
+                <asp:Button ID="ButtonAssociateActionItems" runat="server" Text="Associate Action Items" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" Width="160px" TabIndex="19" Visible="False" />
             </td>
 
 
@@ -485,10 +497,14 @@
             <td colspan="4" class="auto-style19">
                 <asp:TextBox ID="TextBoxActualCompletionDate" runat="server" Visible="False" Height="20px" Width="80px" BackColor="#CCCCCC"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarActComplDate" PopupButtonID="ImageButtonActCompletionDate" runat="server" TargetControlID="TextBoxActualCompletionDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
-                <asp:ImageButton ID="ImageButtonActCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="7" /></td>
+                <asp:ImageButton ID="ImageButtonActCompletionDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="7" />
+                <asp:ImageButton ID="ImageButtonClearActCompl" runat="server" ImageUrl="~/Images/x.png" OnClick="ImageButtonClearActCompl_Click" Visible="False" Width="25px" />
+            </td>
 
-            <td colspan="1" class="auto-style20" style="vertical-align: top">Associated Decision(s):&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="ButtonAssociateDecisions" runat="server" Text="Associate Decisions" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" Width="150px" TabIndex="20" />
+            <td colspan="1" class="auto-style20" style="vertical-align: top">
+                <asp:Label ID="LabelAssocDec" runat="server" Text="Associated Decision(s):" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp;
+                <asp:Button ID="ButtonAssociateDecisions" runat="server" Text="Associate Decisions" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" Width="150px" TabIndex="20" Visible="False" />
             </td>
             <td colspan="4" class="auto-style19"></td>
         </tr>

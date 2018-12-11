@@ -320,13 +320,16 @@
                 <asp:Button ID="ButtonSearch" runat="server" data-toggle="modal" data-target="#myModal" Text="Search" OnClientClick="return false;" CssClass="col-xs-offset-0" />
             </td>
             <td colspan="1">&nbsp;</td>
-            <td colspan="1" class="text-right">Resource Assigned:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelRescource" runat="server" Text="Resource Assigned:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp; </td>
             <td colspan="5">
-                <asp:TextBox ID="TextBoxResourceAssigned" runat="server" Width="100px" ReadOnly="True" BackColor="#CCCCCC" Height="20px"></asp:TextBox>
-                &nbsp;&nbsp;&nbsp;
-                <asp:Button ID="ButtonSelectResource" runat="server" Text="Select Resource" Width="125px" data-toggle="modal" data-target="#myModal6" OnClientClick="return false;" />
+                <asp:TextBox ID="TextBoxResourceAssigned" runat="server" Width="100px" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Visible="False"></asp:TextBox>
+                &nbsp;<asp:ImageButton ID="ImageButtonClearResc" runat="server" ImageUrl="~/Images/x.png" OnClick="ImageButtonClearResc_Click" Visible="False" Width="25px" />
+                &nbsp;&nbsp;
+                <asp:Button ID="ButtonSelectResource" runat="server" Text="Select Resource" Width="125px" data-toggle="modal" data-target="#myModal6" OnClientClick="return false;" Visible="False" />
             </td>
-            <td colspan="2">&nbsp;<asp:Button ID="ButtonAddResource" runat="server" Text="Add New Resource" OnClick="ButtonAddResource_Click" TabIndex="14" Width="145px" />
+            <td colspan="2">&nbsp;<asp:Button ID="ButtonAddResource" runat="server" Text="Add New Resource" OnClick="ButtonAddResource_Click" TabIndex="14" Width="145px" Visible="False" />
             </td>
             <td colspan="6" class="text-left">&nbsp;</td>
         </tr>
@@ -367,22 +370,27 @@
                 <cc1:CalendarExtender ID="CalendarExpDueDate" PopupButtonID="ImageButtonExpectedDueDate" runat="server" TargetControlID="TextBoxExpectedDueDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonExpectedDueDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" TabIndex="5" />
             </td>
-            <td colspan="1" class="text-right">Set Predecessor Task:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelPred" runat="server" Text="Set Predecessor Task:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp; </td>
             <td colspan="1" class="auto-style3">
-                <asp:TextBox ID="TextBoxPredecessorTask" runat="server" ReadOnly="True" Height="20px" Width="150px" BackColor="#CCCCCC"></asp:TextBox>
+                <asp:TextBox ID="TextBoxPredecessorTask" runat="server" ReadOnly="True" Height="20px" Width="150px" BackColor="#CCCCCC" Visible="False"></asp:TextBox>
+                <asp:ImageButton ID="ImageButtonClearPred" runat="server" ImageUrl="~/Images/x.png" OnClick="ImageButtonClearPred_Click" Visible="False" Width="25px" />
             </td>
             <td colspan="5" class="auto-style5">
-                <asp:Button ID="ButtonPredecessorTask" runat="server" Text="Select Predecessor Task" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" TabIndex="15" Width="175px" />
+                <asp:Button ID="ButtonPredecessorTask" runat="server" Text="Select Predecessor Task" data-toggle="modal" data-target="#myModal3" OnClientClick="return false;" TabIndex="15" Width="175px" Visible="False" />
             </td>
         </tr>
 
         <tr>
             <td colspan="11" class="auto-style4"></td>
-            <td colspan="1" class="text-right">Predecessor Dependency:&nbsp;&nbsp;&nbsp;&nbsp;
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelPredDep" runat="server" Text="Predecessor Dependency:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 
             </td>
             <td colspan="1">
-                <asp:TextBox ID="TextBoxPredDepend" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px"></asp:TextBox></td>
+                <asp:TextBox ID="TextBoxPredDepend" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px" Visible="False"></asp:TextBox></td>
             <td colspan="5">&nbsp;</td>
         </tr>
 
@@ -396,20 +404,25 @@
                 <asp:TextBox ID="TextBoxExpectedDuration" runat="server" Height="20px" Width="80px" TabIndex="6"></asp:TextBox>
                 &nbsp;days</td>
             <td colspan="6">&nbsp;</td>
-            <td colspan="1" class="text-right">Set Successor Task:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelSucc" runat="server" Text="Set Successor Task:" Visible="False"></asp:Label>
+                :&nbsp;&nbsp;&nbsp; </td>
             <td colspan="1">
-                <asp:TextBox ID="TextBoxSuccessorTask" runat="server" ReadOnly="True" Height="20px" Width="150px" BackColor="#CCCCCC"></asp:TextBox>
+                <asp:TextBox ID="TextBoxSuccessorTask" runat="server" ReadOnly="True" Height="20px" Width="150px" BackColor="#CCCCCC" Visible="False"></asp:TextBox>
+                <asp:ImageButton ID="ImageButtonClearSuc" runat="server" ImageUrl="~/Images/x.png" OnClick="ImageButtonClearSuc_Click" Visible="False" Width="25px" />
             </td>
             <td colspan="6" class="text-left">
-                <asp:Button ID="ButtonSuccessorTask" runat="server" Text="Select Successor Task" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" TabIndex="16" Width="175px" />
+                <asp:Button ID="ButtonSuccessorTask" runat="server" Text="Select Successor Task" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" TabIndex="16" Width="175px" Visible="False" />
             </td>
         </tr>
 
         <tr>
             <td colspan="11" class="auto-style6"></td>
-            <td colspan="1" class="text-right">Successor Dependency:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="1" class="text-right">
+                <asp:Label ID="LabelSuccDep" runat="server" Text="Successor Dependency:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp; </td>
             <td colspan="6">
-                <asp:TextBox ID="TextBoxSuccDepend" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px"></asp:TextBox>
+                <asp:TextBox ID="TextBoxSuccDepend" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px" Visible="False"></asp:TextBox>
             </td>
         </tr>
 
@@ -449,9 +462,12 @@
                 <asp:TextBox ID="TextBoxActualStartDate" runat="server" Width="80px" Visible="False" Height="20px" onchange="fnOnDateChangeAct()" BackColor="#CCCCCC"></asp:TextBox>
                 <cc1:CalendarExtender ID="CalendarActStartDate" PopupButtonID="ImageButtonActualStartDate" runat="server" TargetControlID="TextBoxActualStartDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonActualStartDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="8" />
+                <asp:ImageButton ID="ImageButtonClearStart" runat="server" ImageUrl="~/Images/x.png" OnClick="ImageButtonClearStart_Click" Visible="False" Width="25px" />
             </td>
-            <td colspan="1" class="text-left">Associate Issues:&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="ButtonAssociateIssues" runat="server" Text="Associate Issues" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" OnClick="ButtonAssociateIssues_Click" TabIndex="17" Width="125px" />
+            <td colspan="1" class="text-left">
+                <asp:Label ID="LabelAssocIssue" runat="server" Text="Associate Issues:" Visible="False"></asp:Label>
+                &nbsp;&nbsp;&nbsp;
+                <asp:Button ID="ButtonAssociateIssues" runat="server" Text="Associate Issues" data-toggle="modal" data-target="#myModal2" OnClientClick="return false;" OnClick="ButtonAssociateIssues_Click" TabIndex="17" Width="125px" Visible="False" />
             </td>
             <td colspan="5">&nbsp;</td>
 
@@ -468,6 +484,7 @@
                 <asp:TextBox ID="TextBoxActualEndDate" runat="server" Width="80px" Visible="False" onchange="fnOnDateChangeAct()" Height="20px" BackColor="#CCCCCC"></asp:TextBox>
                 <cc1:CalendarExtender ID="Calendar1" PopupButtonID="ImageButtonActualEndDate" runat="server" TargetControlID="TextBoxActualEndDate" Format="MM/dd/yyyy"></cc1:CalendarExtender>
                 <asp:ImageButton ID="ImageButtonActualEndDate" runat="server" Height="25px" ImageUrl="~/Images/calendar.png" Visible="False" TabIndex="9" />
+                <asp:ImageButton ID="ImageButtonClearEnd" runat="server" ImageUrl="~/Images/x.png" OnClick="ImageButtonClearEnd_Click" Visible="False" Width="25px" />
             </td>
             <td colspan="13" class="auto-style1">
                 <div style="overflow: scroll; height: 250px; width: 800px" runat="server" id="Div1">
