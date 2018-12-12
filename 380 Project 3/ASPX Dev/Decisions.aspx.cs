@@ -216,6 +216,8 @@ namespace _380_Project_3.ASPX_Dev
 
             this.GridViewListofDecisions.DataBind();
 
+
+
             ImageButtonClearActDate.Visible = true;
             ImageButtonClearDateMade.Visible = true;
             ImageButtonClearResource.Visible = true;
@@ -261,6 +263,8 @@ namespace _380_Project_3.ASPX_Dev
             LabelUpdStatus.Visible = true;
             TextBoxLastUpdatedStatus.Visible = true;
 
+            LabelMeeting.Visible = true;
+            ButtonAssociateMeetingNotes.Visible = true;
             LabelLastUpdatedNote.Visible = true;
             TextBoxLastUpdatedNote.Visible = true;
 

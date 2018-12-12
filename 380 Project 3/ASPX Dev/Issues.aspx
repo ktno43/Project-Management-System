@@ -66,7 +66,7 @@
                                            <Columns>
                                                <asp:BoundField DataField="ActionItemID" HeaderText="ActionItemID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />
                                                <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                                               <asp:TemplateField>
+                                               <asp:TemplateField HeaderText="Associated">
                                                    <ItemTemplate>
                                                        <asp:CheckBox ID="CheckBoxAssociateActItems" runat="server" Checked='<%#Convert.ToBoolean(Eval("Checked")) %>' />
                                                    </ItemTemplate>
@@ -125,7 +125,7 @@
                                            <Columns>
                                                <asp:BoundField DataField="DecisionID" HeaderText="DecisionID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />
                                                <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                                               <asp:TemplateField>
+                                               <asp:TemplateField  HeaderText="Associated">
                                                    <ItemTemplate>
                                                        <asp:CheckBox ID="CheckBoxAssociateDecisions" runat="server" Checked='<%#Convert.ToBoolean(Eval("Checked")) %>' />
                                                    </ItemTemplate>
@@ -574,12 +574,12 @@
             <td colspan="1"></td>
             <td colspan="1"></td>
             <td colspan="1">
-                <asp:Button ID="ButtonDelete" runat="server" Text="Delete" OnClick="ButtonDelete_Click" Width="75px" Height="26px" />
+                <asp:Button ID="ButtonDelete" runat="server" Text="Delete" OnClick="ButtonDelete_Click" Width="75px" Height="26px" Visible="False" />
             </td>
             <td colspan="1" class="text-left">&nbsp;</td>
             <td colspan="1">&nbsp;</td>
             <td colspan="1" class="text-left">
-                <asp:Button ID="ButtonSave" runat="server" Text="Save" OnClientClick="return listboxSave();" OnClick="ButtonSave_Click" Width="125px" TabIndex="21" />
+                <asp:Button ID="ButtonSave" runat="server" Text="Save" OnClientClick="return listboxSave();" OnClick="ButtonSave_Click" Width="125px" TabIndex="21" Visible="False" />
             </td>
             <td colspan="1">&nbsp;</td>
             <td colspan="1">&nbsp;</td>

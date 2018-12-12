@@ -127,10 +127,11 @@
                                                <asp:BoundField DataField="TaskID" HeaderText="TaskID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />
                                                <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                                                <asp:BoundField DataField="TaskType" HeaderText="Task Type" SortExpression="TaskType" />
-                                               <asp:TemplateField>
+                                               <asp:TemplateField HeaderText="Associated">
                                                    <ItemTemplate>
                                                        <asp:CheckBox ID="CheckBoxAssociateTask" runat="server" Checked='<%#Convert.ToBoolean(Eval("Checked")) %>' />
                                                    </ItemTemplate>
+
                                                </asp:TemplateField>
                                            </Columns>
                                            <EditRowStyle BackColor="#999999" />

@@ -77,7 +77,7 @@
                         </asp:SqlDataSource>
                         <hr />
                         Predecessor Task Dependency:
-                        <asp:DropDownList ID="DropDownListPredDependency" runat="server" Height="16px" Width="140px">
+                        <asp:DropDownList ID="DropDownListPredDependency" runat="server" Width="140px">
                             <asp:ListItem>Finish to Start</asp:ListItem>
                             <asp:ListItem>Start to Start</asp:ListItem>
                             <asp:ListItem>Finish to Finish</asp:ListItem>
@@ -127,7 +127,7 @@
                         </asp:SqlDataSource>
                         <hr />
                         Successor Task Dependency:
-                        <asp:DropDownList ID="DropDownListSuccDependency" runat="server" Height="16px" Width="140px">
+                        <asp:DropDownList ID="DropDownListSuccDependency" runat="server" Width="140px">
                             <asp:ListItem>Finish to Start</asp:ListItem>
                             <asp:ListItem>Start to Start</asp:ListItem>
                             <asp:ListItem>Finish to Finish</asp:ListItem>
@@ -202,7 +202,7 @@
                         <Columns>
                             <asp:BoundField DataField="IssueID" HeaderStyle-CssClass="hiddencol" HeaderText="IssueID" InsertVisible="False" ItemStyle-CssClass="hiddencol" ReadOnly="True" SortExpression="IssueID" />
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                            <asp:TemplateField>
+                            <asp:TemplateField HeaderText="Associated">
                                 <ItemTemplate>
                                     <asp:CheckBox ID="CheckBoxAssociateIssue" runat="server" Checked='<%#Convert.ToBoolean(Eval("Checked")) %>' />
                                 </ItemTemplate>
@@ -399,29 +399,29 @@
         </tr>
 
         <tr>
-            <td colspan="1" class="auto-style9">Expected Duration<span class="auto-style11">*</span>:&nbsp;&nbsp;&nbsp; </td>
-            <td colspan="4">
+            <td colspan="1" class="auto-style10">Expected Duration<span class="auto-style11">*</span>:&nbsp;&nbsp;&nbsp; </td>
+            <td colspan="4" class="auto-style8">
                 <asp:TextBox ID="TextBoxExpectedDuration" runat="server" Height="20px" Width="80px" TabIndex="6"></asp:TextBox>
                 &nbsp;days</td>
-            <td colspan="6">&nbsp;</td>
-            <td colspan="1" class="text-right">
+            <td colspan="6" class="auto-style8"></td>
+            <td colspan="1" class="auto-style1">
                 <asp:Label ID="LabelSucc" runat="server" Text="Set Successor Task:" Visible="False"></asp:Label>
                 :&nbsp;&nbsp;&nbsp; </td>
-            <td colspan="1">
+            <td colspan="1" class="auto-style8">
                 <asp:TextBox ID="TextBoxSuccessorTask" runat="server" ReadOnly="True" Height="20px" Width="150px" BackColor="#CCCCCC" Visible="False"></asp:TextBox>
                 <asp:ImageButton ID="ImageButtonClearSuc" runat="server" ImageUrl="~/Images/x.png" OnClick="ImageButtonClearSuc_Click" Visible="False" Width="25px" />
             </td>
-            <td colspan="6" class="text-left">
+            <td colspan="6" class="auto-style3">
                 <asp:Button ID="ButtonSuccessorTask" runat="server" Text="Select Successor Task" data-toggle="modal" data-target="#myModal4" OnClientClick="return false;" TabIndex="16" Width="175px" Visible="False" />
             </td>
         </tr>
 
         <tr>
-            <td colspan="11" class="auto-style6"></td>
-            <td colspan="1" class="text-right">
+            <td colspan="11" class="auto-style4"></td>
+            <td colspan="1" class="auto-style4">
                 <asp:Label ID="LabelSuccDep" runat="server" Text="Successor Dependency:" Visible="False"></asp:Label>
                 &nbsp;&nbsp;&nbsp; </td>
-            <td colspan="6">
+            <td colspan="6" class="auto-style17">
                 <asp:TextBox ID="TextBoxSuccDepend" runat="server" ReadOnly="True" BackColor="#CCCCCC" Height="20px" Width="150px" Visible="False"></asp:TextBox>
             </td>
         </tr>
@@ -770,6 +770,9 @@
 
         .auto-style14 {
             color: #000000;
+        }
+        .auto-style17 {
+            height: 11px;
         }
     </style>
 </asp:Content>

@@ -77,7 +77,7 @@
                         </asp:SqlDataSource>
                         <hr />
                         Predecessor Task Dependency:
-                        <asp:DropDownList ID="DropDownListPredDependency" runat="server" Height="16px" Width="140px">
+                        <asp:DropDownList ID="DropDownListPredDependency" runat="server"  Width="140px">
                             <asp:ListItem>Finish to Start</asp:ListItem>
                             <asp:ListItem>Start to Start</asp:ListItem>
                             <asp:ListItem>Finish to Finish</asp:ListItem>
@@ -127,7 +127,7 @@
                         </asp:SqlDataSource>
                         <hr />
                         Successor Task Dependency:
-                        <asp:DropDownList ID="DropDownListSuccDependency" runat="server" Height="16px" Width="140px">
+                        <asp:DropDownList ID="DropDownListSuccDependency" runat="server"  Width="140px">
                             <asp:ListItem>Finish to Start</asp:ListItem>
                             <asp:ListItem>Start to Start</asp:ListItem>
                             <asp:ListItem>Finish to Finish</asp:ListItem>
@@ -201,7 +201,7 @@
                         <Columns>
                             <asp:BoundField DataField="IssueID" HeaderStyle-CssClass="hiddencol" HeaderText="IssueID" InsertVisible="False" ItemStyle-CssClass="hiddencol" ReadOnly="True" SortExpression="IssueID" />
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                            <asp:TemplateField>
+                            <asp:TemplateField  HeaderText="Associated">
                                 <ItemTemplate>
                                     <asp:CheckBox ID="CheckBoxAssociateIssue" runat="server" Checked='<%#Convert.ToBoolean(Eval("Checked")) %>' />
                                 </ItemTemplate>
